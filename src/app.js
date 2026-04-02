@@ -4,6 +4,9 @@ import cors from 'cors';
 import { env } from './config/env.js';
 import { checkConnection } from './config/database.js';
 import { connectRedis } from './config/redis.js';
+import { apiLimiter } from './middleware/rateLimiter.js';
+import { errorHandler } from './middleware/errorHandler.js';
+import authRoutes from './routes/auth.js';
 
 const app = express();
 
@@ -15,6 +18,7 @@ app.use(cors({
 }));
 app.use(express.json({ limit: '1mb' }));
 app.use(express.urlencoded({ extended: true }));
+app.use(apiLimiter);
 
 // ── Health check ──────────────────────────────────────────────────────────────
 app.get('/health', async (_req, res) => {
@@ -26,18 +30,15 @@ app.get('/health', async (_req, res) => {
     }
 });
 
-// ── Routes (added in Day 5) ───────────────────────────────────────────────────
-// app.use('/api/auth',     authRoutes);
-// app.use('/api/children', childRoutes);
+// ── Routes ────────────────────────────────────────────────────────────────────
+app.use('/api/auth',     authRoutes);
+// app.use('/api/children', childRoutes);   // Day 20
 
 // ── 404 handler ───────────────────────────────────────────────────────────────
 app.use((_req, res) => res.status(404).json({ error: 'Not found' }));
 
-// ── Global error handler ──────────────────────────────────────────────────────
-app.use((err, _req, res, _next) => {
-    console.error('[App] Unhandled error:', err);
-    res.status(500).json({ error: env.isDev ? err.message : 'Internal server error' });
-});
+// ── Centralised error handler (must be last) ──────────────────────────────────
+app.use(errorHandler);
 
 // ── Boot ──────────────────────────────────────────────────────────────────────
 const start = async () => {
