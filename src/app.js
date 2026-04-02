@@ -6,8 +6,9 @@ import { checkConnection } from './config/database.js';
 import { connectRedis } from './config/redis.js';
 import { apiLimiter } from './middleware/rateLimiter.js';
 import { errorHandler } from './middleware/errorHandler.js';
-import authRoutes    from './routes/auth.js';
-import consentRoutes from './routes/consent.js';
+import authRoutes     from './routes/auth.js';
+import consentRoutes  from './routes/consent.js';
+import childrenRoutes from './routes/children.js';
 
 const app = express();
 
@@ -34,7 +35,7 @@ app.get('/health', async (_req, res) => {
 // ── Routes ────────────────────────────────────────────────────────────────────
 app.use('/api/auth',     authRoutes);
 app.use('/api/consent',  consentRoutes);
-// app.use('/api/children', childRoutes);   // Day 20
+app.use('/api/children', childrenRoutes);
 
 // ── 404 handler ───────────────────────────────────────────────────────────────
 app.use((_req, res) => res.status(404).json({ error: 'Not found' }));
