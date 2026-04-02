@@ -7,7 +7,9 @@
   "scripts": {
     "start": "node src/app.js",
     "dev": "nodemon src/app.js",
-    "test": "jest --runInBand"
+    "test": "jest --runInBand",
+    "migrate": "node database/migrate.js",
+    "migrate:status": "node database/migrate.js --status"
   },
   "dependencies": {
     "bcryptjs": "^3.0.3",
