@@ -6,7 +6,8 @@ import { checkConnection } from './config/database.js';
 import { connectRedis } from './config/redis.js';
 import { apiLimiter } from './middleware/rateLimiter.js';
 import { errorHandler } from './middleware/errorHandler.js';
-import authRoutes from './routes/auth.js';
+import authRoutes    from './routes/auth.js';
+import consentRoutes from './routes/consent.js';
 
 const app = express();
 
@@ -32,6 +33,7 @@ app.get('/health', async (_req, res) => {
 
 // ── Routes ────────────────────────────────────────────────────────────────────
 app.use('/api/auth',     authRoutes);
+app.use('/api/consent',  consentRoutes);
 // app.use('/api/children', childRoutes);   // Day 20
 
 // ── 404 handler ───────────────────────────────────────────────────────────────
