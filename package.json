@@ -9,7 +9,9 @@
     "dev": "nodemon src/app.js",
     "test": "jest --runInBand",
     "migrate": "node database/migrate.js",
-    "migrate:status": "node database/migrate.js --status"
+    "migrate:status": "node database/migrate.js --status",
+    "seed": "node database/seed.js",
+    "seed:fresh": "node database/seed.js --clear"
   },
   "dependencies": {
     "bcryptjs": "^3.0.3",
