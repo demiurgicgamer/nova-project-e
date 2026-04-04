@@ -2,7 +2,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { query } from '../config/database.js';
 
 const SUPPORTED_GRADES    = [6, 7];
-const SUPPORTED_LANGUAGES = ['en', 'hi-IN', 'fr', 'es'];
+const SUPPORTED_LANGUAGES = ['en', 'fr', 'es']; // Phase 1: North America. hi-IN added in Phase 2.
 const MAX_CHILDREN        = 5; // per parent account
 
 // ── Helpers ───────────────────────────────────────────────────────────────────

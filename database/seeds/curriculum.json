@@ -1,4 +1,6 @@
 {
+  "_comment": "North American curriculum — Ontario/BC + US Common Core Grade 6-7. Languages: EN, FR (Canadian French), ES (US Hispanic). Cultural contexts: hockey, NBA/NHL, CAD/USD, Tim Hortons, Canadian/US geography.",
+
   "topics": [
     {
       "grade": 6, "subject": "mathematics", "topic_key": "ratios",
@@ -6,33 +8,51 @@
       "problems": [
         {
           "language_code": "en", "difficulty": 1,
-          "problem_text": "A recipe uses 2 cups of flour and 1 cup of sugar. What is the ratio of flour to sugar?",
-          "solution_steps": ["Write flour : sugar", "Substitute the values: 2 : 1", "The ratio of flour to sugar is 2:1"],
-          "cultural_context": "western"
+          "problem_text": "A hockey team won 8 games and lost 4 games. What is the ratio of wins to losses?",
+          "solution_steps": ["Write wins : losses", "Substitute: 8 : 4", "Simplify by dividing both by 4: 2 : 1", "The ratio of wins to losses is 2:1"],
+          "cultural_context": "hockey"
         },
         {
           "language_code": "en", "difficulty": 2,
-          "problem_text": "In a class of 30 students, 18 are girls. What is the ratio of girls to boys?",
-          "solution_steps": ["Girls = 18, so Boys = 30 − 18 = 12", "Ratio of girls to boys = 18 : 12", "Simplify by dividing both by 6: 3 : 2"],
-          "cultural_context": "western"
+          "problem_text": "At a Tim Hortons, 3 out of every 5 customers order a coffee. If 40 customers visit, how many order coffee?",
+          "solution_steps": ["Ratio of coffee orders = 3:5", "Set up proportion: 3/5 = x/40", "Cross multiply: 5x = 120", "x = 24 customers"],
+          "cultural_context": "tim_hortons"
+        },
+        {
+          "language_code": "en", "difficulty": 2,
+          "problem_text": "An NBA player scored 24 points in 3 quarters. What is the ratio of points per quarter?",
+          "solution_steps": ["Points : Quarters = 24 : 3", "Divide both by 3", "Simplified ratio = 8 : 1", "The player scores 8 points per quarter"],
+          "cultural_context": "basketball"
         },
         {
           "language_code": "en", "difficulty": 3,
-          "problem_text": "A cricket team scored 240 runs in 40 overs. Another team scored 180 runs in 30 overs. Which team had a better runs-per-over ratio?",
-          "solution_steps": ["Team A: 240 ÷ 40 = 6 runs per over", "Team B: 180 ÷ 30 = 6 runs per over", "Both teams have the same ratio: 6 runs per over"],
-          "cultural_context": "cricket"
+          "problem_text": "A maple syrup farm produces 45 litres of syrup from 9 trees. Another farm produces 56 litres from 8 trees. Which farm has a better litre-per-tree ratio?",
+          "solution_steps": ["Farm A: 45 ÷ 9 = 5 litres per tree", "Farm B: 56 ÷ 8 = 7 litres per tree", "Farm B has a better ratio at 7 litres per tree"],
+          "cultural_context": "canadian_nature"
         },
         {
-          "language_code": "hi-IN", "difficulty": 1,
-          "problem_text": "एक क्रिकेट टीम ने 50 ओवर में 300 रन बनाए। रन प्रति ओवर का अनुपात क्या है?",
-          "solution_steps": ["रन प्रति ओवर = कुल रन ÷ कुल ओवर", "300 ÷ 50 = 6", "अनुपात 6:1 है"],
-          "cultural_context": "cricket"
+          "language_code": "fr", "difficulty": 1,
+          "problem_text": "Une équipe de hockey a remporté 6 matchs et en a perdu 2. Quel est le ratio des victoires aux défaites?",
+          "solution_steps": ["Écris victoires : défaites", "Substitue: 6 : 2", "Simplifie en divisant par 2: 3 : 1", "Le ratio victoires/défaites est 3:1"],
+          "cultural_context": "hockey"
         },
         {
-          "language_code": "hi-IN", "difficulty": 2,
-          "problem_text": "एक दुकान में 45 आम और 30 केले हैं। आम और केले का अनुपात क्या है?",
-          "solution_steps": ["आम : केले = 45 : 30", "दोनों को 15 से विभाजित करें", "सरलतम रूप: 3 : 2"],
-          "cultural_context": "market"
+          "language_code": "fr", "difficulty": 2,
+          "problem_text": "Dans une classe de 30 élèves à Montréal, 18 parlent français à la maison et 12 parlent anglais. Quel est le ratio français:anglais?",
+          "solution_steps": ["Français : Anglais = 18 : 12", "Divise les deux par 6", "Ratio simplifié = 3 : 2"],
+          "cultural_context": "canada_culture"
+        },
+        {
+          "language_code": "es", "difficulty": 1,
+          "problem_text": "Un equipo de fútbol ganó 9 partidos y perdió 3. ¿Cuál es la razón de victorias a derrotas?",
+          "solution_steps": ["Escribe victorias : derrotas", "Sustituye: 9 : 3", "Simplifica dividiendo entre 3: 3 : 1", "La razón es 3:1"],
+          "cultural_context": "soccer"
+        },
+        {
+          "language_code": "es", "difficulty": 2,
+          "problem_text": "En una panadería, por cada 2 panes de trigo se venden 5 panes de maíz. Si se vendieron 35 panes de maíz, ¿cuántos panes de trigo se vendieron?",
+          "solution_steps": ["Razón trigo : maíz = 2 : 5", "Proporción: 2/5 = x/35", "5x = 70", "x = 14 panes de trigo"],
+          "cultural_context": "food"
         }
       ]
     },
@@ -42,33 +62,51 @@
       "problems": [
         {
           "language_code": "en", "difficulty": 1,
-          "problem_text": "What is 25% of 80?",
-          "solution_steps": ["25% means 25 out of 100", "Multiply: 80 × 25 ÷ 100", "= 80 × 0.25 = 20"],
+          "problem_text": "What is 30% of 120?",
+          "solution_steps": ["30% means 30 out of 100", "Multiply: 120 × 30 ÷ 100", "= 120 × 0.30 = 36"],
           "cultural_context": "western"
         },
         {
           "language_code": "en", "difficulty": 2,
-          "problem_text": "A shirt costs ₹500. It is on sale for 20% off. What is the sale price?",
-          "solution_steps": ["Discount = 20% of 500", "= 500 × 20 ÷ 100 = ₹100", "Sale price = 500 − 100 = ₹400"],
-          "cultural_context": "rupees"
+          "problem_text": "A jacket at the mall costs $85. It is on sale for 20% off. What is the sale price?",
+          "solution_steps": ["Discount = 20% of $85", "= 85 × 0.20 = $17", "Sale price = $85 − $17 = $68"],
+          "cultural_context": "shopping_cad"
+        },
+        {
+          "language_code": "en", "difficulty": 2,
+          "problem_text": "Liam scored 38 out of 50 on his math test. What percentage did he score?",
+          "solution_steps": ["Percentage = (score ÷ total) × 100", "= (38 ÷ 50) × 100", "= 0.76 × 100 = 76%"],
+          "cultural_context": "school"
         },
         {
           "language_code": "en", "difficulty": 3,
-          "problem_text": "Riya scored 45 out of 60 in a test. What percentage did she score?",
-          "solution_steps": ["Percentage = (marks obtained ÷ total marks) × 100", "= (45 ÷ 60) × 100", "= 0.75 × 100 = 75%"],
-          "cultural_context": "western"
+          "problem_text": "The population of a small town in Ontario was 4,500 last year. This year it is 4,770. What is the percentage increase?",
+          "solution_steps": ["Increase = 4770 − 4500 = 270", "Percentage increase = (270 ÷ 4500) × 100", "= 0.06 × 100 = 6%"],
+          "cultural_context": "canada_geography"
         },
         {
-          "language_code": "hi-IN", "difficulty": 1,
-          "problem_text": "एक परीक्षा में अर्जुन ने 80 में से 60 अंक प्राप्त किए। उसका प्रतिशत क्या है?",
-          "solution_steps": ["प्रतिशत = (प्राप्त अंक ÷ कुल अंक) × 100", "= (60 ÷ 80) × 100", "= 0.75 × 100 = 75%"],
-          "cultural_context": "exam"
+          "language_code": "fr", "difficulty": 1,
+          "problem_text": "Une paire de patins coûte $120. Elle est en solde à 25% de rabais. Quel est le prix de vente?",
+          "solution_steps": ["Rabais = 25% de 120 = 120 × 0.25 = $30", "Prix de vente = $120 − $30 = $90"],
+          "cultural_context": "hockey"
         },
         {
-          "language_code": "hi-IN", "difficulty": 2,
-          "problem_text": "एक दुकानदार ने ₹1200 की साड़ी पर 15% की छूट दी। छूट के बाद कीमत क्या होगी?",
-          "solution_steps": ["छूट = 15% of 1200 = 1200 × 15 ÷ 100 = ₹180", "बिक्री मूल्य = 1200 − 180 = ₹1020"],
-          "cultural_context": "rupees"
+          "language_code": "fr", "difficulty": 2,
+          "problem_text": "Sofia a obtenu 42 points sur 60 à son examen de mathématiques. Quel pourcentage a-t-elle obtenu?",
+          "solution_steps": ["Pourcentage = (points obtenus ÷ total) × 100", "= (42 ÷ 60) × 100", "= 0.70 × 100 = 70%"],
+          "cultural_context": "school"
+        },
+        {
+          "language_code": "es", "difficulty": 1,
+          "problem_text": "Un par de zapatos cuesta $60. Hay un descuento del 15%. ¿Cuál es el precio de venta?",
+          "solution_steps": ["Descuento = 15% de $60 = 60 × 0.15 = $9", "Precio de venta = $60 − $9 = $51"],
+          "cultural_context": "shopping_usd"
+        },
+        {
+          "language_code": "es", "difficulty": 2,
+          "problem_text": "Carlos anotó 34 de 40 puntos en su examen. ¿Qué porcentaje obtuvo?",
+          "solution_steps": ["Porcentaje = (puntos ÷ total) × 100", "= (34 ÷ 40) × 100", "= 0.85 × 100 = 85%"],
+          "cultural_context": "school"
         }
       ]
     },
@@ -78,33 +116,51 @@
       "problems": [
         {
           "language_code": "en", "difficulty": 1,
-          "problem_text": "If x + 5 = 12, what is x?",
-          "solution_steps": ["We need to find x", "Subtract 5 from both sides: x = 12 − 5", "x = 7"],
+          "problem_text": "If x + 9 = 15, what is x?",
+          "solution_steps": ["Subtract 9 from both sides", "x = 15 − 9", "x = 6"],
           "cultural_context": "western"
         },
         {
           "language_code": "en", "difficulty": 2,
-          "problem_text": "Solve for y: 3y = 21",
-          "solution_steps": ["Divide both sides by 3", "y = 21 ÷ 3", "y = 7"],
+          "problem_text": "Emma has some hockey cards. After giving 12 to her friend, she has 25 left. Write an equation and solve it.",
+          "solution_steps": ["Let c = total cards", "Equation: c − 12 = 25", "Add 12 to both sides: c = 37", "Emma started with 37 cards"],
+          "cultural_context": "hockey"
+        },
+        {
+          "language_code": "en", "difficulty": 2,
+          "problem_text": "Solve for y: 4y = 36",
+          "solution_steps": ["Divide both sides by 4", "y = 36 ÷ 4", "y = 9"],
           "cultural_context": "western"
         },
         {
           "language_code": "en", "difficulty": 3,
-          "problem_text": "Priya has some marbles. After giving away 8, she has 15 left. Write an equation and solve it.",
-          "solution_steps": ["Let m = total marbles", "Equation: m − 8 = 15", "Add 8 to both sides: m = 23"],
+          "problem_text": "A ski resort charges a $15 equipment rental fee plus $8 per hour on the slopes. Noah's total bill was $55. How many hours did he ski?",
+          "solution_steps": ["Let h = hours skied", "Equation: 15 + 8h = 55", "Subtract 15: 8h = 40", "Divide by 8: h = 5 hours"],
+          "cultural_context": "winter_sports"
+        },
+        {
+          "language_code": "fr", "difficulty": 1,
+          "problem_text": "Si x + 11 = 20, quelle est la valeur de x?",
+          "solution_steps": ["Soustrait 11 des deux côtés", "x = 20 − 11", "x = 9"],
           "cultural_context": "western"
         },
         {
-          "language_code": "hi-IN", "difficulty": 1,
-          "problem_text": "यदि x + 7 = 15, तो x का मान क्या है?",
-          "solution_steps": ["दोनों तरफ से 7 घटाएं", "x = 15 − 7", "x = 8"],
+          "language_code": "fr", "difficulty": 2,
+          "problem_text": "Un abonnement mensuel à une salle de sport coûte $25 plus $5 par cours. Si Marc a payé $60 ce mois-ci, combien de cours a-t-il suivis?",
+          "solution_steps": ["Soit c = nombre de cours", "25 + 5c = 60", "5c = 35", "c = 7 cours"],
+          "cultural_context": "fitness"
+        },
+        {
+          "language_code": "es", "difficulty": 1,
+          "problem_text": "Si 3x = 24, ¿cuál es el valor de x?",
+          "solution_steps": ["Divide ambos lados entre 3", "x = 24 ÷ 3", "x = 8"],
           "cultural_context": "western"
         },
         {
-          "language_code": "hi-IN", "difficulty": 2,
-          "problem_text": "राहुल के पास कुछ रुपये थे। उसने ₹45 खर्च किए और उसके पास ₹80 बचे। शुरुआत में उसके पास कितने रुपये थे?",
-          "solution_steps": ["माना शुरुआती रुपये = r", "r − 45 = 80", "r = 80 + 45 = ₹125"],
-          "cultural_context": "rupees"
+          "language_code": "es", "difficulty": 2,
+          "problem_text": "Una pizzería cobra $12 por una pizza grande más $2 por cada ingrediente extra. Si Miguel pagó $20, ¿cuántos ingredientes extra pidió?",
+          "solution_steps": ["Sea i = ingredientes extra", "12 + 2i = 20", "2i = 8", "i = 4 ingredientes"],
+          "cultural_context": "food"
         }
       ]
     },
@@ -114,21 +170,33 @@
       "problems": [
         {
           "language_code": "en", "difficulty": 1,
-          "problem_text": "What is −3 + 7?",
-          "solution_steps": ["Start at −3 on the number line", "Move 7 steps to the right", "−3 + 7 = 4"],
+          "problem_text": "What is −4 + 9?",
+          "solution_steps": ["Start at −4 on the number line", "Move 9 steps to the right", "−4 + 9 = 5"],
           "cultural_context": "western"
         },
         {
           "language_code": "en", "difficulty": 2,
-          "problem_text": "The temperature was −5°C in the morning. It rose by 9°C by afternoon. What was the afternoon temperature?",
-          "solution_steps": ["Start at −5°C", "Add 9: −5 + 9", "Afternoon temperature = 4°C"],
-          "cultural_context": "western"
+          "problem_text": "The temperature in Winnipeg was −12°C in the morning. By afternoon it rose by 17°C. What was the afternoon temperature?",
+          "solution_steps": ["Start at −12°C", "Add 17: −12 + 17", "Afternoon temperature = 5°C"],
+          "cultural_context": "canada_weather"
         },
         {
-          "language_code": "hi-IN", "difficulty": 1,
-          "problem_text": "शिमला में सुबह का तापमान −3°C था। दोपहर तक यह 8°C बढ़ गया। दोपहर का तापमान क्या था?",
-          "solution_steps": ["−3 + 8 = ?", "संख्या रेखा पर −3 से 8 कदम दाईं ओर जाएं", "दोपहर का तापमान = 5°C"],
-          "cultural_context": "india_geography"
+          "language_code": "en", "difficulty": 3,
+          "problem_text": "A submarine is at −45 metres. It rises 28 metres, then descends 15 metres. What is its final depth?",
+          "solution_steps": ["Start: −45", "After rising: −45 + 28 = −17", "After descending: −17 − 15 = −32", "Final depth: −32 metres"],
+          "cultural_context": "science"
+        },
+        {
+          "language_code": "fr", "difficulty": 1,
+          "problem_text": "La température à Québec était de −8°C le matin. Elle a augmenté de 13°C l'après-midi. Quelle était la température l'après-midi?",
+          "solution_steps": ["−8 + 13 = ?", "Place −8 sur la droite numérique et avance de 13", "Température de l'après-midi = 5°C"],
+          "cultural_context": "canada_weather"
+        },
+        {
+          "language_code": "es", "difficulty": 1,
+          "problem_text": "La temperatura en Chicago era de −6°C por la mañana. Subió 10°C al mediodía. ¿Cuál fue la temperatura al mediodía?",
+          "solution_steps": ["Empieza en −6", "Suma 10: −6 + 10", "Temperatura al mediodía = 4°C"],
+          "cultural_context": "us_weather"
         }
       ]
     },
@@ -138,81 +206,195 @@
       "problems": [
         {
           "language_code": "en", "difficulty": 1,
-          "problem_text": "Solve: 2x + 3 = 11",
-          "solution_steps": ["Subtract 3 from both sides: 2x = 8", "Divide both sides by 2: x = 4", "Check: 2(4) + 3 = 11 ✓"],
+          "problem_text": "Solve: 3x + 4 = 19",
+          "solution_steps": ["Subtract 4 from both sides: 3x = 15", "Divide both sides by 3: x = 5", "Check: 3(5) + 4 = 19 ✓"],
           "cultural_context": "western"
         },
         {
           "language_code": "en", "difficulty": 2,
-          "problem_text": "An autorickshaw charges ₹15 as a base fare plus ₹8 per km. If the total fare was ₹63, how many km was the ride?",
-          "solution_steps": ["Let d = distance in km", "Equation: 15 + 8d = 63", "8d = 48, so d = 6 km"],
-          "cultural_context": "rupees"
+          "problem_text": "A cell phone plan charges $25 per month plus $0.10 per text. If Aiden's bill was $37, how many texts did he send?",
+          "solution_steps": ["Let t = number of texts", "25 + 0.10t = 37", "0.10t = 12", "t = 120 texts"],
+          "cultural_context": "technology"
         },
         {
           "language_code": "en", "difficulty": 3,
-          "problem_text": "Solve: 5x − 4 = 3x + 8",
-          "solution_steps": ["Subtract 3x from both sides: 2x − 4 = 8", "Add 4 to both sides: 2x = 12", "Divide by 2: x = 6"],
+          "problem_text": "Solve: 6x − 3 = 4x + 9",
+          "solution_steps": ["Subtract 4x from both sides: 2x − 3 = 9", "Add 3 to both sides: 2x = 12", "Divide by 2: x = 6"],
           "cultural_context": "western"
         },
         {
-          "language_code": "hi-IN", "difficulty": 1,
-          "problem_text": "हल करें: 3x − 5 = 10",
-          "solution_steps": ["दोनों तरफ 5 जोड़ें: 3x = 15", "दोनों तरफ 3 से विभाजित करें: x = 5", "जाँच: 3(5) − 5 = 10 ✓"],
+          "language_code": "en", "difficulty": 3,
+          "problem_text": "Two friends are driving toward each other from Toronto and Montreal, 540 km apart. One drives at 90 km/h and the other at 80 km/h. How many hours until they meet?",
+          "solution_steps": ["Combined speed = 90 + 80 = 170 km/h", "Time = Distance ÷ Speed", "= 540 ÷ 170 ≈ 3.18 hours", "They meet in about 3 hours 11 minutes"],
+          "cultural_context": "canada_geography"
+        },
+        {
+          "language_code": "fr", "difficulty": 1,
+          "problem_text": "Résous: 2x + 7 = 17",
+          "solution_steps": ["Soustrait 7 des deux côtés: 2x = 10", "Divise par 2: x = 5", "Vérification: 2(5) + 7 = 17 ✓"],
           "cultural_context": "western"
         },
         {
-          "language_code": "hi-IN", "difficulty": 2,
-          "problem_text": "एक मोबाइल डेटा प्लान में ₹99 का आधार शुल्क और प्रति GB ₹30 है। यदि कुल बिल ₹249 है, तो कितना डेटा उपयोग किया गया?",
-          "solution_steps": ["माना डेटा = d GB", "99 + 30d = 249", "30d = 150, d = 5 GB"],
-          "cultural_context": "india_tech"
+          "language_code": "fr", "difficulty": 2,
+          "problem_text": "Un service de streaming coûte $10 par mois plus $3 par film loué. Si la facture de Julien était de $25, combien de films a-t-il loués?",
+          "solution_steps": ["Soit f = nombre de films", "10 + 3f = 25", "3f = 15", "f = 5 films"],
+          "cultural_context": "technology"
+        },
+        {
+          "language_code": "es", "difficulty": 1,
+          "problem_text": "Resuelve: 4x − 6 = 14",
+          "solution_steps": ["Suma 6 a ambos lados: 4x = 20", "Divide entre 4: x = 5", "Verificación: 4(5) − 6 = 14 ✓"],
+          "cultural_context": "western"
+        },
+        {
+          "language_code": "es", "difficulty": 2,
+          "problem_text": "Un servicio de lavado de autos cobra $8 más $3 por cada servicio extra. Si Ana pagó $23, ¿cuántos servicios extra pidió?",
+          "solution_steps": ["Sea s = servicios extra", "8 + 3s = 23", "3s = 15", "s = 5 servicios"],
+          "cultural_context": "everyday"
+        }
+      ]
+    },
+    {
+      "grade": 7, "subject": "mathematics", "topic_key": "proportional_relationships",
+      "display_name": "Proportional Relationships", "order_index": 2,
+      "problems": [
+        {
+          "language_code": "en", "difficulty": 1,
+          "problem_text": "If 4 movie tickets cost $48, how much do 7 tickets cost?",
+          "solution_steps": ["Cost per ticket = $48 ÷ 4 = $12", "Cost of 7 tickets = 7 × $12", "= $84"],
+          "cultural_context": "entertainment"
+        },
+        {
+          "language_code": "en", "difficulty": 2,
+          "problem_text": "A car travels 210 km in 3 hours on the Trans-Canada Highway. At the same speed, how far will it travel in 5 hours?",
+          "solution_steps": ["Speed = 210 ÷ 3 = 70 km/h", "Distance in 5 hours = 70 × 5", "= 350 km"],
+          "cultural_context": "canada_geography"
+        },
+        {
+          "language_code": "en", "difficulty": 3,
+          "problem_text": "A recipe for poutine serves 4 people and uses 600g of cheese curds. How many grams are needed for 10 people?",
+          "solution_steps": ["Cheese per person = 600 ÷ 4 = 150g", "For 10 people: 10 × 150", "= 1500g of cheese curds"],
+          "cultural_context": "canadian_food"
+        },
+        {
+          "language_code": "fr", "difficulty": 1,
+          "problem_text": "Si 3 billets de cinéma coûtent $36, combien coûtent 8 billets?",
+          "solution_steps": ["Prix par billet = $36 ÷ 3 = $12", "Coût de 8 billets = 8 × $12", "= $96"],
+          "cultural_context": "entertainment"
+        },
+        {
+          "language_code": "fr", "difficulty": 2,
+          "problem_text": "Une recette de tourtière pour 6 personnes nécessite 450g de viande. Quelle quantité faut-il pour 10 personnes?",
+          "solution_steps": ["Viande par personne = 450 ÷ 6 = 75g", "Pour 10 personnes: 10 × 75", "= 750g de viande"],
+          "cultural_context": "canadian_food"
+        },
+        {
+          "language_code": "es", "difficulty": 1,
+          "problem_text": "Si 5 tacos cuestan $7.50, ¿cuánto cuestan 12 tacos?",
+          "solution_steps": ["Precio por taco = $7.50 ÷ 5 = $1.50", "Costo de 12 tacos = 12 × $1.50", "= $18.00"],
+          "cultural_context": "food"
+        },
+        {
+          "language_code": "es", "difficulty": 2,
+          "problem_text": "Un automóvil recorre 180 millas en 3 horas. ¿Cuántas millas recorrerá en 7 horas a la misma velocidad?",
+          "solution_steps": ["Velocidad = 180 ÷ 3 = 60 mph", "Distancia en 7 horas = 60 × 7", "= 420 millas"],
+          "cultural_context": "us_travel"
         }
       ]
     },
     {
       "grade": 7, "subject": "mathematics", "topic_key": "probability",
-      "display_name": "Probability", "order_index": 2,
+      "display_name": "Probability", "order_index": 3,
       "problems": [
         {
           "language_code": "en", "difficulty": 1,
-          "problem_text": "A bag has 3 red marbles and 2 blue marbles. What is the probability of picking a red marble?",
-          "solution_steps": ["Total marbles = 3 + 2 = 5", "Favourable outcomes = 3 (red)", "P(red) = 3/5 = 0.6"],
+          "problem_text": "A bag has 5 red marbles and 3 blue marbles. What is the probability of picking a blue marble?",
+          "solution_steps": ["Total marbles = 5 + 3 = 8", "Favourable outcomes = 3 (blue)", "P(blue) = 3/8 = 0.375"],
           "cultural_context": "western"
         },
         {
           "language_code": "en", "difficulty": 2,
-          "problem_text": "A die is rolled. What is the probability of getting an even number?",
-          "solution_steps": ["Total outcomes = {1,2,3,4,5,6} = 6", "Even numbers = {2,4,6} = 3 outcomes", "P(even) = 3/6 = 1/2"],
+          "problem_text": "In an NHL game, a goalie saves 34 out of 40 shots. What is the probability of stopping the next shot?",
+          "solution_steps": ["Save rate = 34 out of 40", "P(save) = 34/40", "= 17/20 = 0.85 or 85%"],
+          "cultural_context": "hockey"
+        },
+        {
+          "language_code": "en", "difficulty": 2,
+          "problem_text": "A spinner has 8 equal sections: 3 red, 2 blue, 2 green, 1 yellow. What is the probability of landing on green?",
+          "solution_steps": ["Total sections = 8", "Green sections = 2", "P(green) = 2/8 = 1/4 = 0.25"],
           "cultural_context": "western"
         },
         {
-          "language_code": "hi-IN", "difficulty": 1,
-          "problem_text": "एक थैले में 4 लाल और 6 हरी गेंदें हैं। एक गेंद यादृच्छिक रूप से निकाली जाती है। लाल गेंद मिलने की संभाविता क्या है?",
-          "solution_steps": ["कुल गेंदें = 4 + 6 = 10", "अनुकूल परिणाम = 4 (लाल)", "P(लाल) = 4/10 = 2/5"],
+          "language_code": "fr", "difficulty": 1,
+          "problem_text": "Un sac contient 4 billes rouges et 6 billes bleues. Quelle est la probabilité de piger une bille rouge?",
+          "solution_steps": ["Total de billes = 4 + 6 = 10", "Résultats favorables = 4 (rouges)", "P(rouge) = 4/10 = 2/5 = 0.4"],
           "cultural_context": "western"
+        },
+        {
+          "language_code": "fr", "difficulty": 2,
+          "problem_text": "Un joueur de hockey canadien a réussi 27 tirs au but sur 45 tentatives cette saison. Quelle est la probabilité qu'il marque son prochain but?",
+          "solution_steps": ["Tirs réussis = 27 sur 45", "P(but) = 27/45", "= 3/5 = 0.6 ou 60%"],
+          "cultural_context": "hockey"
+        },
+        {
+          "language_code": "es", "difficulty": 1,
+          "problem_text": "Una bolsa tiene 6 canicas rojas y 4 canicas verdes. ¿Cuál es la probabilidad de sacar una canica verde?",
+          "solution_steps": ["Total de canicas = 6 + 4 = 10", "Resultados favorables = 4 (verdes)", "P(verde) = 4/10 = 2/5 = 0.4"],
+          "cultural_context": "western"
+        },
+        {
+          "language_code": "es", "difficulty": 2,
+          "problem_text": "Un jugador de béisbol bateó 15 hits en sus últimos 50 turnos al bate. ¿Cuál es la probabilidad de que bateé en su próximo turno?",
+          "solution_steps": ["Hits = 15 de 50 turnos", "P(hit) = 15/50", "= 3/10 = 0.30 o 30%"],
+          "cultural_context": "baseball"
         }
       ]
     },
     {
-      "grade": 7, "subject": "mathematics", "topic_key": "proportions",
-      "display_name": "Proportions", "order_index": 3,
+      "grade": 7, "subject": "mathematics", "topic_key": "geometry_area",
+      "display_name": "Area and Perimeter", "order_index": 4,
       "problems": [
         {
           "language_code": "en", "difficulty": 1,
-          "problem_text": "If 5 pens cost ₹35, how much do 8 pens cost?",
-          "solution_steps": ["Cost per pen = 35 ÷ 5 = ₹7", "Cost of 8 pens = 8 × 7", "= ₹56"],
-          "cultural_context": "rupees"
+          "problem_text": "A rectangular hockey rink is 60 metres long and 26 metres wide. What is its area?",
+          "solution_steps": ["Area = length × width", "= 60 × 26", "= 1,560 square metres"],
+          "cultural_context": "hockey"
         },
         {
           "language_code": "en", "difficulty": 2,
-          "problem_text": "A car travels 150 km in 3 hours. How far will it travel in 5 hours at the same speed?",
-          "solution_steps": ["Speed = 150 ÷ 3 = 50 km/h", "Distance in 5 hours = 50 × 5", "= 250 km"],
+          "problem_text": "A circular garden has a radius of 7 metres. What is its area? (Use π ≈ 3.14)",
+          "solution_steps": ["Area = π × r²", "= 3.14 × 7²", "= 3.14 × 49 = 153.86 m²"],
           "cultural_context": "western"
         },
         {
-          "language_code": "hi-IN", "difficulty": 1,
-          "problem_text": "यदि 4 किलो चावल का मूल्य ₹200 है, तो 10 किलो चावल का मूल्य क्या होगा?",
-          "solution_steps": ["1 किलो का मूल्य = 200 ÷ 4 = ₹50", "10 किलो का मूल्य = 10 × 50", "= ₹500"],
-          "cultural_context": "rupees"
+          "language_code": "en", "difficulty": 3,
+          "problem_text": "A backyard deck is shaped like an L. It is made of a 8m × 5m rectangle and a 4m × 3m rectangle attached to the corner. What is the total area?",
+          "solution_steps": ["Area of large rectangle = 8 × 5 = 40 m²", "Area of small rectangle = 4 × 3 = 12 m²", "Total area = 40 + 12 = 52 m²"],
+          "cultural_context": "home"
+        },
+        {
+          "language_code": "fr", "difficulty": 1,
+          "problem_text": "Un terrain de basketball est long de 28 mètres et large de 15 mètres. Quelle est son aire?",
+          "solution_steps": ["Aire = longueur × largeur", "= 28 × 15", "= 420 mètres carrés"],
+          "cultural_context": "sports"
+        },
+        {
+          "language_code": "fr", "difficulty": 2,
+          "problem_text": "Une piscine circulaire a un rayon de 5 mètres. Quelle est son aire? (Utilise π ≈ 3.14)",
+          "solution_steps": ["Aire = π × r²", "= 3.14 × 5²", "= 3.14 × 25 = 78.5 m²"],
+          "cultural_context": "home"
+        },
+        {
+          "language_code": "es", "difficulty": 1,
+          "problem_text": "Una cancha de fútbol mide 100 metros de largo y 64 metros de ancho. ¿Cuál es su área?",
+          "solution_steps": ["Área = largo × ancho", "= 100 × 64", "= 6,400 metros cuadrados"],
+          "cultural_context": "soccer"
+        },
+        {
+          "language_code": "es", "difficulty": 2,
+          "problem_text": "Una pizza circular tiene un radio de 15 centímetros. ¿Cuál es su área? (Usa π ≈ 3.14)",
+          "solution_steps": ["Área = π × r²", "= 3.14 × 15²", "= 3.14 × 225 = 706.5 cm²"],
+          "cultural_context": "food"
         }
       ]
     }
