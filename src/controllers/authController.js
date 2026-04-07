@@ -33,27 +33,34 @@ export const register = async (req, res) => {
     const { consentGranted } = req.body;
     const { uid, email } = req.firebaseUser; // set by verifyFirebaseToken middleware
 
-    if (!consentGranted) {
-        return res.status(400).json({ error: 'Parental consent is required to register.' });
-    }
-
     if (!email) {
         return res.status(400).json({ error: 'Firebase account must have an email address.' });
     }
 
-    // Check for duplicate
+    // Check for duplicate — return existing tokens instead of erroring,
+    // so auto-register on login fallback is idempotent.
     const existing = await query(
-        'SELECT id FROM parent_profiles WHERE firebase_uid = $1 OR email = $2',
+        'SELECT * FROM parent_profiles WHERE firebase_uid = $1 OR email = $2',
         [uid, email]
     );
     if (existing.rows.length > 0) {
-        return res.status(409).json({ error: 'An account with this email already exists.' });
+        const parent = existing.rows[0];
+        const tokens = buildTokenPair(parent);
+        return res.status(200).json({
+            parent: sanitizeParent(parent),
+            ...tokens,
+        });
     }
 
     const id = uuidv4();
+    // Only stamp consent_date if the client explicitly passed consentGranted: true.
+    // Unity's ConsentController sends true after the user taps "I Agree".
+    // The login-fallback auto-register sends false — consent screen will show next.
+    const consentDate = consentGranted === true ? 'NOW()' : 'NULL';
+
     const result = await query(
         `INSERT INTO parent_profiles (id, email, firebase_uid, subscription_active, consent_date)
-         VALUES ($1, $2, $3, false, NOW())
+         VALUES ($1, $2, $3, false, ${consentDate})
          RETURNING *`,
         [id, email, uid]
     );

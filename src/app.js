@@ -12,6 +12,19 @@ import childrenRoutes from './routes/children.js';
 
 const app = express();
 
+// ── Request logger (dev only) ─────────────────────────────────────────────────
+if (env.isDev) {
+    app.use((req, res, next) => {
+        const start = Date.now();
+        res.on('finish', () => {
+            const ms = Date.now() - start;
+            const flag = res.statusCode >= 400 ? ' ⚠' : '';
+            console.log(`[${new Date().toISOString()}] ${req.method} ${req.path} → ${res.statusCode} (${ms}ms)${flag}`);
+        });
+        next();
+    });
+}
+
 // ── Security middleware ───────────────────────────────────────────────────────
 app.use(helmet());
 app.use(cors({

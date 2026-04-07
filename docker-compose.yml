@@ -27,6 +27,9 @@ services:
       FIREBASE_CLIENT_EMAIL: ${FIREBASE_CLIENT_EMAIL}
     volumes:
       - ./src:/app/src          # hot reload in development
+      # Mount service account key if present — takes priority over env vars
+      # File must be downloaded from: Firebase Console → Project Settings → Service Accounts
+      - ./service-account-key.json:/app/service-account-key.json:ro
     depends_on:
       postgres:
         condition: service_healthy

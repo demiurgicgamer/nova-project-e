@@ -2,7 +2,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { query } from '../config/database.js';
 
 const SUPPORTED_GRADES    = [6, 7];
-const SUPPORTED_LANGUAGES = ['en', 'fr', 'es']; // Phase 1: North America. hi-IN added in Phase 2.
+const SUPPORTED_LANGUAGES = ['en', 'fr', 'es', 'hi']; // Phase 1: North America + India.
 const MAX_CHILDREN        = 5; // per parent account
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
@@ -88,7 +88,7 @@ export const getChildren = async (req, res) => {
         [parentId]
     );
 
-    return res.status(200).json(result.rows.map(sanitizeChild));
+    return res.status(200).json({ children: result.rows.map(sanitizeChild) });
 };
 
 /**
