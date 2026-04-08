@@ -2,13 +2,12 @@ import { ElevenLabsClient } from '@elevenlabs/elevenlabs-js';
 import { createClient } from 'redis';
 import { env } from '../config/env.js';
 
-// Voice IDs — set these after selecting/cloning voices in the ElevenLabs dashboard.
-// Format: { languageCode: 'voice_id_string' }
-// Placeholder values below — replace with real IDs before Month 2 testing.
-const NOVA_VOICE_IDS = {
-    en: process.env.ELEVENLABS_VOICE_ID_EN || 'placeholder_en_voice_id',
-    hi: process.env.ELEVENLABS_VOICE_ID_HI || 'placeholder_hi_voice_id',
-};
+// Ms. Nova uses a single multilingual voice (eleven_multilingual_v2 handles EN + FR natively).
+// One voice ID covers both English and French Canadian — the model detects language from the text.
+const NOVA_VOICE_ID =
+    process.env.ELEVENLABS_VOICE_ID_EN ||
+    process.env.ELEVENLABS_VOICE_ID_HI ||
+    'placeholder_voice_id';
 
 const MODEL_ID = 'eleven_multilingual_v2';
 
@@ -49,12 +48,12 @@ export class ElevenLabsTTSService {
      * Returns a Buffer of MP3 audio bytes.
      *
      * @param {string} text          Text to speak
-     * @param {string} languageCode  'en' or 'hi'
+     * @param {string} languageCode  'en' or 'fr'
      * @param {string} [phraseKey]   Optional cache key for common phrases (e.g. 'great_job')
      * @returns {Promise<Buffer>}
      */
     async synthesizeNova(text, languageCode = 'en', phraseKey = null) {
-        const voiceId = NOVA_VOICE_IDS[languageCode] ?? NOVA_VOICE_IDS.en;
+        const voiceId = NOVA_VOICE_ID; // same voice for all languages — eleven_multilingual_v2 handles it
 
         // Try cache for common phrases
         if (phraseKey && COMMON_PHRASE_KEYS.has(phraseKey)) {
@@ -91,7 +90,7 @@ export class ElevenLabsTTSService {
                 const existing = await this._getCached(key, lang);
                 if (existing) continue;
                 try {
-                    const audio = await this._callAPI(text, NOVA_VOICE_IDS[lang] ?? NOVA_VOICE_IDS.en);
+                    const audio = await this._callAPI(text, NOVA_VOICE_ID);
                     await this._setCache(key, lang, audio, CACHE_TTL_COMMON);
                     warmed++;
                     console.log(`[ElevenLabs] Cached: ${key} (${lang})`);

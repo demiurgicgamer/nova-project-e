@@ -3,9 +3,11 @@ import { createClient, LiveTranscriptionEvents } from '@deepgram/sdk';
 import { env } from '../config/env.js';
 
 // Language code → Deepgram model config
+// Phase 1: English (Canadian) + French (Canadian)
+// Phase 2: Hindi, Arabic, Spanish
 const LANGUAGE_CONFIG = {
     en: { language: 'en-US', model: 'nova-2' },
-    hi: { language: 'hi',    model: 'nova-2' },
+    fr: { language: 'fr-CA', model: 'nova-2' },
 };
 
 /**
@@ -38,7 +40,7 @@ export class DeepgramSTTService extends EventEmitter {
      * Send an audio chunk to Deepgram for the given language.
      * Opens a new connection automatically if one doesn't exist yet.
      * @param {Buffer} audioBuffer  Raw PCM audio bytes (16-bit, mono)
-     * @param {string} languageCode 'en' or 'hi'
+     * @param {string} languageCode 'en' or 'fr'
      */
     async processAudioChunk(audioBuffer, languageCode = 'en') {
         const conn = await this._getOrCreateConnection(languageCode);
