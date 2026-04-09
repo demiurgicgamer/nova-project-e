@@ -42,12 +42,17 @@ export class SessionWebSocketServer {
      * @param {import('http').Server} httpServer
      */
     attach(httpServer) {
-        this._wss = new WebSocketServer({ server: httpServer, path: '/session' });
+        // No path filter — handle routing manually so /session/{id} subpaths work
+        this._wss = new WebSocketServer({ server: httpServer });
 
         this._wss.on('connection', (ws, req) => {
-            // Extract sessionId from URL: /session/{sessionId}
-            const sessionId = req.url?.split('/').pop();
-            if (!sessionId) { ws.close(1008, 'Missing sessionId'); return; }
+            // Only accept connections to /session/{sessionId}
+            const match = req.url?.match(/^\/session\/(.+)$/);
+            if (!match) {
+                ws.close(1008, 'Invalid path. Use /session/{sessionId}');
+                return;
+            }
+            const sessionId = match[1];
 
             console.log(`[WSS] Client connected — session: ${sessionId}`);
             this._initSession(ws, sessionId);
@@ -124,6 +129,14 @@ export class SessionWebSocketServer {
                 this._send(state.ws, { type: 'pong' });
                 break;
 
+            // Editor-only test shortcut: skip STT, inject fake transcript directly
+            case 'test_transcript':
+                if (msg.text) {
+                    console.log(`[WSS] Test transcript injected: "${msg.text}"`);
+                    this._onTranscript(state, { text: msg.text, isFinal: true, languageCode: state.languageCode });
+                }
+                break;
+
             default:
                 console.warn(`[WSS] Unknown message type: ${msg.type}`);
         }
@@ -149,6 +162,11 @@ export class SessionWebSocketServer {
         let buffer;
         try { buffer = Buffer.from(msg.data, 'base64'); }
         catch { return; }
+
+        state.chunkCount = (state.chunkCount ?? 0) + 1;
+        // Log every 50 chunks (~5 seconds) to confirm audio is flowing
+        if (state.chunkCount % 50 === 1)
+            console.log(`[WSS] Audio chunk #${state.chunkCount} — ${buffer.length}B (session: ${state.sessionId})`);
 
         state.stt.processAudioChunk(buffer, state.languageCode);
     }
@@ -186,21 +204,26 @@ export class SessionWebSocketServer {
         if (state.ws.readyState !== WebSocket.OPEN) return;
 
         try {
-            // Signal animation before audio arrives (reduces perceived latency)
             this._send(state.ws, { type: 'animation_trigger', emotion: 'Talking' });
 
+            console.log(`[WSS] TTS start — "${text.substring(0, 40)}..."`);
             const audioBuffer = await this._tts.synthesizeNova(text, state.languageCode);
+            console.log(`[WSS] TTS done — ${audioBuffer.length} bytes PCM`);
+
             const audioBase64 = audioBuffer.toString('base64');
+            console.log(`[WSS] Sending nova_speaking — base64 length: ${audioBase64.length}`);
 
             this._send(state.ws, {
                 type:        'nova_speaking',
                 text,
                 audioBase64,
             });
+
+            console.log(`[WSS] nova_speaking sent OK`);
         } catch (err) {
-            console.error(`[WSS] TTS failed (${state.sessionId}):`, err.message);
+            console.error(`[WSS] TTS failed (${state.sessionId}):`, err.message, err.stack);
             this._send(state.ws, { type: 'animation_trigger', emotion: 'Idle' });
-            this._send(state.ws, { type: 'error', message: 'Voice synthesis unavailable. Please check connection.' });
+            this._send(state.ws, { type: 'error', message: 'Voice synthesis unavailable.' });
         }
     }
 

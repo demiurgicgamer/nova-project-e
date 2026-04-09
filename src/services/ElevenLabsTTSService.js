@@ -1,73 +1,45 @@
-import { ElevenLabsClient } from '@elevenlabs/elevenlabs-js';
-import { createClient } from 'redis';
-import { env } from '../config/env.js';
+import { spawn } from 'child_process';
 
-// Ms. Nova uses a single multilingual voice (eleven_multilingual_v2 handles EN + FR natively).
-// One voice ID covers both English and French Canadian — the model detects language from the text.
-const NOVA_VOICE_ID =
-    process.env.ELEVENLABS_VOICE_ID_EN ||
-    process.env.ELEVENLABS_VOICE_ID_HI ||
-    'placeholder_voice_id';
+// espeak-ng voice map — Phase 1: EN + FR
+// Phase 2: swap for ElevenLabs voices on paid plan
+const VOICE_MAP = {
+    en: 'en',
+    fr: 'fr',
+};
 
-const MODEL_ID = 'eleven_multilingual_v2';
+// Redis TTL for cached audio. 0 = no expiry.
+const CACHE_TTL_COMMON = 0;
 
-// Redis TTL for cached audio (seconds). 0 = no expiry (permanent for common phrases).
-const CACHE_TTL_COMMON  = 0;
-const CACHE_TTL_DYNAMIC = 0; // dynamic TTS is not cached — only common phrases
-
-// Short phrases Ms. Nova says frequently — these are pre-cached in Redis on first call.
 const COMMON_PHRASE_KEYS = new Set([
     'great_job', 'lets_try_again', 'think_about_it', 'good_thinking',
     'almost_there', 'take_your_time', 'well_done', 'not_quite',
 ]);
 
 /**
- * ElevenLabsTTSService
+ * ElevenLabsTTSService — dev stub backed by espeak-ng (offline, no API key needed).
  *
- * Converts text to speech using ElevenLabs eleven_multilingual_v2.
- * Caches frequently-used short phrases in Redis to reduce latency and API cost.
+ * Same public interface as the real ElevenLabs implementation.
+ * Swap back to ElevenLabs when on a paid plan.
  *
- * Usage:
- *   const tts = new ElevenLabsTTSService(redisClient);
- *   const audioBuffer = await tts.synthesizeNova(text, 'en');
- *   // audioBuffer is a Buffer of raw MP3 bytes — send to Unity via WebSocket
+ * Output: raw signed 16-bit little-endian PCM, 22050 Hz, mono
+ * — matches AudioPlaybackManager.defaultSampleRate exactly.
  */
 export class ElevenLabsTTSService {
-    /**
-     * @param {import('redis').RedisClientType} redisClient  Connected Redis client
-     */
     constructor(redisClient) {
-        this._client = new ElevenLabsClient({ apiKey: env.apis.elevenlabs });
-        this._redis  = redisClient;
+        this._redis = redisClient;
     }
 
-    // ── Public API ────────────────────────────────────────────────────────────
-
-    /**
-     * Synthesize text as Ms. Nova's voice.
-     * Returns a Buffer of MP3 audio bytes.
-     *
-     * @param {string} text          Text to speak
-     * @param {string} languageCode  'en' or 'fr'
-     * @param {string} [phraseKey]   Optional cache key for common phrases (e.g. 'great_job')
-     * @returns {Promise<Buffer>}
-     */
     async synthesizeNova(text, languageCode = 'en', phraseKey = null) {
-        const voiceId = NOVA_VOICE_ID; // same voice for all languages — eleven_multilingual_v2 handles it
-
-        // Try cache for common phrases
         if (phraseKey && COMMON_PHRASE_KEYS.has(phraseKey)) {
             const cached = await this._getCached(phraseKey, languageCode);
             if (cached) {
-                console.log(`[ElevenLabs] Cache hit: ${phraseKey} (${languageCode})`);
+                console.log(`[TTS] Cache hit: ${phraseKey} (${languageCode})`);
                 return cached;
             }
         }
 
-        // Call ElevenLabs API
-        const audio = await this._callAPI(text, voiceId);
+        const audio = await this._synthesize(text, languageCode);
 
-        // Cache common phrases permanently
         if (phraseKey && COMMON_PHRASE_KEYS.has(phraseKey)) {
             await this._setCache(phraseKey, languageCode, audio, CACHE_TTL_COMMON);
         }
@@ -75,13 +47,6 @@ export class ElevenLabsTTSService {
         return audio;
     }
 
-    /**
-     * Pre-warm the Redis cache for all common phrases in both languages.
-     * Call this at session server startup to minimize first-session latency.
-     * Requires COMMON_PHRASE_TEXTS to be populated in your env or config.
-     *
-     * @param {Object} phrasesMap  { phraseKey: { en: '...', hi: '...' } }
-     */
     async warmCache(phrasesMap) {
         let warmed = 0;
         for (const [key, texts] of Object.entries(phrasesMap)) {
@@ -90,39 +55,59 @@ export class ElevenLabsTTSService {
                 const existing = await this._getCached(key, lang);
                 if (existing) continue;
                 try {
-                    const audio = await this._callAPI(text, NOVA_VOICE_ID);
+                    const audio = await this._synthesize(text, lang);
                     await this._setCache(key, lang, audio, CACHE_TTL_COMMON);
                     warmed++;
-                    console.log(`[ElevenLabs] Cached: ${key} (${lang})`);
                 } catch (err) {
-                    console.warn(`[ElevenLabs] Cache warm failed for ${key}/${lang}:`, err.message);
+                    console.warn(`[TTS] Cache warm failed ${key}/${lang}:`, err.message);
                 }
             }
         }
-        console.log(`[ElevenLabs] Cache warm complete — ${warmed} phrases cached.`);
+        console.log(`[TTS] Cache warmed — ${warmed} phrases.`);
     }
 
     // ── Private ───────────────────────────────────────────────────────────────
 
-    async _callAPI(text, voiceId) {
-        const stream = await this._client.textToSpeech.convert(voiceId, {
-            text,
-            model_id:         MODEL_ID,
-            output_format:    'mp3_22050_32',   // 22050 Hz, 32kbps — good quality, low size
-            voice_settings: {
-                stability:        0.55,
-                similarity_boost: 0.75,
-                style:            0.30,         // slight expressiveness for a teacher
-                use_speaker_boost: true,
-            },
-        });
+    /**
+     * Generate PCM audio using espeak-ng (offline, no network).
+     * Output: s16le, 22050 Hz, mono — matches Unity AudioPlaybackManager.
+     */
+    _synthesize(text, languageCode) {
+        const voice = VOICE_MAP[languageCode] ?? 'en';
 
-        // Collect streamed chunks into a single Buffer
-        const chunks = [];
-        for await (const chunk of stream) {
-            chunks.push(chunk);
-        }
-        return Buffer.concat(chunks);
+        return new Promise((resolve, reject) => {
+            // espeak-ng --stdout outputs raw 16-bit PCM at 22050 Hz mono
+            const proc = spawn('espeak-ng', [
+                '-v', voice,
+                '-s', '140',       // speed: 140 words/min (natural pace)
+                '-a', '80',        // amplitude: 80% (not too loud)
+                '-p', '50',        // pitch: 50 (neutral)
+                '--stdout',        // write PCM to stdout
+                text,
+            ]);
+
+            const chunks   = [];
+            const errLines = [];
+
+            proc.stdout.on('data', chunk => chunks.push(chunk));
+            proc.stderr.on('data', chunk => errLines.push(chunk.toString()));
+
+            proc.on('error', err => {
+                console.error('[TTS] espeak-ng spawn error:', err.message);
+                reject(err);
+            });
+
+            proc.on('close', code => {
+                const pcm = Buffer.concat(chunks);
+                if (code !== 0 && pcm.length === 0) {
+                    console.error('[TTS] espeak-ng failed:', errLines.join(''));
+                    reject(new Error(`espeak-ng exit ${code}`));
+                    return;
+                }
+                console.log(`[TTS] espeak-ng OK — ${pcm.length} bytes PCM (${languageCode})`);
+                resolve(pcm);
+            });
+        });
     }
 
     _cacheKey(phraseKey, languageCode) {
@@ -133,22 +118,18 @@ export class ElevenLabsTTSService {
         try {
             const val = await this._redis.get(this._cacheKey(phraseKey, languageCode));
             return val ? Buffer.from(val, 'base64') : null;
-        } catch {
-            return null;
-        }
+        } catch { return null; }
     }
 
     async _setCache(phraseKey, languageCode, audioBuffer, ttl) {
         try {
             const key = this._cacheKey(phraseKey, languageCode);
             const b64 = audioBuffer.toString('base64');
-            if (ttl > 0) {
-                await this._redis.set(key, b64, { EX: ttl });
-            } else {
-                await this._redis.set(key, b64); // no expiry
-            }
+            ttl > 0
+                ? await this._redis.set(key, b64, { EX: ttl })
+                : await this._redis.set(key, b64);
         } catch (err) {
-            console.warn('[ElevenLabs] Redis cache write failed:', err.message);
+            console.warn('[TTS] Redis cache write failed:', err.message);
         }
     }
 }
