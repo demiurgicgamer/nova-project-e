@@ -22,6 +22,7 @@ services:
       HUME_API_KEY: ${HUME_API_KEY}
       AGORA_APP_ID: ${AGORA_APP_ID}
       AGORA_APP_CERTIFICATE: ${AGORA_APP_CERTIFICATE}
+      AGENT_BASE_URL: http://agent:3001
       FIREBASE_PROJECT_ID: ${FIREBASE_PROJECT_ID}
       FIREBASE_PRIVATE_KEY: ${FIREBASE_PRIVATE_KEY}
       FIREBASE_CLIENT_EMAIL: ${FIREBASE_CLIENT_EMAIL}
@@ -33,6 +34,32 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
+      redis:
+        condition: service_healthy
+      agent:
+        condition: service_started
+    networks:
+      - nova_network
+
+  # ── Python AI Agent (LangGraph + Claude API) ────────────────────────────────
+  agent:
+    build:
+      context: ./agent
+      dockerfile: Dockerfile
+    container_name: nova_agent
+    restart: unless-stopped
+    ports:
+      - "3001:3001"
+    environment:
+      LLM_PROVIDER: ${LLM_PROVIDER:-claude}
+      CLAUDE_API_KEY: ${CLAUDE_API_KEY}
+      GEMINI_API_KEY: ${GEMINI_API_KEY}
+      GROQ_API_KEY: ${GROQ_API_KEY}
+      OLLAMA_BASE_URL: ${OLLAMA_BASE_URL:-http://host.docker.internal:11434}
+      OLLAMA_MODEL: ${OLLAMA_MODEL:-llama3.2}
+      REDIS_URL: redis://redis:6379
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
+    depends_on:
       redis:
         condition: service_healthy
     networks:

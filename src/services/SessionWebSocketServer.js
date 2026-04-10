@@ -2,6 +2,8 @@ import { WebSocketServer, WebSocket } from 'ws';
 import { DeepgramSTTService } from './DeepgramSTTService.js';
 import { ElevenLabsTTSService } from './ElevenLabsTTSService.js';
 import redisClient from '../config/redis.js';
+// Native fetch available in Node 20 — no import needed
+const AGENT_BASE_URL = process.env.AGENT_BASE_URL ?? 'http://nova-agent:3001';
 
 const HEARTBEAT_INTERVAL_MS = 20_000; // server-side ping every 20s
 const HEARTBEAT_TIMEOUT_MS  = 10_000; // close connection if no pong within 10s
@@ -79,6 +81,8 @@ export class SessionWebSocketServer {
             stt,
             pingTimer:    null,
             pongReceived: true,
+            micActive:      false,   // true while Unity mic is recording; agent ignores transcripts until false
+            novaProcessing: false,   // true while agent+TTS pipeline is running; drops duplicate transcripts
         };
 
         this._sessions.set(sessionId, state);
@@ -129,6 +133,21 @@ export class SessionWebSocketServer {
                 this._send(state.ws, { type: 'pong' });
                 break;
 
+            // Mic stopped — mark inactive first, then flush Deepgram so final transcript fires
+            // after micActive is false and will be routed to the agent
+            case 'mic_stop':
+                console.log(`[WSS] mic_stop received — finalising Deepgram (${state.sessionId})`);
+                state.micActive = false;
+                state.stt.closeAll();   // finish() → Deepgram sends pending final transcript
+                // Process transcript buffered during mic-active window (endpointing fires before mic_stop)
+                if (state.pendingTranscript) {
+                    const t = state.pendingTranscript;
+                    state.pendingTranscript = null;
+                    console.log(`[WSS] Processing buffered transcript: "${t.text.substring(0, 60)}"`);
+                    this._onTranscript(state, { text: t.text, isFinal: true, languageCode: t.languageCode });
+                }
+                break;
+
             // Editor-only test shortcut: skip STT, inject fake transcript directly
             case 'test_transcript':
                 if (msg.text) {
@@ -144,16 +163,20 @@ export class SessionWebSocketServer {
 
     _handleSessionStart(state, msg) {
         state.childId      = msg.childId;
+        state.childName    = msg.childName    ?? 'friend';
         state.languageCode = msg.languageCode ?? 'en';
-        state.grade        = msg.grade ?? 6;
+        state.grade        = msg.grade        ?? 6;
+        state.weakTopics   = msg.weakTopics   ?? [];
 
         console.log(`[WSS] Session started — child: ${state.childId}, lang: ${state.languageCode}, grade: ${state.grade}`);
 
         // Trigger Ms. Nova's intro animation while agent warms up
         this._send(state.ws, { type: 'animation_trigger', emotion: 'Idle' });
 
-        // TODO (Day 28): initialise Claude agent here
-        // AgentOrchestrator.startSession(state.sessionId, { childId, languageCode, grade });
+        // Notify agent service to initialise session context in Redis
+        this._agentSessionStart(state).catch(err =>
+            console.warn(`[WSS] Agent session init failed (non-fatal): ${err.message}`)
+        );
     }
 
     _handleAudioChunk(state, msg) {
@@ -164,6 +187,7 @@ export class SessionWebSocketServer {
         catch { return; }
 
         state.chunkCount = (state.chunkCount ?? 0) + 1;
+        state.micActive  = true;   // mic is actively recording
         // Log every 50 chunks (~5 seconds) to confirm audio is flowing
         if (state.chunkCount % 50 === 1)
             console.log(`[WSS] Audio chunk #${state.chunkCount} — ${buffer.length}B (session: ${state.sessionId})`);
@@ -190,14 +214,117 @@ export class SessionWebSocketServer {
     async _onTranscript(state, { text, isFinal, languageCode }) {
         if (!isFinal || !text) return;
 
+        // If mic is still active, buffer the transcript instead of ignoring it.
+        // Deepgram may fire a final result via endpointing before the user presses Stop.
+        // We'll process it immediately when mic_stop arrives.
+        if (state.micActive) {
+            console.log(`[WSS] Transcript buffered (mic active): "${text.substring(0, 60)}"`);
+            state.pendingTranscript = { text, languageCode };
+            return;
+        }
+
+        // Deepgram's finish() can fire multiple isFinal events (pending utterances + flush).
+        // Drop them if a response is already in flight — one response per mic session.
+        if (state.novaProcessing) {
+            console.log(`[WSS] Transcript dropped (Nova processing): "${text.substring(0, 60)}"`);
+            return;
+        }
+
         console.log(`[WSS] Transcript (${languageCode}): "${text}"`);
+        state.novaProcessing = true;
 
-        // TODO (Day 28): route transcript through Claude agent
-        // const agentResponse = await AgentOrchestrator.sendMessage(state.sessionId, text);
-        // For now, echo a placeholder so the voice pipeline can be tested end-to-end.
-        const agentResponse = `I heard you say: ${text}. Let me think about that.`;
+        try {
+            // Route transcript through Claude agent
+            const { responseText, animationEmotion } = await this._callAgent(state, text);
 
-        await this._speakAsNova(state, agentResponse);
+            // Drive animator before TTS so the animation starts immediately
+            if (animationEmotion && animationEmotion !== 'Talking') {
+                this._send(state.ws, { type: 'animation_trigger', emotion: animationEmotion });
+            }
+
+            await this._speakAsNova(state, responseText);
+        } finally {
+            state.novaProcessing = false;
+        }
+    }
+
+    // ── Agent HTTP helpers ────────────────────────────────────────────────────
+
+    /**
+     * POST /session/start to the Python agent service.
+     * Initialises Redis session context so history is persisted correctly.
+     */
+    async _agentSessionStart(state) {
+        const body = {
+            session_id: state.sessionId,
+            child_profile: {
+                child_id:    state.childId   ?? 'unknown',
+                name:        state.childName ?? 'friend',
+                grade:       state.grade     ?? 6,
+                language:    state.languageCode ?? 'en',
+                weak_topics: state.weakTopics   ?? [],
+            },
+        };
+
+        const res = await fetch(`${AGENT_BASE_URL}/session/start`, {
+            method:  'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body:    JSON.stringify(body),
+            signal:  AbortSignal.timeout(5000),
+        });
+
+        if (!res.ok) {
+            throw new Error(`Agent /session/start → HTTP ${res.status}`);
+        }
+        console.log(`[WSS] Agent session initialised (${state.sessionId})`);
+    }
+
+    /**
+     * POST /chat to the Python agent service.
+     * Returns Ms. Nova's response text and animation hint.
+     * Falls back to a safe echo response if the agent is unavailable.
+     */
+    async _callAgent(state, text) {
+        const body = {
+            session_id:    state.sessionId,
+            text,
+            emotion_state: state.emotionState ?? 'NEUTRAL',
+            child_profile: {
+                child_id:    state.childId   ?? 'unknown',
+                name:        state.childName ?? 'friend',
+                grade:       state.grade     ?? 6,
+                language:    state.languageCode ?? 'en',
+                weak_topics: state.weakTopics   ?? [],
+            },
+        };
+
+        try {
+            const res = await fetch(`${AGENT_BASE_URL}/chat`, {
+                method:  'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body:    JSON.stringify(body),
+                signal:  AbortSignal.timeout(15000),   // 15s — Claude can be slow on first call
+            });
+
+            if (!res.ok) {
+                const errText = await res.text();
+                throw new Error(`Agent /chat → HTTP ${res.status}: ${errText}`);
+            }
+
+            const data = await res.json();
+            console.log(`[WSS] Agent response (${state.sessionId}): "${data.response_text?.substring(0, 60)}..."`);
+            return {
+                responseText:     data.response_text     ?? 'Let me think about that.',
+                animationEmotion: data.animation_emotion ?? 'Talking',
+            };
+        } catch (err) {
+            console.error(`[WSS] Agent call failed (${state.sessionId}): ${err.message}`);
+            // Graceful fallback — pipeline keeps working even if agent is down
+            return {
+                responseText:     "That's interesting! Can you tell me more about what you're working on?",
+                animationEmotion: 'Talking',
+            };
+        }
     }
 
     async _speakAsNova(state, text) {

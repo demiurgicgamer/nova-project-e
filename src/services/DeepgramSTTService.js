@@ -59,7 +59,9 @@ export class DeepgramSTTService extends EventEmitter {
     close(languageCode) {
         const conn = this._connections.get(languageCode);
         if (conn) {
-            conn.connection.finish();
+            clearInterval(conn.keepAliveTimer);
+            conn.ready = false;
+            conn.connection.finish();   // tells Deepgram to flush and send final transcript
             this._connections.delete(languageCode);
         }
     }
@@ -82,7 +84,7 @@ export class DeepgramSTTService extends EventEmitter {
 
         const config = LANGUAGE_CONFIG[languageCode] ?? LANGUAGE_CONFIG.en;
 
-        const state = { connection: null, ready: false, buffer: [] };
+        const state = { connection: null, ready: false, buffer: [], keepAliveTimer: null };
         this._connections.set(languageCode, state);
 
         const connection = this._client.listen.live({
@@ -93,8 +95,8 @@ export class DeepgramSTTService extends EventEmitter {
             channels:         1,
             punctuate:        true,
             interim_results:  true,
-            endpointing:      300,           // ms of silence before utterance end
-            utterance_end_ms: 1000,
+            endpointing:      1500,          // ms of silence before utterance end (raised from 300 to avoid mid-speech fires)
+            utterance_end_ms: 1500,
         });
 
         state.connection = connection;
@@ -107,6 +109,13 @@ export class DeepgramSTTService extends EventEmitter {
                 connection.send(chunk);
             }
             state.buffer = [];
+
+            // Send KeepAlive every 8s so Deepgram doesn't drop the connection during silence
+            state.keepAliveTimer = setInterval(() => {
+                if (state.ready) {
+                    connection.keepAlive();
+                }
+            }, 8000);
         });
 
         connection.on(LiveTranscriptionEvents.Transcript, (data) => {
@@ -135,6 +144,7 @@ export class DeepgramSTTService extends EventEmitter {
         connection.on(LiveTranscriptionEvents.Close, () => {
             console.log(`[Deepgram] Connection closed (${languageCode})`);
             state.ready = false;
+            clearInterval(state.keepAliveTimer);
 
             // Auto-reconnect if connection was not intentionally closed
             if (this._connections.has(languageCode)) {

@@ -1,10 +1,11 @@
-import { spawn } from 'child_process';
+import { MsEdgeTTS, OUTPUT_FORMAT } from 'msedge-tts';
+import { spawn }                    from 'child_process';
 
-// espeak-ng voice map — Phase 1: EN + FR
-// Phase 2: swap for ElevenLabs voices on paid plan
+// Microsoft Edge neural TTS voices — female, Canadian accents for Phase 1
+// Full voice list: https://speech.microsoft.com/portal/voicegallery
 const VOICE_MAP = {
-    en: 'en',
-    fr: 'fr',
+    en: 'en-CA-ClaraNeural',    // Canadian English female — warm, clear
+    fr: 'fr-CA-SylvieNeural',   // Canadian French female — natural
 };
 
 // Redis TTL for cached audio. 0 = no expiry.
@@ -69,44 +70,81 @@ export class ElevenLabsTTSService {
     // ── Private ───────────────────────────────────────────────────────────────
 
     /**
-     * Generate PCM audio using espeak-ng (offline, no network).
-     * Output: s16le, 22050 Hz, mono — matches Unity AudioPlaybackManager.
+     * Generate PCM audio using Microsoft Edge neural TTS (msedge-tts).
+     * Returns MP3 stream → ffmpeg converts to s16le PCM at 22050 Hz mono.
+     * Falls back to espeak-ng if the service is unreachable.
      */
-    _synthesize(text, languageCode) {
-        const voice = VOICE_MAP[languageCode] ?? 'en';
+    async _synthesize(text, languageCode) {
+        const voice = VOICE_MAP[languageCode] ?? VOICE_MAP.en;
+        try {
+            const mp3 = await this._msEdgeTTS(text, voice);
+            const pcm = await this._mp3ToPcm(mp3);
+            console.log(`[TTS] msedge-tts OK — ${pcm.length} bytes PCM (${voice})`);
+            return pcm;
+        } catch (err) {
+            console.warn(`[TTS] msedge-tts failed (${err.message}) — falling back to espeak-ng`);
+            return this._espeakFallback(text, languageCode);
+        }
+    }
 
+    /** Fetch MP3 audio from Microsoft Edge Read Aloud service. */
+    _msEdgeTTS(text, voice) {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const tts = new MsEdgeTTS();
+                await tts.setMetadata(voice, OUTPUT_FORMAT.AUDIO_24KHZ_96KBITRATE_MONO_MP3);
+
+                const { audioStream } = tts.toStream(text);
+                const chunks = [];
+
+                audioStream.on('data',  chunk => chunks.push(chunk));
+                audioStream.on('close', ()    => resolve(Buffer.concat(chunks)));
+                audioStream.on('error', err   => reject(err));
+            } catch (err) {
+                reject(err);
+            }
+        });
+    }
+
+    /** Convert MP3 buffer → raw s16le PCM at 22050 Hz mono via ffmpeg. */
+    _mp3ToPcm(mp3Buffer) {
         return new Promise((resolve, reject) => {
-            // espeak-ng --stdout outputs raw 16-bit PCM at 22050 Hz mono
-            const proc = spawn('espeak-ng', [
-                '-v', voice,
-                '-s', '140',       // speed: 140 words/min (natural pace)
-                '-a', '80',        // amplitude: 80% (not too loud)
-                '-p', '50',        // pitch: 50 (neutral)
-                '--stdout',        // write PCM to stdout
-                text,
+            const ff = spawn('ffmpeg', [
+                '-i', 'pipe:0',    // read from stdin
+                '-f', 's16le',     // raw PCM
+                '-ar', '22050',    // matches Unity AudioPlaybackManager.defaultSampleRate
+                '-ac', '1',        // mono
+                'pipe:1',          // write to stdout
             ]);
 
-            const chunks   = [];
-            const errLines = [];
+            const chunks = [];
+            const errs   = [];
 
-            proc.stdout.on('data', chunk => chunks.push(chunk));
-            proc.stderr.on('data', chunk => errLines.push(chunk.toString()));
-
-            proc.on('error', err => {
-                console.error('[TTS] espeak-ng spawn error:', err.message);
-                reject(err);
-            });
-
-            proc.on('close', code => {
+            ff.stdout.on('data', c => chunks.push(c));
+            ff.stderr.on('data', c => errs.push(c.toString()));
+            ff.on('error', reject);
+            ff.on('close', code => {
                 const pcm = Buffer.concat(chunks);
-                if (code !== 0 && pcm.length === 0) {
-                    console.error('[TTS] espeak-ng failed:', errLines.join(''));
-                    reject(new Error(`espeak-ng exit ${code}`));
-                    return;
-                }
-                console.log(`[TTS] espeak-ng OK — ${pcm.length} bytes PCM (${languageCode})`);
-                resolve(pcm);
+                if (code !== 0 && pcm.length === 0)
+                    reject(new Error(`ffmpeg exit ${code}: ${errs.slice(-2).join('')}`));
+                else
+                    resolve(pcm);
             });
+
+            ff.stdin.write(mp3Buffer);
+            ff.stdin.end();
+        });
+    }
+
+    /** espeak-ng fallback — used when edge-tts is unavailable. */
+    _espeakFallback(text, languageCode) {
+        const voice = languageCode === 'fr' ? 'fr' : 'en';
+        return new Promise((resolve, reject) => {
+            const proc = spawn('espeak-ng', ['-v', voice, '-s', '140', '-a', '80', '--stdout', text]);
+            const chunks = [];
+            proc.stdout.on('data', c => chunks.push(c));
+            proc.on('error', reject);
+            proc.on('close', () => resolve(Buffer.concat(chunks)));
         });
     }
 
