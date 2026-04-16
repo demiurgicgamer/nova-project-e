@@ -4,13 +4,15 @@ import helmet from 'helmet';
 import cors from 'cors';
 import { env } from './config/env.js';
 import { checkConnection } from './config/database.js';
-import { connectRedis } from './config/redis.js';
+import redisClient, { connectRedis } from './config/redis.js';
 import { apiLimiter } from './middleware/rateLimiter.js';
 import { errorHandler } from './middleware/errorHandler.js';
 import authRoutes     from './routes/auth.js';
 import consentRoutes  from './routes/consent.js';
 import childrenRoutes from './routes/children.js';
+import agoraRoutes    from './routes/agora.js';
 import { SessionWebSocketServer } from './services/SessionWebSocketServer.js';
+import { ElevenLabsTTSService }   from './services/ElevenLabsTTSService.js';
 
 const app = express();
 
@@ -51,6 +53,52 @@ app.get('/health', async (_req, res) => {
 app.use('/api/auth',     authRoutes);
 app.use('/api/consent',  consentRoutes);
 app.use('/api/children', childrenRoutes);
+app.use('/api/agora',    agoraRoutes);
+
+// ── Dev-only TTS debug endpoint ───────────────────────────────────────────────
+// GET  /api/debug/tts?text=Hello&lang=en
+//   → returns JSON with PCM size, duration, first bytes, and base64 audio
+// This bypasses WebSocket + Unity entirely — use curl or browser to verify TTS works.
+if (env.isDev) {
+    app.get('/api/debug/tts', async (req, res) => {
+        const text = req.query.text ?? 'Hi, I am Ms. Nova, your math tutor. Hold the button to talk to me!';
+        const lang = req.query.lang ?? 'en';
+
+        console.log(`[DEBUG /api/debug/tts] text="${text}", lang=${lang}`);
+
+        try {
+            const tts = new ElevenLabsTTSService(redisClient);
+            const pcm = await tts.synthesizeNova(text, lang);
+
+            // Count non-zero bytes as a silence check
+            let nonZeroBytes = 0;
+            for (let i = 0; i < pcm.length; i++) {
+                if (pcm[i] !== 0) nonZeroBytes++;
+            }
+            const silentPercent = ((1 - nonZeroBytes / pcm.length) * 100).toFixed(1);
+            const durationSec   = (pcm.length / 2 / 22050).toFixed(2);
+            const firstBytes    = pcm.slice(0, 16).toString('hex');
+            const audioBase64   = pcm.toString('base64');
+
+            console.log(`[DEBUG TTS] PCM=${pcm.length}B, duration=${durationSec}s, silent=${silentPercent}%, firstBytes=${firstBytes}`);
+
+            res.json({
+                ok:             true,
+                text,
+                lang,
+                pcmBytes:       pcm.length,
+                durationSec:    parseFloat(durationSec),
+                silentPercent:  parseFloat(silentPercent),
+                firstBytes,
+                audioBase64,   // paste into base64decode.org and save as .wav to listen
+            });
+        } catch (err) {
+            console.error(`[DEBUG TTS] Error: ${err.message}`, err.stack);
+            res.status(500).json({ ok: false, error: err.message });
+        }
+    });
+    console.log('[Nova API] Dev mode: TTS debug endpoint at GET /api/debug/tts');
+}
 
 // ── 404 handler ───────────────────────────────────────────────────────────────
 app.use((_req, res) => res.status(404).json({ error: 'Not found' }));

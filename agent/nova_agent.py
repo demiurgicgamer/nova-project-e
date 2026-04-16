@@ -32,6 +32,8 @@ from pydantic import BaseModel
 from langgraph.graph import StateGraph, END
 from dotenv import load_dotenv
 
+from curriculum_engine import CurriculumEngine, CurriculumState
+
 load_dotenv()
 
 # ── Logging ──────────────────────────────────────────────────────────────────
@@ -70,12 +72,13 @@ app = FastAPI(title="Nova Agent", version="1.0.0")
 
 # ── Clients (initialised at startup) ─────────────────────────────────────────
 _redis_client: Optional[aioredis.Redis] = None
-_llm_client = None   # type varies by LLM_PROVIDER
+_llm_client = None           # type varies by LLM_PROVIDER
+_curriculum: Optional[CurriculumEngine] = None
 
 
 @app.on_event("startup")
 async def startup():
-    global _redis_client, _llm_client
+    global _redis_client, _llm_client, _curriculum
 
     _redis_client = aioredis.from_url(
         REDIS_URL,
@@ -120,6 +123,10 @@ async def startup():
         log.warning(f"Unknown LLM_PROVIDER '{LLM_PROVIDER}' — will use fallback responses.")
         _llm_client = None
 
+    # Initialise curriculum engine (connects to PostgreSQL)
+    _curriculum = CurriculumEngine()
+    await _curriculum.init()
+
     log.info("Nova Agent started.")
 
 
@@ -127,6 +134,8 @@ async def startup():
 async def shutdown():
     if _redis_client:
         await _redis_client.aclose()
+    if _curriculum:
+        await _curriculum.close()
 
 
 # ── Pydantic models ───────────────────────────────────────────────────────────
@@ -146,9 +155,9 @@ class ChatRequest(BaseModel):
 
 class ChatResponse(BaseModel):
     response_text:      str
-    animation_emotion:  str = "Talking"   # maps to TeacherAnimator EmotionState
-    whiteboard_problem: Optional[str] = None
-    whiteboard_steps:   list[str] = []
+    animation_emotion:  str         = "Talking"   # maps to TeacherAnimator EmotionState
+    whiteboard_problem: Optional[str] = None       # set when a new problem is introduced
+    whiteboard_steps:   list[str]   = []           # solution steps to reveal on whiteboard
 
 class SessionStartRequest(BaseModel):
     session_id:    str
@@ -156,6 +165,10 @@ class SessionStartRequest(BaseModel):
 
 class SessionEndRequest(BaseModel):
     session_id: str
+
+class SessionIntroRequest(BaseModel):
+    session_id:    str
+    child_profile: ChildProfile
 
 
 # ── System prompt builder ─────────────────────────────────────────────────────
@@ -221,14 +234,17 @@ Respond only in Canadian English. Be warm, concise, and encouraging."""
 
 class AgentState(dict):
     """Typed dictionary passed between LangGraph nodes."""
-    session_id:       str
-    child_profile:    dict
-    emotion_state:    str
-    user_message:     str
-    history:          list    # list of {"role": "user"/"assistant", "content": str}
-    pedagogy_hint:    str
-    nova_response:    str
-    animation:        str
+    session_id:         str
+    child_profile:      dict
+    emotion_state:      str
+    user_message:       str
+    history:            list    # list of {"role": "user"/"assistant", "content": str}
+    pedagogy_hint:      str
+    nova_response:      str
+    animation:          str
+    curriculum_state:   dict    # serialised CurriculumState — loaded pre-graph, saved post-graph
+    whiteboard_problem: str     # non-empty when a new problem is introduced this turn
+    whiteboard_steps:   list    # solution steps for the new problem (shown on whiteboard)
 
 
 def node_receive_message(state: AgentState) -> AgentState:
@@ -257,23 +273,68 @@ def node_check_emotion(state: AgentState) -> AgentState:
     return state
 
 
-def node_select_pedagogy(state: AgentState) -> AgentState:
+async def node_select_pedagogy(state: AgentState) -> AgentState:
     """
-    Determine which teaching strategy to use this turn.
-    In future versions this will consult CurriculumEngine to pick the
-    right topic and difficulty — for MVP it enriches the system prompt hint.
+    Determine teaching strategy + load/refresh the active curriculum problem.
+
+    Curriculum logic:
+      1. Deserialise CurriculumState from state["curriculum_state"]
+      2. If no problem is active, or the current problem is exhausted → fetch next problem
+      3. Append the Socratic coaching context (problem + next hint) to pedagogy_hint
+      4. Serialise updated CurriculumState back into state["curriculum_state"]
+
+    The coaching context is injected into Ms. Nova's system prompt as an
+    [Internal coaching] block — she uses it to guide the student without
+    revealing the full solution.
     """
     history_len = len(state.get("history", []))
+    cs_dict     = state.get("curriculum_state") or {}
+    cs          = CurriculumState.from_dict(cs_dict) if cs_dict else CurriculumState()
+    profile     = ChildProfile(**state["child_profile"])
 
+    # ── Turn-count strategy hint ──────────────────────────────────────────────
     if history_len == 0:
-        strategy = "Opening turn: greet the student warmly, ask what topic they are working on today."
+        strategy = "Opening turn — if no topic is established yet, ask the student what they are working on."
     elif history_len < 4:
-        strategy = "Early in session: establish what the student already knows about this topic."
+        strategy = "Early in session — confirm the topic, ask what the student already knows."
     else:
-        strategy = "Mid-session: guide toward solution using Socratic questioning. Refer to earlier answers if relevant."
+        strategy = "Mid-session — use Socratic questioning to guide. Refer to earlier answers where relevant."
 
-    # Combine pedagogy hint + strategy into a single instruction
-    state["pedagogy_hint"] = state.get("pedagogy_hint", "") + f"\n\nStrategy: {strategy}"
+    # ── Curriculum problem selection ──────────────────────────────────────────
+    if _curriculum:
+        # Fetch a new problem if: none is active, or the current one is exhausted
+        if not cs.has_problem or cs.is_exhausted:
+            if cs.has_problem and cs.is_exhausted:
+                # Problem finished — update difficulty and count it
+                cs.difficulty    = _curriculum.next_difficulty(
+                    cs.session_correct, cs.session_total, cs.difficulty
+                )
+                cs.session_total += 1
+                log.info(f"[{state['session_id']}] Problem exhausted — next difficulty: {cs.difficulty}")
+
+            problem = await _curriculum.select_problem(
+                topic_key   = cs.topic_key or _curriculum._fallback_topic_key(profile.grade),
+                grade       = profile.grade,
+                language    = profile.language,
+                difficulty  = cs.difficulty,
+                exclude_ids = cs.problems_seen,
+            )
+            if problem:
+                cs.load_problem(problem)
+                log.info(
+                    f"[{state['session_id']}] New problem loaded: "
+                    f"{problem.topic_key} / diff={problem.difficulty} / id={problem.id[:8]}"
+                )
+
+        coaching = CurriculumEngine.build_coaching_context(cs, profile.language)
+    else:
+        coaching = ""
+
+    # ── Combine into pedagogy_hint ────────────────────────────────────────────
+    base_hint = state.get("pedagogy_hint", "")
+    parts     = [p for p in [base_hint, f"Strategy: {strategy}", coaching] if p]
+    state["pedagogy_hint"]    = "\n\n".join(parts)
+    state["curriculum_state"] = cs.to_dict()
     return state
 
 
@@ -322,11 +383,33 @@ async def node_generate_response(state: AgentState) -> AgentState:
     }
     state["animation"] = emotion_to_animation.get(state.get("emotion_state", "NEUTRAL"), "Talking")
 
+    # ── Whiteboard: show problem when it is newly loaded this turn ────────────
+    # is_new_problem is true only on the first turn after load_problem() is called
+    # (hints_given == 0). The whiteboard displays the problem + its steps so the
+    # student can see the full question while Nova speaks her first guiding question.
+    cs_dict = state.get("curriculum_state") or {}
+    if cs_dict:
+        cs = CurriculumState.from_dict(cs_dict)
+        if cs.is_new_problem:
+            state["whiteboard_problem"] = cs.problem_text
+            state["whiteboard_steps"]   = cs.solution_steps
+            log.info(f"[{state['session_id']}] Whiteboard update — new problem shown")
+        else:
+            state["whiteboard_problem"] = ""
+            state["whiteboard_steps"]   = []
+    else:
+        state["whiteboard_problem"] = ""
+        state["whiteboard_steps"]   = []
+
     return state
 
 
 async def node_update_context(state: AgentState) -> AgentState:
-    """Append this turn to conversation history and persist in Redis."""
+    """
+    Append this turn to conversation history and persist history + curriculum state in Redis.
+    Also increments hints_given so the next turn guides toward the next solution step.
+    """
+    # ── Conversation history ──────────────────────────────────────────────────
     history = list(state.get("history", []))
     history.append({"role": "user",      "content": state["user_message"]})
     history.append({"role": "assistant", "content": state["nova_response"]})
@@ -337,11 +420,23 @@ async def node_update_context(state: AgentState) -> AgentState:
 
     state["history"] = history
 
-    # Persist to Redis
+    # ── Curriculum state: advance hints pointer ───────────────────────────────
+    cs_dict = state.get("curriculum_state") or {}
+    if cs_dict:
+        cs = CurriculumState.from_dict(cs_dict)
+        if cs.has_problem:
+            cs.hints_given += 1
+            cs.turn_count  += 1
+        state["curriculum_state"] = cs.to_dict()
+
+    # ── Persist to Redis ──────────────────────────────────────────────────────
     if _redis_client:
-        key = f"nova:session:{state['session_id']}:history"
+        session_id = state["session_id"]
         try:
-            await _redis_client.set(key, json.dumps(history), ex=SESSION_TTL_SEC)
+            hist_key = f"nova:session:{session_id}:history"
+            curr_key = f"nova:session:{session_id}:curriculum"
+            await _redis_client.set(hist_key, json.dumps(history),                   ex=SESSION_TTL_SEC)
+            await _redis_client.set(curr_key, json.dumps(state["curriculum_state"]), ex=SESSION_TTL_SEC)
         except Exception as e:
             log.warning(f"[{state['session_id']}] Redis write failed: {e}")
 
@@ -427,7 +522,7 @@ def build_graph():
 _agent_graph = build_graph()
 
 
-# ── Helper: load history from Redis ──────────────────────────────────────────
+# ── Helpers: Redis load ───────────────────────────────────────────────────────
 
 async def _load_history(session_id: str) -> list:
     if not _redis_client:
@@ -437,8 +532,20 @@ async def _load_history(session_id: str) -> list:
         raw = await _redis_client.get(key)
         return json.loads(raw) if raw else []
     except Exception as e:
-        log.warning(f"[{session_id}] Redis read failed: {e}")
+        log.warning(f"[{session_id}] Redis history read failed: {e}")
         return []
+
+
+async def _load_curriculum_state(session_id: str) -> dict:
+    if not _redis_client:
+        return {}
+    key = f"nova:session:{session_id}:curriculum"
+    try:
+        raw = await _redis_client.get(key)
+        return json.loads(raw) if raw else {}
+    except Exception as e:
+        log.warning(f"[{session_id}] Redis curriculum read failed: {e}")
+        return {}
 
 
 # ── HTTP Endpoints ────────────────────────────────────────────────────────────
@@ -466,22 +573,144 @@ async def session_start(req: SessionStartRequest):
     """
     Initialise session context in Redis.
     Called by Node.js SessionWebSocketServer when session_start event arrives.
+
+    Also pre-selects the first topic and problem so the first turn of /chat
+    has a curriculum context ready immediately.
     """
-    key = f"nova:session:{req.session_id}:profile"
+    profile = req.child_profile
+
+    # ── Store child profile ───────────────────────────────────────────────────
     if _redis_client:
         try:
             await _redis_client.set(
-                key,
-                req.child_profile.model_dump_json(),
+                f"nova:session:{req.session_id}:profile",
+                profile.model_dump_json(),
                 ex=SESSION_TTL_SEC,
             )
         except Exception as e:
             log.warning(f"[{req.session_id}] Failed to store profile: {e}")
 
-    log.info(f"[{req.session_id}] Session started — child: {req.child_profile.name}, "
-             f"grade: {req.child_profile.grade}, lang: {req.child_profile.language}")
+    # ── Pre-load first topic + problem ────────────────────────────────────────
+    cs = CurriculumState()
 
+    if _curriculum:
+        try:
+            topic = await _curriculum.select_topic(
+                grade        = profile.grade,
+                language     = profile.language,
+                weak_topics  = profile.weak_topics,
+                covered_today= [],
+            )
+            cs.topic_key  = topic["topic_key"]
+            cs.topic_name = topic["topic_name"]
+
+            problem = await _curriculum.select_problem(
+                topic_key  = cs.topic_key,
+                grade      = profile.grade,
+                language   = profile.language,
+                difficulty = cs.difficulty,
+                exclude_ids= [],
+            )
+            if problem:
+                cs.load_problem(problem)
+                log.info(
+                    f"[{req.session_id}] Pre-loaded problem: "
+                    f"{problem.topic_key} / diff={problem.difficulty} / {problem.id[:8]}"
+                )
+        except Exception as e:
+            log.warning(f"[{req.session_id}] Curriculum pre-load failed: {e}")
+
+    if _redis_client:
+        try:
+            await _redis_client.set(
+                f"nova:session:{req.session_id}:curriculum",
+                json.dumps(cs.to_dict()),
+                ex=SESSION_TTL_SEC,
+            )
+        except Exception as e:
+            log.warning(f"[{req.session_id}] Failed to store curriculum state: {e}")
+
+    log.info(
+        f"[{req.session_id}] Session started — child: {profile.name}, "
+        f"grade: {profile.grade}, lang: {profile.language}, "
+        f"topic: {cs.topic_key or 'pending'}"
+    )
     return {"status": "ok", "session_id": req.session_id}
+
+
+@app.post("/session/intro", response_model=ChatResponse)
+async def session_intro(req: SessionIntroRequest):
+    """
+    Generate Ms. Nova's opening welcome + push-to-talk guide.
+    Called once by Node.js immediately after session_start is acknowledged.
+    Stores the intro as the first assistant message in history so subsequent
+    /chat calls have correct context (Nova spoke first).
+    """
+    profile = req.child_profile
+    name    = profile.name
+    lang    = profile.language
+
+    if lang == "fr":
+        intro_prompt = (
+            f"Tu commences une nouvelle session de tutorat avec {name}. "
+            f"Accueille-le/la chaleureusement par son prénom, présente-toi brièvement, "
+            f"puis explique en une phrase comment fonctionne le bouton: "
+            f"'Maintiens le bouton appuyé pour parler, relâche quand tu as terminé.' "
+            f"Termine en lui demandant ce qu'on va travailler aujourd'hui. "
+            f"2–3 phrases maximum. Sois chaleureuse et enthousiaste."
+        )
+    else:
+        intro_prompt = (
+            f"You are starting a new tutoring session with {name}. "
+            f"Welcome them warmly by name, briefly introduce yourself as Ms. Nova, "
+            f"then explain the push-to-talk button in one simple sentence: "
+            f"'Hold the button to talk, release when you're done.' "
+            f"Then invite them to tell you what they're working on today. "
+            f"2–3 sentences maximum. Be warm and enthusiastic."
+        )
+
+    system = build_system_prompt(profile)
+
+    if _llm_client is None:
+        if lang == "fr":
+            intro_text = (
+                f"Bonjour {name}! Je suis Mme Nova, ta tutrice de maths. "
+                f"Pour me parler, maintiens le bouton appuyé et relâche quand tu as terminé. "
+                f"Alors, qu'est-ce qu'on travaille aujourd'hui?"
+            )
+        else:
+            intro_text = (
+                f"Hi {name}, I'm Ms. Nova — great to meet you! "
+                f"To talk to me, just hold the button and release when you're done. "
+                f"So, what are we working on today?"
+            )
+        log.warning(f"[{req.session_id}] No LLM configured — using hardcoded intro.")
+    else:
+        try:
+            intro_text = await _call_llm(
+                system,
+                [{"role": "user", "content": intro_prompt}],
+                req.session_id,
+            )
+        except Exception as e:
+            log.error(f"[{req.session_id}] Intro LLM error: {e}")
+            intro_text = (
+                f"Hi {name}, I'm Ms. Nova — great to meet you! "
+                f"Hold the button to talk, release when you're done. "
+                f"What are we working on today?"
+            )
+
+    # Store intro as the first assistant message so /chat calls have correct context
+    if _redis_client:
+        history = [{"role": "assistant", "content": intro_text}]
+        key = f"nova:session:{req.session_id}:history"
+        try:
+            await _redis_client.set(key, json.dumps(history), ex=SESSION_TTL_SEC)
+        except Exception as e:
+            log.warning(f"[{req.session_id}] Failed to store intro history: {e}")
+
+    log.info(f"[{req.session_id}] Intro generated for {name}: \"{intro_text[:80]}\"")
+    return ChatResponse(response_text=intro_text, animation_emotion="Talking")
 
 
 @app.post("/session/end")
@@ -494,6 +723,7 @@ async def session_end(req: SessionEndRequest):
         keys = [
             f"nova:session:{req.session_id}:history",
             f"nova:session:{req.session_id}:profile",
+            f"nova:session:{req.session_id}:curriculum",
         ]
         try:
             await _redis_client.delete(*keys)
@@ -509,24 +739,30 @@ async def chat(req: ChatRequest):
     """
     Main endpoint: child's transcript → Ms. Nova's response.
 
-    Called by Node.js SessionWebSocketServer._onTranscript()
+    Called by Node.js SessionWebSocketServer._onTranscript().
+    Returns response_text, animation_emotion, and (when a new problem is introduced)
+    whiteboard_problem + whiteboard_steps for display in the Unity whiteboard.
     """
     if not req.text.strip():
         raise HTTPException(status_code=400, detail="text must not be empty")
 
-    # Load conversation history from Redis
-    history = await _load_history(req.session_id)
+    # Load conversation history + curriculum state from Redis
+    history          = await _load_history(req.session_id)
+    curriculum_state = await _load_curriculum_state(req.session_id)
 
     # Build initial state for the graph
     initial_state: AgentState = {
-        "session_id":    req.session_id,
-        "child_profile": req.child_profile.model_dump(),
-        "emotion_state": req.emotion_state,
-        "user_message":  req.text,
-        "history":       history,
-        "pedagogy_hint": "",
-        "nova_response": "",
-        "animation":     "Talking",
+        "session_id":         req.session_id,
+        "child_profile":      req.child_profile.model_dump(),
+        "emotion_state":      req.emotion_state,
+        "user_message":       req.text,
+        "history":            history,
+        "pedagogy_hint":      "",
+        "nova_response":      "",
+        "animation":          "Talking",
+        "curriculum_state":   curriculum_state,
+        "whiteboard_problem": "",
+        "whiteboard_steps":   [],
     }
 
     # Run the LangGraph agent
@@ -537,6 +773,8 @@ async def chat(req: ChatRequest):
         raise HTTPException(status_code=500, detail="Agent processing failed")
 
     return ChatResponse(
-        response_text=final_state["nova_response"],
-        animation_emotion=final_state.get("animation", "Talking"),
+        response_text      = final_state["nova_response"],
+        animation_emotion  = final_state.get("animation", "Talking"),
+        whiteboard_problem = final_state.get("whiteboard_problem") or None,
+        whiteboard_steps   = final_state.get("whiteboard_steps") or [],
     )

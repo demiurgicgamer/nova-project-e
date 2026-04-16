@@ -105,6 +105,7 @@ export class SessionWebSocketServer {
     _onClose(state) {
         console.log(`[WSS] Client disconnected — session: ${state.sessionId}`);
         clearInterval(state.pingTimer);
+        clearTimeout(state.transcriptTimeoutId);
         state.stt.closeAll();
         this._sessions.delete(state.sessionId);
     }
@@ -133,11 +134,18 @@ export class SessionWebSocketServer {
                 this._send(state.ws, { type: 'pong' });
                 break;
 
+            // Mic activated — PTT pressed. Mark active so audio chunks are forwarded to STT.
+            case 'mic_start':
+                console.log(`[WSS] mic_start received (${state.sessionId})`);
+                state.micActive = true;
+                break;
+
             // Mic stopped — mark inactive first, then flush Deepgram so final transcript fires
             // after micActive is false and will be routed to the agent
             case 'mic_stop':
                 console.log(`[WSS] mic_stop received — finalising Deepgram (${state.sessionId})`);
                 state.micActive = false;
+                clearTimeout(state.transcriptTimeoutId);
                 state.stt.closeAll();   // finish() → Deepgram sends pending final transcript
                 // Process transcript buffered during mic-active window (endpointing fires before mic_stop)
                 if (state.pendingTranscript) {
@@ -145,6 +153,16 @@ export class SessionWebSocketServer {
                     state.pendingTranscript = null;
                     console.log(`[WSS] Processing buffered transcript: "${t.text.substring(0, 60)}"`);
                     this._onTranscript(state, { text: t.text, isFinal: true, languageCode: t.languageCode });
+                } else {
+                    // If no transcript arrives within 5 seconds, Deepgram got silence (or Editor mic
+                    // is muted on Windows). Send processing_complete so Unity returns to Listening
+                    // instead of waiting out the full 45-second session-level timeout.
+                    state.transcriptTimeoutId = setTimeout(() => {
+                        if (!state.novaProcessing) {
+                            console.log(`[WSS] No transcript after mic_stop (5s) — sending processing_complete to recover (${state.sessionId})`);
+                            this._send(state.ws, { type: 'processing_complete' });
+                        }
+                    }, 5000);
                 }
                 break;
 
@@ -173,10 +191,13 @@ export class SessionWebSocketServer {
         // Trigger Ms. Nova's intro animation while agent warms up
         this._send(state.ws, { type: 'animation_trigger', emotion: 'Idle' });
 
-        // Notify agent service to initialise session context in Redis
-        this._agentSessionStart(state).catch(err =>
-            console.warn(`[WSS] Agent session init failed (non-fatal): ${err.message}`)
-        );
+        // Notify agent service to initialise session context in Redis,
+        // then immediately generate and speak the welcome + PTT guide
+        this._agentSessionStart(state)
+            .then(() => this._agentSessionIntro(state))
+            .catch(err =>
+                console.warn(`[WSS] Agent session init/intro failed (non-fatal): ${err.message}`)
+            );
     }
 
     _handleAudioChunk(state, msg) {
@@ -187,12 +208,20 @@ export class SessionWebSocketServer {
         catch { return; }
 
         state.chunkCount = (state.chunkCount ?? 0) + 1;
-        state.micActive  = true;   // mic is actively recording
+        // NOTE: do NOT set state.micActive here. micActive is set only by mic_start
+        // (PTT pressed) and cleared by mic_stop (PTT released). Agora fires audio
+        // frames continuously — even when the mic is muted — so setting micActive on
+        // every chunk causes a race condition: the flag is reset to true before
+        // Deepgram can fire its final transcript after mic_stop, permanently buffering
+        // every transcript and keeping Unity stuck in Processing state.
         // Log every 50 chunks (~5 seconds) to confirm audio is flowing
         if (state.chunkCount % 50 === 1)
-            console.log(`[WSS] Audio chunk #${state.chunkCount} — ${buffer.length}B (session: ${state.sessionId})`);
+            console.log(`[WSS] Audio chunk #${state.chunkCount} — ${buffer.length}B (session: ${state.sessionId}, micActive: ${state.micActive})`);
 
-        state.stt.processAudioChunk(buffer, state.languageCode);
+        // Only forward audio to Deepgram when PTT is actively pressed
+        if (state.micActive) {
+            state.stt.processAudioChunk(buffer, state.languageCode);
+        }
     }
 
     _handleSessionEnd(state) {
@@ -213,6 +242,9 @@ export class SessionWebSocketServer {
 
     async _onTranscript(state, { text, isFinal, languageCode }) {
         if (!isFinal || !text) return;
+
+        // Clear the no-transcript fallback timer — a real transcript arrived
+        clearTimeout(state.transcriptTimeoutId);
 
         // If mic is still active, buffer the transcript instead of ignoring it.
         // Deepgram may fire a final result via endpointing before the user presses Stop.
@@ -235,11 +267,23 @@ export class SessionWebSocketServer {
 
         try {
             // Route transcript through Claude agent
-            const { responseText, animationEmotion } = await this._callAgent(state, text);
+            const { responseText, animationEmotion, whiteboardProblem, whiteboardSteps, languageCode }
+                = await this._callAgent(state, text);
 
             // Drive animator before TTS so the animation starts immediately
             if (animationEmotion && animationEmotion !== 'Talking') {
                 this._send(state.ws, { type: 'animation_trigger', emotion: animationEmotion });
+            }
+
+            // Send whiteboard update when a new problem is introduced
+            if (whiteboardProblem) {
+                console.log(`[WSS] whiteboard_update — problem: "${whiteboardProblem.substring(0, 50)}…", steps: ${whiteboardSteps.length}`);
+                this._send(state.ws, {
+                    type:         'whiteboard_update',
+                    problem:      whiteboardProblem,
+                    steps:        whiteboardSteps,
+                    languageCode: languageCode,
+                });
             }
 
             await this._speakAsNova(state, responseText);
@@ -280,6 +324,49 @@ export class SessionWebSocketServer {
     }
 
     /**
+     * POST /session/intro to generate Ms. Nova's opening welcome + PTT guide.
+     * Called once after session_start is acknowledged.
+     */
+    async _agentSessionIntro(state) {
+        const body = {
+            session_id: state.sessionId,
+            child_profile: {
+                child_id:    state.childId   ?? 'unknown',
+                name:        state.childName ?? 'friend',
+                grade:       state.grade     ?? 6,
+                language:    state.languageCode ?? 'en',
+                weak_topics: state.weakTopics   ?? [],
+            },
+        };
+
+        const res = await fetch(`${AGENT_BASE_URL}/session/intro`, {
+            method:  'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body:    JSON.stringify(body),
+            signal:  AbortSignal.timeout(15000),
+        });
+
+        if (!res.ok) {
+            throw new Error(`Agent /session/intro → HTTP ${res.status}`);
+        }
+
+        const data = await res.json();
+        console.log(`[WSS] Intro from agent — response_text: "${data.response_text?.substring(0, 80)}" | length: ${data.response_text?.length ?? 0} chars | emotion: ${data.animation_emotion}`);
+
+        if (!data.response_text) {
+            console.error(`[WSS] Intro response_text is empty/null for session ${state.sessionId} — skipping TTS`);
+            this._send(state.ws, { type: 'processing_complete' });
+            return;
+        }
+
+        if (data.animation_emotion && data.animation_emotion !== 'Talking') {
+            this._send(state.ws, { type: 'animation_trigger', emotion: data.animation_emotion });
+        }
+
+        await this._speakAsNova(state, data.response_text);
+    }
+
+    /**
      * POST /chat to the Python agent service.
      * Returns Ms. Nova's response text and animation hint.
      * Falls back to a safe echo response if the agent is unavailable.
@@ -312,10 +399,17 @@ export class SessionWebSocketServer {
             }
 
             const data = await res.json();
-            console.log(`[WSS] Agent response (${state.sessionId}): "${data.response_text?.substring(0, 60)}..."`);
+            const hasWhiteboard = data.whiteboard_problem && data.whiteboard_problem.trim().length > 0;
+            console.log(
+                `[WSS] Agent response (${state.sessionId}): "${data.response_text?.substring(0, 60)}..." ` +
+                `| anim: ${data.animation_emotion} | whiteboard: ${hasWhiteboard ? 'YES' : 'no'}`
+            );
             return {
-                responseText:     data.response_text     ?? 'Let me think about that.',
-                animationEmotion: data.animation_emotion ?? 'Talking',
+                responseText:      data.response_text     ?? 'Let me think about that.',
+                animationEmotion:  data.animation_emotion ?? 'Talking',
+                whiteboardProblem: data.whiteboard_problem ?? null,
+                whiteboardSteps:   data.whiteboard_steps  ?? [],
+                languageCode:      state.languageCode     ?? 'en',
             };
         } catch (err) {
             console.error(`[WSS] Agent call failed (${state.sessionId}): ${err.message}`);
@@ -323,12 +417,22 @@ export class SessionWebSocketServer {
             return {
                 responseText:     "That's interesting! Can you tell me more about what you're working on?",
                 animationEmotion: 'Talking',
+                whiteboardProblem: null,
+                whiteboardSteps:  [],
+                languageCode:     state.languageCode ?? 'en',
             };
         }
     }
 
     async _speakAsNova(state, text) {
         if (state.ws.readyState !== WebSocket.OPEN) return;
+
+        // Guard: never send empty/null text to TTS — it would produce silent audio
+        if (!text || !text.trim()) {
+            console.warn(`[WSS] _speakAsNova called with empty text (session: ${state.sessionId}) — skipping TTS`);
+            this._send(state.ws, { type: 'processing_complete' });
+            return;
+        }
 
         try {
             this._send(state.ws, { type: 'animation_trigger', emotion: 'Talking' });
@@ -350,7 +454,11 @@ export class SessionWebSocketServer {
         } catch (err) {
             console.error(`[WSS] TTS failed (${state.sessionId}):`, err.message, err.stack);
             this._send(state.ws, { type: 'animation_trigger', emotion: 'Idle' });
-            this._send(state.ws, { type: 'error', message: 'Voice synthesis unavailable.' });
+            // Send nova_speaking with no audio so Unity's SessionStateMachine
+            // transitions out of Processing via OnPlaybackStarted→OnPlaybackComplete
+            // even when TTS is unavailable.  AudioPlaybackManager will log a
+            // warning and skip playback, then the 45-second timeout is the backup.
+            this._send(state.ws, { type: 'processing_complete' });
         }
     }
 
