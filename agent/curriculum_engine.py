@@ -32,14 +32,16 @@ DATABASE_URL = os.getenv("DATABASE_URL", "")
 
 @dataclass
 class Problem:
-    id:          str
-    topic_key:   str
-    topic_name:  str
-    language:    str
-    difficulty:  int
-    text:        str
-    steps:       list[str]
-    context:     str = ""
+    id:                 str
+    topic_key:          str
+    topic_name:         str
+    language:           str
+    difficulty:         int
+    text:               str
+    steps:              list[str]
+    context:            str       = ""
+    correct_answer:     str       = ""
+    distractor_answers: list[str] = field(default_factory=list)
 
     def to_dict(self) -> dict:
         return self.__dict__.copy()
@@ -66,8 +68,10 @@ class CurriculumState:
     hints_given:     int          = 0     # steps revealed for current problem
     problems_seen:   list[str]    = field(default_factory=list)  # IDs shown this session
     turn_count:      int          = 0     # total conversation turns this session
-    session_correct: int          = 0     # correct answers this session
-    session_total:   int          = 0     # problems attempted this session
+    session_correct:  int       = 0     # correct answers this session
+    session_total:    int       = 0     # problems attempted this session
+    question_choices: list[str] = field(default_factory=list)  # shuffled [A,B,C,D] texts
+    question_correct: int       = -1   # index of correct choice in question_choices
 
     # ── Serialisation ─────────────────────────────────────────────────────────
 
@@ -97,6 +101,26 @@ class CurriculumState:
         return self.solution_steps[idx] if idx < len(self.solution_steps) else None
 
     @property
+    def chunk_phase(self) -> str:
+        """
+        Returns the current pedagogical phase based on total turn count.
+        Drives the 4-dot progress strip in the Unity HUD.
+
+          intro       — turns 0–1   (dot 0)
+          chunk_a     — turns 2–5   (dot 1) first concept chunk
+          chunk_b     — turns 6–9   (dot 2) second concept chunk
+          consolidate — turns 10+   (dot 3) wrap-up / consolidation
+        """
+        if self.turn_count <= 1:
+            return "intro"
+        elif self.turn_count <= 5:
+            return "chunk_a"
+        elif self.turn_count <= 9:
+            return "chunk_b"
+        else:
+            return "consolidate"
+
+    @property
     def is_exhausted(self) -> bool:
         """
         True when the student has had enough time with this problem.
@@ -114,6 +138,21 @@ class CurriculumState:
         self.hints_given    = 0
         if problem.id not in self.problems_seen:
             self.problems_seen.append(problem.id)
+
+        # Build shuffled multiple-choice choices for the question card
+        if problem.correct_answer and len(problem.distractor_answers) >= 1:
+            choices = list(problem.distractor_answers[:3])
+            # Ensure we always have 4 choices (pad with placeholders if fewer distractors)
+            while len(choices) < 3:
+                choices.append("—")
+            choices.append(problem.correct_answer)
+            random.shuffle(choices)
+            self.question_choices = choices
+            self.question_correct = choices.index(problem.correct_answer)
+        else:
+            # No MC data — question card will stay hidden
+            self.question_choices = []
+            self.question_correct = -1
 
 
 # ── CurriculumEngine ──────────────────────────────────────────────────────────
@@ -224,6 +263,44 @@ class CurriculumEngine:
             log.error(f"[CurriculumEngine] select_topic error: {e}")
             return _fallback_topic(grade)
 
+    async def get_topic_by_key(self, topic_key: str, grade: int, language: str) -> dict:
+        """
+        Look up a specific topic by its key.
+        Used when the child has already chosen a topic in the UI — skip the
+        priority-selection algorithm and use exactly what they picked.
+
+        Returns {"topic_key": str, "topic_name": str}.
+        Falls back to a title-cased version of the key if the DB lookup fails.
+        """
+        fallback = {
+            "topic_key":  topic_key,
+            "topic_name": topic_key.replace("_", " ").title(),
+        }
+
+        if not self._pool:
+            return fallback
+
+        try:
+            async with self._pool.acquire() as conn:
+                row = await conn.fetchrow(
+                    """
+                    SELECT topic_key, display_name
+                    FROM   curriculum_topics
+                    WHERE  topic_key = $1
+                    AND    grade     = $2
+                    AND    subject   = 'math'
+                    LIMIT  1
+                    """,
+                    topic_key, grade,
+                )
+            if row:
+                return {"topic_key": row["topic_key"], "topic_name": row["display_name"]}
+            log.warning(f"[CurriculumEngine] topic_key '{topic_key}' not found in DB — using fallback")
+        except Exception as e:
+            log.warning(f"[CurriculumEngine] get_topic_by_key error: {e}")
+
+        return fallback
+
     # ── Problem selection ─────────────────────────────────────────────────────
 
     async def select_problem(
@@ -256,7 +333,8 @@ class CurriculumEngine:
                                ct.topic_key, ct.display_name,
                                cp.language_code, cp.difficulty,
                                cp.problem_text, cp.solution_steps,
-                               cp.cultural_context
+                               cp.cultural_context,
+                               cp.correct_answer, cp.distractor_answers
                         FROM   curriculum_problems cp
                         JOIN   curriculum_topics   ct ON ct.id = cp.topic_id
                         WHERE  ct.topic_key     = $1
@@ -280,15 +358,23 @@ class CurriculumEngine:
                         elif steps is None:
                             steps = []
 
+                        distractors = row["distractor_answers"]
+                        if distractors is None:
+                            distractors = []
+                        elif isinstance(distractors, str):
+                            distractors = json.loads(distractors)
+
                         return Problem(
-                            id         = pid,
-                            topic_key  = row["topic_key"],
-                            topic_name = row["display_name"],
-                            language   = row["language_code"],
-                            difficulty = row["difficulty"],
-                            text       = row["problem_text"],
-                            steps      = steps,
-                            context    = row["cultural_context"] or "",
+                            id                 = pid,
+                            topic_key          = row["topic_key"],
+                            topic_name         = row["display_name"],
+                            language           = row["language_code"],
+                            difficulty         = row["difficulty"],
+                            text               = row["problem_text"],
+                            steps              = steps,
+                            context            = row["cultural_context"] or "",
+                            correct_answer     = row["correct_answer"] or "",
+                            distractor_answers = list(distractors),
                         )
 
             log.warning(f"[CurriculumEngine] No unseen problems for {topic_key}/{grade}/{language}")
@@ -322,6 +408,24 @@ class CurriculumEngine:
         if accuracy < 0.4 and session_total >= 2:
             return max(1, current - 1)
         return current
+
+    # ── Question display builder ──────────────────────────────────────────────
+
+    @staticmethod
+    def build_question_data(cs: "CurriculumState") -> Optional[dict]:
+        """
+        Build the question_display payload sent to Unity's question card.
+
+        Returns None if no choices are available (voice-only fallback).
+        The choices are already shuffled when load_problem() is called.
+        """
+        if not cs.has_problem or not cs.question_choices or cs.question_correct < 0:
+            return None
+        return {
+            "text":          cs.problem_text,
+            "choices":       cs.question_choices,
+            "correct_index": cs.question_correct,
+        }
 
     # ── Socratic coaching context ─────────────────────────────────────────────
 
@@ -406,6 +510,8 @@ _FALLBACK_PROBLEMS: dict[tuple, Problem] = {
             "Simplify: divide both by 4 to get 3/5",
         ],
         context="hockey",
+        correct_answer="3/5",
+        distractor_answers=["2/5", "12/8", "4/5"],
     ),
     ("ratios", "fr"): Problem(
         id="fb_ratios_fr", topic_key="ratios", topic_name="Ratios et taux",
@@ -420,6 +526,8 @@ _FALLBACK_PROBLEMS: dict[tuple, Problem] = {
             "Simplifier en divisant par 4 : 3/5",
         ],
         context="hockey",
+        correct_answer="3/5",
+        distractor_answers=["2/5", "12/8", "4/5"],
     ),
     ("linear_equations", "en"): Problem(
         id="fb_lineq_en", topic_key="linear_equations", topic_name="Linear Equations",
@@ -434,6 +542,8 @@ _FALLBACK_PROBLEMS: dict[tuple, Problem] = {
             "Divide both sides by 0.10: t = 100 texts",
         ],
         context="cell_phone",
+        correct_answer="100 texts",
+        distractor_answers=["50 texts", "200 texts", "75 texts"],
     ),
     ("linear_equations", "fr"): Problem(
         id="fb_lineq_fr", topic_key="linear_equations", topic_name="Équations linéaires",
@@ -448,6 +558,8 @@ _FALLBACK_PROBLEMS: dict[tuple, Problem] = {
             "Diviser par 0,10 : t = 100 textos",
         ],
         context="cell_phone",
+        correct_answer="100 textos",
+        distractor_answers=["50 textos", "200 textos", "75 textos"],
     ),
     ("percentages", "en"): Problem(
         id="fb_pct_en", topic_key="percentages", topic_name="Percentages",
@@ -461,6 +573,8 @@ _FALLBACK_PROBLEMS: dict[tuple, Problem] = {
             "Subtract from original: $2.50 − $0.50 = $2.00",
         ],
         context="tim_hortons",
+        correct_answer="$2.00",
+        distractor_answers=["$1.50", "$2.25", "$2.50"],
     ),
     ("percentages", "fr"): Problem(
         id="fb_pct_fr", topic_key="percentages", topic_name="Pourcentages",
@@ -474,6 +588,8 @@ _FALLBACK_PROBLEMS: dict[tuple, Problem] = {
             "Soustraire du prix original : 2,50 $ − 0,50 $ = 2,00 $",
         ],
         context="tim_hortons",
+        correct_answer="2,00 $",
+        distractor_answers=["1,50 $", "2,25 $", "2,50 $"],
     ),
 }
 

@@ -7,10 +7,11 @@ import { checkConnection } from './config/database.js';
 import redisClient, { connectRedis } from './config/redis.js';
 import { apiLimiter } from './middleware/rateLimiter.js';
 import { errorHandler } from './middleware/errorHandler.js';
-import authRoutes     from './routes/auth.js';
-import consentRoutes  from './routes/consent.js';
-import childrenRoutes from './routes/children.js';
-import agoraRoutes    from './routes/agora.js';
+import authRoutes          from './routes/auth.js';
+import consentRoutes       from './routes/consent.js';
+import childrenRoutes      from './routes/children.js';
+import agoraRoutes         from './routes/agora.js';
+import notificationsRoutes from './routes/notifications.js';
 import { SessionWebSocketServer } from './services/SessionWebSocketServer.js';
 import { ElevenLabsTTSService }   from './services/ElevenLabsTTSService.js';
 
@@ -50,10 +51,11 @@ app.get('/health', async (_req, res) => {
 });
 
 // ── Routes ────────────────────────────────────────────────────────────────────
-app.use('/api/auth',     authRoutes);
-app.use('/api/consent',  consentRoutes);
-app.use('/api/children', childrenRoutes);
-app.use('/api/agora',    agoraRoutes);
+app.use('/api/auth',          authRoutes);
+app.use('/api/consent',       consentRoutes);
+app.use('/api/children',      childrenRoutes);
+app.use('/api/agora',         agoraRoutes);
+app.use('/api/notifications', notificationsRoutes);
 
 // ── Dev-only TTS debug endpoint ───────────────────────────────────────────────
 // GET  /api/debug/tts?text=Hello&lang=en

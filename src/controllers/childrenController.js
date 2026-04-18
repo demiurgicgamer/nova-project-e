@@ -111,6 +111,90 @@ export const getChild = async (req, res) => {
 };
 
 /**
+ * PUT /api/children/:id
+ * Full update of a child profile — name, grade, languageCode.
+ * Streak / stars / sessions are managed by the session-save flow and are read-only here.
+ */
+export const updateChild = async (req, res) => {
+    const parentId = req.user.sub;
+    const { id }   = req.params;
+    const { name, grade, languageCode } = req.body;
+
+    // Validate provided fields
+    if (name !== undefined) {
+        if (!name || typeof name !== 'string' || name.trim().length === 0)
+            return res.status(400).json({ error: 'Child name is required.' });
+        if (name.trim().length > 20)
+            return res.status(400).json({ error: 'Name must be 20 characters or fewer.' });
+    }
+    if (grade !== undefined && !SUPPORTED_GRADES.includes(Number(grade)))
+        return res.status(400).json({ error: `Grade must be one of: ${SUPPORTED_GRADES.join(', ')}.` });
+    if (languageCode !== undefined && !SUPPORTED_LANGUAGES.includes(languageCode))
+        return res.status(400).json({ error: `Language must be one of: ${SUPPORTED_LANGUAGES.join(', ')}.` });
+
+    // Verify the parent owns this child
+    const existing = await query(
+        'SELECT id FROM child_profiles WHERE id = $1 AND parent_id = $2',
+        [id, parentId]
+    );
+    if (existing.rows.length === 0)
+        return res.status(404).json({ error: 'Child profile not found.' });
+
+    // Build SET clause dynamically from provided fields only
+    const setClauses = [];
+    const values     = [];
+    let   idx        = 1;
+
+    if (name         !== undefined) { setClauses.push(`name = $${idx++}`);          values.push(name.trim()); }
+    if (grade        !== undefined) { setClauses.push(`grade = $${idx++}`);         values.push(Number(grade)); }
+    if (languageCode !== undefined) { setClauses.push(`language_code = $${idx++}`); values.push(languageCode); }
+
+    if (setClauses.length === 0)
+        return res.status(400).json({ error: 'No updatable fields provided.' });
+
+    setClauses.push('updated_at = NOW()');
+    values.push(id, parentId);
+
+    const result = await query(
+        `UPDATE child_profiles
+         SET    ${setClauses.join(', ')}
+         WHERE  id = $${idx} AND parent_id = $${idx + 1}
+         RETURNING *`,
+        values
+    );
+
+    return res.status(200).json(sanitizeChild(result.rows[0]));
+};
+
+/**
+ * DELETE /api/children/:id
+ * Permanently removes a child profile and all associated data.
+ * Parent must own the child. This action cannot be undone.
+ */
+export const deleteChild = async (req, res) => {
+    const parentId = req.user.sub;
+    const { id }   = req.params;
+
+    // Verify ownership before deleting anything
+    const existing = await query(
+        'SELECT id, name FROM child_profiles WHERE id = $1 AND parent_id = $2',
+        [id, parentId]
+    );
+    if (existing.rows.length === 0)
+        return res.status(404).json({ error: 'Child profile not found.' });
+
+    const childName = existing.rows[0].name;
+
+    // Delete associated rows first (foreign key constraints may cascade, but be explicit)
+    await query('DELETE FROM child_topic_progress WHERE child_id = $1', [id]);
+    await query('DELETE FROM sessions             WHERE child_id = $1', [id]);
+    await query('DELETE FROM child_profiles       WHERE id = $1 AND parent_id = $2', [id, parentId]);
+
+    console.log(`[childrenController] Deleted child profile: ${childName} (${id}) owned by parent ${parentId}`);
+    return res.status(200).json({ success: true, deletedId: id });
+};
+
+/**
  * PUT /api/profile/language
  * Updates the language preference for the active child or parent.
  * Called by LanguageController after language selection.

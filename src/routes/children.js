@@ -5,6 +5,8 @@ import {
     createChild,
     getChildren,
     getChild,
+    updateChild,
+    deleteChild,
     updateChildLanguage,
 } from '../controllers/childrenController.js';
 import {
@@ -28,8 +30,14 @@ router.post('/',                              asyncHandler(createChild));
 /** GET  /api/children              — list all children for this parent */
 router.get('/',                               asyncHandler(getChildren));
 
-/** GET  /api/children/:id          — get a single child profile */
+/** GET    /api/children/:id          — get a single child profile */
 router.get('/:id',                            asyncHandler(getChild));
+
+/** PUT    /api/children/:id          — update name / grade / languageCode */
+router.put('/:id',                            asyncHandler(updateChild));
+
+/** DELETE /api/children/:id          — permanently delete child + all data */
+router.delete('/:id',                         asyncHandler(deleteChild));
 
 /** PATCH /api/children/:id         — update currentTopic / languageCode / weakTopics */
 router.patch('/:id',                          asyncHandler(patchChild));

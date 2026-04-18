@@ -24,6 +24,7 @@ HTTP endpoints:
 import json
 import os
 import logging
+import random
 from typing import Optional
 
 import redis.asyncio as aioredis
@@ -155,28 +156,39 @@ class ChatRequest(BaseModel):
 
 class ChatResponse(BaseModel):
     response_text:      str
-    animation_emotion:  str         = "Talking"   # maps to TeacherAnimator EmotionState
-    whiteboard_problem: Optional[str] = None       # set when a new problem is introduced
-    whiteboard_steps:   list[str]   = []           # solution steps to reveal on whiteboard
+    animation_emotion:  str             = "Talking"   # maps to TeacherAnimator EmotionState
+    whiteboard_problem: Optional[str]   = None        # set when a new problem is introduced
+    whiteboard_steps:   list[str]       = []          # solution steps to reveal on whiteboard
+    question_display:   Optional[dict]  = None        # {text, choices, correct_index} for question card
+    chunk_phase:        str             = "intro"     # drives 4-dot HUD strip: intro|chunk_a|chunk_b|consolidate
+
+
+class AnswerRequest(BaseModel):
+    session_id: str
+    is_correct: bool
 
 class SessionStartRequest(BaseModel):
-    session_id:    str
-    child_profile: ChildProfile
+    session_id:     str
+    child_profile:  ChildProfile
+    selected_topic: Optional[str] = None   # topic_key chosen by child in TopicPicker
 
 class SessionEndRequest(BaseModel):
     session_id: str
 
 class SessionIntroRequest(BaseModel):
-    session_id:    str
-    child_profile: ChildProfile
+    session_id:     str
+    child_profile:  ChildProfile
+    selected_topic: Optional[str] = None   # passed through so intro can name the topic
 
 
 # ── System prompt builder ─────────────────────────────────────────────────────
 
-def build_system_prompt(child_profile: ChildProfile) -> str:
+def build_system_prompt(child_profile: ChildProfile, current_topic_name: Optional[str] = None) -> str:
     """
     Build Ms. Nova's system prompt for this child's session.
     Language-specific variants for EN and FR (Canadian).
+    current_topic_name — human-readable topic the child selected (e.g. "Fractions").
+    When provided, Nova is told to teach that topic and NOT ask what to work on.
     """
     name    = child_profile.name
     grade   = child_profile.grade
@@ -184,6 +196,19 @@ def build_system_prompt(child_profile: ChildProfile) -> str:
     weak    = child_profile.weak_topics
 
     weak_str = ", ".join(weak) if weak else "none identified yet"
+
+    if current_topic_name:
+        topic_line_fr = (
+            f"\nSujet de la séance d'aujourd'hui: **{current_topic_name}**. "
+            f"Commence à enseigner ce sujet immédiatement — ne demande PAS à l'élève ce qu'il veut apprendre."
+        )
+        topic_line_en = (
+            f"\nToday's session topic: **{current_topic_name}**. "
+            f"Begin teaching this topic immediately — do NOT ask the student what they want to work on."
+        )
+    else:
+        topic_line_fr = ""
+        topic_line_en = ""
 
     if lang == "fr":
         return f"""Tu es Mme Nova, une tutrice de mathématiques chaleureuse et professionnelle pour des élèves de {grade}e année au Canada.
@@ -195,7 +220,7 @@ Personnalité:
 - Tu félicites les efforts, pas seulement les bonnes réponses
 - Tu restes toujours dans le sujet des mathématiques
 
-L'élève s'appelle {name}. Ses points faibles actuels: {weak_str}.
+L'élève s'appelle {name}. Ses points faibles actuels: {weak_str}.{topic_line_fr}
 
 Règles pédagogiques strictes:
 1. Ne jamais donner la réponse directement — guide l'élève par des questions
@@ -217,7 +242,7 @@ Personality:
 - You celebrate effort and persistence, not just correct answers
 - You stay strictly on-topic (mathematics)
 
-Your student is named {name}. Their current weak areas: {weak_str}.
+Your student is named {name}. Their current weak areas: {weak_str}.{topic_line_en}
 
 Strict pedagogical rules:
 1. NEVER give the answer directly — guide the student with leading questions
@@ -245,6 +270,8 @@ class AgentState(dict):
     curriculum_state:   dict    # serialised CurriculumState — loaded pre-graph, saved post-graph
     whiteboard_problem: str     # non-empty when a new problem is introduced this turn
     whiteboard_steps:   list    # solution steps for the new problem (shown on whiteboard)
+    question_display:   dict    # {text, choices, correct_index} — None when no new question
+    chunk_phase:        str     # current pedagogical phase from CurriculumState.chunk_phase
 
 
 def node_receive_message(state: AgentState) -> AgentState:
@@ -383,23 +410,31 @@ async def node_generate_response(state: AgentState) -> AgentState:
     }
     state["animation"] = emotion_to_animation.get(state.get("emotion_state", "NEUTRAL"), "Talking")
 
-    # ── Whiteboard: show problem when it is newly loaded this turn ────────────
+    # ── Whiteboard + question card: emitted on first turn of a new problem ────
     # is_new_problem is true only on the first turn after load_problem() is called
-    # (hints_given == 0). The whiteboard displays the problem + its steps so the
-    # student can see the full question while Nova speaks her first guiding question.
+    # (hints_given == 0). The whiteboard shows problem text + steps; the question
+    # card shows shuffled MC choices for tap-to-answer evaluation.
     cs_dict = state.get("curriculum_state") or {}
     if cs_dict:
         cs = CurriculumState.from_dict(cs_dict)
         if cs.is_new_problem:
             state["whiteboard_problem"] = cs.problem_text
             state["whiteboard_steps"]   = cs.solution_steps
-            log.info(f"[{state['session_id']}] Whiteboard update — new problem shown")
+            state["question_display"]   = CurriculumEngine.build_question_data(cs) if _curriculum else None
+            log.info(
+                f"[{state['session_id']}] New problem shown — "
+                f"question_card={'yes' if state['question_display'] else 'no (no MC data)'}"
+            )
         else:
             state["whiteboard_problem"] = ""
             state["whiteboard_steps"]   = []
+            state["question_display"]   = None
+        state["chunk_phase"] = cs.chunk_phase
     else:
         state["whiteboard_problem"] = ""
         state["whiteboard_steps"]   = []
+        state["question_display"]   = None
+        state["chunk_phase"]        = "intro"
 
     return state
 
@@ -595,12 +630,23 @@ async def session_start(req: SessionStartRequest):
 
     if _curriculum:
         try:
-            topic = await _curriculum.select_topic(
-                grade        = profile.grade,
-                language     = profile.language,
-                weak_topics  = profile.weak_topics,
-                covered_today= [],
-            )
+            # If the child already chose a topic in the TopicPicker, use it directly.
+            # Otherwise fall back to the priority-selection algorithm (weak areas first).
+            if req.selected_topic:
+                topic = await _curriculum.get_topic_by_key(
+                    topic_key = req.selected_topic,
+                    grade     = profile.grade,
+                    language  = profile.language,
+                )
+                log.info(f"[{req.session_id}] Using child-selected topic: {topic['topic_key']} ({topic['topic_name']})")
+            else:
+                topic = await _curriculum.select_topic(
+                    grade        = profile.grade,
+                    language     = profile.language,
+                    weak_topics  = profile.weak_topics,
+                    covered_today= [],
+                )
+
             cs.topic_key  = topic["topic_key"]
             cs.topic_name = topic["topic_name"]
 
@@ -630,6 +676,20 @@ async def session_start(req: SessionStartRequest):
         except Exception as e:
             log.warning(f"[{req.session_id}] Failed to store curriculum state: {e}")
 
+    # Store the resolved topic key as a dedicated Redis key so session_intro
+    # can reliably retrieve it without depending on how it was forwarded.
+    # Priority: child-selected topic → curriculum-preloaded topic
+    persisted_topic = req.selected_topic or cs.topic_key or ""
+    if _redis_client and persisted_topic:
+        try:
+            await _redis_client.set(
+                f"nova:session:{req.session_id}:topic",
+                persisted_topic,
+                ex=SESSION_TTL_SEC,
+            )
+        except Exception as e:
+            log.warning(f"[{req.session_id}] Failed to store topic key: {e}")
+
     log.info(
         f"[{req.session_id}] Session started — child: {profile.name}, "
         f"grade: {profile.grade}, lang: {profile.language}, "
@@ -645,62 +705,142 @@ async def session_intro(req: SessionIntroRequest):
     Called once by Node.js immediately after session_start is acknowledged.
     Stores the intro as the first assistant message in history so subsequent
     /chat calls have correct context (Nova spoke first).
+
+    Topic resolution order (most → least reliable):
+      1. req.selected_topic   — forwarded by WSS from session_start message
+      2. nova:session:{id}:topic  — Redis key written by session_start
+      3. nova:session:{id}:curriculum → topic_name field
+
+    When the topic is known the intro is HARDCODED (fixed greeting + topic
+    announcement + opening question). The LLM is NOT called for the topic-
+    aware path because Gemini concatenates the system prompt as plain text
+    and can hallucinate "what topic?" regardless of instructions.
+    Only the no-topic fallback path uses the LLM.
     """
     profile = req.child_profile
     name    = profile.name
     lang    = profile.language
 
-    if lang == "fr":
-        intro_prompt = (
-            f"Tu commences une nouvelle session de tutorat avec {name}. "
-            f"Accueille-le/la chaleureusement par son prénom, présente-toi brièvement, "
-            f"puis explique en une phrase comment fonctionne le bouton: "
-            f"'Maintiens le bouton appuyé pour parler, relâche quand tu as terminé.' "
-            f"Termine en lui demandant ce qu'on va travailler aujourd'hui. "
-            f"2–3 phrases maximum. Sois chaleureuse et enthousiaste."
-        )
-    else:
-        intro_prompt = (
-            f"You are starting a new tutoring session with {name}. "
-            f"Welcome them warmly by name, briefly introduce yourself as Ms. Nova, "
-            f"then explain the push-to-talk button in one simple sentence: "
-            f"'Hold the button to talk, release when you're done.' "
-            f"Then invite them to tell you what they're working on today. "
-            f"2–3 sentences maximum. Be warm and enthusiastic."
-        )
+    # ── Step 1: Resolve topic key from all available sources ─────────────────
+    topic_key: Optional[str] = None
 
-    system = build_system_prompt(profile)
+    # Source A: forwarded by WSS
+    if req.selected_topic:
+        topic_key = req.selected_topic
+        log.info(f"[{req.session_id}] Topic from request: {topic_key}")
 
-    if _llm_client is None:
+    # Source B: dedicated Redis key written by session_start
+    if not topic_key and _redis_client:
+        try:
+            stored = await _redis_client.get(f"nova:session:{req.session_id}:topic")
+            if stored:
+                topic_key = stored
+                log.info(f"[{req.session_id}] Topic from Redis key: {topic_key}")
+        except Exception:
+            pass
+
+    # Source C: curriculum state topic_key (may differ from child's choice only
+    # when selected_topic wasn't forwarded and select_topic() picked one)
+    if not topic_key and _redis_client:
+        try:
+            raw = await _redis_client.get(f"nova:session:{req.session_id}:curriculum")
+            if raw:
+                cs_dict   = json.loads(raw)
+                topic_key = cs_dict.get("topic_key") or None
+                log.info(f"[{req.session_id}] Topic from curriculum state: {topic_key}")
+        except Exception:
+            pass
+
+    # ── Step 2: Resolve human-readable display name from topic key ────────────
+    topic_name: Optional[str] = None
+    if topic_key:
+        # Try DB lookup first; always fall back to title-casing the key
+        if _curriculum:
+            try:
+                t = await _curriculum.get_topic_by_key(topic_key, profile.grade, profile.language)
+                topic_name = t.get("topic_name") or topic_key.replace("_", " ").title()
+            except Exception:
+                topic_name = topic_key.replace("_", " ").title()
+        else:
+            topic_name = topic_key.replace("_", " ").title()
+
+    log.info(f"[{req.session_id}] Intro topic resolved → key={topic_key!r} name={topic_name!r}")
+
+    # ── Step 3: Build intro text ──────────────────────────────────────────────
+    #
+    # When topic_name IS known:
+    #   Use a hardcoded template — guaranteed to announce the topic correctly.
+    #   No LLM call = no hallucination risk, lower latency for the first message.
+    #
+    # When topic_name is NOT known (edge case — no topic picked yet):
+    #   Fall through to LLM-generated open-ended greeting.
+    #
+    if topic_name:
+        # Hardcoded intro — topic always announced, never asks "what topic?"
         if lang == "fr":
             intro_text = (
                 f"Bonjour {name}! Je suis Mme Nova, ta tutrice de maths. "
                 f"Pour me parler, maintiens le bouton appuyé et relâche quand tu as terminé. "
-                f"Alors, qu'est-ce qu'on travaille aujourd'hui?"
+                f"Aujourd'hui on travaille sur {topic_name} — super choix! "
+                f"Pour commencer, dis-moi ce que tu sais déjà sur {topic_name}."
             )
         else:
             intro_text = (
-                f"Hi {name}, I'm Ms. Nova — great to meet you! "
-                f"To talk to me, just hold the button and release when you're done. "
-                f"So, what are we working on today?"
+                f"Hi {name}, I'm Ms. Nova — great to see you! "
+                f"Hold the button to talk, release when you're done. "
+                f"Today we're working on {topic_name} — excellent choice! "
+                f"To kick things off, tell me what you already know about {topic_name}."
             )
-        log.warning(f"[{req.session_id}] No LLM configured — using hardcoded intro.")
+        log.info(f"[{req.session_id}] Using hardcoded topic intro (topic: {topic_name})")
+
     else:
-        try:
-            intro_text = await _call_llm(
-                system,
-                [{"role": "user", "content": intro_prompt}],
-                req.session_id,
+        # No topic known — use LLM to generate open-ended welcome
+        system = build_system_prompt(profile)
+
+        if lang == "fr":
+            intro_prompt = (
+                f"Tu commences une nouvelle session de tutorat avec {name}. "
+                f"Accueille-le/la chaleureusement par son prénom, présente-toi brièvement, "
+                f"puis explique en une phrase comment fonctionne le bouton: "
+                f"'Maintiens le bouton appuyé pour parler, relâche quand tu as terminé.' "
+                f"Termine en lui demandant ce qu'on va travailler aujourd'hui. "
+                f"2–3 phrases maximum. Sois chaleureuse et enthousiaste."
             )
-        except Exception as e:
-            log.error(f"[{req.session_id}] Intro LLM error: {e}")
-            intro_text = (
+            fallback = (
+                f"Bonjour {name}! Je suis Mme Nova, ta tutrice de maths. "
+                f"Pour me parler, maintiens le bouton appuyé et relâche quand tu as terminé. "
+                f"Alors, sur quel sujet veux-tu travailler aujourd'hui?"
+            )
+        else:
+            intro_prompt = (
+                f"You are starting a new tutoring session with {name}. "
+                f"Welcome them warmly by name, briefly introduce yourself as Ms. Nova, "
+                f"then explain the push-to-talk button in one sentence: "
+                f"'Hold the button to talk, release when you're done.' "
+                f"Then ask what math topic they'd like to work on today. "
+                f"2–3 sentences maximum. Be warm and enthusiastic."
+            )
+            fallback = (
                 f"Hi {name}, I'm Ms. Nova — great to meet you! "
                 f"Hold the button to talk, release when you're done. "
-                f"What are we working on today?"
+                f"What math topic would you like to work on today?"
             )
 
-    # Store intro as the first assistant message so /chat calls have correct context
+        if _llm_client is None:
+            intro_text = fallback
+            log.warning(f"[{req.session_id}] No LLM + no topic — using hardcoded open-ended intro.")
+        else:
+            try:
+                intro_text = await _call_llm(
+                    system,
+                    [{"role": "user", "content": intro_prompt}],
+                    req.session_id,
+                )
+            except Exception as e:
+                log.error(f"[{req.session_id}] Intro LLM error: {e}")
+                intro_text = fallback
+
+    # ── Step 4: Store intro as first assistant message ────────────────────────
     if _redis_client:
         history = [{"role": "assistant", "content": intro_text}]
         key = f"nova:session:{req.session_id}:history"
@@ -709,7 +849,7 @@ async def session_intro(req: SessionIntroRequest):
         except Exception as e:
             log.warning(f"[{req.session_id}] Failed to store intro history: {e}")
 
-    log.info(f"[{req.session_id}] Intro generated for {name}: \"{intro_text[:80]}\"")
+    log.info(f"[{req.session_id}] Intro sent to {name}: \"{intro_text[:100]}\"")
     return ChatResponse(response_text=intro_text, animation_emotion="Talking")
 
 
@@ -718,20 +858,185 @@ async def session_end(req: SessionEndRequest):
     """
     Clean up Redis keys for the session.
     Called by Node.js when session_end event arrives.
+    Returns session_correct + session_total so the WSS can include them
+    in the session_summary event for Unity's mastery calculation.
     """
+    session_correct, session_total = 0, 0
+
     if _redis_client:
+        # Read curriculum stats before deleting keys
+        curr_key = f"nova:session:{req.session_id}:curriculum"
+        try:
+            raw = await _redis_client.get(curr_key)
+            if raw:
+                cs = CurriculumState.from_dict(json.loads(raw))
+                session_correct = cs.session_correct
+                session_total   = cs.session_total
+        except Exception as e:
+            log.warning(f"[{req.session_id}] Failed to read curriculum end stats: {e}")
+
         keys = [
             f"nova:session:{req.session_id}:history",
             f"nova:session:{req.session_id}:profile",
             f"nova:session:{req.session_id}:curriculum",
+            f"nova:session:{req.session_id}:topic",
         ]
         try:
             await _redis_client.delete(*keys)
         except Exception as e:
             log.warning(f"[{req.session_id}] Redis cleanup failed: {e}")
 
-    log.info(f"[{req.session_id}] Session ended — Redis keys cleaned up.")
-    return {"status": "ok"}
+    log.info(
+        f"[{req.session_id}] Session ended — "
+        f"correct: {session_correct}/{session_total} — Redis keys cleaned up."
+    )
+    return {
+        "status":          "ok",
+        "session_correct": session_correct,
+        "session_total":   session_total,
+    }
+
+
+# ── Answer feedback phrases ────────────────────────────────────────────────────
+# Hardcoded praise for correct answers — no LLM needed, low latency.
+_CORRECT_EN = [
+    "That's exactly right — great work! Let's keep going.",
+    "Perfect! You nailed it. Nice thinking!",
+    "Correct! Excellent! You're really getting this.",
+    "Yes! That's the one. Well done — let's move on.",
+    "Brilliant! You got it! I love the confidence.",
+]
+_CORRECT_FR = [
+    "C'est exactement ça — excellent travail! On continue.",
+    "Parfait! Tu as trouvé. Beau raisonnement!",
+    "Correct! Tu maîtrises vraiment bien ça.",
+    "Oui! C'est la bonne réponse. Bravo — on avance.",
+    "Brillant! Tu l'as eu! J'adore ta confiance.",
+]
+
+
+@app.post("/answer", response_model=ChatResponse)
+async def record_answer(req: AnswerRequest):
+    """
+    Record a tap-to-answer result from Unity's question card.
+
+    Steps:
+      1. Increment session_correct / session_total in CurriculumState (Redis).
+      2. Generate Ms. Nova's verbal reaction:
+           • Correct  → random hardcoded praise (fast, no LLM).
+           • Wrong    → LLM-generated explanation using session history so Nova
+                        references the actual question and correct answer.
+      3. Append Nova's reaction to session history so the next /chat turn has
+         full context (Nova already acknowledged the answer).
+      4. Return ChatResponse so Node.js can synthesize TTS and send nova_speaking.
+    """
+    # ── Step 1: Update curriculum stats ──────────────────────────────────────
+    if _redis_client:
+        curr_key = f"nova:session:{req.session_id}:curriculum"
+        try:
+            raw = await _redis_client.get(curr_key)
+            if raw:
+                cs = CurriculumState.from_dict(json.loads(raw))
+                cs.session_total += 1
+                if req.is_correct:
+                    cs.session_correct += 1
+                await _redis_client.set(
+                    curr_key, json.dumps(cs.to_dict()), ex=SESSION_TTL_SEC
+                )
+                log.info(
+                    f"[{req.session_id}] Answer recorded: "
+                    f"{'✓ correct' if req.is_correct else '✗ wrong'} "
+                    f"({cs.session_correct}/{cs.session_total})"
+                )
+        except Exception as e:
+            log.warning(f"[{req.session_id}] Failed to record answer: {e}")
+
+    # ── Step 2: Load profile to pick language ─────────────────────────────────
+    profile: Optional[ChildProfile] = None
+    if _redis_client:
+        try:
+            raw = await _redis_client.get(f"nova:session:{req.session_id}:profile")
+            if raw:
+                profile = ChildProfile.model_validate_json(raw)
+        except Exception:
+            pass
+
+    lang = profile.language if profile else "en"
+
+    # ── Step 3: Generate Nova's reaction ──────────────────────────────────────
+    if req.is_correct:
+        # Hardcoded praise — fast, warm, varied
+        phrases = _CORRECT_FR if lang == "fr" else _CORRECT_EN
+        response_text = random.choice(phrases)
+        animation     = "Celebrating"
+        log.info(f"[{req.session_id}] Correct answer — using praise phrase.")
+
+    else:
+        # Wrong answer — LLM generates a targeted explanation so Nova addresses
+        # the specific mistake rather than giving a generic "try again".
+        animation = "Concerned"
+        fallback_en = (
+            "Not quite — but that's okay! Look at the correct answer I've highlighted. "
+            "Let's think through why that one works, and you'll get the next one!"
+        )
+        fallback_fr = (
+            "Pas tout à fait — mais c'est normal! Regarde la bonne réponse que j'ai mise en évidence. "
+            "Réfléchissons pourquoi celle-là est correcte, et tu réussiras la prochaine!"
+        )
+        fallback = fallback_fr if lang == "fr" else fallback_en
+
+        if _llm_client is None or profile is None:
+            response_text = fallback
+            log.warning(f"[{req.session_id}] Wrong answer — no LLM/profile, using fallback.")
+        else:
+            try:
+                history = await _load_history(req.session_id)
+                system  = build_system_prompt(profile)
+
+                if lang == "fr":
+                    explain_prompt = (
+                        "L'élève vient de donner une mauvaise réponse à la question ci-dessus. "
+                        "En 2-3 phrases courtes: (1) reconnais gentiment l'erreur, "
+                        "(2) explique clairement pourquoi la bonne réponse est correcte, "
+                        "(3) termine par un encouragement bref. "
+                        "Ne pose pas encore de nouvelle question."
+                    )
+                else:
+                    explain_prompt = (
+                        "The student just gave an incorrect answer to the question above. "
+                        "In 2-3 short sentences: (1) gently acknowledge the mistake, "
+                        "(2) explain clearly why the correct answer is right, "
+                        "(3) end with a brief word of encouragement. "
+                        "Do NOT ask a new question yet."
+                    )
+
+                response_text = await _call_llm(
+                    system,
+                    history + [{"role": "user", "content": explain_prompt}],
+                    req.session_id,
+                )
+                log.info(f"[{req.session_id}] Wrong answer — LLM explanation generated.")
+            except Exception as e:
+                log.error(f"[{req.session_id}] Wrong-answer LLM failed: {e}")
+                response_text = fallback
+
+    # ── Step 4: Append Nova's reaction to history ─────────────────────────────
+    if _redis_client:
+        try:
+            hist_key = f"nova:session:{req.session_id}:history"
+            history  = await _load_history(req.session_id)
+            history.append({"role": "assistant", "content": response_text})
+            # Keep last 20 messages
+            if len(history) > 20:
+                history = history[-20:]
+            await _redis_client.set(hist_key, json.dumps(history), ex=SESSION_TTL_SEC)
+        except Exception as e:
+            log.warning(f"[{req.session_id}] Failed to update history after answer: {e}")
+
+    return ChatResponse(
+        response_text     = response_text,
+        animation_emotion = animation,
+    )
 
 
 @app.post("/chat", response_model=ChatResponse)
@@ -763,6 +1068,8 @@ async def chat(req: ChatRequest):
         "curriculum_state":   curriculum_state,
         "whiteboard_problem": "",
         "whiteboard_steps":   [],
+        "question_display":   None,
+        "chunk_phase":        "intro",
     }
 
     # Run the LangGraph agent
@@ -777,4 +1084,6 @@ async def chat(req: ChatRequest):
         animation_emotion  = final_state.get("animation", "Talking"),
         whiteboard_problem = final_state.get("whiteboard_problem") or None,
         whiteboard_steps   = final_state.get("whiteboard_steps") or [],
+        question_display   = final_state.get("question_display"),
+        chunk_phase        = final_state.get("chunk_phase", "intro"),
     )

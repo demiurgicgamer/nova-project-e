@@ -1,5 +1,9 @@
 import { v4 as uuidv4 } from 'uuid';
 import { query } from '../config/database.js';
+import {
+    sendSessionComplete,
+    sendStreakMilestone,
+} from '../services/NotificationService.js';
 
 /**
  * Sessions controller — saves completed tutoring sessions and
@@ -126,11 +130,25 @@ export const createSession = async (req, res) => {
             [childId]
         );
 
+        const finalStreak   = updatedChild.rows[0].streak_days;
+        const topicDisplay  = topicsCovered.length > 0
+            ? topicsCovered[topicsCovered.length - 1]
+                .split('_').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')
+            : 'Math';
+
+        // Fire push notifications after response — non-blocking, never throw
+        setImmediate(() => {
+            sendSessionComplete(parentId, child.name, starsEarned, topicDisplay, finalStreak)
+                .catch(e => console.warn('[sessionsController] sendSessionComplete failed:', e.message));
+            sendStreakMilestone(parentId, child.name, finalStreak)
+                .catch(e => console.warn('[sessionsController] sendStreakMilestone failed:', e.message));
+        });
+
         return res.status(201).json({
             session:       sessionResult.rows[0].id,
             starsEarned,
             newTotalStars: updatedChild.rows[0].total_stars,
-            streakDays:    updatedChild.rows[0].streak_days,
+            streakDays:    finalStreak,
             totalSessions: updatedChild.rows[0].total_sessions,
         });
 

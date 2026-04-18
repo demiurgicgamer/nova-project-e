@@ -2,6 +2,7 @@ import { WebSocketServer, WebSocket } from 'ws';
 import { DeepgramSTTService } from './DeepgramSTTService.js';
 import { ElevenLabsTTSService } from './ElevenLabsTTSService.js';
 import redisClient from '../config/redis.js';
+import { query } from '../config/database.js';
 // Native fetch available in Node 20 — no import needed
 const AGENT_BASE_URL = process.env.AGENT_BASE_URL ?? 'http://nova-agent:3001';
 
@@ -17,17 +18,20 @@ const HEARTBEAT_TIMEOUT_MS  = 10_000; // close connection if no pong within 10s
  * Path: ws://host/session/{sessionId}
  *
  * Inbound events (Unity → Backend):
- *   { type: 'session_start', childId, sessionId, languageCode, grade }
- *   { type: 'audio_chunk',   data: <base64 PCM>, sampleRate }
- *   { type: 'session_end',   sessionId }
+ *   { type: 'session_start',  childId, sessionId, languageCode, grade, currentTopic }
+ *   { type: 'audio_chunk',    data: <base64 PCM>, sampleRate }
+ *   { type: 'session_end',    sessionId }
+ *   { type: 'answer_submit',  isCorrect: bool }   — tap answer result from question card
  *   { type: 'ping' }
  *
  * Outbound events (Backend → Unity):
  *   { type: 'nova_speaking',     text, audioBase64 }
  *   { type: 'animation_trigger', emotion }
  *   { type: 'whiteboard_update', problem, steps[], languageCode }
+ *   { type: 'question_display',  text, choices[], correctIndex }  — MC question card
+ *   { type: 'chunk_phase',       phase }           — HUD dot strip progress
  *   { type: 'session_progress',  topicsCompleted, accuracy }
- *   { type: 'session_summary',   starsEarned, streakDays, totalSessions }
+ *   { type: 'session_summary',   starsEarned, streakDays, totalSessions, correctAnswers, totalQuestions }
  *   { type: 'pong' }
  *   { type: 'error',             message }
  */
@@ -174,17 +178,24 @@ export class SessionWebSocketServer {
                 }
                 break;
 
+            // Tap answer result from Unity's question card (Option B local evaluation)
+            case 'answer_submit':
+                this._handleAnswerSubmit(state, msg);
+                break;
+
             default:
                 console.warn(`[WSS] Unknown message type: ${msg.type}`);
         }
     }
 
     _handleSessionStart(state, msg) {
-        state.childId      = msg.childId;
-        state.childName    = msg.childName    ?? 'friend';
-        state.languageCode = msg.languageCode ?? 'en';
-        state.grade        = msg.grade        ?? 6;
-        state.weakTopics   = msg.weakTopics   ?? [];
+        state.childId       = msg.childId;
+        state.childName     = msg.childName    ?? 'friend';
+        state.languageCode  = msg.languageCode ?? 'en';
+        state.grade         = msg.grade        ?? 6;
+        state.weakTopics    = msg.weakTopics   ?? [];
+        state.selectedTopic = msg.currentTopic ?? null;   // topic_key chosen in TopicPicker
+        state.startTime     = Date.now();
 
         console.log(`[WSS] Session started — child: ${state.childId}, lang: ${state.languageCode}, grade: ${state.grade}`);
 
@@ -224,17 +235,57 @@ export class SessionWebSocketServer {
         }
     }
 
-    _handleSessionEnd(state) {
+    async _handleSessionEnd(state) {
         console.log(`[WSS] Session end requested — session: ${state.sessionId}`);
         state.stt.closeAll();
 
-        // TODO (Day 37): flush session data to DB via SessionSaveService
-        // Then send session_summary back to Unity
+        // Tell the Python agent to clean up Redis state and return session accuracy stats.
+        // Stats are used to populate session_summary so Unity can compute mastery updates.
+        let agentCorrect = 0, agentTotal = 0;
+        if (state.sessionId) {
+            try {
+                const agentRes = await fetch(`${AGENT_BASE_URL}/session/end`, {
+                    method:  'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body:    JSON.stringify({ session_id: state.sessionId }),
+                    signal:  AbortSignal.timeout(5000),
+                });
+                const agentData = await agentRes.json();
+                agentCorrect = agentData.session_correct ?? 0;
+                agentTotal   = agentData.session_total   ?? 0;
+                console.log(`[WSS] Agent session cleaned up (${state.sessionId}) — correct: ${agentCorrect}/${agentTotal}`);
+            } catch (err) {
+                console.warn(`[WSS] Agent /session/end failed (non-fatal): ${err.message}`);
+            }
+        }
+
+        // Query real child stats from DB.
+        // The Unity REST call (POST /api/children/:id/sessions) runs before session_end
+        // is sent, so DB values are already updated with the correct streak + totals.
+        let starsEarned = 1, streakDays = 0, totalSessions = 0;
+        if (state.childId) {
+            try {
+                const result = await query(
+                    'SELECT streak_days, total_sessions FROM child_profiles WHERE id = $1',
+                    [state.childId]
+                );
+                if (result.rows[0]) {
+                    streakDays    = result.rows[0].streak_days    ?? 0;
+                    totalSessions = result.rows[0].total_sessions ?? 0;
+                }
+                console.log(`[WSS] session_summary — child: ${state.childId}, streak: ${streakDays}, total: ${totalSessions}`);
+            } catch (err) {
+                console.warn(`[WSS] session_summary DB query failed (non-fatal): ${err.message}`);
+            }
+        }
+
         this._send(state.ws, {
-            type:         'session_summary',
-            starsEarned:  1,   // placeholder until agent integration
-            streakDays:   0,
-            totalSessions: 0,
+            type:           'session_summary',
+            starsEarned,
+            streakDays,
+            totalSessions,
+            correctAnswers: agentCorrect,
+            totalQuestions: agentTotal,
         });
     }
 
@@ -267,7 +318,8 @@ export class SessionWebSocketServer {
 
         try {
             // Route transcript through Claude agent
-            const { responseText, animationEmotion, whiteboardProblem, whiteboardSteps, languageCode }
+            const { responseText, animationEmotion, whiteboardProblem, whiteboardSteps, languageCode,
+                    questionDisplay, chunkPhase }
                 = await this._callAgent(state, text);
 
             // Drive animator before TTS so the animation starts immediately
@@ -286,6 +338,22 @@ export class SessionWebSocketServer {
                 });
             }
 
+            // Send question card data (MC choices) alongside the whiteboard for a new problem
+            if (questionDisplay) {
+                console.log(`[WSS] question_display — choices: ${questionDisplay.choices?.length ?? 0}`);
+                this._send(state.ws, {
+                    type:         'question_display',
+                    text:         questionDisplay.text         ?? '',
+                    choices:      questionDisplay.choices      ?? [],
+                    correctIndex: questionDisplay.correct_index ?? 0,
+                });
+            }
+
+            // Always send chunk phase so HUD dots stay in sync
+            if (chunkPhase) {
+                this._send(state.ws, { type: 'chunk_phase', phase: chunkPhase });
+            }
+
             await this._speakAsNova(state, responseText);
         } finally {
             state.novaProcessing = false;
@@ -302,12 +370,13 @@ export class SessionWebSocketServer {
         const body = {
             session_id: state.sessionId,
             child_profile: {
-                child_id:    state.childId   ?? 'unknown',
-                name:        state.childName ?? 'friend',
-                grade:       state.grade     ?? 6,
+                child_id:    state.childId      ?? 'unknown',
+                name:        state.childName    ?? 'friend',
+                grade:       state.grade        ?? 6,
                 language:    state.languageCode ?? 'en',
                 weak_topics: state.weakTopics   ?? [],
             },
+            selected_topic: state.selectedTopic ?? null,
         };
 
         const res = await fetch(`${AGENT_BASE_URL}/session/start`, {
@@ -331,12 +400,13 @@ export class SessionWebSocketServer {
         const body = {
             session_id: state.sessionId,
             child_profile: {
-                child_id:    state.childId   ?? 'unknown',
-                name:        state.childName ?? 'friend',
-                grade:       state.grade     ?? 6,
+                child_id:    state.childId      ?? 'unknown',
+                name:        state.childName    ?? 'friend',
+                grade:       state.grade        ?? 6,
                 language:    state.languageCode ?? 'en',
                 weak_topics: state.weakTopics   ?? [],
             },
+            selected_topic: state.selectedTopic ?? null,
         };
 
         const res = await fetch(`${AGENT_BASE_URL}/session/intro`, {
@@ -410,6 +480,8 @@ export class SessionWebSocketServer {
                 whiteboardProblem: data.whiteboard_problem ?? null,
                 whiteboardSteps:   data.whiteboard_steps  ?? [],
                 languageCode:      state.languageCode     ?? 'en',
+                questionDisplay:   data.question_display  ?? null,
+                chunkPhase:        data.chunk_phase       ?? 'chunk_a',
             };
         } catch (err) {
             console.error(`[WSS] Agent call failed (${state.sessionId}): ${err.message}`);
@@ -420,6 +492,8 @@ export class SessionWebSocketServer {
                 whiteboardProblem: null,
                 whiteboardSteps:  [],
                 languageCode:     state.languageCode ?? 'en',
+                questionDisplay:  null,
+                chunkPhase:       'chunk_a',
             };
         }
     }
@@ -460,6 +534,68 @@ export class SessionWebSocketServer {
             // warning and skip playback, then the 45-second timeout is the backup.
             this._send(state.ws, { type: 'processing_complete' });
         }
+    }
+
+    // ── Answer recording ──────────────────────────────────────────────────────
+
+    /**
+     * Handle a tap-answer result from Unity's question card.
+     *
+     * Two things happen:
+     *   1. POST /answer on the Python agent — updates session stats in Redis
+     *      AND returns Ms. Nova's verbal reaction (praise or LLM explanation).
+     *   2. Synthesize TTS for that reaction and send nova_speaking back to Unity
+     *      so the conversation continues naturally after every answer tap.
+     *
+     * Correct  → praise phrase  (hardcoded, low latency)
+     * Wrong    → LLM explanation (agent references the actual question from history)
+     */
+    async _handleAnswerSubmit(state, msg) {
+        const isCorrect = msg.isCorrect === true;
+        console.log(`[WSS] answer_submit — session: ${state.sessionId}, correct: ${isCorrect}`);
+
+        let responseText    = null;
+        let animationEmotion = isCorrect ? 'Celebrating' : 'Concerned';
+
+        try {
+            const res = await fetch(`${AGENT_BASE_URL}/answer`, {
+                method:  'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body:    JSON.stringify({
+                    session_id: state.sessionId,
+                    is_correct: isCorrect,
+                }),
+                // Wrong answers call the LLM — allow up to 15 s (same as /chat)
+                signal: AbortSignal.timeout(15000),
+            });
+
+            if (res.ok) {
+                const data   = await res.json();
+                responseText     = data.response_text     ?? null;
+                animationEmotion = data.animation_emotion ?? animationEmotion;
+            } else {
+                console.warn(`[WSS] /answer returned ${res.status} — using fallback phrase.`);
+            }
+        } catch (err) {
+            console.warn(`[WSS] answer_submit agent call failed (non-fatal): ${err.message}`);
+        }
+
+        // Fallback phrases if agent is down or returned nothing
+        if (!responseText) {
+            responseText = isCorrect
+                ? "Great job! That's correct — keep it up!"
+                : "Not quite, but that's okay! Let's look at the correct answer together.";
+        }
+
+        // Play the animation hint before TTS starts (mirrors _callAgent pattern)
+        if (animationEmotion && animationEmotion !== 'Talking') {
+            this._send(state.ws, { type: 'animation_trigger', emotion: animationEmotion });
+        }
+
+        // Synthesize TTS and send nova_speaking — this is what makes Nova actually speak
+        await this._speakAsNova(state, responseText);
+
+        console.log(`[WSS] answer_submit response sent (correct: ${isCorrect}) — "${responseText.substring(0, 60)}…"`);
     }
 
     // ── Helpers ───────────────────────────────────────────────────────────────
