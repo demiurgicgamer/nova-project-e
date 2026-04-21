@@ -59,8 +59,14 @@ services:
       OLLAMA_MODEL: ${OLLAMA_MODEL:-llama3.2}
       REDIS_URL: redis://redis:6379
       REDIS_PASSWORD: ${REDIS_PASSWORD}
+      # PostgreSQL — required for CurriculumEngine to query real problems from DB
+      DATABASE_URL: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
+    volumes:
+      - ./agent:/app            # hot reload in development (mirrors --reload flag in CMD)
     depends_on:
       redis:
+        condition: service_healthy
+      postgres:
         condition: service_healthy
     networks:
       - nova_network

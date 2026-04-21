@@ -85,8 +85,12 @@ export class SessionWebSocketServer {
             stt,
             pingTimer:    null,
             pongReceived: true,
-            micActive:      false,   // true while Unity mic is recording; agent ignores transcripts until false
-            novaProcessing: false,   // true while agent+TTS pipeline is running; drops duplicate transcripts
+            micActive:        false,  // true while Unity mic is recording; agent ignores transcripts until false
+            novaProcessing:   false,  // true while agent+TTS pipeline is running; drops duplicate transcripts
+            cardGeneration:   0,      // incremented on every turn; delayed card sends check this before firing
+            novaSpeaking:     false,  // true from nova_speaking send until playback_complete arrives from Unity
+            _playbackResolve: null,   // Promise resolver — called by _onPlaybackComplete
+            pendingSilenceText: null, // question text waiting for silence timer after playback ends
         };
 
         this._sessions.set(sessionId, state);
@@ -134,6 +138,13 @@ export class SessionWebSocketServer {
                 this._handleSessionEnd(state);
                 break;
 
+            // App going to background or being killed mid-session.
+            // Save a resume checkpoint without ending the session so the child
+            // continues from the right place when they reopen the app.
+            case 'session_pause':
+                this._saveSessionCheckpoint(state);
+                break;
+
             case 'ping':
                 this._send(state.ws, { type: 'pong' });
                 break;
@@ -142,6 +153,7 @@ export class SessionWebSocketServer {
             case 'mic_start':
                 console.log(`[WSS] mic_start received (${state.sessionId})`);
                 state.micActive = true;
+                this._cancelSilenceTimer(state);   // child is responding — cancel hint timer
                 break;
 
             // Mic stopped — mark inactive first, then flush Deepgram so final transcript fires
@@ -178,8 +190,15 @@ export class SessionWebSocketServer {
                 }
                 break;
 
+            // Unity AudioPlaybackManager finished playing all queued clips.
+            // Resolve the _waitForPlayback promise so the question card can be sent now.
+            case 'playback_complete':
+                this._onPlaybackComplete(state);
+                break;
+
             // Tap answer result from Unity's question card (Option B local evaluation)
             case 'answer_submit':
+                this._cancelSilenceTimer(state);   // child tapped an answer — cancel hint timer
                 this._handleAnswerSubmit(state, msg);
                 break;
 
@@ -237,6 +256,7 @@ export class SessionWebSocketServer {
 
     async _handleSessionEnd(state) {
         console.log(`[WSS] Session end requested — session: ${state.sessionId}`);
+        state.sessionEnding = true;   // prevent _continueLesson from firing after session closes
         state.stt.closeAll();
 
         // Tell the Python agent to clean up Redis state and return session accuracy stats.
@@ -314,7 +334,12 @@ export class SessionWebSocketServer {
         }
 
         console.log(`[WSS] Transcript (${languageCode}): "${text}"`);
+        this._cancelSilenceTimer(state);   // real transcript arrived — cancel hint timer
         state.novaProcessing = true;
+
+        // Claim a generation token so any older pending delayed card sends are
+        // invalidated.  We check this again after the delay before sending cards.
+        const myGen = ++state.cardGeneration;
 
         try {
             // Route transcript through Claude agent
@@ -327,7 +352,30 @@ export class SessionWebSocketServer {
                 this._send(state.ws, { type: 'animation_trigger', emotion: animationEmotion });
             }
 
-            // Send whiteboard update when a new problem is introduced
+            // HUD dot strip can update immediately — it's subtle UI, not problem content.
+            if (chunkPhase) {
+                this._send(state.ws, { type: 'chunk_phase', phase: chunkPhase });
+            }
+
+            // Speak FIRST — Nova describes the problem aloud.
+            // Both the whiteboard card and the MC answer card are held until Nova
+            // finishes speaking so neither appears while she is still talking.
+            const playbackMs = await this._speakAsNova(state, responseText);
+
+            // Wait for Unity to confirm playback is done before revealing visual cards.
+            // _waitForPlayback resolves on playback_complete from Unity, or times out
+            // at 1.5× the estimated duration + 1s as a safe fallback.
+            if (whiteboardProblem || questionDisplay) {
+                await this._waitForPlayback(state, playbackMs);
+            }
+
+            // Stale check — if a newer turn started while we were awaiting, skip
+            // sending these cards; the newer turn will send its own.
+            if (state.cardGeneration !== myGen) {
+                console.log(`[WSS] question_display skipped — stale gen ${myGen} vs current ${state.cardGeneration}`);
+                return;
+            }
+
             if (whiteboardProblem) {
                 console.log(`[WSS] whiteboard_update — problem: "${whiteboardProblem.substring(0, 50)}…", steps: ${whiteboardSteps.length}`);
                 this._send(state.ws, {
@@ -338,7 +386,6 @@ export class SessionWebSocketServer {
                 });
             }
 
-            // Send question card data (MC choices) alongside the whiteboard for a new problem
             if (questionDisplay) {
                 console.log(`[WSS] question_display — choices: ${questionDisplay.choices?.length ?? 0}`);
                 this._send(state.ws, {
@@ -348,13 +395,6 @@ export class SessionWebSocketServer {
                     correctIndex: questionDisplay.correct_index ?? 0,
                 });
             }
-
-            // Always send chunk phase so HUD dots stay in sync
-            if (chunkPhase) {
-                this._send(state.ws, { type: 'chunk_phase', phase: chunkPhase });
-            }
-
-            await this._speakAsNova(state, responseText);
         } finally {
             state.novaProcessing = false;
         }
@@ -421,10 +461,14 @@ export class SessionWebSocketServer {
         }
 
         const data = await res.json();
-        console.log(`[WSS] Intro from agent — response_text: "${data.response_text?.substring(0, 80)}" | length: ${data.response_text?.length ?? 0} chars | emotion: ${data.animation_emotion}`);
+        const isResume = !!(data.whiteboard_problem);
+        console.log(
+            `[WSS] Intro — "${data.response_text?.substring(0, 80)}" | ` +
+            `emotion: ${data.animation_emotion} | resume_problem: ${isResume ? 'YES' : 'no'}`
+        );
 
         if (!data.response_text) {
-            console.error(`[WSS] Intro response_text is empty/null for session ${state.sessionId} — skipping TTS`);
+            console.error(`[WSS] Intro response_text empty (${state.sessionId}) — skipping TTS`);
             this._send(state.ws, { type: 'processing_complete' });
             return;
         }
@@ -433,7 +477,68 @@ export class SessionWebSocketServer {
             this._send(state.ws, { type: 'animation_trigger', emotion: data.animation_emotion });
         }
 
-        await this._speakAsNova(state, data.response_text);
+        // HUD dot strip can update immediately — subtle UI, not problem content.
+        if (data.chunk_phase) {
+            this._send(state.ws, { type: 'chunk_phase', phase: data.chunk_phase });
+        }
+
+        // Claim generation token before the delay so any later turn can invalidate this send.
+        const introGen = ++state.cardGeneration;
+
+        // Speak first — whiteboard and MC card are both held until Nova finishes
+        // talking so neither card appears while she is still speaking.
+        const introPlaybackMs = await this._speakAsNova(state, data.response_text);
+
+        // Wait for Unity to confirm playback is done before revealing visual cards.
+        if (data.whiteboard_problem || data.question_display) {
+            await this._waitForPlayback(state, introPlaybackMs);
+        }
+
+        // Stale check — abort if a newer turn started during our await.
+        if (state.cardGeneration !== introGen) {
+            console.log(`[WSS] Intro question_display skipped — stale gen ${introGen} vs current ${state.cardGeneration}`);
+            return;
+        }
+
+        if (data.whiteboard_problem) {
+            console.log(`[WSS] Intro whiteboard — "${data.whiteboard_problem.substring(0, 60)}…"`);
+            this._send(state.ws, {
+                type:         'whiteboard_update',
+                problem:      data.whiteboard_problem,
+                steps:        data.whiteboard_steps ?? [],
+                languageCode: state.languageCode,
+            });
+        }
+
+        if (data.question_display) {
+            console.log(`[WSS] Intro question_display — choices: ${data.question_display.choices?.length ?? 0}`);
+            this._send(state.ws, {
+                type:         'question_display',
+                text:         data.question_display.text          ?? '',
+                choices:      data.question_display.choices       ?? [],
+                correctIndex: data.question_display.correct_index ?? 0,
+            });
+        }
+    }
+
+    /**
+     * Save a mid-session checkpoint without ending the session.
+     * Called when Unity sends session_pause (app goes to background / is killed).
+     * Ensures resume works even if the child never pressed "End Session".
+     */
+    async _saveSessionCheckpoint(state) {
+        if (!state.sessionId) return;
+        try {
+            await fetch(`${AGENT_BASE_URL}/session/checkpoint`, {
+                method:  'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body:    JSON.stringify({ session_id: state.sessionId }),
+                signal:  AbortSignal.timeout(4000),
+            });
+            console.log(`[WSS] Mid-session checkpoint saved (${state.sessionId})`);
+        } catch (err) {
+            console.warn(`[WSS] Checkpoint save failed (non-fatal): ${err.message}`);
+        }
     }
 
     /**
@@ -498,14 +603,24 @@ export class SessionWebSocketServer {
         }
     }
 
+    /**
+     * Synthesize TTS and send nova_speaking to Unity.
+     *
+     * Sets state.novaSpeaking = true immediately; the flag is cleared in
+     * _onPlaybackComplete when Unity confirms audio has finished playing.
+     * Silence timer is also started there for accurate timing.
+     *
+     * Returns the estimated playback duration in ms (s16le PCM @ 22050 Hz)
+     * so _waitForPlayback can use it as a timeout fallback.
+     */
     async _speakAsNova(state, text) {
-        if (state.ws.readyState !== WebSocket.OPEN) return;
+        if (state.ws.readyState !== WebSocket.OPEN) return 0;
 
         // Guard: never send empty/null text to TTS — it would produce silent audio
         if (!text || !text.trim()) {
             console.warn(`[WSS] _speakAsNova called with empty text (session: ${state.sessionId}) — skipping TTS`);
             this._send(state.ws, { type: 'processing_complete' });
-            return;
+            return 0;
         }
 
         try {
@@ -518,21 +633,156 @@ export class SessionWebSocketServer {
             const audioBase64 = audioBuffer.toString('base64');
             console.log(`[WSS] Sending nova_speaking — base64 length: ${audioBase64.length}`);
 
-            this._send(state.ws, {
-                type:        'nova_speaking',
-                text,
-                audioBase64,
-            });
+            // Mark Nova as speaking BEFORE sending so callers that check novaSpeaking
+            // immediately after this call see the correct state.
+            state.novaSpeaking = true;
 
+            // If the response contains a question, store the text so _onPlaybackComplete
+            // can start the silence timer at the exact moment audio finishes on Unity.
+            state.pendingSilenceText = text.includes('?') ? text : null;
+
+            this._send(state.ws, { type: 'nova_speaking', text, audioBase64 });
             console.log(`[WSS] nova_speaking sent OK`);
+
+            // Estimated duration: s16le PCM at 22050 Hz (msedge-tts output rate)
+            // Used as a timeout fallback in _waitForPlayback; actual completion
+            // is signalled by the playback_complete event from Unity.
+            const durationMs = Math.ceil((audioBuffer.length / 2 / 22050) * 1000);
+            console.log(`[WSS] Estimated playback: ${durationMs}ms (~${(durationMs/1000).toFixed(1)}s)`);
+
+            return durationMs;
         } catch (err) {
             console.error(`[WSS] TTS failed (${state.sessionId}):`, err.message, err.stack);
             this._send(state.ws, { type: 'animation_trigger', emotion: 'Idle' });
-            // Send nova_speaking with no audio so Unity's SessionStateMachine
-            // transitions out of Processing via OnPlaybackStarted→OnPlaybackComplete
-            // even when TTS is unavailable.  AudioPlaybackManager will log a
-            // warning and skip playback, then the 45-second timeout is the backup.
             this._send(state.ws, { type: 'processing_complete' });
+            state.novaSpeaking = false;
+            return 0;
+        }
+    }
+
+    /**
+     * Called when Unity's AudioPlaybackManager fires OnPlaybackComplete.
+     * This is the authoritative signal that Nova has stopped speaking.
+     *
+     * Actions:
+     *   1. Clear novaSpeaking flag
+     *   2. Resolve any _waitForPlayback promise so card-send logic can proceed
+     *   3. Start the silence timer if Nova just asked a question
+     */
+    _onPlaybackComplete(state) {
+        console.log(`[WSS] playback_complete received from Unity (${state.sessionId})`);
+        state.novaSpeaking = false;
+
+        // Resolve the waiting card-send promise
+        if (state._playbackResolve) {
+            const fn = state._playbackResolve;
+            state._playbackResolve = null;
+            fn();
+        }
+
+        // Start silence timer now that audio has ACTUALLY ended on the device
+        if (state.pendingSilenceText) {
+            const questionText = state.pendingSilenceText;
+            state.pendingSilenceText = null;
+            if (!state.micActive && !state.novaProcessing && !state.sessionEnding) {
+                this._startSilenceTimer(state, questionText);
+            }
+        }
+    }
+
+    /**
+     * Wait until Unity confirms playback is complete via playback_complete event.
+     * Falls back to a timeout of (estimatedMs × 1.5 + 1 s) in case the event
+     * is lost (network blip, Unity crash, very short clip that completes before
+     * the Promise is registered).
+     *
+     * @param {object} state       - session state
+     * @param {number} estimatedMs - estimated duration from PCM buffer size
+     */
+    _waitForPlayback(state, estimatedMs) {
+        // If TTS failed (estimatedMs === 0) or Nova is already not speaking, continue immediately
+        if (estimatedMs <= 0 || !state.novaSpeaking) return Promise.resolve();
+
+        return new Promise(resolve => {
+            // Safety timeout: 1.5× estimated duration + 1 s
+            const timeoutMs = Math.ceil(estimatedMs * 1.5) + 1000;
+            const timer = setTimeout(() => {
+                if (state._playbackResolve === resolve) {
+                    state._playbackResolve = null;
+                    state.novaSpeaking = false;
+                    console.warn(`[WSS] _waitForPlayback timeout after ${timeoutMs}ms — continuing without playback_complete (${state.sessionId})`);
+                }
+                resolve();
+            }, timeoutMs);
+
+            state._playbackResolve = () => {
+                clearTimeout(timer);
+                resolve();
+            };
+        });
+    }
+
+    /** Simple promise-based delay helper. */
+    _delay(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    // ── Silence timeout ───────────────────────────────────────────────────────
+    // After Nova asks a question (text ends with "?"), we start a 7-second timer.
+    // If the child presses PTT or taps an answer before it fires, the timer is
+    // cancelled.  If it fires, Nova offers a gentle hint to prompt the child.
+
+    _startSilenceTimer(state, questionText) {
+        this._cancelSilenceTimer(state);
+        const SILENCE_MS = 7_000;
+        state.silenceTimerId = setTimeout(async () => {
+            state.silenceTimerId = null;
+            if (state.ws.readyState !== WebSocket.OPEN) return;
+            if (state.sessionEnding) return;
+            if (state.novaProcessing) return;  // don't fire if pipeline already busy
+
+            console.log(`[WSS] Silence timeout — offering hint (session: ${state.sessionId})`);
+            await this._offerHint(state, questionText);
+        }, SILENCE_MS);
+    }
+
+    _cancelSilenceTimer(state) {
+        if (state.silenceTimerId) {
+            clearTimeout(state.silenceTimerId);
+            state.silenceTimerId = null;
+        }
+    }
+
+    /**
+     * Called when the child hasn't responded after 7 seconds.
+     * Calls the agent with a special hint-request message so Nova offers
+     * a gentle nudge using the actual question context from session history.
+     */
+    async _offerHint(state, lastQuestion) {
+        if (state.novaProcessing) return;
+        // Set novaProcessing synchronously BEFORE any await so a concurrent call
+        // that checks the flag immediately after us sees it as busy.
+        state.novaProcessing = true;
+
+        // Invalidate any pending delayed card sends from _continueLesson or
+        // _onTranscript — their stale question_display must not fire during the hint.
+        ++state.cardGeneration;
+
+        const hintTrigger = state.languageCode === 'fr'
+            ? "Je ne sais pas trop par où commencer."
+            : "I'm not sure where to start.";
+
+        try {
+            const { responseText, animationEmotion } = await this._callAgent(state, hintTrigger);
+
+            if (animationEmotion && animationEmotion !== 'Talking') {
+                this._send(state.ws, { type: 'animation_trigger', emotion: animationEmotion });
+            }
+            await this._speakAsNova(state, responseText);
+        } catch (err) {
+            console.warn(`[WSS] _offerHint failed: ${err.message}`);
+        } finally {
+            state.novaProcessing = false;
         }
     }
 
@@ -593,9 +843,106 @@ export class SessionWebSocketServer {
         }
 
         // Synthesize TTS and send nova_speaking — this is what makes Nova actually speak
-        await this._speakAsNova(state, responseText);
+        const durationMs = await this._speakAsNova(state, responseText);
 
         console.log(`[WSS] answer_submit response sent (correct: ${isCorrect}) — "${responseText.substring(0, 60)}…"`);
+
+        // ── Auto-continue the lesson ──────────────────────────────────────────
+        // Wait for the client to finish playing the praise/explanation audio,
+        // then advance the curriculum and speak the next problem transition.
+        // This keeps the session flowing without the child having to press PTT.
+        const playbackBuffer = 900;   // ms padding for network + audio system startup
+        const waitMs = Math.max(durationMs + playbackBuffer, 2000);
+        console.log(`[WSS] Scheduling lesson continuation in ${waitMs}ms (session: ${state.sessionId})`);
+        this._delay(waitMs).then(() => this._continueLesson(state, isCorrect));
+    }
+
+    /**
+     * Called automatically after an MC answer response has been spoken.
+     * Asks the Python agent to advance to the next problem and generates Nova's
+     * transition text — no PTT required.
+     */
+    async _continueLesson(state, isCorrect) {
+        if (state.ws.readyState !== WebSocket.OPEN) return;
+        if (state.sessionEnding) return;
+
+        console.log(`[WSS] _continueLesson — advancing curriculum (session: ${state.sessionId})`);
+
+        let data = null;
+        try {
+            const res = await fetch(`${AGENT_BASE_URL}/session/continue`, {
+                method:  'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body:    JSON.stringify({
+                    session_id: state.sessionId,
+                    is_correct: isCorrect,
+                }),
+                signal: AbortSignal.timeout(18000),
+            });
+            if (res.ok) {
+                data = await res.json();
+            } else {
+                console.warn(`[WSS] /session/continue returned ${res.status}`);
+            }
+        } catch (err) {
+            console.warn(`[WSS] /session/continue failed (non-fatal): ${err.message}`);
+        }
+
+        if (!data) return;
+
+        // Drive animation before speech starts.
+        if (data.animation_emotion && data.animation_emotion !== 'Talking') {
+            this._send(state.ws, { type: 'animation_trigger', emotion: data.animation_emotion });
+        }
+
+        // HUD dot strip can update immediately — subtle UI, not problem content.
+        if (data.chunk_phase) {
+            this._send(state.ws, { type: 'chunk_phase', phase: data.chunk_phase });
+        }
+
+        // Claim generation token before the delay so any later turn (_offerHint,
+        // _onTranscript) can invalidate this pending card send.
+        const continueGen = ++state.cardGeneration;
+
+        // Speak Nova's transition text FIRST.
+        // Both the whiteboard card and the MC card are held until she finishes
+        // so neither appears while she is still talking.
+        let continuePlaybackMs = 0;
+        if (data.response_text) {
+            continuePlaybackMs = await this._speakAsNova(state, data.response_text);
+        }
+
+        // Wait for Unity to confirm playback is done before revealing visual cards.
+        if (data.whiteboard_problem || data.question_display) {
+            await this._waitForPlayback(state, continuePlaybackMs);
+        }
+
+        // Stale check — _offerHint or _onTranscript may have incremented cardGeneration
+        // while we were awaiting, meaning a newer turn is now responsible for cards.
+        if (state.cardGeneration !== continueGen) {
+            console.log(`[WSS] continueLesson question_display skipped — stale gen ${continueGen} vs current ${state.cardGeneration}`);
+            return;
+        }
+
+        if (data.whiteboard_problem) {
+            console.log(`[WSS] continueLesson — whiteboard_update for new problem`);
+            this._send(state.ws, {
+                type:         'whiteboard_update',
+                problem:      data.whiteboard_problem,
+                steps:        data.whiteboard_steps ?? [],
+                languageCode: state.languageCode,
+            });
+        }
+
+        if (data.question_display) {
+            console.log(`[WSS] continueLesson — question_display for new problem`);
+            this._send(state.ws, {
+                type:         'question_display',
+                text:         data.question_display.text         ?? '',
+                choices:      data.question_display.choices      ?? [],
+                correctIndex: data.question_display.correct_index ?? 0,
+            });
+        }
     }
 
     // ── Helpers ───────────────────────────────────────────────────────────────

@@ -66,7 +66,8 @@ OLLAMA_MODEL    = os.getenv("OLLAMA_MODEL", "llama3.2")
 
 REDIS_URL       = os.getenv("REDIS_URL", "redis://redis:6379")
 REDIS_PASSWORD  = os.getenv("REDIS_PASSWORD", "")
-SESSION_TTL_SEC = 7200   # 2 hours — max session lifetime in Redis
+SESSION_TTL_SEC      = 7200    # 2 hours  — active session Redis keys
+CHECKPOINT_TTL_SEC   = 2592000 # 30 days  — per-child per-topic resume checkpoint
 
 # ── FastAPI app ───────────────────────────────────────────────────────────────
 app = FastAPI(title="Nova Agent", version="1.0.0")
@@ -166,6 +167,10 @@ class ChatResponse(BaseModel):
 class AnswerRequest(BaseModel):
     session_id: str
     is_correct: bool
+
+class SessionContinueRequest(BaseModel):
+    session_id: str
+    is_correct: bool = True   # tone hint: correct → celebratory advance, wrong → empathetic advance
 
 class SessionStartRequest(BaseModel):
     session_id:     str
@@ -332,11 +337,15 @@ async def node_select_pedagogy(state: AgentState) -> AgentState:
         # Fetch a new problem if: none is active, or the current one is exhausted
         if not cs.has_problem or cs.is_exhausted:
             if cs.has_problem and cs.is_exhausted:
-                # Problem finished — update difficulty and count it
-                cs.difficulty    = _curriculum.next_difficulty(
+                # Problem finished — update difficulty.
+                # mc_answered: /answer already incremented session_total → don't double-count.
+                # Hint path: session_total counts problem completions, not individual answer taps.
+                cs.difficulty = _curriculum.next_difficulty(
                     cs.session_correct, cs.session_total, cs.difficulty
                 )
-                cs.session_total += 1
+                if not cs.mc_answered:
+                    cs.session_total += 1
+                cs.mc_answered = False   # reset flag for the next problem
                 log.info(f"[{state['session_id']}] Problem exhausted — next difficulty: {cs.difficulty}")
 
             problem = await _curriculum.select_problem(
@@ -571,6 +580,50 @@ async def _load_history(session_id: str) -> list:
         return []
 
 
+async def _load_checkpoint(child_id: str, topic_key: str) -> dict:
+    """
+    Load a topic-level resume checkpoint for a child.
+    This key survives session cleanup (30-day TTL) so the child picks up where
+    they left off when they return to the same topic in a later session.
+
+    Returns a dict with keys: problems_seen, difficulty.
+    Returns {} if no checkpoint exists (first time on this topic).
+    """
+    if not _redis_client or not child_id or not topic_key:
+        return {}
+    key = f"nova:child:{child_id}:topic:{topic_key}:checkpoint"
+    try:
+        raw = await _redis_client.get(key)
+        if raw:
+            data = json.loads(raw)
+            log.info(f"[checkpoint] Restored for child={child_id} topic={topic_key}: "
+                     f"{len(data.get('problems_seen', []))} problems seen, diff={data.get('difficulty', 2)}")
+            return data
+    except Exception as e:
+        log.warning(f"[checkpoint] Load failed for {child_id}/{topic_key}: {e}")
+    return {}
+
+
+async def _save_checkpoint(child_id: str, topic_key: str, cs: "CurriculumState") -> None:
+    """
+    Persist a topic-level resume checkpoint so the child continues from here next session.
+    Called at session_end — stored for 30 days.
+    """
+    if not _redis_client or not child_id or not topic_key:
+        return
+    key = f"nova:child:{child_id}:topic:{topic_key}:checkpoint"
+    payload = {
+        "problems_seen": cs.problems_seen,
+        "difficulty":    cs.difficulty,
+    }
+    try:
+        await _redis_client.set(key, json.dumps(payload), ex=CHECKPOINT_TTL_SEC)
+        log.info(f"[checkpoint] Saved for child={child_id} topic={topic_key}: "
+                 f"{len(cs.problems_seen)} problems seen, diff={cs.difficulty}")
+    except Exception as e:
+        log.warning(f"[checkpoint] Save failed for {child_id}/{topic_key}: {e}")
+
+
 async def _load_curriculum_state(session_id: str) -> dict:
     if not _redis_client:
         return {}
@@ -625,7 +678,7 @@ async def session_start(req: SessionStartRequest):
         except Exception as e:
             log.warning(f"[{req.session_id}] Failed to store profile: {e}")
 
-    # ── Pre-load first topic + problem ────────────────────────────────────────
+    # ── Pre-load first topic + problem (with resume checkpoint) ──────────────
     cs = CurriculumState()
 
     if _curriculum:
@@ -650,12 +703,48 @@ async def session_start(req: SessionStartRequest):
             cs.topic_key  = topic["topic_key"]
             cs.topic_name = topic["topic_name"]
 
+            # ── Resume detection ──────────────────────────────────────────────
+            # Priority 1: Redis checkpoint (set by _save_checkpoint at session_end).
+            #   Contains problems_seen + difficulty from the previous session.
+            # Priority 2: DB mastery bootstrap (catches existing users who have
+            #   mastery recorded in child_topic_progress before the checkpoint
+            #   feature was introduced — mastery_level > 0 OR attempt_count > 0).
+            # is_resuming is stored in CurriculumState (Redis) so session_intro
+            # reads exactly the same flag without making its own independent query.
+
+            checkpoint = await _load_checkpoint(profile.child_id, cs.topic_key)
+            if checkpoint and checkpoint.get("problems_seen"):
+                cs.problems_seen = checkpoint.get("problems_seen", [])
+                cs.difficulty    = checkpoint.get("difficulty", cs.difficulty)
+                cs.is_resuming   = True
+                log.info(
+                    f"[{req.session_id}] Resuming from Redis checkpoint — "
+                    f"{len(cs.problems_seen)} problems already seen, diff={cs.difficulty}"
+                )
+            else:
+                # No checkpoint: fall back to DB mastery to detect returning users
+                db_progress = {}
+                if _curriculum:
+                    db_progress = await _curriculum.get_child_topic_progress(
+                        profile.child_id, cs.topic_key
+                    )
+                if db_progress.get("mastery_level", 0) > 0 or db_progress.get("attempt_count", 0) > 0:
+                    cs.is_resuming = True
+                    log.info(
+                        f"[{req.session_id}] Resuming from DB mastery bootstrap — "
+                        f"mastery={db_progress.get('mastery_level')}%, "
+                        f"attempts={db_progress.get('attempt_count')}"
+                    )
+                else:
+                    cs.is_resuming = False
+                    log.info(f"[{req.session_id}] Fresh start — no prior history for topic: {cs.topic_key}")
+
             problem = await _curriculum.select_problem(
                 topic_key  = cs.topic_key,
                 grade      = profile.grade,
                 language   = profile.language,
                 difficulty = cs.difficulty,
-                exclude_ids= [],
+                exclude_ids= cs.problems_seen,  # skip already-seen problems
             )
             if problem:
                 cs.load_problem(problem)
@@ -776,22 +865,91 @@ async def session_intro(req: SessionIntroRequest):
     #   Fall through to LLM-generated open-ended greeting.
     #
     if topic_name:
+        # Read CurriculumState written by session_start.
+        # session_start is the single source of truth — it checks BOTH the Redis
+        # checkpoint (problems_seen) AND the DB mastery (child_topic_progress).
+        is_resuming      = False
+        resume_problem:  Optional[dict] = None   # pre-loaded problem to show immediately on resume
+        resume_wb_steps: list[str]      = []
+        resume_qd:       Optional[dict] = None   # question_display dict for question card
+        resume_chunk:    str            = "intro"
+
+        if _redis_client:
+            try:
+                raw_cs = await _redis_client.get(f"nova:session:{req.session_id}:curriculum")
+                if raw_cs:
+                    cs_dict      = json.loads(raw_cs)
+                    is_resuming  = bool(cs_dict.get("is_resuming", False))
+
+                    # When resuming, load the pre-selected problem so the intro
+                    # can present it directly — child jumps straight into work,
+                    # no "what do you remember" warmup needed.
+                    if is_resuming:
+                        cs_obj = CurriculumState.from_dict(cs_dict)
+                        # chunk_phase is a @property — compute from the object, not cs_dict
+                        resume_chunk = cs_obj.chunk_phase
+                        if cs_obj.has_problem:
+                            resume_problem  = {
+                                "text":  cs_obj.problem_text,
+                                "steps": cs_obj.solution_steps,
+                            }
+                            resume_wb_steps = cs_obj.solution_steps
+                            if _curriculum and cs_obj.question_choices:
+                                resume_qd = _curriculum.build_question_data(cs_obj)
+            except Exception:
+                pass
+
         # Hardcoded intro — topic always announced, never asks "what topic?"
+        # Two variants: fresh start vs. resuming a previous session.
+        #
+        # Resume variant: skips the "what do you know" warmup — presents the
+        # next problem directly so the child continues real work immediately.
         if lang == "fr":
-            intro_text = (
-                f"Bonjour {name}! Je suis Mme Nova, ta tutrice de maths. "
-                f"Pour me parler, maintiens le bouton appuyé et relâche quand tu as terminé. "
-                f"Aujourd'hui on travaille sur {topic_name} — super choix! "
-                f"Pour commencer, dis-moi ce que tu sais déjà sur {topic_name}."
-            )
+            if is_resuming:
+                if resume_problem:
+                    intro_text = (
+                        f"Bon retour, {name}! Contente de te revoir. "
+                        f"On reprend {topic_name} là où on s'est arrêtés — voici ton prochain problème. "
+                        f"Maintiens le bouton pour me répondre."
+                    )
+                else:
+                    intro_text = (
+                        f"Bon retour, {name}! Contente de te revoir. "
+                        f"On continue {topic_name} — tu as déjà bien progressé! "
+                        f"Maintiens le bouton pour me parler."
+                    )
+            else:
+                intro_text = (
+                    f"Bonjour {name}! Je suis Mme Nova, ta tutrice de maths. "
+                    f"Pour me parler, maintiens le bouton appuyé et relâche quand tu as terminé. "
+                    f"Aujourd'hui on travaille sur {topic_name} — super choix! "
+                    f"Pour commencer, dis-moi ce que tu sais déjà sur {topic_name}."
+                )
         else:
-            intro_text = (
-                f"Hi {name}, I'm Ms. Nova — great to see you! "
-                f"Hold the button to talk, release when you're done. "
-                f"Today we're working on {topic_name} — excellent choice! "
-                f"To kick things off, tell me what you already know about {topic_name}."
-            )
-        log.info(f"[{req.session_id}] Using hardcoded topic intro (topic: {topic_name})")
+            if is_resuming:
+                if resume_problem:
+                    intro_text = (
+                        f"Welcome back, {name}! Great to see you again. "
+                        f"We're picking up {topic_name} right where we left off — here's your next problem. "
+                        f"Hold the button to answer when you're ready."
+                    )
+                else:
+                    intro_text = (
+                        f"Welcome back, {name}! Great to see you again. "
+                        f"We're continuing {topic_name} — you've already made great progress! "
+                        f"Hold the button to talk when you're ready."
+                    )
+            else:
+                intro_text = (
+                    f"Hi {name}, I'm Ms. Nova — great to see you! "
+                    f"Hold the button to talk, release when you're done. "
+                    f"Today we're working on {topic_name} — excellent choice! "
+                    f"To kick things off, tell me what you already know about {topic_name}."
+                )
+        log.info(
+            f"[{req.session_id}] Hardcoded intro — topic: {topic_name}, "
+            f"resuming: {is_resuming}, problem_attached: {resume_problem is not None}"
+        )
 
     else:
         # No topic known — use LLM to generate open-ended welcome
@@ -850,7 +1008,58 @@ async def session_intro(req: SessionIntroRequest):
             log.warning(f"[{req.session_id}] Failed to store intro history: {e}")
 
     log.info(f"[{req.session_id}] Intro sent to {name}: \"{intro_text[:100]}\"")
+
+    # When resuming and a problem was pre-loaded, attach it to the response.
+    # Node.js will send whiteboard_update + question_display events before TTS
+    # so the child sees the problem the moment Nova starts speaking.
+    if is_resuming and resume_problem:
+        return ChatResponse(
+            response_text      = intro_text,
+            animation_emotion  = "Talking",
+            whiteboard_problem = resume_problem["text"],
+            whiteboard_steps   = resume_wb_steps,
+            question_display   = resume_qd,
+            chunk_phase        = resume_chunk,
+        )
+
     return ChatResponse(response_text=intro_text, animation_emotion="Talking")
+
+
+@app.post("/session/checkpoint")
+async def session_checkpoint(req: SessionEndRequest):
+    """
+    Save a resume checkpoint for the current session WITHOUT ending it.
+    Called by Node.js when Unity sends a session_pause event (app goes to
+    background / is killed mid-session).
+
+    The session Redis keys (history, profile, curriculum) are left intact so
+    the session can continue if the app returns. Only the long-lived
+    nova:child:{id}:topic:{key}:checkpoint key is written/refreshed.
+
+    Uses the same SessionEndRequest shape (just needs session_id).
+    """
+    if _redis_client:
+        curr_key    = f"nova:session:{req.session_id}:curriculum"
+        profile_key = f"nova:session:{req.session_id}:profile"
+        try:
+            raw = await _redis_client.get(curr_key)
+            if raw:
+                cs = CurriculumState.from_dict(json.loads(raw))
+                if cs.topic_key:
+                    profile_raw = await _redis_client.get(profile_key)
+                    if profile_raw:
+                        profile = ChildProfile.model_validate_json(profile_raw)
+                        await _save_checkpoint(profile.child_id, cs.topic_key, cs)
+                        log.info(
+                            f"[{req.session_id}] Mid-session checkpoint saved — "
+                            f"child={profile.child_id}, topic={cs.topic_key}, "
+                            f"problems_seen={len(cs.problems_seen)}"
+                        )
+                        return {"status": "ok", "problems_seen": len(cs.problems_seen)}
+        except Exception as e:
+            log.warning(f"[{req.session_id}] Checkpoint save failed: {e}")
+
+    return {"status": "no_data"}
 
 
 @app.post("/session/end")
@@ -865,13 +1074,26 @@ async def session_end(req: SessionEndRequest):
 
     if _redis_client:
         # Read curriculum stats before deleting keys
-        curr_key = f"nova:session:{req.session_id}:curriculum"
+        curr_key    = f"nova:session:{req.session_id}:curriculum"
+        profile_key = f"nova:session:{req.session_id}:profile"
         try:
             raw = await _redis_client.get(curr_key)
             if raw:
                 cs = CurriculumState.from_dict(json.loads(raw))
                 session_correct = cs.session_correct
                 session_total   = cs.session_total
+
+                # ── Save resume checkpoint ────────────────────────────────────
+                # Persist problems_seen + difficulty so the child continues from
+                # here when they return to this topic in a future session.
+                profile_raw = await _redis_client.get(profile_key)
+                if profile_raw and cs.topic_key:
+                    try:
+                        profile = ChildProfile.model_validate_json(profile_raw)
+                        await _save_checkpoint(profile.child_id, cs.topic_key, cs)
+                    except Exception as cp_err:
+                        log.warning(f"[{req.session_id}] Checkpoint save failed: {cp_err}")
+
         except Exception as e:
             log.warning(f"[{req.session_id}] Failed to read curriculum end stats: {e}")
 
@@ -940,6 +1162,7 @@ async def record_answer(req: AnswerRequest):
                 cs.session_total += 1
                 if req.is_correct:
                     cs.session_correct += 1
+                cs.mc_answered = True   # signal to node_select_pedagogy: don't double-count
                 await _redis_client.set(
                     curr_key, json.dumps(cs.to_dict()), ex=SESSION_TTL_SEC
                 )
@@ -1036,6 +1259,181 @@ async def record_answer(req: AnswerRequest):
     return ChatResponse(
         response_text     = response_text,
         animation_emotion = animation,
+    )
+
+
+@app.post("/session/continue", response_model=ChatResponse)
+async def session_continue(req: SessionContinueRequest):
+    """
+    Called by Node.js after a correct or wrong MC answer response has been spoken.
+    Automatically advances the curriculum (loads next problem) and generates
+    Ms. Nova's natural transition text so the lesson continues without the child
+    having to press PTT.
+
+    This endpoint does NOT add a synthetic user message to history, keeping the
+    conversation history clean.
+    """
+    # ── Load and advance curriculum state ────────────────────────────────────
+    cs_dict = await _load_curriculum_state(req.session_id)
+    cs      = CurriculumState.from_dict(cs_dict) if cs_dict else CurriculumState()
+
+    # Load child profile for language and grade
+    profile: Optional[ChildProfile] = None
+    if _redis_client:
+        try:
+            raw = await _redis_client.get(f"nova:session:{req.session_id}:profile")
+            if raw:
+                profile = ChildProfile.model_validate_json(raw)
+        except Exception:
+            pass
+    if profile is None:
+        profile = ChildProfile(child_id="unknown")
+
+    lang = profile.language
+
+    # ── Advance to next problem ───────────────────────────────────────────────
+    prev_problem_text = cs.problem_text  # for transition context
+    advanced = False
+
+    if _curriculum and cs.has_problem:
+        # mc_answered was set by /answer; is_exhausted is now True
+        new_difficulty = _curriculum.next_difficulty(
+            cs.session_correct, cs.session_total, cs.difficulty
+        )
+        cs.difficulty  = new_difficulty
+        cs.mc_answered = False   # consumed here
+
+        problem = await _curriculum.select_problem(
+            topic_key   = cs.topic_key or _curriculum._fallback_topic_key(profile.grade),
+            grade       = profile.grade,
+            language    = profile.language,
+            difficulty  = cs.difficulty,
+            exclude_ids = cs.problems_seen,
+        )
+        if problem:
+            cs.load_problem(problem)
+            advanced = True
+            log.info(
+                f"[{req.session_id}] session/continue — advanced to next problem: "
+                f"{problem.id[:8]} diff={problem.difficulty}"
+            )
+        else:
+            log.warning(f"[{req.session_id}] session/continue — no unseen problems available.")
+
+    # Persist updated curriculum state
+    if _redis_client:
+        try:
+            await _redis_client.set(
+                f"nova:session:{req.session_id}:curriculum",
+                json.dumps(cs.to_dict()),
+                ex=SESSION_TTL_SEC,
+            )
+        except Exception as e:
+            log.warning(f"[{req.session_id}] session/continue — Redis write failed: {e}")
+
+    # ── Generate transition text ──────────────────────────────────────────────
+    history = await _load_history(req.session_id)
+
+    if advanced and cs.has_problem:
+        # Tell Nova to transition from the last answer to the new problem
+        if lang == "fr":
+            if req.is_correct:
+                transition_note = (
+                    f"L'élève vient de répondre correctement. "
+                    f"Maintenant, présente le prochain problème de façon naturelle et enthousiaste. "
+                    f"Problème: {cs.problem_text}. "
+                    f"1-2 phrases max. Pose une question d'ouverture sur ce problème."
+                )
+            else:
+                transition_note = (
+                    f"L'élève vient d'avoir une erreur et Nova a expliqué. "
+                    f"Passons maintenant au prochain problème pour continuer à progresser. "
+                    f"Problème: {cs.problem_text}. "
+                    f"1-2 phrases max. Introduis-le chaleureusement."
+                )
+        else:
+            if req.is_correct:
+                transition_note = (
+                    f"The student just answered correctly. "
+                    f"Transition warmly and naturally to the next problem. "
+                    f"Problem: {cs.problem_text}. "
+                    f"1-2 sentences max. Ask an opening question about this problem."
+                )
+            else:
+                transition_note = (
+                    f"The student got the last question wrong and Nova explained it. "
+                    f"Move on to the next problem to keep momentum. "
+                    f"Problem: {cs.problem_text}. "
+                    f"1-2 sentences max. Introduce it warmly."
+                )
+
+        system = build_system_prompt(profile)
+        system += f"\n\n[Internal note — do NOT reveal to student]\n{transition_note}"
+
+        if lang == "fr":
+            default_text = (
+                f"Super, passons à la suite! "
+                f"{cs.problem_text} — qu'est-ce que tu penses pour commencer?"
+            )
+        else:
+            default_text = (
+                f"Great, let's keep going! "
+                f"{cs.problem_text} — what do you think the first step is?"
+            )
+
+        if _llm_client:
+            try:
+                # Use history for context but send an empty user turn as trigger
+                response_text = await _call_llm(
+                    system,
+                    history + [{"role": "user", "content": "[continue]"}],
+                    req.session_id,
+                )
+            except Exception as e:
+                log.error(f"[{req.session_id}] session/continue LLM error: {e}")
+                response_text = default_text
+        else:
+            response_text = default_text
+
+    else:
+        # No new problem available — wrap up the session topic
+        if lang == "fr":
+            response_text = (
+                "Tu as fait un excellent travail aujourd'hui! "
+                "On a couvert tous les problèmes disponibles pour ce sujet. "
+                "Dis-moi ce que tu as trouvé le plus intéressant!"
+            )
+        else:
+            response_text = (
+                "Excellent work today! "
+                "You've worked through all the available problems on this topic. "
+                "Tell me what you found most interesting!"
+            )
+
+    # ── Append transition to history (as assistant only — no synthetic user msg) ─
+    if _redis_client:
+        try:
+            updated_history = list(history)
+            updated_history.append({"role": "assistant", "content": response_text})
+            if len(updated_history) > 20:
+                updated_history = updated_history[-20:]
+            await _redis_client.set(
+                f"nova:session:{req.session_id}:history",
+                json.dumps(updated_history),
+                ex=SESSION_TTL_SEC,
+            )
+        except Exception as e:
+            log.warning(f"[{req.session_id}] session/continue history write failed: {e}")
+
+    animation = "Celebrating" if req.is_correct else "Encouraging"
+
+    return ChatResponse(
+        response_text      = response_text,
+        animation_emotion  = animation,
+        whiteboard_problem = cs.problem_text if (advanced and cs.has_problem) else None,
+        whiteboard_steps   = cs.solution_steps if (advanced and cs.has_problem) else [],
+        question_display   = CurriculumEngine.build_question_data(cs) if (advanced and cs.has_problem) else None,
+        chunk_phase        = cs.chunk_phase,
     )
 
 

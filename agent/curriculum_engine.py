@@ -72,6 +72,8 @@ class CurriculumState:
     session_total:    int       = 0     # problems attempted this session
     question_choices: list[str] = field(default_factory=list)  # shuffled [A,B,C,D] texts
     question_correct: int       = -1   # index of correct choice in question_choices
+    mc_answered:      bool      = False  # True after MC tap; prevents double-counting in select_pedagogy
+    is_resuming:      bool      = False  # True when child has prior history on this topic (checkpoint OR DB mastery)
 
     # ── Serialisation ─────────────────────────────────────────────────────────
 
@@ -103,19 +105,24 @@ class CurriculumState:
     @property
     def chunk_phase(self) -> str:
         """
-        Returns the current pedagogical phase based on total turn count.
+        Returns the current pedagogical phase based on problems completed.
         Drives the 4-dot progress strip in the Unity HUD.
 
-          intro       — turns 0–1   (dot 0)
-          chunk_a     — turns 2–5   (dot 1) first concept chunk
-          chunk_b     — turns 6–9   (dot 2) second concept chunk
-          consolidate — turns 10+   (dot 3) wrap-up / consolidation
+        Using problems_seen (count of distinct problems attempted this session)
+        rather than turn_count gives accurate, child-visible progress — one dot
+        advances per problem, not per conversation exchange.
+
+          intro       — 0 problems done  (dot 0)  warming up / first problem
+          chunk_a     — 1 problem done   (dot 1)  building understanding
+          chunk_b     — 2 problems done  (dot 2)  deepening practice
+          consolidate — 3+ problems done (dot 3)  wrap-up / mastery check
         """
-        if self.turn_count <= 1:
+        done = max(0, len(self.problems_seen) - 1)  # -1: first problem is "intro" not "done"
+        if done == 0:
             return "intro"
-        elif self.turn_count <= 5:
+        elif done == 1:
             return "chunk_a"
-        elif self.turn_count <= 9:
+        elif done == 2:
             return "chunk_b"
         else:
             return "consolidate"
@@ -124,10 +131,11 @@ class CurriculumState:
     def is_exhausted(self) -> bool:
         """
         True when the student has had enough time with this problem.
-        2 turns of buffer after all hints are given gives Nova a chance to
-        prompt the student to present their own full solution.
+        Either:
+          - Hints have exceeded all steps + 2 buffer turns (verbal path), OR
+          - An MC answer was submitted (mc_answered flag set by /answer endpoint)
         """
-        return self.hints_given >= len(self.solution_steps) + 2
+        return self.mc_answered or self.hints_given >= len(self.solution_steps) + 2
 
     def load_problem(self, problem: "Problem") -> None:
         self.topic_key      = problem.topic_key
@@ -191,6 +199,40 @@ class CurriculumEngine:
     def _fallback_topic_key(grade: int) -> str:
         """Return the default topic key for a grade when no topic is cached yet."""
         return _FALLBACK_TOPICS.get(grade, _FALLBACK_TOPICS[6])["topic_key"]
+
+    # ── Child progress queries ────────────────────────────────────────────────
+
+    async def get_child_topic_progress(self, child_id: str, topic_key: str) -> dict:
+        """
+        Look up a child's recorded progress for a topic from the DB.
+        Returns {"mastery_level": int, "attempt_count": int} or {} if not found / DB unavailable.
+
+        mastery_level is 0–100.  attempt_count > 0 means the child has done at least
+        one session on this topic, even if mastery is still low.
+        """
+        if not self._pool or not child_id or not topic_key:
+            return {}
+        try:
+            async with self._pool.acquire() as conn:
+                row = await conn.fetchrow(
+                    """
+                    SELECT ctp.mastery_level, ctp.attempt_count
+                    FROM   child_topic_progress ctp
+                    JOIN   curriculum_topics    ct  ON ct.id = ctp.topic_id
+                    WHERE  ctp.child_id = $1::uuid
+                    AND    ct.topic_key = $2
+                    LIMIT  1
+                    """,
+                    child_id, topic_key,
+                )
+            if row:
+                return {
+                    "mastery_level": row["mastery_level"],
+                    "attempt_count": row["attempt_count"],
+                }
+        except Exception as e:
+            log.warning(f"[CurriculumEngine] get_child_topic_progress error: {e}")
+        return {}
 
     # ── Topic selection ───────────────────────────────────────────────────────
 
@@ -377,7 +419,59 @@ class CurriculumEngine:
                             distractor_answers = list(distractors),
                         )
 
-            log.warning(f"[CurriculumEngine] No unseen problems for {topic_key}/{grade}/{language}")
+            # All DB problems for this topic have been seen this session.
+            # Rather than falling back to the same hardcoded problem every time,
+            # query the full pool (ignoring exclude_ids) and pick one at random
+            # so the student gets variety even after exhausting new material.
+            log.warning(f"[CurriculumEngine] No unseen problems for {topic_key}/{grade}/{language} — recycling from full pool")
+            async with self._pool.acquire() as conn:
+                all_rows = await conn.fetch(
+                    """
+                    SELECT cp.id::text,
+                           ct.topic_key, ct.display_name,
+                           cp.language_code, cp.difficulty,
+                           cp.problem_text, cp.solution_steps,
+                           cp.cultural_context,
+                           cp.correct_answer, cp.distractor_answers
+                    FROM   curriculum_problems cp
+                    JOIN   curriculum_topics   ct ON ct.id = cp.topic_id
+                    WHERE  ct.topic_key     = $1
+                    AND    ct.grade         = $2
+                    AND    cp.language_code = $3
+                    ORDER  BY RANDOM()
+                    LIMIT  20
+                    """,
+                    topic_key, grade, language,
+                )
+
+            if all_rows:
+                row = random.choice(all_rows)
+                steps = row["solution_steps"]
+                if isinstance(steps, str):
+                    steps = json.loads(steps)
+                elif steps is None:
+                    steps = []
+                distractors = row["distractor_answers"]
+                if distractors is None:
+                    distractors = []
+                elif isinstance(distractors, str):
+                    distractors = json.loads(distractors)
+                log.info(f"[CurriculumEngine] Recycled problem id={row['id']} (pool exhausted)")
+                return Problem(
+                    id                 = row["id"],
+                    topic_key          = row["topic_key"],
+                    topic_name         = row["display_name"],
+                    language           = row["language_code"],
+                    difficulty         = row["difficulty"],
+                    text               = row["problem_text"],
+                    steps              = steps,
+                    context            = row["cultural_context"] or "",
+                    correct_answer     = row["correct_answer"] or "",
+                    distractor_answers = list(distractors),
+                )
+
+            # DB truly has no problems at all for this topic — use hardcoded fallback
+            log.warning(f"[CurriculumEngine] No DB problems at all for {topic_key}/{grade}/{language} — using hardcoded fallback")
             return _fallback_problem(topic_key, grade, language)
 
         except Exception as e:
@@ -492,11 +586,63 @@ class CurriculumEngine:
 # ── Fallback data (no DB connection) ─────────────────────────────────────────
 
 _FALLBACK_TOPICS: dict[int, dict] = {
-    6: {"topic_key": "ratios",           "topic_name": "Ratios and Rates"},
+    6: {"topic_key": "fractions",        "topic_name": "Fractions"},
     7: {"topic_key": "linear_equations", "topic_name": "Linear Equations"},
 }
 
 _FALLBACK_PROBLEMS: dict[tuple, Problem] = {
+    ("fractions", "en"): Problem(
+        id="fb_frac_en", topic_key="fractions", topic_name="Fractions",
+        language="en", difficulty=1,
+        text="What is 1/2 + 1/4?",
+        steps=[
+            "Find a common denominator: LCM of 2 and 4 is 4",
+            "Convert: 1/2 = 2/4",
+            "Add numerators: 2/4 + 1/4 = 3/4",
+        ],
+        context="arithmetic",
+        correct_answer="3/4",
+        distractor_answers=["1/6", "2/6", "1/3"],
+    ),
+    ("fractions", "fr"): Problem(
+        id="fb_frac_fr", topic_key="fractions", topic_name="Fractions",
+        language="fr", difficulty=1,
+        text="Combien fait 1/2 + 1/4 ?",
+        steps=[
+            "Trouver le PPCM de 2 et 4 : PPCM = 4",
+            "Convertir : 1/2 = 2/4",
+            "Additionner : 2/4 + 1/4 = 3/4",
+        ],
+        context="arithmetic",
+        correct_answer="3/4",
+        distractor_answers=["1/6", "2/6", "1/3"],
+    ),
+    ("integers", "en"): Problem(
+        id="fb_int_en", topic_key="integers", topic_name="Integers",
+        language="en", difficulty=1,
+        text="What is (-5) + 3?",
+        steps=[
+            "Start at -5 on the number line",
+            "Move 3 steps to the right",
+            "Land on -2",
+        ],
+        context="number_line",
+        correct_answer="-2",
+        distractor_answers=["2", "-8", "8"],
+    ),
+    ("integers", "fr"): Problem(
+        id="fb_int_fr", topic_key="integers", topic_name="Entiers",
+        language="fr", difficulty=1,
+        text="Combien fait (-5) + 3 ?",
+        steps=[
+            "Partir de -5 sur la droite numerique",
+            "Avancer de 3 pas vers la droite",
+            "Arriver a -2",
+        ],
+        context="number_line",
+        correct_answer="-2",
+        distractor_answers=["2", "-8", "8"],
+    ),
     ("ratios", "en"): Problem(
         id="fb_ratios_en", topic_key="ratios", topic_name="Ratios and Rates",
         language="en", difficulty=2,
