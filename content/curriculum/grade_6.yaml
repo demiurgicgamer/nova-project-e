@@ -1,0 +1,289 @@
+# Nova Curriculum Master File — Grade 6
+# =======================================
+# Scope: STEM only (Mathematics, Physics, Chemistry, Biology)
+# History and Geography deferred — see future regional curriculum files
+#
+# Topic status lifecycle:
+#   pending      → not yet sent to agent
+#   draft        → .md file generated, awaiting human review
+#   approved     → .md reviewed and approved, ready for JSON export
+#   db_inserted  → .json exported and inserted into database
+#
+# Languages: en = English (Canadian context)
+#            fr = French Canadian (Quebec context)
+#
+# Usage:
+#   python generate_arc.py --grade 6 --subject mathematics --topic fractions --language en
+#   python generate_arc.py --grade 6 --subject mathematics   (all pending math topics)
+#   python generate_arc.py --grade 6 --all                   (all pending STEM topics)
+#   python generate_arc.py --grade 6 --all --dry-run         (preview only)
+#
+#   python export_json.py --grade 6                          (export all approved)
+
+grade: 6
+scope: STEM
+region: canada
+languages: [en, fr]
+
+# ─────────────────────────────────────────────────────────────────────────────
+subjects:
+
+  # ── MATHEMATICS ─────────────────────────────────────────────────────────────
+  - subject: mathematics
+    display: Mathematics
+    topics:
+
+      - key: fractions
+        display: Fractions
+        description: >
+          Understanding fractions as parts of a whole. Numerator and denominator.
+          Comparing fractions with the same denominator. Adding and subtracting
+          fractions with the same denominator.
+        prerequisites: []
+        estimated_sessions: 2
+        status:
+          en: approved      # reference arc — arcs/grade_6/mathematics/fractions/en.md
+          fr: pending
+
+      - key: integers
+        display: Integers
+        description: >
+          Positive and negative whole numbers. The number line. Ordering integers.
+          Adding and subtracting integers. Real-world contexts (temperature,
+          elevation, bank balance).
+        prerequisites: []
+        estimated_sessions: 2
+        status:
+          en: pending
+          fr: pending
+
+      - key: ratios
+        display: Ratios and Rates
+        description: >
+          Understanding ratios as comparisons. Part-to-part and part-to-whole.
+          Equivalent ratios. Unit rates. Real-world contexts (recipes, speed,
+          price per unit).
+        prerequisites: [fractions]
+        estimated_sessions: 2
+        status:
+          en: pending
+          fr: pending
+
+      - key: percentages
+        display: Percentages
+        description: >
+          Percent as a fraction of 100. Converting between fractions, decimals,
+          and percentages. Finding the percent of a number. Real-world contexts
+          (discounts, test scores, tips).
+        prerequisites: [fractions, ratios]
+        estimated_sessions: 2
+        status:
+          en: pending
+          fr: pending
+
+      - key: algebra_basics
+        display: Algebra Basics
+        description: >
+          Introduction to variables as unknowns. Writing expressions.
+          Evaluating expressions by substituting values. Simple one-step
+          equations. Real-world contexts (mystery number problems, fair sharing).
+        prerequisites: []
+        estimated_sessions: 2
+        status:
+          en: pending
+          fr: pending
+
+      - key: linear_equations
+        display: Linear Equations
+        description: >
+          Solving one and two-step linear equations. Inverse operations.
+          Checking solutions. Real-world word problems that require forming
+          and solving an equation.
+        prerequisites: [algebra_basics]
+        estimated_sessions: 2
+        status:
+          en: pending
+          fr: pending
+
+      - key: geometry_area_perimeter
+        display: Area and Perimeter
+        description: >
+          Perimeter of polygons. Area of rectangles, triangles, and composite
+          shapes. Understanding the difference between area and perimeter.
+          Real-world contexts (flooring, fencing, gardens).
+        prerequisites: []
+        estimated_sessions: 2
+        status:
+          en: pending
+          fr: pending
+
+      - key: probability
+        display: Probability
+        description: >
+          Basic probability as a fraction between 0 and 1. Certain, impossible,
+          likely, unlikely events. Simple experiments (coins, dice, spinners).
+          Theoretical vs experimental probability.
+        prerequisites: [fractions]
+        estimated_sessions: 2
+        status:
+          en: pending
+          fr: pending
+
+      - key: data_and_graphs
+        display: Data and Graphs
+        description: >
+          Reading and creating bar graphs, line graphs, and pie charts.
+          Mean, median, and mode. Drawing conclusions from data.
+          Real-world contexts (sports stats, weather, class surveys).
+        prerequisites: []
+        estimated_sessions: 2
+        status:
+          en: pending
+          fr: pending
+
+  # ── PHYSICS ──────────────────────────────────────────────────────────────────
+  - subject: physics
+    display: Physics
+    topics:
+
+      - key: forces_and_motion
+        display: Forces and Motion
+        description: >
+          What a force is (push, pull). Contact vs non-contact forces.
+          Gravity, friction, and air resistance. How forces affect motion —
+          speed up, slow down, change direction. Balanced vs unbalanced forces.
+        prerequisites: []
+        estimated_sessions: 2
+        status:
+          en: pending
+          fr: pending
+
+      - key: simple_machines
+        display: Simple Machines
+        description: >
+          The six simple machines (lever, wheel and axle, pulley, inclined plane,
+          wedge, screw). How each makes work easier. Mechanical advantage.
+          Real-world examples in everyday objects.
+        prerequisites: [forces_and_motion]
+        estimated_sessions: 2
+        status:
+          en: pending
+          fr: pending
+
+      - key: electricity_basics
+        display: Electricity Basics
+        description: >
+          Electric current, voltage, and resistance. Simple circuits (series
+          and parallel). Conductors and insulators. Safety with electricity.
+          Real-world contexts (household circuits, batteries).
+        prerequisites: []
+        estimated_sessions: 2
+        status:
+          en: pending
+          fr: pending
+
+      - key: light_and_optics
+        display: Light and Optics
+        description: >
+          Properties of light (travels in straight lines, speed). Reflection
+          and refraction. How mirrors and lenses work. The visible spectrum.
+          Real-world contexts (glasses, rainbows, cameras).
+        prerequisites: []
+        estimated_sessions: 2
+        status:
+          en: pending
+          fr: pending
+
+  # ── CHEMISTRY ────────────────────────────────────────────────────────────────
+  - subject: chemistry
+    display: Chemistry
+    topics:
+
+      - key: matter_and_materials
+        display: Matter and Materials
+        description: >
+          States of matter (solid, liquid, gas). Properties of materials.
+          How temperature causes state changes. Particle model of matter.
+          Real-world examples (ice, steam, cooking).
+        prerequisites: []
+        estimated_sessions: 2
+        status:
+          en: pending
+          fr: pending
+
+      - key: mixtures_and_solutions
+        display: Mixtures and Solutions
+        description: >
+          Pure substances vs mixtures. Homogeneous and heterogeneous mixtures.
+          Solutions (solute, solvent, solubility). Separating mixtures
+          (filtering, evaporation, distillation). Real-world examples.
+        prerequisites: [matter_and_materials]
+        estimated_sessions: 2
+        status:
+          en: pending
+          fr: pending
+
+      - key: physical_vs_chemical_changes
+        display: Physical and Chemical Changes
+        description: >
+          Difference between physical changes (reversible, no new substance)
+          and chemical changes (new substance formed). Signs of chemical change
+          (colour, gas, heat, light). Real-world examples (burning, rusting,
+          cooking, dissolving).
+        prerequisites: [matter_and_materials]
+        estimated_sessions: 2
+        status:
+          en: pending
+          fr: pending
+
+  # ── BIOLOGY ──────────────────────────────────────────────────────────────────
+  - subject: biology
+    display: Biology
+    topics:
+
+      - key: cells_and_life
+        display: Cells and Life
+        description: >
+          The cell as the basic unit of life. Plant vs animal cells.
+          Key organelles and their functions (nucleus, mitochondria, cell wall).
+          Unicellular vs multicellular organisms. Real-world contexts
+          (why cells matter, how organisms grow).
+        prerequisites: []
+        estimated_sessions: 2
+        status:
+          en: pending
+          fr: pending
+
+      - key: ecosystems
+        display: Ecosystems
+        description: >
+          Producers, consumers, and decomposers. Food chains and food webs.
+          Predator and prey relationships. How energy flows through an ecosystem.
+          Human impact on ecosystems. Canadian ecosystem examples.
+        prerequisites: []
+        estimated_sessions: 2
+        status:
+          en: pending
+          fr: pending
+
+      - key: human_body_systems
+        display: Human Body Systems
+        description: >
+          Overview of major systems (digestive, circulatory, respiratory,
+          skeletal, muscular). How systems work together. How lifestyle
+          choices affect the body. Real-world contexts (exercise, nutrition,
+          health decisions).
+        prerequisites: [cells_and_life]
+        estimated_sessions: 2
+        status:
+          en: pending
+          fr: pending
+
+# ─────────────────────────────────────────────────────────────────────────────
+# DEFERRED — Not in current scope
+# ─────────────────────────────────────────────────────────────────────────────
+# history:   Regional — varies by country. Add via regions/canada/grade_6.yaml
+#            when expanding beyond STEM.
+# geography: Regional — same reason.
+# arts:      Not suitable for voice-first tutoring in MVP.
+# language:  Requires different arc structure (immersion model). Future phase.

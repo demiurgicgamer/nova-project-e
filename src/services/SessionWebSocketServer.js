@@ -477,10 +477,12 @@ export class SessionWebSocketServer {
             this._send(state.ws, { type: 'animation_trigger', emotion: data.animation_emotion });
         }
 
-        // HUD dot strip can update immediately — subtle UI, not problem content.
-        if (data.chunk_phase) {
-            this._send(state.ws, { type: 'chunk_phase', phase: data.chunk_phase });
-        }
+        // Do NOT forward data.chunk_phase during the intro.
+        // On a resumed session the Python agent returns the stored Redis chunk state
+        // (e.g. "consolidate" = 100%) which would fill the progress bar immediately
+        // before any work is done this session.  The bar always starts at 0% ("intro")
+        // and only advances once _continueLesson fires after the first answer.
+        this._send(state.ws, { type: 'chunk_phase', phase: 'intro' });
 
         // Claim generation token before the delay so any later turn can invalidate this send.
         const introGen = ++state.cardGeneration;
