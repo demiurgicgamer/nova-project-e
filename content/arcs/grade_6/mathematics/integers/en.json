@@ -1,0 +1,160 @@
+{
+  "meta": {
+    "subject": "mathematics",
+    "topic_key": "integers",
+    "topic_display": "Integers",
+    "grade": 6,
+    "region": "canada",
+    "language_code": "en",
+    "status": "approved",
+    "review_flags": [
+      "Ensure the number line visualizations in both concept and guided sections are clear and correct.",
+      "Confirm all real-world examples (temperature, elevation, bank account) are accurate and culturally appropriate for Canadian children.",
+      "Double-check integer addition and subtraction in practice problems — all calculations must be precise.",
+      "Verify the capstone problem has correct step-by-step reasoning and that answer choices reflect common student misconceptions.",
+      "Confirm that the language remains consistent, engaging, and at an appropriate grade level for 11–12 year olds."
+    ]
+  },
+  "hook_stories": [
+    {
+      "id": "hook_a",
+      "culture_hint": "canadian",
+      "text": "It's a cold winter morning in Montreal. The temperature starts at negative 5 degrees Celsius. By noon, it has warmed up by 8 degrees. What is the temperature now?",
+      "closing_line": "To engage students with real-world examples where positive and negative numbers are naturally used. These examples show how integers are part of everyday Canadian life."
+    },
+    {
+      "id": "hook_b",
+      "culture_hint": "canadian",
+      "text": "Sarah is hiking in the Canadian Rockies. She starts at 1000 meters above sea level. She descends down to 300 meters. What is her final elevation?",
+      "closing_line": "To engage students with real-world examples where positive and negative numbers are naturally used. These examples show how integers are part of everyday Canadian life."
+    }
+  ],
+  "concept": {
+    "explanation_steps": [
+      "Integers are positive and negative whole numbers. They include zero.",
+      "The number line helps us see how integers work.",
+      "Positive numbers go to the right (e.g., 3).",
+      "Negative numbers go to the left (e.g., -3).",
+      "Zero is in the middle.",
+      "We can use the number line to compare, add, and subtract integers."
+    ],
+    "whiteboard_text": "Integers: Positive and negative whole numbers including zero. Use number line to visualize.",
+    "comprehension_check": "Which of the following shows a negative integer?",
+    "reteach_angles": [
+      "Think of integers as positions on a number line with zero in the center.",
+      "Imagine a thermometer showing temperatures; below zero is negative, above is positive."
+    ]
+  },
+  "problems": [
+    {
+      "id": "p_guided_1",
+      "stage": "guided",
+      "difficulty": "medium",
+      "text": "Order the following integers from least to greatest: -3, 5, -7, 2",
+      "answer": "B) -7, -3, 2, 5",
+      "answer_explanation": "To order integers from least to greatest, start with the most negative integer (-7), then negative integers (-3), then zero, then positive numbers (2, 5).",
+      "mc_choices": [
+        "B) -7, -3, 2, 5",
+        "A) -3, -7, 2, 5",
+        "C) 5, 2, -3, -7",
+        "D) -7, 2, -3, 5"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Students usually forget that negative numbers are smaller as they become more negative.",
+      "intervention_hints": {
+        "level_1": "Draw a number line and place each integer on it.",
+        "level_2": "Which number is the furthest to the left?",
+        "level_3": "Start from the smallest number and move to the right on the number line."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_1",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "A submarine is at a depth of 20 meters below sea level. It ascends 15 meters. What is its new depth?",
+      "answer": "B) 5 meters below sea level",
+      "answer_explanation": "Start at -20 (20 meters below sea level). Ascending 15 meters means adding 15. So, -20 + 15 = -5, or 5 meters below sea level.",
+      "mc_choices": [
+        "B) 5 meters below sea level",
+        "A) 35 meters below sea level",
+        "C) 5 meters above sea level",
+        "D) 35 meters above sea level"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Students often confuse depth changes and may incorrectly add rather than subtract when ascending.",
+      "intervention_hints": {
+        "level_1": "Start at -20 on the number line. Move up 15 units.",
+        "level_2": "Think: Depth below sea level is represented by negative numbers.",
+        "level_3": "What is -20 + 15?"
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_2",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "The temperature in Calgary was -10°C in the morning. By evening it had dropped by 5°C. What was the evening temperature?",
+      "answer": "A) -15°C",
+      "answer_explanation": "When the temperature drops, we subtract. So, -10 - 5 = -15°C.",
+      "mc_choices": [
+        "A) -15°C",
+        "B) -5°C",
+        "C) 5°C",
+        "D) 15°C"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Students often add instead of subtract when dealing with temperature drops.",
+      "intervention_hints": {
+        "level_1": "Start at -10 on the number line. Move left 5 units.",
+        "level_2": "To subtract a positive number is like moving left on the number line.",
+        "level_3": "What is -10 - 5?"
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_3",
+      "stage": "practice",
+      "difficulty": "medium_hard",
+      "text": "Jack has a bank account balance of $200. He withdraws $300. What is his new balance?",
+      "answer": "C) -$100",
+      "answer_explanation": "Withdrawing means subtracting a positive amount. So, 200 - 300 = -100, which indicates a debt of $100.",
+      "mc_choices": [
+        "C) -$100",
+        "A) $500",
+        "B) $100",
+        "D) -$500"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Students often fail to recognize that withdrawing more than they have results in a negative balance or debt.",
+      "intervention_hints": {
+        "level_1": "Think of it as moving along a number line. Start at +200.",
+        "level_2": "Withdrawing money is like subtracting a positive amount.",
+        "level_3": "What is 200 - 300?"
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_capstone_1",
+      "stage": "capstone",
+      "difficulty": "hard",
+      "text": "In a ski resort, the temperature in the morning was -5°C. It rose 12°C by noon and then dropped 8°C by evening. What was the temperature in the evening?",
+      "answer": "A) -1°C",
+      "answer_explanation": "Starting at -5°C, we add 12°C to get 7°C. Then subtract 8°C, leaving -1°C.",
+      "mc_choices": [
+        "A) -1°C",
+        "B) 1°C",
+        "C) -21°C",
+        "D) 21°C"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Students may add or subtract the changes in the wrong order or fail to track negative and positive changes correctly.",
+      "intervention_hints": {
+        "level_1": "Show each step on a number line.",
+        "level_2": "Remember: adding a positive number moves right; subtracting a positive number moves left.",
+        "level_3": "What is the temperature after the rise? What is it after the drop?"
+      },
+      "nova_guiding_question": "Show each step on a number line."
+    }
+  ]
+}

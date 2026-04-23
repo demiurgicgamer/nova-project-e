@@ -1,0 +1,161 @@
+{
+  "arc_id": "fractions_1",
+  "title": "Understanding Fractions",
+  "description": "This arc teaches the fundamentals of fractions using visual models and real-world contexts, focusing on comparing, adding, and subtracting like fractions.",
+  "stages": [
+    {
+      "stage_id": "S1",
+      "title": "Hook",
+      "description": "Introduction to fractions through engaging stories and visuals.",
+      "problems": [
+        {
+          "problem_id": "S1_P1",
+          "text": "You and a friend are sharing a pizza. The pizza is cut into 8 equal slices. You eat 3 slices. What fraction of the pizza did you eat?",
+          "type": "story",
+          "solution": "3/8",
+          "language": "en"
+        }
+      ]
+    },
+    {
+      "stage_id": "S2",
+      "title": "Concept",
+      "description": "Learn the meaning of fractions using visual models.",
+      "problems": [
+        {
+          "problem_id": "S2_P1",
+          "text": "Draw a rectangle and shade 1/4 of it.",
+          "type": "conceptual",
+          "solution": "Visual representation; one out of four equal parts shaded",
+          "language": "en"
+        },
+        {
+          "problem_id": "S2_P2",
+          "text": "What fraction is represented by 3 shaded parts out of 5 equal parts?",
+          "type": "conceptual",
+          "solution": "3/5",
+          "language": "en"
+        }
+      ]
+    },
+    {
+      "stage_id": "S3",
+      "title": "Guided Practice",
+      "description": "Guided problem-solving with step-by-step support.",
+      "problems": [
+        {
+          "problem_id": "S3_P1",
+          "text": "A garden is divided into 10 equal sections. Rosa planted flowers in 3 sections. What fraction of the garden did Rosa plant?",
+          "type": "guided",
+          "solution": "3/10",
+          "language": "en"
+        }
+      ]
+    },
+    {
+      "stage_id": "S4",
+      "title": "Practice",
+      "description": "Independent practice problems to solidify understanding.",
+      "problems": [
+        {
+          "problem_id": "S4_P1",
+          "text": "A recipe needs 3/8 cup of sugar. Mia has already added 1/8 cup. How much more sugar does she still need?",
+          "type": "practice",
+          "solution": "2/8",
+          "language": "en"
+        },
+        {
+          "problem_id": "S4_P2",
+          "text": "Sara ate 3/8 of a pizza. Tom ate 4/8 of the same pizza. Who ate more?",
+          "type": "practice",
+          "solution": "Tom ate more because 4 > 3 when denominators are equal",
+          "language": "en"
+        },
+        {
+          "problem_id": "S4_P3",
+          "text": "A garden is divided into 10 equal sections. Rosa planted flowers in 3 sections. Her brother planted in 4 sections. What fraction of the garden is planted altogether?",
+          "type": "practice",
+          "solution": "7/10",
+          "language": "en"
+        }
+      ]
+    },
+    {
+      "stage_id": "S5",
+      "title": "Capstone",
+      "description": "Challenging, multi-part problem that integrates all previous learning.",
+      "problems": [
+        {
+          "problem_id": "S5_P1",
+          "text": "A recipe needs 3/8 cup of sugar. Mia has already added 1/8 cup. How much more sugar does she still need to add? And what fraction of the total sugar has she added so far?",
+          "type": "capstone",
+          "solution": [
+            "2/8 cup more needed to complete the recipe",
+            "1/8 of the total sugar has been added so far"
+          ],
+          "language": "en"
+        }
+      ],
+      "guiding_question": {
+        "text": "What's the total amount of sugar the recipe needs? And how much has Mia put in already? Start with those two pieces.",
+        "language": "en"
+      }
+    }
+  ],
+  "completions": {
+    "S1": {
+      "description": "Story delivered — no assessment"
+    },
+    "S2": {
+      "description": "Comprehension check answered correctly (interventions allowed)"
+    },
+    "S3": {
+      "description": "Guided problem solved (interventions allowed)"
+    },
+    "S4": {
+      "description": "2 out of 3 problems correct"
+    },
+    "S5": {
+      "description": "Both parts correct within 2 attempts"
+    }
+  },
+  "review_mode": {
+    "description": "Once Stage 5 is passed, the child enters Review mode for this topic. In future sessions, Nova surfaces one Stage 4–5 level problem per session for this topic. No hook, no concept — just the problem, as a warm-up or closing challenge.",
+    "enabled": true
+  },
+  "misconceptions": [
+    {
+      "id": "flip",
+      "title": "Flip numerator/denominator",
+      "example": "Writes 8/3 instead of 3/8",
+      "nova_approach": "You have the right numbers — which is the total, which is your part?"
+    },
+    {
+      "id": "add_denominators",
+      "title": "Add denominators",
+      "example": "3/8 + 4/8 = 7/16",
+      "nova_approach": "The garden still has 10 sections. Does planting more change the total?"
+    },
+    {
+      "id": "compare_by_numerator",
+      "title": "Compare fractions by numerator only without checking denominator",
+      "example": "Says 3/5 > 3/8 without reasoning",
+      "nova_approach": "Covered in next arc (different denominators)"
+    },
+    {
+      "id": "use_remaining",
+      "title": "Use remaining parts instead of taken parts",
+      "example": "Writes 5/8 instead of 3/8",
+      "nova_approach": "The question asks how much she ATE — which number is that?"
+    }
+  ],
+  "meta": {
+    "subject": "mathematics",
+    "topic_key": "fractions",
+    "topic_display": "Fractions",
+    "grade": 6,
+    "region": "canada",
+    "language_code": "en",
+    "status": "approved"
+  }
+}

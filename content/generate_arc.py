@@ -13,30 +13,36 @@ PHASE 1 — This script (generate_arc.py)
 PHASE 2 — export_json.py
   Converts approved .md files to .json for database insertion.
 
-Folder structure:
-  arcs/
-    grade_6/
-      mathematics/
-        fractions/
-          en.md   ← draft or approved
-          en.json ← exported after approval
-          fr.md
-          fr.json
-        integers/
-          en.md
-          ...
+Supported providers (--provider):
+  anthropic  Claude Opus/Sonnet         Paid — ~$0.20–0.30/arc
+  gemini     Gemini 1.5 Flash           FREE tier — 15 req/min, 1M tok/day
+  groq       Llama 3.1 70B              FREE tier — 30 req/min
+  ollama     Any local model            FREE — runs on your machine (needs 16GB+ RAM)
+
+Provider setup:
+  anthropic  ANTHROPIC_API_KEY (or CLAUDE_API_KEY) in .env
+             pip install anthropic
+  gemini     GEMINI_API_KEY in .env  (get free key at aistudio.google.com)
+             pip install google-generativeai
+  groq       GROQ_API_KEY in .env    (get free key at console.groq.com)
+             pip install openai
+  ollama     No key needed. Install ollama, run: ollama pull llama3.1
+             pip install openai   (uses OpenAI-compatible local endpoint)
 
 Usage:
-  # Single topic
-  python generate_arc.py --grade 6 --subject mathematics --topic fractions --language en
+  # Free — Gemini (recommended starting point)
+  python generate_arc.py --grade 6 --subject mathematics --provider gemini
 
-  # All pending topics in a subject
-  python generate_arc.py --grade 6 --subject mathematics
+  # Free — Groq
+  python generate_arc.py --grade 6 --subject mathematics --provider groq
 
-  # All pending topics across all subjects (use with care — costs API credits per topic)
-  python generate_arc.py --grade 6 --all
+  # Free — local Ollama
+  python generate_arc.py --grade 6 --subject mathematics --provider ollama --model llama3.1
 
-  # Dry run — show what would be generated without calling the API
+  # Paid — Anthropic (best quality)
+  python generate_arc.py --grade 6 --subject mathematics --provider anthropic
+
+  # Dry run
   python generate_arc.py --grade 6 --all --dry-run
 """
 
@@ -54,14 +60,20 @@ load_dotenv(Path(__file__).parent.parent / ".env")
 if not os.environ.get("ANTHROPIC_API_KEY") and os.environ.get("CLAUDE_API_KEY"):
     os.environ["ANTHROPIC_API_KEY"] = os.environ["CLAUDE_API_KEY"]
 
-import anthropic  # noqa: E402 — import after env setup
-
 # ── Paths ─────────────────────────────────────────────────────────────────────
-CONTENT_DIR   = Path(__file__).parent
-FRAMEWORK_MD  = CONTENT_DIR / "ARC_FRAMEWORK.md"
-REFERENCE_ARC = CONTENT_DIR / "arcs" / "grade_6" / "mathematics" / "fractions" / "en.md"
+CONTENT_DIR    = Path(__file__).parent
+FRAMEWORK_MD   = CONTENT_DIR / "ARC_FRAMEWORK.md"
+REFERENCE_ARC  = CONTENT_DIR / "arcs" / "grade_6" / "mathematics" / "fractions" / "en.md"
 CURRICULUM_DIR = CONTENT_DIR / "curriculum"
-ARCS_DIR      = CONTENT_DIR / "arcs"
+ARCS_DIR       = CONTENT_DIR / "arcs"
+
+# ── Provider defaults ─────────────────────────────────────────────────────────
+PROVIDER_DEFAULTS = {
+    "anthropic": "claude-opus-4-5",
+    "gemini":    "gemini-2.0-flash",
+    "groq":      "llama-3.3-70b-versatile",
+    "ollama":    "llama3.1",
+}
 
 
 # ── Curriculum helpers ────────────────────────────────────────────────────────
@@ -81,15 +93,12 @@ def arc_path(grade: int, subject: str, topic_key: str, language: str) -> Path:
 
 def get_pending_topics(curriculum: dict, subject_filter: str = None,
                        topic_filter: str = None, language_filter: str = None) -> list[dict]:
-    """Return list of {grade, subject, topic, language} dicts that are still pending."""
     grade     = curriculum["grade"]
+    region    = curriculum.get("region", "global")
     languages = curriculum["languages"]
     pending   = []
 
     for subj in curriculum["subjects"]:
-        if subject_filter and subj["key"] if "key" in subj else subj["subject"] != subject_filter:
-            # Use 'subject' field (not 'key') in the yaml
-            pass
         subj_key = subj["subject"]
         if subject_filter and subj_key != subject_filter:
             continue
@@ -102,21 +111,21 @@ def get_pending_topics(curriculum: dict, subject_filter: str = None,
             for lang in langs:
                 status = topic.get("status", {}).get(lang, "pending")
                 if status == "pending":
-                    # Also skip if the file already exists (in case status wasn't updated)
                     path = arc_path(grade, subj_key, topic["key"], lang)
                     if path.exists():
                         print(f"  [SKIP] {subj_key}/{topic['key']}/{lang} — file exists (update status in YAML)")
                         continue
                     pending.append({
-                        "grade":    grade,
-                        "subject":  subj_key,
+                        "grade":           grade,
+                        "region":          region,
+                        "subject":         subj_key,
                         "subject_display": subj["display"],
-                        "topic_key": topic["key"],
-                        "topic_display": topic["display"],
-                        "description": topic.get("description", ""),
-                        "prerequisites": topic.get("prerequisites", []),
-                        "review_note": topic.get("review_note", None),
-                        "language": lang,
+                        "topic_key":       topic["key"],
+                        "topic_display":   topic["display"],
+                        "description":     topic.get("description", ""),
+                        "prerequisites":   topic.get("prerequisites", []),
+                        "review_note":     topic.get("review_note", None),
+                        "language":        lang,
                     })
 
     return pending
@@ -172,16 +181,19 @@ At the very end of the document add a REVIEW FLAGS section:
 
 
 def build_user_prompt(item: dict) -> str:
-    lang_name = (
-        "English (Canadian context where applicable)"
-        if item["language"] == "en"
-        else "French Canadian (Quebec context, natural colloquial French for children aged 11-12)"
-    )
+    region = item.get("region", "global")
+    region_display = {
+        "canada": "Canada",
+        "india":  "India",
+        "global": "global (no region-specific references)",
+    }.get(region, region.capitalize())
 
-    prereq_str = (
-        ", ".join(item["prerequisites"]) if item["prerequisites"] else "None"
-    )
+    if item["language"] == "en":
+        lang_name = f"English ({region_display} context where applicable)"
+    else:
+        lang_name = "French Canadian (Quebec context, natural colloquial French for children aged 11-12)"
 
+    prereq_str = ", ".join(item["prerequisites"]) if item["prerequisites"] else "None"
     review_note = (
         f"\n⚠ SPECIAL NOTE FOR THIS TOPIC: {item['review_note']}"
         if item["review_note"] else ""
@@ -193,6 +205,7 @@ Subject:      {item['subject_display']}
 Topic:        {item['topic_display']}
 Topic key:    {item['topic_key']}
 Grade:        {item['grade']}
+Region:       {region_display}
 Language:     {lang_name} (code: {item['language']})
 Prerequisites: {prereq_str}
 
@@ -204,6 +217,7 @@ Requirements:
 - Follow ARC_FRAMEWORK.md exactly — all 5 stages, complete
 - Match the quality and depth of the reference Fractions arc
 - Age-appropriate language for Grade {item['grade']} children (ages {item['grade'] + 5}–{item['grade'] + 6})
+- Hook stories must use real-world examples relevant to {region_display} where natural
 - At least 2 hook stories with different cultural angles
 - All problems must have exactly 4 MC choices with real common-misconception distractors
 - Include intervention hints (Level 1, 2, 3) for every problem
@@ -213,32 +227,111 @@ Generate the complete arc now.
 """
 
 
-# ── API call ──────────────────────────────────────────────────────────────────
+# ── Provider implementations ──────────────────────────────────────────────────
 
-def generate_arc_md(item: dict, model: str) -> tuple[str, dict]:
-    """Call Claude API and return (markdown_text, usage_dict)."""
-    client = anthropic.Anthropic()
-
+def _generate_anthropic(item: dict, model: str) -> tuple[str, dict]:
+    import anthropic
+    client  = anthropic.Anthropic()
     message = client.messages.create(
         model=model,
         max_tokens=8192,
         system=build_system_prompt(),
-        messages=[
-            {"role": "user", "content": build_user_prompt(item)}
-        ]
+        messages=[{"role": "user", "content": build_user_prompt(item)}],
     )
-
     usage = {
         "input_tokens":  message.usage.input_tokens,
         "output_tokens": message.usage.output_tokens,
         "cost_usd": round(
-            (message.usage.input_tokens / 1_000_000 * 15) +
-            (message.usage.output_tokens / 1_000_000 * 75),
-            4
-        )
+            (message.usage.input_tokens  / 1_000_000 * 15) +
+            (message.usage.output_tokens / 1_000_000 * 75), 4
+        ),
     }
-
     return message.content[0].text, usage
+
+
+def _generate_gemini(item: dict, model: str) -> tuple[str, dict]:
+    import google.generativeai as genai
+    api_key = os.environ.get("GEMINI_API_KEY")
+    if not api_key:
+        print("\n  ERROR: GEMINI_API_KEY not set in .env", file=sys.stderr)
+        print("  Get a free key at https://aistudio.google.com → Get API Key", file=sys.stderr)
+        sys.exit(1)
+    genai.configure(api_key=api_key)
+    gemini = genai.GenerativeModel(
+        model_name=model,
+        system_instruction=build_system_prompt(),
+    )
+    response = gemini.generate_content(
+        build_user_prompt(item),
+        generation_config=genai.types.GenerationConfig(max_output_tokens=8192),
+    )
+    usage = {
+        "input_tokens":  getattr(response.usage_metadata, "prompt_token_count", 0),
+        "output_tokens": getattr(response.usage_metadata, "candidates_token_count", 0),
+        "cost_usd":      0.0,   # free tier
+    }
+    return response.text, usage
+
+
+def _generate_openai_compat(item: dict, model: str,
+                             base_url: str, api_key: str) -> tuple[str, dict]:
+    """Shared implementation for Groq and Ollama (both OpenAI-compatible)."""
+    from openai import OpenAI
+    client = OpenAI(base_url=base_url, api_key=api_key or "ollama")
+    system = build_system_prompt()
+    user   = build_user_prompt(item)
+    resp   = client.chat.completions.create(
+        model=model,
+        max_tokens=8192,
+        messages=[
+            {"role": "system", "content": system},
+            {"role": "user",   "content": user},
+        ],
+    )
+    usage = {
+        "input_tokens":  resp.usage.prompt_tokens     if resp.usage else 0,
+        "output_tokens": resp.usage.completion_tokens if resp.usage else 0,
+        "cost_usd":      0.0,   # free tier
+    }
+    return resp.choices[0].message.content, usage
+
+
+def _generate_groq(item: dict, model: str) -> tuple[str, dict]:
+    api_key = os.environ.get("GROQ_API_KEY")
+    if not api_key:
+        print("\n  ERROR: GROQ_API_KEY not set in .env", file=sys.stderr)
+        print("  Get a free key at https://console.groq.com", file=sys.stderr)
+        sys.exit(1)
+    return _generate_openai_compat(
+        item, model,
+        base_url="https://api.groq.com/openai/v1",
+        api_key=api_key,
+    )
+
+
+def _generate_ollama(item: dict, model: str) -> tuple[str, dict]:
+    text, usage = _generate_openai_compat(
+        item, model,
+        base_url="http://localhost:11434/v1",
+        api_key="ollama",
+    )
+    # Strip Qwen3 / reasoning model <think>...</think> blocks
+    text = re.sub(r"<think>.*?</think>", "", text, flags=re.DOTALL).strip()
+    return text, usage
+
+
+# ── Dispatch ──────────────────────────────────────────────────────────────────
+
+PROVIDERS = {
+    "anthropic": _generate_anthropic,
+    "gemini":    _generate_gemini,
+    "groq":      _generate_groq,
+    "ollama":    _generate_ollama,
+}
+
+
+def generate_arc_md(item: dict, model: str, provider: str) -> tuple[str, dict]:
+    return PROVIDERS[provider](item, model)
 
 
 # ── Save ──────────────────────────────────────────────────────────────────────
@@ -262,11 +355,24 @@ def main():
     parser.add_argument("--language", choices=["en", "fr"], help="Filter by language")
     parser.add_argument("--all",      action="store_true", help="Generate all pending topics")
     parser.add_argument("--dry-run",  action="store_true", help="Show what would run, no API calls")
-    parser.add_argument("--model",    default="claude-opus-4-5")
+    parser.add_argument(
+        "--provider",
+        choices=list(PROVIDERS.keys()),
+        default="gemini",
+        help="AI provider to use (default: gemini — free tier)",
+    )
+    parser.add_argument(
+        "--model",
+        default=None,
+        help="Model name override (default: provider's recommended model)",
+    )
     args = parser.parse_args()
 
     if not args.all and not args.subject and not args.topic:
         parser.error("Specify --subject, --topic, or --all")
+
+    # Resolve model default
+    model = args.model or PROVIDER_DEFAULTS[args.provider]
 
     # Validate required files
     for f in [FRAMEWORK_MD, REFERENCE_ARC]:
@@ -286,8 +392,11 @@ def main():
         print("\n  Nothing to generate — all matching topics are already drafted or approved.")
         return
 
+    free_providers = {"gemini", "groq", "ollama"}
+    cost_note = "FREE" if args.provider in free_providers else "PAID"
+
     print(f"\n  Grade {args.grade} — {len(pending)} topic(s) to generate")
-    print(f"  Model: {args.model}")
+    print(f"  Provider: {args.provider} ({cost_note}) | Model: {model}")
     if args.dry_run:
         print("  DRY RUN — no API calls will be made\n")
 
@@ -301,10 +410,10 @@ def main():
             print(f"         -> would generate: {arc_path(item['grade'], item['subject'], item['topic_key'], item['language'])}")
             continue
 
-        print(f"         Calling API...", end="", flush=True)
+        print(f"         Calling {args.provider}...", end="", flush=True)
 
         try:
-            content, usage = generate_arc_md(item, args.model)
+            content, usage = generate_arc_md(item, model, args.provider)
         except Exception as e:
             print(f"\n         ERROR: {e}")
             continue
@@ -312,20 +421,21 @@ def main():
         path = save_arc(item, content)
 
         total_cost += usage["cost_usd"]
+        cost_str = f"${usage['cost_usd']:.4f}" if usage["cost_usd"] > 0 else "free"
         print(f" done")
         print(f"         Saved : {path}")
-        print(f"         Tokens: {usage['input_tokens']} in / {usage['output_tokens']} out — ${usage['cost_usd']:.4f}")
+        print(f"         Tokens: {usage['input_tokens']} in / {usage['output_tokens']} out — {cost_str}")
 
-        # Check for review flags
         if "Review Flags" in content:
             flags_section = content.split("## Review Flags")[-1].strip()
             if "No flags" not in flags_section:
                 print(f"         *** HAS REVIEW FLAGS — check before approving ***")
 
     if not args.dry_run and len(pending) > 0:
+        total_str = f"~${total_cost:.4f} USD" if total_cost > 0 else "free"
         print(f"\n  {'=' * 56}")
         print(f"  Done. {len(pending)} arc(s) generated.")
-        print(f"  Total cost: ~${total_cost:.4f} USD")
+        print(f"  Total cost: {total_str}")
         print(f"\n  NEXT STEPS:")
         print(f"  1. Review .md files in content/arcs/grade_{args.grade}/")
         print(f"  2. Update status to 'approved' in curriculum/grade_{args.grade}.yaml")
