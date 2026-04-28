@@ -1,0 +1,182 @@
+{
+  "meta": {
+    "subject": "mathematics",
+    "topic_key": "percentages",
+    "topic_display": "Percentages",
+    "grade": 6,
+    "region": "canada",
+    "language_code": "fr",
+    "status": "approved",
+    "review_flags": [
+      "Vérifier que tous les problèmes mathématiquement corrects (notamment les conversions et les calculs).",
+      "Vérifier que tous les textes sont en français naturel et appropriés pour un enfant de 11–12 ans.",
+      "S'assurer que la terminologie est conforme au contexte québécois (ex. : 25 % de réduction au lieu de « discount »).",
+      "Vérifier les réponses des questions (surtout les erreurs communes dans les choix de réponse).",
+      "Confirmer que les réponses sont cohérentes avec un niveau 6e secondaire (précision dans les calculs).",
+      "Vérifier que les interventions sont bien adaptées à l'ancienne connaissance attendue (fractions, ratios)."
+    ]
+  },
+  "hook_stories": [
+    {
+      "id": "hook_a",
+      "culture_hint": "canadian",
+      "text": "Mia va acheter un jouet qui coûte 40 $, mais il est à 25 % de réduction. Comment sait-elle combien elle va payer? Mia pense que c’est 10 $ de moins. Est-ce que c’est vrai?",
+      "closing_line": "C’est une excellente question à laquelle nous allons répondre ensemble!"
+    },
+    {
+      "id": "hook_b",
+      "culture_hint": "sports",
+      "text": "L’équipe de hockey de Mia a gagné 15 matchs sur 20 parties jouées. Quel est le pourcentage de victoires de cette équipe? Est-ce que c’est 75 %?",
+      "closing_line": "Regardons ensemble si c’est vrai!"
+    }
+  ],
+  "concept": {
+    "explanation_steps": [
+      "Un pourcentage est une façon de dire une partie par rapport à 100.",
+      "Il est comme une fraction, mais avec 100 comme dénominateur.",
+      "Par exemple, 40 % = 40/100.",
+      "On peut aussi convertir un pourcentage en décimal en divisant par 100, par exemple 40 % = 0,40.",
+      "Pour calculer un pourcentage d’un nombre, on multiplie ce nombre par le pourcentage (converti en décimal)."
+    ],
+    "whiteboard_text": "40 % = 40/100 = 0,40",
+    "comprehension_check": "Un pourcentage, c’est comme une fraction, mais avec combien comme dénominateur?",
+    "reteach_angles": [
+      "Puis-je montrer que 25 % signifie 25 parties sur 100 ?",
+      "Comment puis-je transformer un pourcentage en fraction ?"
+    ]
+  },
+  "problems": [
+    {
+      "id": "p_guided_1",
+      "stage": "guided",
+      "difficulty": "easy",
+      "text": "Quelle fraction correspond à 40 %?",
+      "answer": "40/100",
+      "answer_explanation": "40 % signifie 40 parties sur 100, donc la fraction équivalente est 40/100.",
+      "mc_choices": [
+        "40/100",
+        "4/100",
+        "40/10",
+        "4/10"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Confondre le pourcentage avec le numérateur, penser que 40 % est égal à 4/10 ou 40/10.",
+      "intervention_hints": {
+        "level_1": "Si c’est 40 %, tu as 40 parties sur 100.",
+        "level_2": "Un pourcentage = fraction avec dénominateur 100.",
+        "level_3": "Écris 40 % comme fraction. Quel est le chiffre au dessus, et quel est le chiffre en bas?"
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_1",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "Quelle est la fraction équivalente à 35 %?",
+      "answer": "35/100",
+      "answer_explanation": "35 % signifie 35 parties sur 100, donc la fraction équivalente est 35/100.",
+      "mc_choices": [
+        "35/100",
+        "3.5/100",
+        "35/10",
+        "0.35/100"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Penser que 35 % = 3.5/100 ou 0.35/100 (erreur de déplacement de la virgule).",
+      "intervention_hints": {
+        "level_1": "Pourcentage = part sur 100.",
+        "level_2": "Si c’est 35 %, écris 35 sur 100.",
+        "level_3": "Tu es à 35 %, donc ton numérateur est 35."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_2",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "Quel est le pourcentage de 80 que représente 20?",
+      "answer": "25 %",
+      "answer_explanation": "Pour trouver ce pourcentage, on divise 20 par 80 et on convertit en pourcentage : 20 ÷ 80 = 0,25 = 25 %.",
+      "mc_choices": [
+        "25 %",
+        "40 %",
+        "20 %",
+        "10 %"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Diviser 80 par 20 au lieu de 20 par 80.",
+      "intervention_hints": {
+        "level_1": "Tu veux savoir quelle part 20 est de 80.",
+        "level_2": "Divise 20 par 80 pour trouver la fraction.",
+        "level_3": "Transforme la fraction en pourcentage."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_3",
+      "stage": "practice",
+      "difficulty": "medium_hard",
+      "text": "Si 12 % de 50 élèves sont absents, combien d’élèves sont absents?",
+      "answer": "6",
+      "answer_explanation": "Pour trouver 12 % de 50, on fait : (12 × 50) ÷ 100 = 600 ÷ 100 = 6.",
+      "mc_choices": [
+        "6",
+        "12",
+        "2",
+        "5"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Penser que 12 % de 50 = 50 × 0.12 = 6 est le bon calcul (bonne réponse mais mauvaise méthode pour certaines personnes).",
+      "intervention_hints": {
+        "level_1": "Pour calculer un pourcentage d’un nombre, multiplie par le pourcentage en décimal.",
+        "level_2": "12 % = 0,12. Donc, 50 × 0,12 = ?",
+        "level_3": "Tu peux aussi faire (12 × 50) ÷ 100."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_capstone_1",
+      "stage": "capstone",
+      "difficulty": "hard",
+      "text": "Une classe a fait un test. 85 % des élèves ont réussit. Il y a 20 élèves dans la classe. Combien ont réussi le test?",
+      "answer": "17 élèves",
+      "answer_explanation": "Pour trouver 85 % de 20, on fait : (85 × 20) ÷ 100 = 1700 ÷ 100 = 17.",
+      "mc_choices": [
+        "17 élèves",
+        "10 élèves",
+        "12 élèves",
+        "15 élèves"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Confondre le pourcentage avec une simplification incorrecte ou faire des conversions erronées.",
+      "intervention_hints": {
+        "level_1": "Tu dois trouver 85 % de 20.",
+        "level_2": "Utilise la formule : (85 × 20) ÷ 100.",
+        "level_3": "Multiplie 85 par 20, puis divise le résultat par 100."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_capstone_2",
+      "stage": "capstone",
+      "difficulty": "hard",
+      "text": "Une classe a fait un test. 85 % des élèves ont réussit. Il y a 20 élèves dans la classe. Combien ont réussi le test?",
+      "answer": "17 élèves",
+      "answer_explanation": "Pour trouver 85 % de 20, on fait : (85 × 20) ÷ 100 = 1700 ÷ 100 = 17.",
+      "mc_choices": [
+        "17 élèves",
+        "10 élèves",
+        "12 élèves",
+        "15 élèves"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Penser que 85 % est 85/100 = 17/20 et donc 17 élèves — mais ce n’est pas la méthode standard de résolution.",
+      "intervention_hints": {
+        "level_1": "Multiplier 85 par 20, puis diviser par 100.",
+        "level_2": "Quel est le résultat de (85 × 20) ÷ 100 ?",
+        "level_3": "Pense à utiliser la base de 100 pour trouver le pourcentage d’un nombre."
+      },
+      "nova_guiding_question": ""
+    }
+  ]
+}

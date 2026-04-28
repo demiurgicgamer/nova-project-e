@@ -1,0 +1,158 @@
+{
+  "meta": {
+    "subject": "mathematics",
+    "topic_key": "ratios",
+    "topic_display": "Ratios and Rates",
+    "grade": 6,
+    "region": "canada",
+    "language_code": "fr",
+    "status": "approved",
+    "review_flags": [
+      "Vérifier la précision mathématique des ratios et des conversions dans le capstone.",
+      "Vérifier la qualité naturelle de la langue FR-CA pour les enfants de 11-12 ans.",
+      "S'assurer que tous les éléments de textes sont adaptés à un niveau scolaire de 6e année."
+    ]
+  },
+  "hook_stories": [
+    {
+      "id": "hook_a",
+      "culture_hint": "canadian",
+      "text": "Mme Tremblay organise un pique-nique pour sa classe de 6e année. Elle veut faire un mélange de chips et de bonbons pour tous les enfants. Elle sait que pour chaque enfant, il faut : 2 morceaux de chips de fromage et 3 bonbons. Mais elle n’est pas certaine combien elle doit acheter. Si elle a 12 enfants venant au pique-nique, combien de morceaux de chips et de bonbons va-t-elle devoir acheter?",
+      "closing_line": "Et maintenant, voyons comment les ratios peuvent vous aider à résoudre ce problème."
+    },
+    {
+      "id": "hook_b",
+      "culture_hint": "canadian",
+      "text": "Dans la ville d'Ottawa, on veut créer un nouveau parc. Pour cela, on va tracer un plan avec une échelle de 1 cm pour 50 m. Si sur l’échelle, la longueur du parc est de 4 cm, quelle est la vraie longueur du parc en mètres?",
+      "closing_line": "Un peu comme les ratios, cela vous aide à comprendre la taille réelle de ce que vous voyez sur le plan."
+    }
+  ],
+  "concept": {
+    "explanation_steps": [
+      "Un ratio est une façon de comparer deux quantités entre elles.",
+      "Il peut être exprimé comme 2:3 ou 2/3.",
+      "On utilise les ratios pour comparer des parties entre elles.",
+      "Il y a deux types de ratios : part-to-part et part-to-whole.",
+      "Deux ratios sont équivalents lorsqu'ils représentent exactement la même comparaison.",
+      "Le taux unitaire est le quotient d'une quantité divisée par une autre quantité, souvent exprimé comme une unité de temps ou de mesure."
+    ],
+    "whiteboard_text": "Ratio = Comparaison de deux quantités (ex: 2:3)\nPart-to-Part vs. Part-to-Whole\nTaux Unitaires = Comparaison d'une quantité par unité (ex: $2 par pomme)",
+    "comprehension_check": "Quel est le ratio de pommes à oranges si j'ai 2 pommes et 3 oranges?",
+    "reteach_angles": [
+      "Un ratio peut être vu comme une fraction, par exemple 2:3 peut être lu comme 2 sur 3.",
+      "Pour comprendre un ratio, imaginez que vous divisez une quantité en parties égales."
+    ]
+  },
+  "problems": [
+    {
+      "id": "p_guided_1",
+      "stage": "guided",
+      "difficulty": "medium",
+      "text": "Pour préparer un café, on utilise 3 cuillères à soupe de café pour chaque 100 ml d'eau. Si on veut 200 ml d'eau, combien de cuillères faut-il?",
+      "answer": "6 cuillères",
+      "answer_explanation": "On sait que pour 100 ml, il faut 3 cuillères. Donc pour 200 ml, on double la quantité de cuillères : 3 × 2 = 6 cuillères.",
+      "mc_choices": [
+        "6 cuillères",
+        "3 cuillères",
+        "4 cuillères",
+        "9 cuillères"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Les enfants peuvent oublier de doubler la quantité en multipliant par 2, en pensant que 200 ml est simplement un ajout de 100 ml.",
+      "intervention_hints": {
+        "level_1": "Tu as 200 ml d'eau. Tu sais qu’il te faut 3 cuillères pour 100 ml. Comment pourrais-tu savoir combien pour 200 ml?",
+        "level_2": "Est-ce que 200 ml est le double de 100 ml? Est-ce que le nombre de cuillères devrait aussi être le double?",
+        "level_3": "Tu peux multiplier 3 × 2 pour avoir 6 cuillères. C’est une façon de calculer le ratio équivalent."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_1",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "Pour un mélange de peinture, on utilise 4 parties de rouge pour 5 parties de bleu. Quelle est la proportion de rouge à la peinture totale?",
+      "answer": "4:9",
+      "answer_explanation": "Il y a 4 parties de rouge et 5 parties de bleu, donc le total est 4 + 5 = 9 parties. Le ratio de rouge à tout est donc 4:9.",
+      "mc_choices": [
+        "4:9",
+        "5:9",
+        "4:5",
+        "9:4"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Certains élèves pensent que la proportion de rouge est 4:5 (part-to-part) plonge, et non pas 4:9 (part-to-whole).",
+      "intervention_hints": {
+        "level_1": "Qu'est-ce que « 4 parties de rouge pour 5 parties de bleu » signifie? Combien y a-t-il de parties au total?",
+        "level_2": "Il y a 4 parties de rouge et 5 de bleu. Quel est le total des parties?",
+        "level_3": "Le ratio de rouge à tout est 4 : (4 + 5), donc 4:9."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_2",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "Si l’échelle d’un plan est de 1 cm pour 1000 m, combien de mètres représentent 5 cm sur la carte?",
+      "answer": "5000 m",
+      "answer_explanation": "1 cm représente 1000 m. Donc 5 cm représentent 5 × 1000 = 5000 m.",
+      "mc_choices": [
+        "5000 m",
+        "500 m",
+        "1000 m",
+        "10000 m"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Certains élèves peuvent oublier de multiplier par le facteur d'échelle (1000) et simplement dire 5 mètres.",
+      "intervention_hints": {
+        "level_1": "1 cm → 1000 m. Donc 5 cm = 5 × 1000 m.",
+        "level_2": "Il faut multiplier la longueur sur le plan par le facteur d’échelle.",
+        "level_3": "5 × 1000 = 5000 m"
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_capstone_1",
+      "stage": "capstone",
+      "difficulty": "hard",
+      "text": "Pour un gâteau, la recette demande : 2 tasses de farine, 3 œufs, 1 tasse de sucre. Si la recette est pour 4 personnes et qu’on veut en faire pour 8 personnes, combien faut-il de chaque ingrédient?",
+      "answer": "4 tasses, 6 œufs, 2 tasses de sucre",
+      "answer_explanation": "Pour doubler la recette, on multiplie chaque ingrédient par 2 : 2 × 2 = 4 tasses de farine, 3 × 2 = 6 œufs, 1 × 2 = 2 tasses de sucre.",
+      "mc_choices": [
+        "4 tasses, 6 œufs, 2 tasses de sucre",
+        "2 tasses, 3 œufs, 1 tasse de sucre",
+        "6 tasses, 9 œufs, 3 tasses de sucre",
+        "8 tasses, 12 œufs, 4 tasses de sucre"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Certains peuvent penser que les quantités peuvent être additionnées, par exemple 2 + 2 = 4 tasses de farine, ce qui est faux.",
+      "intervention_hints": {
+        "level_1": "La recette est pour 4 personnes. Tu veux faire pour 8 personnes. Tu dois doubler chaque ingrédient.",
+        "level_2": "Il faut multiplier chaque ingrédient par 2 pour avoir une recette pour 8 personnes.",
+        "level_3": "2 tasses × 2 = 4 tasses, 3 œufs × 2 = 6 œufs, 1 tasse × 2 = 2 tasses"
+      },
+      "nova_guiding_question": "La recette est pour 4 personnes. Tu veux faire pour 8 personnes. Tu dois doubler chaque ingrédient."
+    },
+    {
+      "id": "p_capstone_2",
+      "stage": "capstone",
+      "difficulty": "hard",
+      "text": "Si on sait qu’un œuf coûte 0,50 $, quel est le coût total de 3 œufs?",
+      "answer": "1,50 $",
+      "answer_explanation": "Le coût de 3 œufs est obtenu en multipliant le prix de chaque œuf par 3 : 0,50 $ × 3 = 1,50 $.",
+      "mc_choices": [
+        "1,50 $",
+        "1,00 $",
+        "0,50 $",
+        "0,25 $"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Certains élèves peuvent penser que le coût total est égal au prix d’un œuf, sans multiplier par 3.",
+      "intervention_hints": {
+        "level_1": "Pour le coût : 3 œufs à 0,50 $ chacun = 3 × 0,50 $",
+        "level_2": "Multiplier le prix d’un œuf par le nombre d’œufs requis.",
+        "level_3": "3 × 0,50 = 1,50 $"
+      },
+      "nova_guiding_question": "Pour le coût : 3 œufs à 0,50 $ chacun = 3 × 0,50 $"
+    }
+  ]
+}

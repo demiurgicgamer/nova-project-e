@@ -1,0 +1,98 @@
+{
+  "meta": {
+    "subject": "mathematics",
+    "topic_key": "probability",
+    "topic_display": "Probability",
+    "grade": 6,
+    "region": "canada",
+    "language_code": "fr",
+    "status": "approved",
+    "review_flags": []
+  },
+  "hook_stories": [
+    {
+      "id": "hook_a",
+      "culture_hint": "sports",
+      "text": "Ah, ben regardez-moi ça... J’ai entendu dire que la team de hockey de votre école a gagné leur match de championnat hier! L’équipe de hockey est partie pour le match de la finale et ils ont joué très fort.",
+      "closing_line": "Mais... Est-ce qu’il est certain que le joueur va marquer? Ou est-ce que c’est impossible? Ou peut-être qu’il est probable mais pas certain?"
+    },
+    {
+      "id": "hook_b",
+      "culture_hint": "universal",
+      "text": "Il y a un petit chiot au jardin de l’école, et un élève le suit partout. Tous les matins, le petit chiot part toujours vers un coin du jardin... mais il ne va pas toujours au même endroit.",
+      "closing_line": "Mais tu vois, on ne peut pas dire qu’il est certain qu’il vienne à ce coin. Il peut y arriver ou non — la probabilité c’est comme une estimation. Et on est en train de découvrir ce que tu apprends ici... la probabilité!"
+    }
+  ],
+  "concept": {
+    "explanation_steps": [
+      "Alors, on va apprendre ensemble ce qu’est la probabilité en utilisant des fractions.",
+      "Regarde cette fraction ici, 0/1, ou 0. Cela signifie que l’événement est impossible. Une chance sur un... ou zéro chance... comme si tu lançais un dé et que tu espères tomber sur un 7. C’est impossible! C’est une chance de zéro.",
+      "Et si tu fais une fraction de 1/1, ou 1, ça veut dire que l’événement est certain. Comme si dans une boîte, il y a seulement des billes rouges, et que tu en choisis une au hasard... tu sais avec certitude que tu auras une bille rouge. Tu as 1 chance sur 1.",
+      "Entre zéro et 1? C’est probable ou improbable. Comme si tu lançais un dé et que tu veux tomber sur un 3. Il y a une chance sur 6 de ça — donc, c’est probable.",
+      "Et tu as aussi 'très probable', comme si tu veux que la température soit plus chaude qu’hier — ça peut se produire. Mais il y a aussi 'très improbable', comme si tu veux que ta classe tombe dans l'eau. C’est possible... mais improbable.",
+      "Donc, en utilisant des fractions entre 0 et 1, on peut dire comment une chose se produit... et si elle est probable ou non. Et tu peux te servir de ça pour faire tes prédictions."
+    ],
+    "whiteboard_text": "0/1 = impossible, 1/1 = certain, entre 0 et 1 = probable ou improbable",
+    "comprehension_check": "Quel est le terme utilisé quand il y a une chance sur un de voir un événement se produire ?",
+    "reteach_angles": [
+      "Utiliser le dé à 6 faces pour montrer les probabilités simples.",
+      "Utiliser un jeu de cartes pour illustrer combien de façons un événement peut se produire."
+    ]
+  },
+  "problems": [
+    {
+      "id": "p_guided_1",
+      "stage": "guided",
+      "difficulty": "easy",
+      "text": "Alors, regardons ce dé à 6 faces. Il a 6 faces numérotées: 1, 2, 3, 4, 5, 6. Si tu veux tomber sur un 6, quelle est la probabilité?",
+      "choices": [
+        "1/6",
+        "6/1",
+        "1/1",
+        "1/5"
+      ],
+      "answer_index": 0,
+      "hints": [
+        "Combien de façons tu peux tomber sur un seul nombre?",
+        "Il y a 1 chiffre 6 sur 6 faces.",
+        "Donc la probabilité est de 1 sur 6."
+      ]
+    },
+    {
+      "id": "p_capstone_1",
+      "stage": "capstone",
+      "difficulty": "medium",
+      "text": "Imagine que ton école a organisé une super loterie. Ils ont 40 billets. Chaque billet a une chance de gagner un prix. Le prix principal est 100 dollars. Le prix secondaire est 20 dollars. Combien de chances y a-t-il que ton billet soit gagnant pour le prix principal?",
+      "choices": [
+        "1/40",
+        "1/10",
+        "1/4",
+        "1/5"
+      ],
+      "answer_index": 0,
+      "hints": [
+        "Combien de billet est gagnant pour le prix principal?",
+        "Il y a seulement 1 billet gagnant sur 40.",
+        "Donc, la fraction est 1/40."
+      ]
+    },
+    {
+      "id": "p_capstone_2",
+      "stage": "capstone",
+      "difficulty": "medium",
+      "text": "Et pour le prix secondaire qui est 20 dollars, 10 billets sur 40 billets sont gagnants — donc c’est une probabilité de 10 sur 40, ou 1/4. Quelle est la fraction simplifiée?",
+      "choices": [
+        "1/4",
+        "1/10",
+        "1/5",
+        "1/2"
+      ],
+      "answer_index": 0,
+      "hints": [
+        "Quelle est la valeur simplifiée de 10/40?",
+        "La fraction 10/40 se simplifie en 1/4.",
+        "Le numérateur et le dénominateur peuvent être divisés par 10."
+      ]
+    }
+  ]
+}

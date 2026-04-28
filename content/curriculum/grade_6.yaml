@@ -15,7 +15,7 @@
 # subject tile on the Dashboard.
 #
 # Topic status lifecycle:
-#   pending      → not yet sent to agent
+#   approved      → not yet sent to agent
 #   draft        → .md file generated, awaiting human review
 #   approved     → .md reviewed and approved, ready for JSON export
 #   db_inserted  → .json exported and inserted into database
@@ -32,8 +32,8 @@
 #
 # Usage:
 #   python generate_arc.py --grade 6 --subject mathematics --topic fractions --language en
-#   python generate_arc.py --grade 6 --subject mathematics        (all pending math topics)
-#   python generate_arc.py --grade 6 --all                        (all pending topics)
+#   python generate_arc.py --grade 6 --subject mathematics        (all approved math topics)
+#   python generate_arc.py --grade 6 --all                        (all approved topics)
 #   python generate_arc.py --grade 6 --all --dry-run              (preview only)
 #   python generate_arc.py --grade 6 --all --provider groq        (free — Groq)
 #   python generate_arc.py --grade 6 --all --provider ollama      (free — local)
@@ -69,7 +69,7 @@ subjects:
           us: CCSS 6.NS — Apply and extend previous understandings of numbers
         status:
           en: approved      # reference arc — arcs/grade_6/mathematics/fractions/en.md
-          fr: pending
+          fr: approved
 
       - key: integers
         display: Integers
@@ -84,7 +84,7 @@ subjects:
           us: CCSS 6.NS.5-8 — Understand positive and negative numbers
         status:
           en: approved
-          fr: pending
+          fr: approved
 
       - key: ratios
         display: Ratios and Rates
@@ -99,7 +99,7 @@ subjects:
           us: CCSS 6.RP — Ratios and Proportional Relationships
         status:
           en: approved
-          fr: pending
+          fr: approved
 
       - key: percentages
         display: Percentages
@@ -114,7 +114,7 @@ subjects:
           us: CCSS 6.RP.3c — Find percent of a quantity
         status:
           en: approved
-          fr: pending
+          fr: approved
 
       - key: algebra_basics
         display: Algebra Basics
@@ -129,7 +129,7 @@ subjects:
           us: CCSS 6.EE — Expressions and Equations
         status:
           en: approved
-          fr: pending
+          fr: approved
 
       - key: linear_equations
         display: Linear Equations
@@ -144,7 +144,7 @@ subjects:
           us: CCSS 6.EE.7-8 — Solve one-variable equations and inequalities
         status:
           en: approved
-          fr: pending
+          fr: approved
 
       - key: geometry_area_perimeter
         display: Area and Perimeter
@@ -159,7 +159,7 @@ subjects:
           us: CCSS 6.G — Solve real-world problems involving area
         status:
           en: approved
-          fr: pending
+          fr: approved
 
       - key: probability
         display: Probability
@@ -178,7 +178,7 @@ subjects:
           us: CCSS 7.SP — Grade 7 (deferred for US market)
         status:
           en: approved
-          fr: pending
+          fr: approved
 
       - key: data_and_graphs
         display: Data and Graphs
@@ -193,7 +193,7 @@ subjects:
           us: CCSS 6.SP — Statistics and Probability
         status:
           en: approved
-          fr: pending
+          fr: approved
 
   # ── SCIENCE — PHYSICS ────────────────────────────────────────────────────────
   # Grouped as "Science" in the app Dashboard. Kept separate here for arc granularity.
@@ -217,7 +217,7 @@ subjects:
           us: NGSS MS-PS2 — Motion and Stability
         status:
           en: approved
-          fr: pending
+          fr: approved
 
       - key: simple_machines
         display: Simple Machines
@@ -232,7 +232,7 @@ subjects:
           us: NGSS MS-PS2 — Forces and Interactions
         status:
           en: approved
-          fr: pending
+          fr: approved
 
       - key: electricity_basics
         display: Electricity Basics
@@ -247,7 +247,7 @@ subjects:
           us: NGSS MS-PS3 — Energy
         status:
           en: approved
-          fr: pending
+          fr: approved
 
       - key: light_and_optics
         display: Light and Optics
@@ -263,7 +263,7 @@ subjects:
           us: NGSS MS-PS4 — Waves and Electromagnetic Radiation
         status:
           en: approved
-          fr: pending
+          fr: approved
 
   # ── SCIENCE — CHEMISTRY ──────────────────────────────────────────────────────
   # Aligned to: Ontario Science Grade 6 · NGSS MS-PS1 (Matter and Its Interactions)
@@ -286,7 +286,7 @@ subjects:
           us: NGSS MS-PS1-4 — States of matter and particle model
         status:
           en: approved
-          fr: pending
+          fr: approved
 
       - key: mixtures_and_solutions
         display: Mixtures and Solutions
@@ -302,7 +302,7 @@ subjects:
           us: NGSS MS-PS1-2 — Substances and mixtures
         status:
           en: approved
-          fr: pending
+          fr: approved
 
       - key: physical_vs_chemical_changes
         display: Physical and Chemical Changes
@@ -318,7 +318,7 @@ subjects:
           us: NGSS MS-PS1-2 — Chemical reactions
         status:
           en: approved
-          fr: pending
+          fr: approved
 
   # ── SCIENCE — BIOLOGY ────────────────────────────────────────────────────────
   # Aligned to: Ontario Science Grade 6 · NGSS MS-LS (Middle School Life Science)
@@ -341,7 +341,7 @@ subjects:
           us: NGSS MS-LS1-1 — Cell theory and organelle function
         status:
           en: approved
-          fr: pending
+          fr: approved
 
       - key: ecosystems
         display: Ecosystems
@@ -357,7 +357,7 @@ subjects:
           us: NGSS MS-LS2 — Ecosystems
         status:
           en: approved
-          fr: pending
+          fr: approved
 
       - key: human_body_systems
         display: Human Body Systems
@@ -377,7 +377,7 @@ subjects:
           us: NGSS MS-LS1-3 — Body systems
         status:
           en: approved
-          fr: pending
+          fr: approved
 
 # ─────────────────────────────────────────────────────────────────────────────
 # DEFERRED — Not in MVP scope

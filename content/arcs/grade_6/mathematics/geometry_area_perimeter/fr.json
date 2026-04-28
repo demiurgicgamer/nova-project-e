@@ -1,0 +1,198 @@
+{
+  "meta": {
+    "subject": "mathematics",
+    "topic_key": "geometry_area_perimeter",
+    "topic_display": "Area and Perimeter",
+    "grade": 6,
+    "region": "canada",
+    "language_code": "fr",
+    "status": "approved",
+    "review_flags": [
+      "Vérifiez que toutes les formules utilisées pour l’aire et le périmètre sont correctes.",
+      "Le niveau de difficulté doit être adapté à un enfant de 11 à 12 ans.",
+      "S’assurer que le vocabulaire est accessible et compris.",
+      "Confirmer que les questions sont équilibrées entre les deux concepts (aire et périmètre).",
+      "L’expression mathématique de la formule du triangle doit être claire pour un enfant en 6e."
+    ]
+  },
+  "hook_stories": [
+    {
+      "id": "hook_a",
+      "culture_hint": "canadian",
+      "text": "Dans un petit village rural au Québec, les enfants de l’école ont décidé de faire un jardin communautaire. Pour planter leurs légumes, ils ont besoin de savoir combien de graminées acheter pour entourer le jardin, et combien de terre utiliser pour planter. Voici un de leurs plans : Le jardin est un rectangle de 8 mètres de long et 5 mètres de large. Ils veulent entourer le jardin avec un grillage. Quelle est la distance totale autour du jardin ? Tu en as entendu parler ? On appelle ça le **périmètre**.",
+      "closing_line": "Alors, tu peux essayer de deviner : combien de mètres de grillage faut-il pour entourer le jardin ?"
+    }
+  ],
+  "concept": {
+    "explanation_steps": [
+      "Tu viens de découvrir comment calculer le **périmètre** — c’est la distance autour d’une forme.",
+      "Mais il y a autre chose aussi : **l’aire**.",
+      "Regarde cette image : Le jardin est un rectangle de 8 m de long et de 5 m de large. Tu peux dessiner 5 rangées de 8 carreaux, et ça fait 40 carreaux en tout.",
+      "Alors, l’aire du rectangle est **40 mètres carrés**.",
+      "Donc, **périmètre = distance autour**",
+      "**Aire = espace à l’intérieur**."
+    ],
+    "whiteboard_text": "Périmètre = distance autour d’une forme. Aire = espace à l’intérieur. Rectangle : long × large = aire.",
+    "comprehension_check": "Si on a un rectangle de 6 mètres de longueur et de 4 mètres de largeur, quelle est l’aire du rectangle ?",
+    "reteach_angles": [
+      "Trouve le nombre de cases dans ta tête. Pense à un rectangle de 6 × 4. Combien de carrés y a-t-il ?",
+      "Tu veux savoir l’espace à l’intérieur. Donc, tu fais **longueur × largeur**. C’est ce que tu fais pour l’aire."
+    ]
+  },
+  "problems": [
+    {
+      "id": "p_hook_1",
+      "stage": "guided",
+      "difficulty": "easy",
+      "text": "Quelle est la distance totale autour du jardin si le jardin est un rectangle de 8 mètres de long et 5 mètres de large ?",
+      "answer": "26 mètres",
+      "answer_explanation": "Le périmètre est calculé en additionnant les côtés opposés : (8 + 8) + (5 + 5) = 16 + 10 = 26 mètres.",
+      "mc_choices": [
+        "26 mètres",
+        "13 mètres",
+        "40 mètres",
+        "48 mètres"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Confondre le périmètre avec l’aire.",
+      "intervention_hints": {
+        "level_1": "Calcule les deux longueurs : 8 × 2 = 16 mètres.",
+        "level_2": "Calcule les deux largeurs : 5 × 2 = 10 mètres.",
+        "level_3": "Additionne les deux résultats : 16 + 10 = 26 mètres."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_concept_1",
+      "stage": "guided",
+      "difficulty": "easy",
+      "text": "Si on a un rectangle de 6 mètres de longueur et de 4 mètres de largeur, quelle est l’aire du rectangle ?",
+      "answer": "24 mètres carrés",
+      "answer_explanation": "L’aire d’un rectangle se calcule en multipliant la longueur par la largeur : 6 × 4 = 24 m².",
+      "mc_choices": [
+        "24 mètres carrés",
+        "10 mètres",
+        "24 mètres",
+        "10 mètres carrés"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Confondre aire avec périmètre, ou confondre unités.",
+      "intervention_hints": {
+        "level_1": "Trouve le nombre de cases dans ta tête. Pense à un rectangle de 6 × 4.",
+        "level_2": "Tu veux savoir l’espace à l’intérieur. Donc, tu fais longueur × largeur.",
+        "level_3": "Écris une petite phrase : Aire = longueur × largeur."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_1",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "Quelle est l’aire totale d’un rectangle de 5 mètres de longueur et de 4 mètres de largeur ?",
+      "answer": "20 mètres carrés",
+      "answer_explanation": "L’aire d’un rectangle est calculée par longueur × largeur : 5 × 4 = 20 m².",
+      "mc_choices": [
+        "20 mètres carrés",
+        "12 m²",
+        "9 m²",
+        "24 m²"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Utiliser des unités incorrectes ou confondre longueur et largeur.",
+      "intervention_hints": {
+        "level_1": "Utilise la formule : aire = longueur × largeur.",
+        "level_2": "Mémo : rectangle → L × l = aire.",
+        "level_3": "Fais le calcul : 5 × 4 = 20."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_2",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "Sophie veut entourer un poulailler de 5 mètres de longueur et 4 mètres de largeur avec un grillage. Quel est le périmètre qu’elle doit acheter ?",
+      "answer": "18 mètres",
+      "answer_explanation": "Périmètre = 2 × (longueur + largeur) = 2 × (5 + 4) = 2 × 9 = 18 mètres.",
+      "mc_choices": [
+        "18 mètres",
+        "9 mètres",
+        "34 mètres",
+        "14 mètres"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Confondre aire et périmètre.",
+      "intervention_hints": {
+        "level_1": "Périmètre = additionner tous les côtés.",
+        "level_2": "Utilise la formule : P = 2 × (L + l).",
+        "level_3": "Calcule 5 + 4 = 9, puis 9 × 2 = 18 mètres."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_3",
+      "stage": "practice",
+      "difficulty": "hard",
+      "text": "Un rectangle de 7 mètres de long et 3 mètres de large est joint à un triangle de base 7 mètres et hauteur 3 mètres. Quelle est l’aire totale ?",
+      "answer": "31.5 mètres carrés",
+      "answer_explanation": "Rectangle : 7 × 3 = 21 m². Triangle : (7 × 3) ÷ 2 = 10.5 m². Aire totale = 21 + 10.5 = 31.5 m².",
+      "mc_choices": [
+        "31.5 mètres carrés",
+        "21 mètres carrés",
+        "24 mètres carrés",
+        "42 mètres carrés"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Mauvaise application de la formule du triangle.",
+      "intervention_hints": {
+        "level_1": "Divise la forme en rectangle et triangle.",
+        "level_2": "Calcule l’aire du rectangle : L × l.",
+        "level_3": "Utilise la formule du triangle : (base × hauteur) ÷ 2."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_capstone_1",
+      "stage": "capstone",
+      "difficulty": "hard",
+      "text": "Sophie veut construire un poulailler pour ses poulets. Le poulailler est un rectangle de 5 mètres de longueur et de 4 mètres de largeur. Quelle est l’aire du poulailler de Sophie ?",
+      "answer": "20 m²",
+      "answer_explanation": "Aire = longueur × largeur = 5 × 4 = 20 m².",
+      "mc_choices": [
+        "20 m²",
+        "12 m²",
+        "9 m²",
+        "24 m²"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Mauvaise application de la formule.",
+      "intervention_hints": {
+        "level_1": "Utilise la formule de l’aire du rectangle.",
+        "level_2": "Multiplie la longueur par la largeur.",
+        "level_3": "5 × 4 = 20."
+      },
+      "nova_guiding_question": "Tu as résolu un problème complexe avec des idées de périmètre et d’aire. C’est une vraie leçon de maths appliquée. Tu es super fort !"
+    },
+    {
+      "id": "p_capstone_2",
+      "stage": "capstone",
+      "difficulty": "hard",
+      "text": "Sophie veut entourer tout le poulailler avec un grillage. Quel est le périmètre qu’elle doit acheter ?",
+      "answer": "18 mètres",
+      "answer_explanation": "Périmètre = 2 × (longueur + largeur) = 2 × (5 + 4) = 2 × 9 = 18 mètres.",
+      "mc_choices": [
+        "18 mètres",
+        "9 mètres",
+        "34 mètres",
+        "14 mètres"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Confondre aire et périmètre.",
+      "intervention_hints": {
+        "level_1": "Périmètre = additionne tous les côtés.",
+        "level_2": "Utilise la formule : P = 2 × (L + l).",
+        "level_3": "5 + 4 = 9, puis 9 × 2 = 18."
+      },
+      "nova_guiding_question": "Ce problème a plusieurs étapes et c’est vraiment difficile. Ce n’est pas grave, tu as déjà beaucoup appris aujourd’hui. On reviendra dessus la prochaine fois."
+    }
+  ]
+}

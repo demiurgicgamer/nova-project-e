@@ -1,0 +1,120 @@
+{
+  "meta": {
+    "subject": "mathematics",
+    "topic_key": "algebra_basics",
+    "topic_display": "Algebra Basics",
+    "grade": 6,
+    "region": "canada",
+    "language_code": "fr",
+    "status": "approved",
+    "review_flags": []
+  },
+  "hook_stories": [
+    {
+      "id": "hook_a",
+      "culture_hint": "universal",
+      "text": "Imagine que tu es un détective et que ton amie t’a envoyé un message. Elle t’a dit : « Tu trouveras mon nombre favori si tu fais ceci : je prends mon nombre et je le divise par 3, et après je retranche 2. Le résultat est 4. » Tu dois trouver quel est le nombre favori de ton amie. Mais attention, ce numéro n'est pas un nombre ordinaire. Il est caché! Le nombre est inconnu... on va l’appeler **x**. Alors, combien est x?",
+      "closing_line": "Fais-le comme un détective : trouve le nombre mystère en utilisant les indices qu’on te donne."
+    }
+  ],
+  "concept": {
+    "explanation_steps": [
+      "Quand nous ne connaissons pas un nombre, on peut l'exprimer avec une lettre. Cette lettre est appelée une variable.",
+      "La variable permet de représenter un nombre inconnu dans une situation.",
+      "Pour résoudre un problème, on peut créer une équation à partir du problème en utilisant une variable.",
+      "Une fois que l'équation est écrite, on peut résoudre l’inconnue pour trouver sa valeur."
+    ],
+    "whiteboard_text": "x = le nombre inconnu. On exprime une situation avec x : (x / 3) - 2 = 4",
+    "comprehension_check": "Dans le problème, tu dois résoudre cette équation pour trouver x.",
+    "reteach_angles": [
+      "On peut utiliser des objets concrets pour illustrer une variable : comme un sac avec une lettre dans lequel on place un nombre.",
+      "Ensuite on fait des calculs comme si on connaissait déjà le nombre et on essaie de retrouver ce qu’il devait être."
+    ]
+  },
+  "problems": [
+    {
+      "id": "p_guided_1",
+      "stage": "guided",
+      "difficulty": "medium",
+      "text": "Un enfant partage équitablement 15 bonbons entre 5 amis. Combien de bonbons chaque ami reçoit-ils *s’il y en avait un nombre inconnu* au départ? Si on appelle le nombre total de bonbons *x*, comment écrirais-tu cette situation en utilisant une expression ?",
+      "answer": "C",
+      "answer_explanation": "On sait que chaque ami reçoit 3 bonbons. Donc, 15 bonbons divisés par 5 équivalent à 3 chacun → $ \\frac{x}{5} = 3 $",
+      "mc_choices": [
+        "15 ÷ 5 = x",
+        "\\frac{x}{5} = 15",
+        "\\frac{x}{5} = 3",
+        "x = 15 ÷ 5"
+      ],
+      "correct_index": 1,
+      "common_misconception": "Confondre l'équation qui représente la répartition avec celle qui montre le total.",
+      "intervention_hints": {
+        "level_1": "Combien de bonbons y a-t-il pour chaque ami ? C'est 3.",
+        "level_2": "Si tu prends le total et tu caches le nombre qu’on divise, quelle relation trouve-tu ?",
+        "level_3": "Pourquoi l’expression $ \\frac{x}{5} $ est-elle utilisée ? Est-ce qu’elle représente juste le nombre de bonbons pour chaque enfant ?"
+      }
+    },
+    {
+      "id": "p_practice_1",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "Écris l’expression pour : \"Je prends un nombre, je le multiplie par 4, et j’ajoute 3. Le résultat est 19.\"",
+      "answer": "B",
+      "answer_explanation": "Si on appelle ce nombre *y*, alors on dit : $ 4y + 3 = 19 $",
+      "mc_choices": [
+        "y + 4 × 3 = 19",
+        "4y + 3 = 19",
+        "4 + 3y = 19",
+        "4y - 3 = 19"
+      ],
+      "correct_index": 1,
+      "common_misconception": "Mettre les opérations dans le mauvais ordre : addition avant multiplication.",
+      "intervention_hints": {
+        "level_1": "Tu fais quoi d’abord : multiplier ou ajouter ?",
+        "level_2": "Regarde l’ordre : \"multiplie par 4\" vient avant \"ajoute 3\", donc multiplication d’abord.",
+        "level_3": "Trouve l’expression qui dit \"quand je multiplie quelquechose par 4 et que j’ajoute 3, j’ai 19.\""
+      }
+    },
+    {
+      "id": "p_practice_2",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "Maman a acheté un certain nombre de pommes. Elle en donne 6 à son fils, et ensuite il lui en reste 4. Si x représente le nombre initial de pommes, quelle équation peut représenter cette situation ?",
+      "answer": "A",
+      "answer_explanation": "Elle donne 6 pommes → donc enlève. Il reste 4. => $ x - 6 = 4 $",
+      "mc_choices": [
+        "x - 6 = 4",
+        "x + 6 = 4",
+        "x × 6 = 4",
+        "x = 4 ÷ 6"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Confondre l’action de donner avec une addition ou une multiplication.",
+      "intervention_hints": {
+        "level_1": "Maman a commencé avec x pommes et en a donné 6 → combien en reste ?",
+        "level_2": "Est-ce que ton équation correspond bien à l’histoire ? La somme ou la différence ?",
+        "level_3": "Trouve l’équation qui dit exactement « j’ai une quantité initiale, j’enlève 6 et il me reste 4. »"
+      }
+    },
+    {
+      "id": "p_practice_3",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "Maman sait combien elle a de pommes et qu’elle en a donné 6 à son fils, et il lui en restait 4. Utilise l’équation trouvée pour calculer le nombre initial de pommes.",
+      "answer": "B",
+      "answer_explanation": "$ x - 6 = 4 $ → Ajouter 6 aux deux côtés → $ x = 10 $",
+      "mc_choices": [
+        "2 pommes",
+        "10 pommes",
+        "12 pommes",
+        "24 pommes"
+      ],
+      "correct_index": 1,
+      "common_misconception": "Ajouter au lieu de soustraire ou inverser l’opération.",
+      "intervention_hints": {
+        "level_1": "Quelle équation as-tu écrite pour représenter ? Et comment résous-tu cette équation ?",
+        "level_2": "Tu as une soustraction. Pour trouver x, qu’est-ce qu’il faut faire ?",
+        "level_3": "Ajoute les 6 pommes à l’équation pour avoir le total initial."
+      }
+    }
+  ]
+}

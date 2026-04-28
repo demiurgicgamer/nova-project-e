@@ -1,0 +1,167 @@
+{
+  "meta": {
+    "subject": "mathematics",
+    "topic_key": "data_and_graphs",
+    "topic_display": "Data and Graphs",
+    "grade": 6,
+    "region": "canada",
+    "language_code": "fr",
+    "status": "approved",
+    "review_flags": []
+  },
+  "hook_stories": [
+    {
+      "id": "hook_a",
+      "culture_hint": "universal",
+      "text": "C’est la fin de l’année scolaire et l’équipe de science de l’école veut savoir combien d’élèves ont choisi chaque sport pour leur activité préférée. La prof de science a fait une enquête dans la classe. Elle a noté tout le monde dans un tableau et veut créer un graphique pour montrer les résultats. Étienne est super curieux et veut comprendre comment ces données deviennent un graphique.",
+      "closing_line": "Alors, il suit les étapes avec sa classe pour faire un graphique à barres qui montre combien d'élèves ont choisi chaque sport."
+    }
+  ],
+  "concept": {
+    "explanation_steps": [
+      "Les graphiques sont des façons visuelles de montrer des données.",
+      "Lire un graphique, c’est comprendre ce que les barres, lignes ou secteurs représentent.",
+      "Créer un graphique, c’est organiser des informations pour qu’elles soient claires et faciles à lire."
+    ],
+    "whiteboard_text": "Un graphique à barres montre les données avec des barres verticales. Chaque barre représente une catégorie et sa hauteur indique la quantité.",
+    "comprehension_check": "Quel type de graphique montre les sports préférés de la classe?",
+    "reteach_angles": [
+      "Si tu regardes un graphique avec des barres verticales, il s'agit d'un graphique à barres.",
+      "Le graphique à barres est utile pour comparer des quantités entre différentes catégories."
+    ]
+  },
+  "problems": [
+    {
+      "id": "p_guided_1",
+      "stage": "guided",
+      "difficulty": "easy",
+      "text": "La classe de 6e année a demandé à 25 élèves quel était leur plat préféré pour le déjeuner. Voici les résultats: Pâtes (10 élèves), Sandwich (6 élèves), Salade (4 élèves), Poulet (3 élèves), Pizza (2 élèves). Quel est le plat préféré des élèves selon le graphique?",
+      "answer": "C) Pâtes",
+      "answer_explanation": "Le plat préféré est celui avec le plus d'élèves, qui est les pâtes avec 10 élèves.",
+      "mc_choices": [
+        "C) Pâtes",
+        "A) Salade",
+        "B) Sandwich",
+        "D) Pizza"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Confondre le plat préféré avec un autre plat.",
+      "intervention_hints": {
+        "level_1": "Regarde les valeurs de chaque plat. Quel est le plus haut?",
+        "level_2": "Le graphique montre combien d’élèves ont choisi chaque plat. Tu as besoin de trouver le plus grand.",
+        "level_3": "Si la barre de pâtes est plus haute que toutes les autres, c’est le plat préféré."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_1a",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "Le température a été enregistrée chaque jour pendant une semaine. Le graphique linéaire montre 4°C, 5°C, 7°C, 8°C, 6°C, 9°C, et 10°C. Quelle a été la température la plus élevée durant la semaine?",
+      "answer": "C) 10°C",
+      "answer_explanation": "La température la plus élevée est celle qui correspond au point le plus haut sur la ligne du graphique.",
+      "mc_choices": [
+        "C) 10°C",
+        "A) 4°C",
+        "B) 5°C",
+        "D) 9°C"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Confondre la valeur la plus élevée avec une autre valeur sur la ligne.",
+      "intervention_hints": {
+        "level_1": "Trouve le point le plus haut sur la ligne.",
+        "level_2": "Regarde la valeur du point haut sur l’axe vertical.",
+        "level_3": "Le maximum des températures est 10°C."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_1b",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "Voici les scores des tests de Math d’une classe de 6e année: 70, 75, 80, 85, 90. Quelle est la médiane des scores?",
+      "answer": "B) 80",
+      "answer_explanation": "La médiane est le nombre du milieu dans une liste triée. La médiane est le troisième nombre dans la liste donnée.",
+      "mc_choices": [
+        "B) 80",
+        "A) 75",
+        "C) 85",
+        "D) 90"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Identifier mal la médiane en confondant les positions des nombres.",
+      "intervention_hints": {
+        "level_1": "Trouve le nombre du milieu dans la liste.",
+        "level_2": "Les nombres sont dans l’ordre. Mets-les en liste et identifie le milieu.",
+        "level_3": "Comme il y a 5 nombres, le troisième est le milieu — 80."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_1c",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "Voici les scores des tests de Math d’une classe de 6e année: 70, 75, 80, 85, 90. Quelle est la médiane des scores?",
+      "answer": "B) 80",
+      "answer_explanation": "La médiane est le nombre du milieu dans une liste triée. La médiane est le troisième nombre dans la liste donnée.",
+      "mc_choices": [
+        "B) 80",
+        "A) 75",
+        "C) 85",
+        "D) 90"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Identifier mal la médiane en confondant les positions des nombres.",
+      "intervention_hints": {
+        "level_1": "Trouve le nombre du milieu dans la liste.",
+        "level_2": "Les nombres sont dans l’ordre. Mets-les en liste et identifie le milieu.",
+        "level_3": "Comme il y a 5 nombres, le troisième est le milieu — 80."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_capstone_1",
+      "stage": "capstone",
+      "difficulty": "medium",
+      "text": "L’école a fait un sondage sur combien d’élèves boivent de la limonade ou du jus à la récréation. Voici les résultats: 15 élèves boivent de la limonade, 20 élèves boivent du jus, 5 élèves boivent des boissons gazeuses, 10 élèves boivent de l’eau. Combien d’élèves en tout ont participé au sondage?",
+      "answer": "C) 50",
+      "answer_explanation": "Il faut additionner tous le nombre d’élèves pour chaque type de boisson: 15 + 20 + 5 + 10 = 50.",
+      "mc_choices": [
+        "C) 50",
+        "A) 30",
+        "B) 40",
+        "D) 60"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Soustraire des nombres ou mal additionner.",
+      "intervention_hints": {
+        "level_1": "Additionne les nombres de chaque type de boisson.",
+        "level_2": "Regarde tous les nombres et additionne-les.",
+        "level_3": "15 + 20 + 5 + 10 = 50 élèves."
+      },
+      "nova_guiding_question": "Quel type de boisson est le plus choisi? Combien d’élèves sont concernés?"
+    },
+    {
+      "id": "p_capstone_2",
+      "stage": "capstone",
+      "difficulty": "medium",
+      "text": "L’école a fait un sondage sur combien d’élèves boivent de la limonade ou du jus à la récréation. Voici les résultats: 15 élèves boivent de la limonade, 20 élèves boivent du jus, 5 élèves boivent des boissons gazeuses, 10 élèves boivent de l’eau. Quel type de boisson a été le plus populaire selon le graphique à barres?",
+      "answer": "B) Jus",
+      "answer_explanation": "Dans le graphique à barres, la barre la plus haute indique la boisson la plus populaire, qui est le jus.",
+      "mc_choices": [
+        "B) Jus",
+        "A) Limonade",
+        "C) Eau",
+        "D) Boissons gazeuses"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Identifier une autre boisson comme la plus populaire par erreur visuelle.",
+      "intervention_hints": {
+        "level_1": "Compare les hauteurs des barres.",
+        "level_2": "La barre la plus haute est la plus populaire.",
+        "level_3": "Regarde le graphique, le jus est supérieur à tous les autres."
+      },
+      "nova_guiding_question": ""
+    }
+  ]
+}

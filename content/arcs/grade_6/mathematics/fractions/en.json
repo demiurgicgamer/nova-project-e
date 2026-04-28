@@ -1,128 +1,182 @@
 {
-  "arc_id": "fractions_1",
-  "title": "Understanding Fractions",
-  "description": "This arc teaches the fundamentals of fractions using visual models and real-world contexts, focusing on comparing, adding, and subtracting like fractions.",
-  "stages": [
+  "meta": {
+    "subject": "mathematics",
+    "topic_key": "fractions",
+    "topic_display": "Fractions",
+    "grade": 6,
+    "region": "canada",
+    "language_code": "en",
+    "status": "approved",
+    "review_flags": []
+  },
+  "hook_stories": [
     {
-      "stage_id": "S1",
-      "title": "Hook",
-      "description": "Introduction to fractions through engaging stories and visuals.",
-      "problems": [
-        {
-          "problem_id": "S1_P1",
-          "text": "You and a friend are sharing a pizza. The pizza is cut into 8 equal slices. You eat 3 slices. What fraction of the pizza did you eat?",
-          "type": "story",
-          "solution": "3/8",
-          "language": "en"
-        }
-      ]
+      "id": "hook_a",
+      "culture_hint": "food",
+      "text": "You and 3 friends order a pizza. It gets cut into 8 equal slices. You're hungry — you grab 3 slices. Your friend says: 'that's not fair, you took more than your share.' Were they right? How would you even prove it? That's exactly what fractions let you do.",
+      "closing_line": "Fractions are how you settle arguments like this — and I'm going to show you exactly how."
     },
     {
-      "stage_id": "S2",
-      "title": "Concept",
-      "description": "Learn the meaning of fractions using visual models.",
-      "problems": [
-        {
-          "problem_id": "S2_P1",
-          "text": "Draw a rectangle and shade 1/4 of it.",
-          "type": "conceptual",
-          "solution": "Visual representation; one out of four equal parts shaded",
-          "language": "en"
-        },
-        {
-          "problem_id": "S2_P2",
-          "text": "What fraction is represented by 3 shaded parts out of 5 equal parts?",
-          "type": "conceptual",
-          "solution": "3/5",
-          "language": "en"
-        }
-      ]
+      "id": "hook_b",
+      "culture_hint": "screen_time",
+      "text": "You have 60 minutes of screen time today. You spend 20 minutes on YouTube, 15 on a game, and the rest texting. Your parent asks: what fraction of your time went to YouTube? Without fractions, you can't answer that. With fractions, it takes 5 seconds.",
+      "closing_line": "Fractions show up everywhere — time, money, food, sports. Let me show you how they work."
     },
     {
-      "stage_id": "S3",
-      "title": "Guided Practice",
-      "description": "Guided problem-solving with step-by-step support.",
-      "problems": [
-        {
-          "problem_id": "S3_P1",
-          "text": "A garden is divided into 10 equal sections. Rosa planted flowers in 3 sections. What fraction of the garden did Rosa plant?",
-          "type": "guided",
-          "solution": "3/10",
-          "language": "en"
-        }
-      ]
-    },
-    {
-      "stage_id": "S4",
-      "title": "Practice",
-      "description": "Independent practice problems to solidify understanding.",
-      "problems": [
-        {
-          "problem_id": "S4_P1",
-          "text": "A recipe needs 3/8 cup of sugar. Mia has already added 1/8 cup. How much more sugar does she still need?",
-          "type": "practice",
-          "solution": "2/8",
-          "language": "en"
-        },
-        {
-          "problem_id": "S4_P2",
-          "text": "Sara ate 3/8 of a pizza. Tom ate 4/8 of the same pizza. Who ate more?",
-          "type": "practice",
-          "solution": "Tom ate more because 4 > 3 when denominators are equal",
-          "language": "en"
-        },
-        {
-          "problem_id": "S4_P3",
-          "text": "A garden is divided into 10 equal sections. Rosa planted flowers in 3 sections. Her brother planted in 4 sections. What fraction of the garden is planted altogether?",
-          "type": "practice",
-          "solution": "7/10",
-          "language": "en"
-        }
-      ]
-    },
-    {
-      "stage_id": "S5",
-      "title": "Capstone",
-      "description": "Challenging, multi-part problem that integrates all previous learning.",
-      "problems": [
-        {
-          "problem_id": "S5_P1",
-          "text": "A recipe needs 3/8 cup of sugar. Mia has already added 1/8 cup. How much more sugar does she still need to add? And what fraction of the total sugar has she added so far?",
-          "type": "capstone",
-          "solution": [
-            "2/8 cup more needed to complete the recipe",
-            "1/8 of the total sugar has been added so far"
-          ],
-          "language": "en"
-        }
-      ],
-      "guiding_question": {
-        "text": "What's the total amount of sugar the recipe needs? And how much has Mia put in already? Start with those two pieces.",
-        "language": "en"
-      }
+      "id": "hook_c",
+      "culture_hint": "sports",
+      "text": "A basketball player takes 8 free throw shots in a game and makes 5 of them. The commentator says she scored 'five eighths' of her free throws. What does that mean? And is that good or bad? Once you understand fractions, you'll know instantly.",
+      "closing_line": "Every sports stat you've ever heard uses fractions. Let's decode them."
     }
   ],
-  "completions": {
-    "S1": {
-      "description": "Story delivered — no assessment"
+  "concept": {
+    "explanation_steps": [
+      "That pizza — 8 equal slices — is our whole. The whole is always cut into equal parts. Equal parts is important: a pizza cut into uneven slices doesn't count.",
+      "The number at the bottom of a fraction tells us how many equal parts the whole is cut into. 8 slices total → 8 goes on the bottom. We call it the denominator.",
+      "The number at the top tells us how many parts we have. You took 3 slices → 3 goes on top. We call it the numerator.",
+      "So you ate 3 out of 8 slices. Written as a fraction: 3/8. We say 'three eighths.'"
+    ],
+    "whiteboard_text": "3 ← numerator (your slices)\n─\n8 ← denominator (total equal slices)\n\n'three eighths of the pizza'",
+    "comprehension_check": "Your friend took 2 slices from the same pizza. Without me helping — what fraction did they eat? Just tell me the two numbers.",
+    "reteach_angles": [
+      "Let's forget the pizza for a second. Imagine a chocolate bar broken into 6 equal pieces. You eat 2 pieces. The total pieces is our denominator — 6. The pieces you ate is our numerator — 2. So you ate 2/6 of the chocolate bar. Now back to the pizza — same idea, different numbers.",
+      "Think of an hour split into 4 equal chunks of 15 minutes each. You spend 1 chunk watching TV. Total chunks: 4. Your chunks: 1. Fraction: 1/4 of the hour. Same idea everywhere."
+    ]
+  },
+  "problems": [
+    {
+      "id": "p_guided_1",
+      "stage": "guided",
+      "difficulty": "easy",
+      "text": "A chocolate bar has 6 equal pieces. Maya eats 2 pieces. What fraction of the chocolate bar did Maya eat?",
+      "answer": "2/6",
+      "answer_explanation": "The whole bar has 6 pieces — that is the denominator. Maya ate 2 pieces — that is the numerator. So Maya ate 2/6 of the chocolate bar.",
+      "mc_choices": [
+        "2/6",
+        "6/2",
+        "2/4",
+        "4/6"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Child writes 6/2 — they know both numbers but put them in the wrong order.",
+      "intervention_hints": {
+        "level_1": "Let's use smaller numbers — if a bar had 3 pieces and Maya ate 1, the fraction would be 1/3. Now back to 6 pieces and 2 eaten.",
+        "level_2": "Remember the pizza? 8 slices total, you took 3 — that was 3/8. This chocolate bar works exactly the same way. 6 pieces total, Maya took 2...",
+        "level_3": "Just the bottom number first — how many pieces total? Good. Now just the top — how many did Maya eat? Put them together with a line between."
+      },
+      "nova_guiding_question": "You've got the right numbers — just check which one goes on top. Which number is the part Maya ate, and which is the total?"
     },
-    "S2": {
-      "description": "Comprehension check answered correctly (interventions allowed)"
+    {
+      "id": "p_practice_1",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "A water bottle has 8 equal sips worth of water. Leon drinks 5 sips. What fraction of the bottle did Leon drink?",
+      "answer": "5/8",
+      "answer_explanation": "The bottle has 8 sips total — that is the denominator. Leon drank 5 sips — that is the numerator. So Leon drank 5/8 of the bottle.",
+      "mc_choices": [
+        "5/8",
+        "3/8",
+        "5/3",
+        "8/5"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Child writes 3/8 — they calculated the remaining water, not what Leon drank.",
+      "intervention_hints": {
+        "level_1": "Just focus on two things — total sips in the bottle, and how many Leon drank.",
+        "level_2": "Pizza again — 8 slices, you took 5. What fraction? Same numbers, same idea.",
+        "level_3": "Bottom number first — how many sips total in the bottle?"
+      },
+      "nova_guiding_question": "3/8 is how much is LEFT in the bottle. The question asks how much Leon DRANK — which number is that?"
     },
-    "S3": {
-      "description": "Guided problem solved (interventions allowed)"
+    {
+      "id": "p_practice_2",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "Sara ate 3/8 of a pizza. Tom ate 4/8 of the same pizza. Who ate more, and how do you know?",
+      "answer": "Tom — because 4/8 is more than 3/8",
+      "answer_explanation": "The denominator is the same (8) for both fractions, so each slice is the same size. You just compare the numerators: 4 > 3, so Tom ate more.",
+      "mc_choices": [
+        "Tom — because 4/8 is more than 3/8",
+        "Sara — because she ate first",
+        "They ate the same — the denominator is the same",
+        "Can't tell — we don't know the pizza size"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Child says 'they ate the same' because they see the same denominator without understanding what it means.",
+      "intervention_hints": {
+        "level_1": "Forget fractions for a second — if I gave you 3 slices and Tom 4 slices from the same pizza, who has more?",
+        "level_2": "The bottom number — 8 — is the same for both. That means each slice is the same size. So who has more slices?",
+        "level_3": "How many slices does Sara have? How many does Tom have? Which number is bigger?"
+      },
+      "nova_guiding_question": ""
     },
-    "S4": {
-      "description": "2 out of 3 problems correct"
+    {
+      "id": "p_practice_3",
+      "stage": "practice",
+      "difficulty": "hard",
+      "text": "A garden is divided into 10 equal sections. Rosa planted flowers in 3 sections. Her brother planted in 4 sections. What fraction of the garden is planted altogether?",
+      "answer": "7/10",
+      "answer_explanation": "Rosa planted 3/10 and her brother planted 4/10. Same denominator — add the numerators: 3 + 4 = 7. The denominator stays 10. So 7/10 of the garden is planted.",
+      "mc_choices": [
+        "7/10",
+        "7/20",
+        "12/10",
+        "3/4"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Child writes 7/20 — they added both numerators AND denominators.",
+      "intervention_hints": {
+        "level_1": "If Rosa has 3 apples and her brother has 4 apples, how many apples together? Now write that over 10.",
+        "level_2": "Back to the pizza — 8 slices. You took 3, a friend took 4. Together you took 7 slices — written as 7/8. The garden works the same way.",
+        "level_3": "Just the top numbers — 3 sections plus 4 sections equals how many? Now what's the total number of sections in the garden?"
+      },
+      "nova_guiding_question": "I see where that came from — you added the bottom numbers too. But the garden still has 10 sections total. The total doesn't change when you plant more. So what stays on the bottom?"
     },
-    "S5": {
-      "description": "Both parts correct within 2 attempts"
+    {
+      "id": "p_capstone_1",
+      "stage": "capstone",
+      "difficulty": "hard",
+      "text": "A recipe needs 3/8 cup of sugar. Mia has already added 1/8 cup. How much more sugar does she still need to add? And what fraction of the total sugar has she added so far?",
+      "answer": "2/8 more needed; 1/8 added so far",
+      "answer_explanation": "Part 1: 3/8 − 1/8 = 2/8 — she still needs 2/8 cup more. Part 2: She has added 1/8 out of the total 3/8 needed — but the question asks what fraction of the total she has added, which is 1/8.",
+      "mc_choices": [
+        "2/8 more needed; 1/8 added so far",
+        "1/8 more needed; 2/8 added so far",
+        "2/8 more needed; 2/8 added so far",
+        "4/8 more needed; 1/8 added so far"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Child gets one part right but confuses the two sub-questions with each other.",
+      "intervention_hints": {
+        "level_1": "There are two questions here — answer them one at a time. Start with: how much sugar does the recipe need in total?",
+        "level_2": "For part 1: she needs 3/8 total and has 1/8 already. How much is still missing? For part 2: out of all the sugar needed, what fraction has she put in so far?",
+        "level_3": "Part 1 is subtraction — 3/8 minus 1/8. Part 2 is just reading what's already in the bowl — 1/8 of the total 3/8."
+      },
+      "nova_guiding_question": "What's the total amount of sugar the recipe needs? And how much has Mia put in already? Start with those two pieces."
+    },
+    {
+      "id": "p_capstone_2",
+      "stage": "capstone",
+      "difficulty": "hard",
+      "text": "A ribbon is 8/10 metres long. Kenji cuts off 3/10 metres. What fraction of the ribbon is left? And what fraction did he cut off?",
+      "answer": "5/10 left; 3/10 cut off",
+      "answer_explanation": "Part 1: 8/10 − 3/10 = 5/10 — that is the fraction remaining. Part 2: Kenji cut off 3/10 — this is given directly in the problem.",
+      "mc_choices": [
+        "5/10 left; 3/10 cut off",
+        "3/10 left; 5/10 cut off",
+        "5/10 left; 5/10 cut off",
+        "8/10 left; 3/10 cut off"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Child swaps the two answers — gives the cut portion as remaining and vice versa.",
+      "intervention_hints": {
+        "level_1": "Start with the ribbon — how long was it originally? How much did Kenji cut off?",
+        "level_2": "If you start with 8/10 and remove 3/10, how much ribbon do you have left? And how much did he cut — the problem already tells you.",
+        "level_3": "8/10 minus 3/10 — same denominator, just subtract the top numbers."
+      },
+      "nova_guiding_question": ""
     }
-  },
-  "review_mode": {
-    "description": "Once Stage 5 is passed, the child enters Review mode for this topic. In future sessions, Nova surfaces one Stage 4–5 level problem per session for this topic. No hook, no concept — just the problem, as a warm-up or closing challenge.",
-    "enabled": true
-  },
+  ],
   "misconceptions": [
     {
       "id": "flip",
@@ -132,7 +186,7 @@
     },
     {
       "id": "add_denominators",
-      "title": "Add denominators",
+      "title": "Add denominators when adding fractions",
       "example": "3/8 + 4/8 = 7/16",
       "nova_approach": "The garden still has 10 sections. Does planting more change the total?"
     },
@@ -145,17 +199,8 @@
     {
       "id": "use_remaining",
       "title": "Use remaining parts instead of taken parts",
-      "example": "Writes 5/8 instead of 3/8",
+      "example": "Writes 5/8 instead of 3/8 when asked how much was taken",
       "nova_approach": "The question asks how much she ATE — which number is that?"
     }
-  ],
-  "meta": {
-    "subject": "mathematics",
-    "topic_key": "fractions",
-    "topic_display": "Fractions",
-    "grade": 6,
-    "region": "canada",
-    "language_code": "en",
-    "status": "approved"
-  }
+  ]
 }

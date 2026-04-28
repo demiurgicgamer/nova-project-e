@@ -146,7 +146,7 @@
         "178.5 square meters",
         "100 square meters"
       ],
-      "correct_index": 0,
+      "correct_index": 1,
       "common_misconception": "Calculating the area of two separate semicircles instead of treating them as one full circle.",
       "intervention_hints": {
         "level_1": "What shapes make up this figure? How do you calculate their areas?",
@@ -168,7 +168,7 @@
         "357 square meters",
         "57 square meters"
       ],
-      "correct_index": 0,
+      "correct_index": 2,
       "common_misconception": "Confusion in calculating the circular components.",
       "intervention_hints": {
         "level_1": "What two shapes are in this figure? How do you find the area of each?",
@@ -190,7 +190,7 @@
         "90 meters",
         "100 meters"
       ],
-      "correct_index": 0,
+      "correct_index": 1,
       "common_misconception": "Including all sides instead of recognizing internal ones don't contribute to the perimeter.",
       "intervention_hints": {
         "level_1": "What parts of the shape’s edge make up the perimeter?",

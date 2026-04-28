@@ -1,0 +1,151 @@
+{
+  "meta": {
+    "subject": "mathematics",
+    "topic_key": "integers",
+    "topic_display": "Integers",
+    "grade": 6,
+    "region": "canada",
+    "language_code": "fr",
+    "status": "approved",
+    "review_flags": [
+      "Vérifier que les exemples (température, hockey, football, tennis) soient pertinents pour un public québécois.",
+      "S'assurer que les formules numériques, comme les additions ou soustractions, sont claires et accessibles.",
+      "Confirmer que la difficulté des problèmes est progressive et bien adaptée à l'âge (11-12 ans).",
+      "Vérifier les traductions FR-CA pour être naturelles et adaptées aux enfants."
+    ]
+  },
+  "hook_stories": [
+    {
+      "id": "hook_a",
+      "culture_hint": "canadian",
+      "text": "Tu es en train de faire ton réveil sur la terrasse de ta maison à Montréal. Le thermomètre montre -8 degrés Celsius! Tu t'es réveillé avec un peu de mal à cause du froid. Alors, tu vas à l'ombre pour faire ton café. Le thermomètre montre +3 degrés. Tu te dis : « Alors, c’est quand même plus chaud en intérieur? » Tu es sûr que la température est de 3 degrés en intérieur? Quelle différence y a-t-il entre ces deux mesures?",
+      "closing_line": "Tu es sûr que la température est de 3 degrés en intérieur? Quelle différence y a-t-il entre ces deux mesures?"
+    }
+  ],
+  "concept": {
+    "explanation_steps": [
+      "Pour trouver la différence entre deux températures, on soustrait la température extérieure de la température intérieure.",
+      "On doit calculer +3 - (-8).",
+      "Soustraire un nombre négatif est équivalent à ajouter son opposé. Donc, +3 - (-8) = +3 + 8 = 11.",
+      "La différence de température est de 11 degrés."
+    ],
+    "whiteboard_text": "Température à l’extérieur : -8° ; Température à l’intérieur : +3° ; Différence = +3 - (-8) = 11°",
+    "comprehension_check": "Combien fait -2 moins 5?",
+    "reteach_angles": [
+      "On peut aussi voir cela comme un déplacement sur une droite numérique. Si tu es à -8, et que tu avances de 3 unités, tu es à -5. Si tu continues en avançant de 8 unités supplémentaires, tu es à 3. La distance entre -8 et +3 est donc 11 unités.",
+      "La différence entre deux températures peut être calculée en additionnant la distance entre les deux points sur la droite numérique."
+    ]
+  },
+  "problems": [
+    {
+      "id": "p_guided_1",
+      "stage": "guided",
+      "difficulty": "medium",
+      "text": "Une équipe de hockey gagne 3 points, puis perd 5 points. Quel est leur gain net?",
+      "answer": "-2",
+      "answer_explanation": "Le gain net est calculé par 3 + (-5) = -2. Cela signifie qu'ils ont perdu 2 points globalement.",
+      "mc_choices": [
+        "-2",
+        "+2",
+        "0",
+        "-8"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Certains élèves peuvent penser que +3 - 5 = 8 au lieu de -2.",
+      "intervention_hints": {
+        "level_1": "Une équipe perd 5 points et gagne 3 points. Quel est leur gain global?",
+        "level_2": "Tu es à zéro points. Tu gagnes +3. Puis tu perds -5. Comment écris-tu cela?",
+        "level_3": "3 - 5 = ? Tu peux voir cela comme un déplacement sur une droite numérique, en partant de 0."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_2a",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "Dans la ville de Québec, le niveau de la rivière monte de 2 cm. Puis, il descend de 5 cm. De combien le niveau a-t-il changé?",
+      "answer": "-3 cm",
+      "answer_explanation": "Le changement global est calculé par 2 + (-5) = -3. Cela signifie que le niveau a baissé de 3 cm.",
+      "mc_choices": [
+        "-3 cm",
+        "+7 cm",
+        "-7 cm",
+        "+3 cm"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Certains élèves peuvent confondre l’addition avec la soustraction et écrire 2 - 5 = -3 au lieu de 2 + (-5) = -3.",
+      "intervention_hints": {
+        "level_1": "La rivière monte de 2 cm, puis descend de 5 cm. De combien à été le changement global?",
+        "level_2": "Tu dois faire 2 + (-5). Cela vaut combien?",
+        "level_3": "Sur une droite, tu pars de zéro. Tu avances de 2 cm, puis recules de 5 cm. Où es-tu?"
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_2b",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "Un joueur de football a reçu 3 points pour un excellent jeu, mais a aussi 2 points de pénalité. Quel est son gain total?",
+      "answer": "+1",
+      "answer_explanation": "Son gain total est 3 + (-2) = 1. Il a gagné 1 point.",
+      "mc_choices": [
+        "+1",
+        "+5",
+        "-1",
+        "-5"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Certains élèves peuvent penser que cela vaut 3 - 2 = 1, mais ils ignorent le signe négatif.",
+      "intervention_hints": {
+        "level_1": "Le joueur a gagné 3 points, mais perdu 2 points. Quelle est la différence?",
+        "level_2": "C’est comme faire 3 - 2. Comment écris-tu cela avec des nombres entiers?",
+        "level_3": "Tu es en position de départ. Tu avances de 3 points, puis recules de 2 points. Où es-tu?"
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_2c",
+      "stage": "practice",
+      "difficulty": "medium_hard",
+      "text": "Un joueur de tennis a gagné 4 matchs, puis a perdu 3 matchs pendant la saison. Combien de matchs a-t-il gagnés en tout, après ces confrontations?",
+      "answer": "+1",
+      "answer_explanation": "Le gain net est de 4 + (-3) = 1. Il a gagné 1 match au total.",
+      "mc_choices": [
+        "+1",
+        "+7",
+        "-1",
+        "0"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Les élèves peuvent additionner tous les matchs de manière incorrecte sans tenir compte des signes positifs et négatifs.",
+      "intervention_hints": {
+        "level_1": "Combien a-t-il gagné de matchs et perdu? Quel est le gain net?",
+        "level_2": "Gagner 4 matchs équivaut à +4. Perdre 3 matchs équivaut à -3. Quel est le gain total?",
+        "level_3": "Tu peux visualiser cela comme un déplacement sur une droite numérique."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_capstone_1",
+      "stage": "practice",
+      "difficulty": "hard",
+      "text": "Un joueur de hockey a accumulé des points au cours de trois périodes. Il a gagné 4 points à la première période, perdu 2 points à la deuxième période et gagné 3 points à la troisième période. Combien de points a-t-il accumulés en tout?",
+      "answer": "+5",
+      "answer_explanation": "Le total est calculé par 4 + (-2) + 3 = 5. Il a accumulé 5 points.",
+      "mc_choices": [
+        "+5",
+        "-5",
+        "+1",
+        "-1"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Les élèves peuvent additionner mentalement les nombres sans respecter les règles de signes.",
+      "intervention_hints": {
+        "level_1": "À quel moment devrait-on commencer à additionner ou à soustraire les points?",
+        "level_2": "Calcule ce qu'il a gagné à la première période et ce qu'il a perdu à la deuxième période.",
+        "level_3": "Tu peux additionner les points comme des déplacements sur une droite numérique."
+      },
+      "nova_guiding_question": "Quel est son gain total au tout début? Quel est le cumul de ses points à la fin?"
+    }
+  ]
+}

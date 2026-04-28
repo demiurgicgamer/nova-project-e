@@ -20,13 +20,13 @@
       "id": "hook_a",
       "culture_hint": "canadian",
       "text": "It's a cold winter morning in Montreal. The temperature starts at negative 5 degrees Celsius. By noon, it has warmed up by 8 degrees. What is the temperature now?",
-      "closing_line": "To engage students with real-world examples where positive and negative numbers are naturally used. These examples show how integers are part of everyday Canadian life."
+      "closing_line": "If it started at negative 5 and warmed up by 8 degrees — what temperature do you think it is now?"
     },
     {
       "id": "hook_b",
       "culture_hint": "canadian",
       "text": "Sarah is hiking in the Canadian Rockies. She starts at 1000 meters above sea level. She descends down to 300 meters. What is her final elevation?",
-      "closing_line": "To engage students with real-world examples where positive and negative numbers are naturally used. These examples show how integers are part of everyday Canadian life."
+      "closing_line": "She went from 1000 metres all the way down to 300 metres — can you figure out her final elevation?"
     }
   ],
   "concept": {

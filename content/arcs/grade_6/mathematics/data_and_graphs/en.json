@@ -66,7 +66,7 @@
         "C. The most students were in 2020",
         "D. The school’s student number went up every year"
       ],
-      "correct_index": 0,
+      "correct_index": 1,
       "common_misconception": "Students might choose A or D because they may misinterpret trend lines or compare values they don't see directly on the graph.",
       "intervention_hints": {
         "level_1": "A line graph shows changes over time. What can we read directly from a point on the graph?",
@@ -110,7 +110,7 @@
         "C. Part A: Pie chart; Part B: 25%",
         "D. Part A: Bar graph; Part B: 40%"
       ],
-      "correct_index": 0,
+      "correct_index": 3,
       "common_misconception": "Students may confuse how to work out percentages or think that 8 students from 21 total equals 40% without calculating.",
       "intervention_hints": {
         "level_1": "How many total students are in the class based on the table?",

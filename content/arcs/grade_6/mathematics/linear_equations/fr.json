@@ -1,0 +1,128 @@
+{
+  "meta": {
+    "subject": "mathematics",
+    "topic_key": "linear_equations",
+    "topic_display": "Linear Equations",
+    "grade": 6,
+    "region": "canada",
+    "language_code": "fr",
+    "status": "approved",
+    "review_flags": []
+  },
+  "hook_stories": [
+    {
+      "id": "hook_a",
+      "culture_hint": "universal",
+      "text": "Sophie est entrain de planifier un voyage à Québec pour ses vacances. Elle a 120$ à dépenser. Elle a déjà réservé un hôtel qui coûte 60$. Pour le reste de sa dépense, elle veut acheter des billets pour le métro. Les billets coûtent 3$ chacun. Combien de billets peut-elle en acheter avec l'argent qui lui reste?",
+      "closing_line": "Alors, comment trouver combien de billets Sophie peut acheter ? On va résoudre cette équation en utilisant des opérations inverses."
+    }
+  ],
+  "concept": {
+    "explanation_steps": [
+      "Quand on résout une équation, on veut trouver la valeur de la lettre (comme \"x\") qui rend l'équation vraie.",
+      "Pour ce faire, on utilise des opérations inverses.",
+      "Si l’équation est : 3x + 60 = 120, on commence par soustraire 60 des deux côtés : 3x = 60.",
+      "Puis, on divise les deux côtés par 3 : x = 20.",
+      "Alors Sophie peut acheter 20 billets de métro."
+    ],
+    "whiteboard_text": "3x + 60 = 120\n→ 3x = 120 - 60\n→ 3x = 60\n→ x = 60 / 3\n→ x = 20",
+    "comprehension_check": "Problème : 2x + 10 = 30 Quelle est la valeur de \"x\" ?",
+    "reteach_angles": [
+      "Au lieu de penser à x comme un mystère, pense à x comme un nombre que tu dois trouver.",
+      "Imagine que la balance de l'équation doit rester équilibrée — ce que tu fais d'un côté, tu dois le faire de l'autre."
+    ]
+  },
+  "problems": [
+    {
+      "id": "problem_a",
+      "equation": "20x + 180 = 400",
+      "problem_text": "Une classe de 30 élèves veut organiser un voyage. Il faut 10$ par élève pour aller au musée. La classe a déjà ramassé 150$. Combien d'élèves supplémentaires peuvent venir si la classe a 100$ de plus ?",
+      "choices": [
+        "5",
+        "6",
+        "7",
+        "8"
+      ],
+      "answer": "6",
+      "step_by_step": [
+        "Le total d'argent que la classe a : 150 + 100 = 250$.",
+        "Le coût total pour les élèves supplémentaires : 250 - 150 = 100$.",
+        "Nombre d'élèves supplémentaires : x = 100 / 10 = 10 élèves.",
+        "Mais la question était combien peuvent venir, pas combien peuvent payer.\nDonc : 10 élèves = 10 élèves supplémentaires."
+      ],
+      "interventions": [
+        "Il y a 30 élèves, chacun paie 10$ pour aller au musée. La classe a déjà 150$, et elle a 100$ de plus. Quel est le total d'argent ? Combien d'élèves peuvent venir si elle a ce montant ?",
+        "10x + 150 = 250. Soustrais 150 de chaque côté. 10x = 100. Maintenant divise par 10.",
+        "x = 100 / 10 = 10. Donc 10 élèves supplémentaires peuvent venir."
+      ]
+    },
+    {
+      "id": "problem_b",
+      "equation": "5x = 30 + 20",
+      "problem_text": "Mathilde a 30$ et veut acheter 5 livres de même prix. Elle a encore besoin de 20$. Quel est le prix de chaque livre ?",
+      "choices": [
+        "2",
+        "4",
+        "6",
+        "10"
+      ],
+      "answer": "6",
+      "step_by_step": [
+        "Mathilde a 30$ et a besoin de 50$ en tout : 30 + 20 = 50$.",
+        "Elle achète 5 livres à un même prix : 5x = 50.",
+        "Divisons par 5 : x = 50 / 5 = 10.",
+        "Donc le prix de chaque livre est 10$."
+      ],
+      "interventions": [
+        "Mathilde a 30$ et elle en a besoin de 50$ en tout. Elle achète 5 livres à un même prix. Comment trouver le prix de chaque livre ?",
+        "5x = 50. Est-ce que tu peux diviser 50 par 5 ? Quel est le prix d’un livre ?",
+        "x = 50 / 5 = 10. Donc, chaque livre coûte 10$. Cette valeur n'est pas parmi les réponses. Vérifie si l'équation est correcte."
+      ]
+    },
+    {
+      "id": "problem_c",
+      "equation": "48 + 3x = 70",
+      "problem_text": "Un jardinier a 70$ pour acheter des plantes. Il achète 4 arbustes à 12$ chacun. Il veut acheter aussi des fleurs à 3$ chacune. Combien peut-il acheter de fleurs avec l'argent qui lui reste ?",
+      "choices": [
+        "3",
+        "4",
+        "5",
+        "6"
+      ],
+      "answer": "6",
+      "step_by_step": [
+        "Calculons d'abord combien a coûté les arbustes : 4 x 12 = 48$.",
+        "Soustrayons 48 des 70$ : 70 - 48 = 22$ restants.",
+        "Combien de fleurs peut-il acheter avec 22$ à 3$ chacune ? 22 / 3 = environ 7.33 → 7 fleurs maximum.",
+        "On vérifie : 3 x 7 = 21 → 21 + 48 = 69. Il lui reste 1$. Donc max = 7 fleurs."
+      ],
+      "interventions": [
+        "Tu cherches combien de fleurs il peut acheter avec l'argent restant. On sait qu'il achète 4 arbustes à 12$ → 48$ dépensés. Il avait 70$. Donc il reste 22$. Combien de fleurs à 3$ peut-il acheter avec 22$ ?",
+        "3x = 22. Quel est le résultat de 22 / 3 ? Tu dois arrondir vers le bas.",
+        "22 / 3 = environ 7.33. Donc, il peut acheter au maximum combien de fleurs ?"
+      ]
+    },
+    {
+      "id": "problem_d",
+      "equation": "2x + 8 = 30",
+      "problem_text": "On a l’équation : 2x + 8 = 30. Trouve x.",
+      "choices": [
+        "11",
+        "12",
+        "13",
+        "14"
+      ],
+      "answer": "11",
+      "step_by_step": [
+        "Soustrayons 8 des deux côtés : 2x = 30 - 8 = 22.",
+        "Divisons maintenant par 2 : x = 22 / 2 = 11.",
+        "Donc, x = 11."
+      ],
+      "interventions": [
+        "Il faut que tu trouves x. Tu as une équation : 2x + 8 = 30. Comment commencer ?",
+        "Soustrais 8 des deux côtés. 2x = 30 - 8 = 22.",
+        "Divise par 2. x = 22 / 2 = 11."
+      ]
+    }
+  ]
+}

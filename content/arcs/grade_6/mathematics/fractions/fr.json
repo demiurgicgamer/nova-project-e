@@ -1,0 +1,109 @@
+{
+  "meta": {
+    "subject": "mathematics",
+    "topic_key": "fractions",
+    "topic_display": "Fractions",
+    "grade": 6,
+    "region": "canada",
+    "language_code": "fr",
+    "status": "approved",
+    "review_flags": [
+      "Vérifier l'exactitude mathématique des problèmes.",
+      "Vérifier la qualité linguistique du texte en français québécois naturel.",
+      "Confirmer que les fractions sont bien adaptées au niveau secondaire (6e année) et utilisent des contextes réels pour les enfants québécois.",
+      "S'assurer que les distractors dans les questions à choix multiples sont réalistes et proviennent de misconceptions fréquentes des élèves.",
+      "Vérifier que les interventions sont claires, accessibles et pertinentes pour des élèves de 11-12 ans."
+    ]
+  },
+  "hook_stories": [
+    {
+      "id": "hook_a",
+      "culture_hint": "canadian",
+      "text": "Dans un petit village québécois, Marie a préparé un grand gâteau pour la Fête de la Famille. Le gâteau est coupé en 8 parts égales. Son frère a mangé 3 parts, et son amie a mangé 2 parts. Combien de parts restent-elles?",
+      "closing_line": "Imagine que tu es Marie et que tu veux partager ce gâteau avec tout le monde. Tu as déjà mangé 3 parts et ton amie a mangé 2 parts. Si le gâteau était divisé en 8 parties, combien de parts n'ont pas été mangées?"
+    },
+    {
+      "id": "hook_b",
+      "culture_hint": "canadian",
+      "text": "Pierre a décidé de faire des crêpes pour son amie. Il a besoin de 5/8 de tasse de lait. Il a déjà mis 2/8 de tasse. Combien de lait lui reste-t-il à ajouter?",
+      "closing_line": "Imagine que tu es Pierre et que tu suis une recette de crêpes. La recette dit que tu dois mettre 5/8 de tasse de lait, mais tu as déjà mis 2/8. Combien de lait te manque-t-il pour finir la recette?"
+    }
+  ],
+  "concept": {
+    "explanation_steps": [
+      "Une fraction montre une partie d'un tout. Si tu as 5/8 de tasse de sucre, cela veut dire que tu as 5 parties sur 8 parties au total.",
+      "Quand tu additionnes ou soustrais des fractions avec le même dénominateur, tu gardes le même dénominateur et tu changes uniquement le numérateur."
+    ],
+    "whiteboard_text": "Une fraction est une partie d’un tout. Exemple : 2/6 signifie 2 parties sur 6 parties au total.",
+    "comprehension_check": "Un gâteau est coupé en 6 parts. Si tu manges 2 parts, quelle fraction du gâteau as-tu mangée?",
+    "reteach_angles": [
+      "Tu peux imaginer que le gâteau est divisé en parts égales et compter celles que tu as mangées.",
+      "Une fraction s’écrit avec deux nombres : le numérateur (le haut) et le dénominateur (le bas). Le dénominateur indique en combien de parts le tout est divisé."
+    ]
+  },
+  "problems": [
+    {
+      "id": "p_guided_1",
+      "stage": "guided",
+      "difficulty": "medium",
+      "text": "Dans un resto d'école, 3/8 des enfants veulent du fromage dans leur sandwich. 2/8 veulent de la charcuterie. Combien ont choisi une garniture au total?",
+      "answer": "5/8",
+      "answer_explanation": "Puisque les deux fractions ont le même dénominateur, on additionne les numérateurs : 3 + 2 = 5. Donc, 5/8 des enfants ont choisi une garniture.",
+      "mc_choices": [
+        "5/8",
+        "6/8",
+        "3/2",
+        "5/16"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Additionner le numérateur et le dénominateur ensemble, par exemple 3 + 2 = 5, mais garder le dénominateur comme 8, ce qui donne 5/8 — correct — ou confondre les fractions en additionnant les deux dénominateurs.",
+      "intervention_hints": {
+        "level_1": "Tu as déjà choisi des fractions. Tu dois les additionner. 3/8 + 2/8.",
+        "level_2": "On a 3/8 qui veulent du fromage, et 2/8 qui veulent de la charcuterie. Cela fait 3+2 = 5 de la même partie. Alors, c’est 5/8.",
+        "level_3": "Si tu manges 3 gâteaux sur 8, et ton ami mange 2 gâteaux sur 8, ensemble, vous mangez 3+2=5 gâteaux sur 8. Cela fait 5/8."
+      }
+    },
+    {
+      "id": "p_practice_1",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "Pour une tarte, Sarah utilise 4/10 de tasse de sucre. Elle en a déjà ajouté 1/10. Combien de sucre lui reste-t-il à ajouter?",
+      "answer": "3/10",
+      "answer_explanation": "Pour trouver la différence, on soustrait les fractions : 4/10 - 1/10 = 3/10.",
+      "mc_choices": [
+        "3/10",
+        "5/10",
+        "4/10",
+        "3/20"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Soustraire maladroitement le numérateur et garder le dénominateur sans soustraire le numérateur correctement.",
+      "intervention_hints": {
+        "level_1": "Tu as déjà 1/10, il te manque 4–1 = 3 parts.",
+        "level_2": "Tu voulais 4 parties sur 10 et tu en as déjà 1. Donc il te reste 4 – 1 = 3 parties.",
+        "level_3": "Le total est 4 parties. Tu en as déjà utilisé 1. Donc, il en reste 3 pour le reste de la tarte."
+      }
+    },
+    {
+      "id": "p_practice_2",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "Le trésor se cache dans 5/10 de la forêt. Les enfants ont déjà exploré 2/10 de la forêt. Combien de la forêt doivent-ils encore explorer pour trouver le trésor?",
+      "answer": "3/10",
+      "answer_explanation": "On soustrait les fractions : 5/10 - 2/10 = 3/10. Ils doivent explorer 3/10 restant.",
+      "mc_choices": [
+        "3/10",
+        "7/10",
+        "2/10",
+        "5/10"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Soustraire le dénominateur plutôt que le numérateur, ce qui donnerait une erreur.",
+      "intervention_hints": {
+        "level_1": "Tu dois soustraire 2/10 de 5/10.",
+        "level_2": "Le trésor est en 5 parties sur 10. Ils ont exploré 2. Donc, il reste 5 – 2 = 3 parties.",
+        "level_3": "Imagine que tu as 10 arbres. Le trésor est dans 5 arbres. Tu as déjà regardé 2 arbres. Combien t’en reste-t-il à regarder ? Oui, 5 – 2 = 3. C’est donc 3/10."
+      }
+    }
+  ]
+}

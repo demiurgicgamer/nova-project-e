@@ -51,9 +51,9 @@
       "correct_index": 0,
       "common_misconception": "Students may confuse phytoplankton with zooplankton, which are consumers, not producers.",
       "intervention_hints": {
-        "level_1": "Ask: \"Which of these animals makes its own food using sunlight?\"",
-        "level_2": "Explain phytoplankton as tiny plants in water.",
-        "level_3": "Ask students to think of other examples of producers (plants, algae, etc.)"
+        "level_1": "Think about what a producer does — does it make its own food, or does it eat other things?",
+        "level_2": "Phytoplankton are tiny plants that float in water. Just like grass on land uses sunlight to make food, phytoplankton do the same thing in a lake.",
+        "level_3": "A producer makes its own food using sunlight. Which animal on this list can do that?"
       },
       "nova_guiding_question": ""
     },
@@ -70,12 +70,12 @@
         "C) The foxes will start to eat grass",
         "D) The mushrooms will disappear"
       ],
-      "correct_index": 0,
+      "correct_index": 1,
       "common_misconception": "Students might assume that if one consumer goes away, another will eat its food, but this does not take into account ecosystem balance.",
       "intervention_hints": {
-        "level_1": "Ask: \"What would happen if rabbits didn't eat grass anymore?\"",
-        "level_2": "Explain that when a population goes down, its prey typically grows in abundance.",
-        "level_3": "Ask: \"If animals are removed from a food chain, how does that affect the levels above and below them?\""
+        "level_1": "If rabbits disappear, who was eating the grass before? What happens to the grass now that nobody is eating it?",
+        "level_2": "Rabbits eat grass. Fewer rabbits means less grass is being eaten. So what do you think happens to the amount of grass?",
+        "level_3": "Think of it like this — if you stopped eating your vegetables, would there be more vegetables or fewer vegetables left?"
       },
       "nova_guiding_question": ""
     },
@@ -92,12 +92,12 @@
         "C) It gets passed to decomposers and then back into the soil",
         "D) It is stored as wood for animals"
       ],
-      "correct_index": 0,
+      "correct_index": 2,
       "common_misconception": "Some students may think that dead things just disappear or get turned into air.",
       "intervention_hints": {
-        "level_1": "Ask: \"What happens to dead things in nature?\"",
-        "level_2": "Explain the role of decomposers in recycling nutrients.",
-        "level_3": "Ask: \"Who breaks dead things apart to release nutrients back to nature?\""
+        "level_1": "Have you ever seen a fallen log covered in mushrooms? What do you think those mushrooms are doing to the wood?",
+        "level_2": "Decomposers like fungi and bacteria break down dead things. Where do you think all those nutrients go once the tree is broken apart?",
+        "level_3": "Energy doesn't disappear — it gets recycled. Think: decomposers break down the tree and release nutrients back into the soil, where the next tree can use them."
       },
       "nova_guiding_question": ""
     },
@@ -114,34 +114,12 @@
         "C) Animals will have more food because of the city",
         "D) Animals will have less space to live, fewer places to hide, and fewer resources"
       ],
-      "correct_index": 0,
+      "correct_index": 3,
       "common_misconception": "Students may believe that urban development always benefits animals, not recognizing that habitats are essential to animal survival.",
       "intervention_hints": {
-        "level_1": "Ask: \"If a grassland gets smaller, how does that affect the animals that live there?\"",
-        "level_2": "Show real-world examples of animals being impacted by habitat loss.",
-        "level_3": "Ask: \"What happens to an animal's shelter if their habitat shrinks?\""
-      },
-      "nova_guiding_question": ""
-    },
-    {
-      "id": "p_practice_3",
-      "stage": "practice",
-      "difficulty": "hard",
-      "text": "In a forest ecosystem, an oak tree dies and falls to the ground. What happens to the oak's energy?",
-      "answer": "C) It gets passed to decomposers and then back into the soil",
-      "answer_explanation": "When an oak tree dies, decomposers such as fungi and bacteria break it down and release the nutrients back into the soil so new plants can grow.",
-      "mc_choices": [
-        "A) It goes into the air as heat",
-        "B) It stops being used",
-        "C) It gets passed to decomposers and then back into the soil",
-        "D) It is stored as wood for animals"
-      ],
-      "correct_index": 0,
-      "common_misconception": "Some students may think that dead things just disappear or get turned into air.",
-      "intervention_hints": {
-        "level_1": "Ask: \"What happens to dead things in nature?\"",
-        "level_2": "Explain the role of decomposers in recycling nutrients.",
-        "level_3": "Ask: \"Who breaks dead things apart to release nutrients back to nature?\""
+        "level_1": "If your home kept getting smaller and smaller, what problems would that cause for you?",
+        "level_2": "Animals need space to find food, hide from predators, and raise their young. If the grassland shrinks, which of those things gets harder?",
+        "level_3": "Think about all the resources an animal needs — food, shelter, water, space. What happens to each one when the habitat gets smaller?"
       },
       "nova_guiding_question": ""
     },
@@ -158,12 +136,12 @@
         "C) Consumer",
         "D) Nutrient"
       ],
-      "correct_index": 0,
+      "correct_index": 2,
       "common_misconception": "Some students may think that if an animal eats plants, it must also be a producer.",
       "intervention_hints": {
-        "level_1": "Ask: \"How do we know if an animal eats plants, animals, or both?\"",
-        "level_2": "Discuss relationships between predator and prey.",
-        "level_3": "Ask students to consider a broader ecosystem impact of each change."
+        "level_1": "Does a caribou make its own food, eat other living things, or break down dead things?",
+        "level_2": "Producers make food. Decomposers break things down. Consumers eat other living things. Which one matches a caribou?",
+        "level_3": "Caribou graze on plants — they are eating something that was already made. That makes them a consumer, not a producer."
       },
       "nova_guiding_question": ""
     },
@@ -180,12 +158,12 @@
         "C) They start to eat trees instead of seeds",
         "D) They will eat other birds"
       ],
-      "correct_index": 0,
+      "correct_index": 1,
       "common_misconception": "Students may think that birds will adapt quickly or simply relocate without considering resource limitation.",
       "intervention_hints": {
-        "level_1": "Ask: \"How do we know if an animal eats plants, animals, or both?\"",
-        "level_2": "Discuss relationships between predator and prey.",
-        "level_3": "Ask students to consider a broader ecosystem impact of each change."
+        "level_1": "The birds rely on seeds from these trees. If the trees are gone, what happens to their food supply?",
+        "level_2": "If your only grocery store closed, what would you do? Animals face the same problem when their food source disappears.",
+        "level_3": "Less food means the birds either have to go somewhere else to find food, or their population drops because there isn't enough to survive on."
       },
       "nova_guiding_question": ""
     },
@@ -202,12 +180,12 @@
         "C) The caribou population will decrease",
         "D) The caribou will move to a new area"
       ],
-      "correct_index": 0,
+      "correct_index": 2,
       "common_misconception": "Students may not realize that increased predators directly cause declines in prey populations.",
       "intervention_hints": {
-        "level_1": "Ask: \"How do we know if an animal eats plants, animals, or both?\"",
-        "level_2": "Discuss relationships between predator and prey.",
-        "level_3": "Ask students to consider a broader ecosystem impact of each change."
+        "level_1": "Wolves hunt caribou. If there are more wolves hunting, what happens to the animals being hunted?",
+        "level_2": "More predators means more hunting. If more caribou are being caught each day, will the caribou population go up or down over time?",
+        "level_3": "Think about it as a balance — if predators increase, the prey population gets smaller until it finds a new balance."
       },
       "nova_guiding_question": ""
     }
