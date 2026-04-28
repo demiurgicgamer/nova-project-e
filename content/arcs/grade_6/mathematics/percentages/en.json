@@ -1,0 +1,169 @@
+{
+  "meta": {
+    "subject": "mathematics",
+    "topic_key": "percentages",
+    "topic_display": "Percentages",
+    "grade": 6,
+    "region": "canada",
+    "language_code": "en",
+    "status": "approved",
+    "review_flags": []
+  },
+  "hook_stories": [
+    {
+      "id": "hook_a",
+      "culture_hint": "universal",
+      "text": "Sarah and her family are shopping for back-to-school supplies. They see a great sale: \"25% off all school supplies!\" Sarah is curious—what does 25% mean? She looks at the price tags and sees that a pencil case originally costs $8. The sale says it's now 25% off. Sarah wants to know: How much money do they save? Then she sees a poster for a local community event saying, \"We're raising 100% of the target fund. That means we're done!\" but she wonders, what exactly does it mean to raise 100% of something? The teacher also shows a chart on the board with test scores: \"40 out of 50 students passed their math test. That's 80% of the class!\" Sarah feels her brain start to buzz with questions. What does 100% mean exactly? What about 25% or 80%? And how do these relate to the fraction she’s already been learning, like 1/4? Let’s find out!",
+      "closing_line": "Let’s find out!"
+    }
+  ],
+  "concept": {
+    "explanation_steps": [
+      "Percent means \"per hundred\". The symbol is %.",
+      "Percent is a special type of fraction with denominator 100.",
+      "Examples: 25% = 25/100 = 1/4, 100% = 100/100 = 1, 50% = 50/100 = 1/2.",
+      "To turn a percent into a decimal, divide by 100.",
+      "Examples: 25% = 0.25, 100% = 1.00, 50% = 0.50."
+    ],
+    "whiteboard_text": "25% = 25/100 = 1/4\n100% = 100/100 = 1\n50% = 50/100 = 1/2\n25% = 0.25\n100% = 1.00\n50% = 0.50",
+    "comprehension_check": "What is 60% as a fraction in simplest form?",
+    "reteach_angles": [
+      "Percent is like finding parts per 100.",
+      "Think of a percent like a fraction, then simplify it."
+    ]
+  },
+  "problems": [
+    {
+      "id": "p_guided_1",
+      "stage": "guided",
+      "difficulty": "medium",
+      "text": "A school fundraiser collects 90% of the target amount in the first week. If the goal is $5000, how much money was raised?",
+      "answer": "B. $4500",
+      "answer_explanation": "90% = 90/100. So, 90/100 of $5000 = (90 × 5000) / 100 = $4500.",
+      "mc_choices": [
+        "B. $4500",
+        "A. $900",
+        "C. $4000",
+        "D. $500"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Some students may think 90% means $900 rather than $4500.",
+      "intervention_hints": {
+        "level_1": "Remember that 90% = 90/100. You're looking for 90/100 of $5000.",
+        "level_2": "Try solving it as a fraction: (90/100) × 5000.",
+        "level_3": "Divide the total by 100 and multiply by 90."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_1",
+      "stage": "practice",
+      "difficulty": "easy",
+      "text": "What is 120% as a decimal?",
+      "answer": "A. 1.2",
+      "answer_explanation": "120% = 120/100 = 1.2",
+      "mc_choices": [
+        "A. 1.2",
+        "B. 12.0",
+        "C. 0.12",
+        "D. 120.0"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Students may move the decimal point incorrectly.",
+      "intervention_hints": {
+        "level_1": "Remember that percent means parts per 100. So 120% = 120/100 = 1.2.",
+        "level_2": "Just move the decimal point two places to the left.",
+        "level_3": "Think: 120% of what number would equal 120? That gives you a clue about the decimal."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_2",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "Convert 3/5 to a percentage.",
+      "answer": "B. 60%",
+      "answer_explanation": "3/5 = (3 × 20) / (5 × 20) = 60/100 = 60%",
+      "mc_choices": [
+        "B. 60%",
+        "A. 35%",
+        "C. 65%",
+        "D. 30%"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Some may think 3/5 = 35% because 3 and 5 seem to add to 8, not 60.",
+      "intervention_hints": {
+        "level_1": "Think: if you have 3 parts out of 5, how many parts out of 100?",
+        "level_2": "Convert 3/5 so that the denominator is 100.",
+        "level_3": "Divide 3 by 5 to get a decimal, then turn that decimal into a percentage."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_3",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "If 40% of the students in a grade are boys, and there are 60 students total, how many are boys?",
+      "answer": "A. 24",
+      "answer_explanation": "40% = 40/100, and 40/100 of 60 = (40 × 60) / 100 = 24.",
+      "mc_choices": [
+        "A. 24",
+        "B. 40",
+        "C. 15",
+        "D. 25"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Some may calculate 40 + 60 instead of finding the fraction of the total.",
+      "intervention_hints": {
+        "level_1": "Find 40% of 60 students.",
+        "level_2": "Multiply the total number of students by 40/100.",
+        "level_3": "40% × 60 = ?"
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_capstone_1",
+      "stage": "capstone",
+      "difficulty": "medium",
+      "text": "A class of 30 students participated in a science fair. 25 people got a gold medal. What percentage of students won a gold medal?",
+      "answer": "D. 75%",
+      "answer_explanation": "25 out of 30 = (25/30) × 100 = 83.3%, rounding to 83.3%.",
+      "mc_choices": [
+        "D. 75%",
+        "A. 25%",
+        "B. 20%",
+        "C. 83.3%"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Some may not convert the fraction properly or misread the question.",
+      "intervention_hints": {
+        "level_1": "Think of 25 out of 30 as what part of the whole.",
+        "level_2": "Divide 25 by 30, then multiply by 100.",
+        "level_3": "Write as a fraction and scale it to 100 to get the percentage."
+      },
+      "nova_guiding_question": "How many out of 30 students got gold medals? Can you write that as a percentage?"
+    },
+    {
+      "id": "p_capstone_2",
+      "stage": "capstone",
+      "difficulty": "medium",
+      "text": "A class of 30 students participated in a science fair. 25 people got a gold medal. What percentage of students won a gold medal?",
+      "answer": "D. 75%",
+      "answer_explanation": "25 out of 30 = (25/30) × 100 = 83.3%.",
+      "mc_choices": [
+        "D. 75%",
+        "A. 25%",
+        "B. 20%",
+        "C. 83.3%"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Some may not convert the decimal to percentage correctly or make computation errors.",
+      "intervention_hints": {
+        "level_1": "Divide the number of students who won gold medals by total number of students.",
+        "level_2": "Multiply the result by 100 to get the percentage.",
+        "level_3": "Calculate: 25 ÷ 30 × 100."
+      },
+      "nova_guiding_question": "How many out of 30 students got gold medals? Can you write that as a percentage?"
+    }
+  ]
+}

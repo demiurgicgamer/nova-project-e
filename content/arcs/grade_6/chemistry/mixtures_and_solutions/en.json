@@ -1,0 +1,184 @@
+{
+  "meta": {
+    "subject": "chemistry",
+    "topic_key": "mixtures_and_solutions",
+    "topic_display": "Mixtures and Solutions",
+    "grade": 6,
+    "region": "canada",
+    "language_code": "en",
+    "status": "approved",
+    "review_flags": []
+  },
+  "hook_stories": [
+    {
+      "id": "hook_a",
+      "culture_hint": "universal",
+      "text": "You're back from a family camping trip with your sibling. You're excited to see the lake because you love fishing at the same spot you’ve been going to for years. But when you get there, you notice the water looks strange. You see oil on the surface. Your sibling says, \"That’s okay, we can fish anyway.\" But you've heard from your teacher that sometimes water has things in it that are harmful — things like bacteria or tiny plastic pieces. What do scientists do to figure out what’s really in the water before anyone drinks it?",
+      "closing_line": "These real-life situations introduce the concept of mixtures and solutions."
+    },
+    {
+      "id": "hook_b",
+      "culture_hint": "canadian",
+      "text": "Imagine you're at a local market in a Canadian town. You see a vendor selling maple syrup. He tells you it takes 40 gallons of sap from a sugar maple tree to make just 1 gallon of syrup. He’s explaining how the sap turns into syrup — a solution — through a process of heating and evaporation. What happens to the water when the sap is heated? Also, what's really *in* your maple syrup? Is it just sugar water? Or are there other ingredients or impurities?",
+      "closing_line": "These real-life situations introduce the concept of mixtures and solutions."
+    }
+  ],
+  "concept": {
+    "explanation_steps": [
+      "A mixture is two or more different substances that are combined but not chemically bonded. You can see what’s inside, and the parts can be separated by physical means.",
+      "Solutions are a special type of mixture where one substance dissolves in another.",
+      "In a solution, you can't see the separate parts.",
+      "Salt-water or kool-aid are examples.",
+      "There are two main kinds of mixtures: homogeneous (you can't see the parts, like salt in water or air) and heterogeneous (you can see the parts, like sand and water or trail mix).",
+      "A solution consists of a solvent (the substance doing the dissolving) and a solute (the substance being dissolved).",
+      "Water is the most common solvent, and examples of solutes include salt, sugar, and kool-aid powder."
+    ],
+    "explanation": "A mixture is two or more different substances that are combined but not chemically bonded. You can see what’s inside, and the parts can be separated by physical means. Solutions are a special type of mixture where one substance dissolves in another, making it impossible to see the separate ingredients. Salt-water or kool-aid are examples. There are two main kinds of mixtures: homogeneous (you can't see the parts, like salt in water or air) and heterogeneous (you can see the parts, like sand and water or trail mix).",
+    "explanation_detailed": [
+      "A mixture is two or more different substances that are combined but not chemically bonded.",
+      "You can see what’s inside, and the parts can be separated by physical means.",
+      "Solutions are a special type of mixture where one substance dissolves in another.",
+      "In a solution, you can't see the separate parts.",
+      "Salt-water or kool-aid are examples.",
+      "There are two main kinds of mixtures: homogeneous (you can't see the parts, like salt in water or air) and heterogeneous (you can see the parts, like sand and water or trail mix).",
+      "A solution consists of a solvent (the substance doing the dissolving) and a solute (the substance being dissolved).",
+      "Water is the most common solvent, and examples of solutes include salt, sugar, and kool-aid powder."
+    ],
+    "key_terms": [
+      "mixture",
+      "solution",
+      "homogeneous mixture",
+      "heterogeneous mixture",
+      "solvent",
+      "solute"
+    ],
+    "explanation_summary": "Mixtures are combinations of substances that can be separated. Solutions are a type of mixture where a substance dissolves into another. Mixtures can be homogeneous (uniform) or heterogeneous (visible parts). Understanding these concepts helps explain what's in our food, water, and air.",
+    "discussion_questions": [
+      "What is the difference between homogeneous and heterogeneous mixtures?",
+      "Can you name examples of solutions in your daily life?",
+      "Why is it important to know about mixtures and solutions?"
+    ],
+    "example_scenarios": [
+      "Mixing sand and water to form a heterogeneous mixture",
+      "Dissolving sugar in water to form a solution",
+      "Air as a homogeneous mixture of gases"
+    ],
+    "review_key_points": [
+      "Mixtures are combinations of two or more substances not chemically bonded.",
+      "Solutions are homogeneous mixtures where a solute dissolves in a solvent.",
+      "Homogeneous mixtures have uniform properties throughout.",
+      "Heterogeneous mixtures have visible parts and non-uniform properties.",
+      "The solvent is the substance that dissolves another substance, and the solute is the substance being dissolved."
+    ]
+  },
+  "problems": [
+    {
+      "id": "problem_1",
+      "type": "guided",
+      "problem_text": "You pour sugar into water and stir it until it dissolves completely. What kind of mixture have you created?",
+      "multiple_choice_options": [
+        "A) Homogeneous",
+        "B) Heterogeneous",
+        "C) Solution",
+        "D) Pure substance"
+      ],
+      "correct_answer": "C) Solution",
+      "intervention_support": [
+        "Level 1: Did the sugar dissolve completely and can you not see it?",
+        "Level 2: What happens when sugar dissolves in water? Is it like soil in water?",
+        "Level 3: What word best describes when one thing dissolves into another and we can't see it?"
+      ],
+      "difficulty_level": "medium"
+    },
+    {
+      "id": "problem_2",
+      "type": "guided",
+      "problem_text": "You are given a solution of salt in water. Which method would be best to separate the salt from the water?",
+      "multiple_choice_options": [
+        "A) Filtering",
+        "B) Evaporation",
+        "C) Distillation",
+        "D) Magnetic separation"
+      ],
+      "correct_answer": "B) Evaporation",
+      "intervention_support": [
+        "Level 1: What happens to the water when heat is applied to it?",
+        "Level 2: Can you take out the salt after it's dissolved or does it stay mixed?",
+        "Level 3: What method allows you to collect the water back while leaving the salt behind?"
+      ],
+      "difficulty_level": "medium"
+    },
+    {
+      "id": "problem_3",
+      "type": "guided",
+      "problem_text": "Which of the following is a heterogeneous mixture?",
+      "multiple_choice_options": [
+        "A) Salt water",
+        "B) Air",
+        "C) Milk",
+        "D) Trail mix"
+      ],
+      "correct_answer": "D) Trail mix",
+      "intervention_support": [
+        "Level 1: Do you easily see the different parts of trail mix?",
+        "Level 2: When you mix trail mix, do the parts blend together like water and sugar?",
+        "Level 3: Is trail mix the same throughout like a solution or can you see the parts?"
+      ],
+      "difficulty_level": "medium"
+    },
+    {
+      "id": "problem_4",
+      "type": "application",
+      "problem_text": "You are at a nature camp. Your instructor brings you to a stream. You notice the water looks cloudy. She says it’s likely full of particles that are too small for your eyes to see. She tells you that they can be removed by letting the water settle. What is the best way to clean the water and separate the small particles from it?",
+      "multiple_choice_options": [
+        "A) Salt and water",
+        "B) Filter the water",
+        "C) Evaporate the water",
+        "D) Boil the water"
+      ],
+      "correct_answer": "B) Filter the water",
+      "intervention_support": [
+        "Level 1: What does a filter do with small particles?",
+        "Level 2: Can you get rid of the fine particles by letting it settle?",
+        "Level 3: How do you separate something that cannot be seen?"
+      ],
+      "difficulty_level": "hard"
+    },
+    {
+      "id": "problem_5",
+      "type": "application",
+      "problem_text": "You decide to make your own kool-aid. You add kool-aid powder to water and stir. What happens to the kool-aid powder?",
+      "multiple_choice_options": [
+        "A) It remains solid and you can still see it",
+        "B) It dissolves and becomes part of the water",
+        "C) It mixes but stays separated",
+        "D) It changes into a new chemical substance"
+      ],
+      "correct_answer": "B) It dissolves and becomes part of the water",
+      "intervention_support": [
+        "Level 1: What does it mean when something dissolves?",
+        "Level 2: Do you see the kool-aid powder after stirring?",
+        "Level 3: Did it form a solution where the powder and water became one?"
+      ],
+      "difficulty_level": "hard"
+    },
+    {
+      "id": "problem_6",
+      "type": "application",
+      "problem_text": "You are preparing a lunch. You are making trail mix that has nuts, seeds, and dried fruit. Is this a solution or a heterogeneous mixture?",
+      "multiple_choice_options": [
+        "A) Solution",
+        "B) Heterogeneous mixture",
+        "C) Homogeneous mixture",
+        "D) Pure substance"
+      ],
+      "correct_answer": "B) Heterogeneous mixture",
+      "intervention_support": [
+        "Level 1: Do you see the nuts, seeds and fruit in the trail mix?",
+        "Level 2: Do they blend together or remain separate?",
+        "Level 3: Is the trail mix evenly mixed, like a solution, or visible, like a heterogeneous mixture?"
+      ],
+      "difficulty_level": "hard"
+    }
+  ]
+}

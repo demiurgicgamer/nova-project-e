@@ -1,0 +1,16 @@
+# Nova Arc Content Agent — Python dependencies
+# Install: pip install -r requirements.txt
+
+# Core
+pyyaml>=6.0
+python-dotenv>=1.0
+
+# AI providers
+anthropic>=0.96.0          # --provider anthropic
+google-generativeai>=0.8.0 # --provider gemini
+openai>=1.30.0             # --provider groq + ollama (OpenAI-compatible)
+
+# Required by openai / anthropic SDKs
+pydantic>=2.0.0
+typing_extensions>=4.8.0
+httpx>=0.27.0

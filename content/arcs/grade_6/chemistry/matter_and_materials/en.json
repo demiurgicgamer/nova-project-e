@@ -1,0 +1,198 @@
+{
+  "meta": {
+    "subject": "chemistry",
+    "topic_key": "matter_and_materials",
+    "topic_display": "Matter and Materials",
+    "grade": 6,
+    "region": "canada",
+    "language_code": "en",
+    "status": "approved",
+    "review_flags": []
+  },
+  "hook_stories": [
+    {
+      "id": "hook_a",
+      "culture_hint": "canadian",
+      "text": "Meet Alex, an 11-year-old from Vancouver who loves to cook with his mom. One cold winter morning, Alex watched his mom take a pot of water from the fridge and put it on the stove. The ice cube in the pot began to melt, turning from a solid into a liquid. Alex was curious — why did this happen? What changed inside the ice cube?",
+      "closing_line": "What changed inside the ice cube?"
+    },
+    {
+      "id": "hook_b",
+      "culture_hint": "canadian",
+      "text": "Imagine you're at a summer camp in Ontario and you’re helping to set up campfires. You notice that when you light a match, it creates a flame — a gas — that rises up into the air. However, if you pour cold water onto the fire, the gas turns back into liquid droplets. It's fascinating how matter can change its form!",
+      "closing_line": "Can you see how matter changes form?"
+    }
+  ],
+  "concept": {
+    "explanation_steps": [
+      "Matter can exist in different forms: solid, liquid, and gas.",
+      "Solids have a definite shape and volume. The particles are close together and vibrate in place.",
+      "Liquids have a definite volume but no definite shape. The particles are close together but can move around each other.",
+      "Gases have no definite shape or volume. The particles are far apart and move freely around.",
+      "Temperature affects how matter changes: heating generally changes matter from solid to liquid to gas, while cooling changes it from gas to liquid to solid.",
+      "The particle model of matter explains this: in solids, particles are tightly packed and vibrate in one spot; in liquids, particles are close together and can slide past each other; in gases, particles are far apart and move quickly in all directions."
+    ],
+    "whiteboard_text": "Solids: definite shape and volume. Liquids: definite volume, no definite shape. Gases: no definite shape or volume. Temperature affects phase changes.",
+    "comprehension_check": "What is the main difference between a solid and a gas?",
+    "reteach_angles": [
+      "Use everyday examples like ice, water, and steam.",
+      "Relate matter states to how particles behave in each form."
+    ]
+  },
+  "problems": [
+    {
+      "id": "p_guided_1",
+      "stage": "guided",
+      "difficulty": "medium",
+      "text": "You are observing an ice cube melting in your hand. What happens to the ice cube's particles as it melts?",
+      "answer": "B",
+      "answer_explanation": "As the ice cube melts, heat is added, causing the particles to move faster and spread out, changing from a solid to a liquid.",
+      "mc_choices": [
+        "B) They move faster and spread out.",
+        "A) They move closer together.",
+        "C) They move slower and vibrate in place.",
+        "D) They stay the same and don’t move."
+      ],
+      "correct_index": 0,
+      "common_misconception": "A (Misunderstanding that particles get closer during melting)",
+      "intervention_hints": {
+        "level_1": "If you heat the ice cube, do the particles move slower or faster?",
+        "level_2": "Why does the solid change into a liquid? What do you think happens to particles?",
+        "level_3": "In the solid state, particles have less energy. In the liquid state, what do you think happens to particles' energy?"
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_1",
+      "stage": "practice",
+      "difficulty": "easy",
+      "text": "What happens to matter when heat is added?",
+      "answer": "C",
+      "answer_explanation": "When heat is added, matter usually becomes more energetic and can change states.",
+      "mc_choices": [
+        "C) It usually becomes more energetic and can change states.",
+        "A) It becomes a gas.",
+        "B) It always becomes a liquid.",
+        "D) It becomes less flexible and harder."
+      ],
+      "correct_index": 0,
+      "common_misconception": "A (Oversimplifying state change)",
+      "intervention_hints": {
+        "level_1": "Try thinking of what happens to ice water when you leave it out in the sun.",
+        "level_2": "How does heat make the particles in ice move?",
+        "level_3": "When you add energy, what usually happens to the state of matter?"
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_2",
+      "stage": "practice",
+      "difficulty": "easy",
+      "text": "Which property of a material describes how easily it can be bent?",
+      "answer": "C",
+      "answer_explanation": "Flexibility is the property of a material that describes how easily it can be bent.",
+      "mc_choices": [
+        "C) Flexibility",
+        "A) Hardness",
+        "B) Conductivity",
+        "D) Density"
+      ],
+      "correct_index": 0,
+      "common_misconception": "A (Confusing hardness with flexibility)",
+      "intervention_hints": {
+        "level_1": "Think about a rubber band — is it hard or flexible?",
+        "level_2": "If a material can bend easily, what is that called?",
+        "level_3": "What is the main characteristic of flexible materials?"
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_3",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "What is the best example of matter changing from a gas to a solid?",
+      "answer": "C",
+      "answer_explanation": "Steam condensing into water droplets is the change from gas (steam) to liquid, not solid. But if we consider the process of a gas cooling to a solid, we’d look for freezing or deposition. For this, condensation to liquid is the closest example given.",
+      "mc_choices": [
+        "C) Steam condensing into water droplets",
+        "A) Baking a cake",
+        "B) Freezing water",
+        "D) Melting ice"
+      ],
+      "correct_index": 0,
+      "common_misconception": "A (Incorrectly identifying cooking as gas to solid conversion)",
+      "intervention_hints": {
+        "level_1": "What happens to steam (gas) when it hits a cold window?",
+        "level_2": "What is this process called when a gas turns into a liquid?",
+        "level_3": "Which change involves a gas cooling down and forming a solid? Think about what happens around ice cubes or hot drinks."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_capstone_1a",
+      "stage": "capstone",
+      "difficulty": "capstone",
+      "text": "Sarah is making homemade ice cream. She puts the ice cream mix in the freezer. The mixture changes from a liquid to a solid form. What property of matter changes when the liquid ice cream mix turns to solid ice cream?",
+      "answer": "C",
+      "answer_explanation": "The state of matter changes from liquid to solid when heat is removed.",
+      "mc_choices": [
+        "C) State",
+        "A) Color",
+        "B) Temperature",
+        "D) Volume"
+      ],
+      "correct_index": 0,
+      "common_misconception": "",
+      "intervention_hints": {
+        "level_1": "",
+        "level_2": "",
+        "level_3": ""
+      },
+      "nova_guiding_question": "Do you know that cooling removes heat from matter? This is how a liquid becomes a solid."
+    },
+    {
+      "id": "p_capstone_1b",
+      "stage": "capstone",
+      "difficulty": "capstone",
+      "text": "Sarah is making homemade ice cream. She puts the ice cream mix in the freezer. The mixture changes from a liquid to a solid form. What causes the ice cream mix to become solid?",
+      "answer": "A",
+      "answer_explanation": "Cooling removes heat from the mixture, causing it to change from liquid to solid.",
+      "mc_choices": [
+        "A) Cooling (removing heat)",
+        "B) Heating (adding heat)",
+        "C) Stirring",
+        "D) Evaporation"
+      ],
+      "correct_index": 0,
+      "common_misconception": "",
+      "intervention_hints": {
+        "level_1": "",
+        "level_2": "",
+        "level_3": ""
+      },
+      "nova_guiding_question": "Do you know that cooling removes heat from matter? This is how a liquid becomes a solid."
+    },
+    {
+      "id": "p_capstone_alt_1",
+      "stage": "capstone",
+      "difficulty": "capstone",
+      "text": "You are cooking eggs for breakfast. You notice that when you crack an egg into a pan and heat it, the white becomes white and solid, while the yolk remains yellow and somewhat runny. What explains this difference?",
+      "answer": "B",
+      "answer_explanation": "The proteins in each part respond differently to heat; the white coagulates at a lower temperature than the yolk.",
+      "mc_choices": [
+        "B) The proteins in each part respond differently to heat",
+        "A) One is solid and one is liquid",
+        "C) The yolk has more heat than the white",
+        "D) The yolk is harder to cook"
+      ],
+      "correct_index": 0,
+      "common_misconception": "",
+      "intervention_hints": {
+        "level_1": "",
+        "level_2": "",
+        "level_3": ""
+      },
+      "nova_guiding_question": "Think about the materials of the egg — what parts of the egg are different in how they respond to heat?"
+    }
+  ]
+}

@@ -1,9 +1,9 @@
 import { Router } from 'express';
 import { verifyFirebaseToken } from '../middleware/firebaseAuth.js';
-import { requireRefreshToken } from '../middleware/auth.js';
+import { requireAuth, requireRefreshToken } from '../middleware/auth.js';
 import { authLimiter } from '../middleware/rateLimiter.js';
 import { asyncHandler } from '../middleware/errorHandler.js';
-import { register, login, refresh } from '../controllers/authController.js';
+import { register, login, refresh, getProfile, updateProfile } from '../controllers/authController.js';
 
 const router = Router();
 
@@ -27,5 +27,17 @@ router.post('/login', verifyFirebaseToken, asyncHandler(login));
  * Requires: { refreshToken } in body
  */
 router.post('/refresh', requireRefreshToken, asyncHandler(refresh));
+
+/**
+ * GET /api/auth/profile
+ * Returns parent profile including curriculumRegion.
+ */
+router.get('/profile', requireAuth, asyncHandler(getProfile));
+
+/**
+ * PATCH /api/auth/profile
+ * Body: { curriculumRegion: 'canada' | 'quebec' | 'india' | 'global' }
+ */
+router.patch('/profile', requireAuth, asyncHandler(updateProfile));
 
 export default router;

@@ -1,0 +1,175 @@
+{
+  "meta": {
+    "subject": "physics",
+    "topic_key": "forces_and_motion",
+    "topic_display": "Forces and Motion",
+    "grade": 6,
+    "region": "canada",
+    "language_code": "en",
+    "status": "approved",
+    "review_flags": []
+  },
+  "hook_stories": [
+    {
+      "id": "hook_a",
+      "culture_hint": "sports",
+      "text": "In an icy winter morning, a young skater named Amara is practicing on the local hockey rink. She pushes off from the boards with her stick. She glides smoothly across the ice without using her hands. But after a few seconds, she begins to slow down and eventually stops. Why does this happen? What makes Amara start moving? What makes her stop? What is the invisible thing that helps her move and what might bring her to a stop?",
+      "closing_line": "What is the invisible thing that helps her move and what might bring her to a stop?"
+    },
+    {
+      "id": "hook_b",
+      "culture_hint": "canadian",
+      "text": "In a backyard in Thunder Bay, a child named Kael is trying to push a heavy sled loaded with toys up a snowy hill. Even though he pushes as hard as he can, the sled doesn’t move very far. Why is that? What force is being applied? Is there something else that’s making it hard for the sled to move forward? What kind of force could help him push the sled up the hill?",
+      "closing_line": "What kind of force could help him push the sled up the hill?"
+    }
+  ],
+  "concept": {
+    "explanation_steps": [
+      "A force is a push or a pull on an object.",
+      "There are two types of forces—contact and non-contact forces.",
+      "Contact forces occur when objects touch each other, such as pushing or pulling.",
+      "Non-contact forces act at a distance without touching, such as gravity or magnetism.",
+      "Common forces include gravity, friction, and air resistance, which all affect how objects move."
+    ],
+    "whiteboard_text": "Force = Push or Pull\nContact Forces: Touch\nNon-Contact Forces: No Touch\nExamples: Gravity, Friction, Air Resistance",
+    "comprehension_check": "What is a force?",
+    "reteach_angles": [
+      "A force is a push or a pull on an object",
+      "Think of forces like how you move things—like pushing a door or pulling a sled."
+    ]
+  },
+  "problems": [
+    {
+      "id": "p_guided_1",
+      "stage": "guided",
+      "difficulty": "medium",
+      "text": "Sofia is sliding down a playground slide. As she goes down, she starts to slow down. Which force is mainly causing her to slow down?",
+      "answer": "B",
+      "answer_explanation": "Friction is the force that resists motion between two surfaces in contact. When Sofia slides, the friction between her and the slide surface causes her to slow down.",
+      "mc_choices": [
+        "B. Friction",
+        "A. Gravity",
+        "C. Air resistance",
+        "D. Her push on the slide"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Students often confuse the direction of friction with direction of motion and may think that friction always pushes objects forward or that a push causes slowing.",
+      "intervention_hints": {
+        "level_1": "Friction is often a problem on slides. What happens when you put sandpaper on a slide?",
+        "level_2": "The slide doesn’t stay smooth when Sofia is sliding on it. That’s friction.",
+        "level_3": "Think about how you go down a slide. What stops you at the end?"
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_1",
+      "stage": "practice",
+      "difficulty": "easy",
+      "text": "Which of the following is an example of a non-contact force?",
+      "answer": "C",
+      "answer_explanation": "A magnet attracting a nail is a non-contact force because the magnet does not touch the nail to exert a force.",
+      "mc_choices": [
+        "C. A magnet attracting a nail",
+        "A. A baseball being hit by a bat",
+        "B. A child pushing a shopping cart",
+        "D. A hand pulling a sled"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Students may incorrectly think that any force that pulls or pushes is a contact force, or they might not recognize a magnet attracting an object as an example of a non-contact force.",
+      "intervention_hints": {
+        "level_1": "Think about forces that work without touching. When you use a magnet, does it have to touch the nail?",
+        "level_2": "Which of these forces is acting without you touching the object?",
+        "level_3": "A magnet can pull on something without actually touching it. That is a non-contact force."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_2",
+      "stage": "practice",
+      "difficulty": "easy",
+      "text": "A hockey puck on the ice is gliding toward the goal. What force will MOST likely cause it to stop?",
+      "answer": "B",
+      "answer_explanation": "Though friction is often small on ice, it still acts on the puck, eventually slowing it down and bringing it to a stop.",
+      "mc_choices": [
+        "B. Friction",
+        "A. Gravity",
+        "C. Air resistance",
+        "D. A player’s stick"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Students might think that friction is absent on ice or may confuse air resistance or gravity with the force stopping the puck.",
+      "intervention_hints": {
+        "level_1": "What happens when something rolls over sand? It slows down.",
+        "level_2": "Ice is smooth — it’s not like sand, so which force helps things stop?",
+        "level_3": "The puck is sliding — it needs what kind of force to slow it down?"
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_3",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "Which of the following forces is acting when a ball falls from your hand?",
+      "answer": "C",
+      "answer_explanation": "Gravity is the invisible force that pulls the ball downward towards the ground.",
+      "mc_choices": [
+        "C. Gravity",
+        "A. Air resistance",
+        "B. Friction",
+        "D. A pull from a magnet"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Some students may incorrectly identify air resistance or another force as the reason for a falling object, not understanding that gravity is the dominant force that pulls objects to the Earth.",
+      "intervention_hints": {
+        "level_1": "When you drop something, what makes it fall?",
+        "level_2": "Gravity is the unseen force that pulls things to the ground.",
+        "level_3": "When you throw something up, what pulls it back down?"
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_capstone_1",
+      "stage": "capstone",
+      "difficulty": "capstone",
+      "text": "In a physics experiment, two cars are moving toward each other on a track. One car is moving fast and the other is moving slowly. When they crash, what will cause the cars to change direction?",
+      "answer": "D",
+      "answer_explanation": "When unbalanced forces act on the cars, they cause a change in motion, such as changing direction or stopping. If forces are balanced, there is no change in motion.",
+      "mc_choices": [
+        "D. Unbalanced forces between the cars",
+        "A. Gravity alone",
+        "B. Balanced forces between the cars",
+        "C. Air resistance"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Students often think that balanced forces are needed to cause changes in motion, or they may not realize that changes in direction and speed are only caused by unbalanced forces.",
+      "intervention_hints": {
+        "level_1": "Did you ever see a ball bounce off a wall? Why did it go in a new direction?",
+        "level_2": "If two forces are acting on something but they're the same, what does that cause?",
+        "level_3": "In a car crash, what does it mean when forces are different?"
+      },
+      "nova_guiding_question": "What forces are acting on each car? Are these forces equal or different?"
+    },
+    {
+      "id": "p_capstone_2",
+      "stage": "capstone",
+      "difficulty": "capstone",
+      "text": "A child pushes a toy car forward, and the car moves in the same direction. What could explain why the car stops after moving forward?",
+      "answer": "B",
+      "answer_explanation": "Friction is the force that resists motion. When the car moves forward and stops, friction between the car and the surface it’s moving on is what causes it to slow down and eventually stop.",
+      "mc_choices": [
+        "B. Friction",
+        "A. Air resistance",
+        "C. Gravity",
+        "D. A push from behind"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Some students may think that the car stops due to gravity or air resistance, rather than the frictional force opposing motion.",
+      "intervention_hints": {
+        "level_1": "Even when a car is moving forward, what force constantly works against its motion?",
+        "level_2": "Think about how a toy car slows down when you slide it on a table.",
+        "level_3": "If a ball rolls on the ground, what stops it eventually?"
+      },
+      "nova_guiding_question": ""
+    }
+  ]
+}

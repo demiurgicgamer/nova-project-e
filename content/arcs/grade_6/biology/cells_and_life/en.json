@@ -1,0 +1,175 @@
+{
+  "meta": {
+    "subject": "biology",
+    "topic_key": "cells_and_life",
+    "topic_display": "Cells and Life",
+    "grade": 6,
+    "region": "canada",
+    "language_code": "en",
+    "status": "approved",
+    "review_flags": [
+      "Please verify anatomical and functional accuracy of plant and animal organelles in all lessons.",
+      "Confirm Canadian biodiversity context examples are age-appropriate and geographically relevant.",
+      "Ensure all multiple-choice distractors are plausible and based on real misconceptions.",
+      "Confirm the capstone problem aligns with Grade 6 curriculum expectations for cell biology.",
+      "Confirm that all language and terminology are within Grade 6 science vocabulary scope."
+    ]
+  },
+  "hook_stories": [
+    {
+      "id": "hook_a",
+      "culture_hint": "canadian",
+      "text": "Imagine you're on a field trip to a local science center in Toronto. You enter a large room where there are hundreds of tiny, glowing creatures moving under a microscope. The guide tells you about **cells**, the basic units of life. As you watch, a fish scale falls on the floor near you. The teacher says, “You know what? That scale had cells — and every time you scratch your knee, you’re dealing with the **repairs** of your own cells.” Suddenly, an alarm rings, and everyone is asked to head to a greenhouse nearby. When you're inside, the guide points to a red maple leaf (a common Canadian tree). “This leaf contains hundreds of **plant cells** – and each cell has special features that help it live.” She tells you that **chloroplasts** inside the leaf help the tree make food using sunlight – just like the solar panels on your home. You look closely and realize that even the **tiniest organisms**, like bacteria or yeast in the soil, are made of **cells** – and they're alive too. This is the world of **cells**.",
+      "closing_line": "This is the world of cells."
+    }
+  ],
+  "concept": {
+    "explanation_steps": [
+      "A cell is the basic building block of all living things. Living things can be made of just one cell, or trillions of cells.",
+      "There are two types of organisms: unicellular (one cell) like paramecium or yeast, and multicellular (many cells) like humans and trees.",
+      "Plant cells have features in addition to those of animal cells: a cell wall that protects and gives shape, and chloroplasts that make food using sunlight.",
+      "Organelles have specific functions: the nucleus controls cell activities, mitochondria make energy for the cell, the cell wall supports and protects plant cells, and chloroplasts make food for plant cells using sunlight.",
+      "Cells help us grow, heal, and function. When you get a cut, your body uses cells to heal and repair it. When you eat food, your cells break it down and use it for energy and growth."
+    ],
+    "whiteboard_text": "Cell = Basic Unit of Life. Animal: Nucleus, Mitochondria. Plant: Nucleus, Mitochondria, Cell Wall, Chloroplast.",
+    "comprehension_check": "Which of the following best describes what a cell is?",
+    "reteach_angles": [
+      "If we think of a building, the blocks that make up the building are like the cells in our body.",
+      "Think about a garden – every plant in the garden is made of tiny building blocks called cells."
+    ]
+  },
+  "problems": [
+    {
+      "id": "p_guided_1",
+      "stage": "guided",
+      "difficulty": "easy",
+      "text": "Lila is looking at a leaf under her microscope. She sees a structure in the cell that allows the plant to make food from sunlight. What is this structure?",
+      "answer": "C. Chloroplast",
+      "answer_explanation": "Chloroplasts are found in plant cells and use sunlight to make food (glucose) from carbon dioxide and water. This is called photosynthesis.",
+      "mc_choices": [
+        "C. Chloroplast",
+        "A. Mitochondria",
+        "B. Nucleus",
+        "D. Cell Wall"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Students might confuse the function of chloroplasts with that of mitochondria, thinking chloroplasts make energy.",
+      "intervention_hints": {
+        "level_1": "What part of the plant cell makes light into food?",
+        "level_2": "The chloroplast is like a kitchen – what does it use?",
+        "level_3": "If a leaf were a solar-powered house, what part would catch the sun’s light and turn it into food?"
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_1",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "Which of the following is TRUE about both plant and animal cells?",
+      "answer": "C. They both have a nucleus",
+      "answer_explanation": "The nucleus is found in all living cells (both plant and animal) and holds the DNA that controls cell activities.",
+      "mc_choices": [
+        "C. They both have a nucleus",
+        "A. They both have chloroplasts",
+        "B. They both have a cell wall",
+        "D. Only animal cells have mitochondria"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Students might think that chloroplasts are found in both plant and animal cells, or assume that only animal cells have mitochondria.",
+      "intervention_hints": {
+        "level_1": "What part is in ALL cells?",
+        "level_2": "The nucleus is like the brain – where is it in both types of cells?",
+        "level_3": "If a plant and animal are made of cells, which part must they both have?"
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_2",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "A student is comparing a cell from a mushroom (a fungus) with a cell from a maple tree. Which structure will be found in BOTH?",
+      "answer": "C. Nucleus",
+      "answer_explanation": "Every cell, whether from a tree or a mushroom, has a nucleus to store DNA and control cell activities.",
+      "mc_choices": [
+        "C. Nucleus",
+        "A. Cell wall",
+        "B. Chloroplast",
+        "D. Mitochondria"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Students may incorrectly believe that all types of cells contain chloroplasts or cell walls.",
+      "intervention_hints": {
+        "level_1": "Fungi and plants are both living things – what do they always have?",
+        "level_2": "What makes the cell work and give energy?",
+        "level_3": "How can we tell that they’re both made of cells if one is a mushroom and the other is a tree?"
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_3",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "A student is studying two organisms. One is made of just one cell (like an amoeba), and one is made of many cells (like a maple tree). What are they both made of?",
+      "answer": "C. Both are made of cells",
+      "answer_explanation": "All living things are made of cells, whether it's a single-celled organism like an amoeba or a multicellular organism like a tree.",
+      "mc_choices": [
+        "C. Both are made of cells",
+        "A. Both are made of bacteria cells",
+        "B. Both are made of animal cells",
+        "D. Both are made of plant cells"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Students may confuse how cells work in one type of organism with another or assume they must be identical unless stated otherwise.",
+      "intervention_hints": {
+        "level_1": "How are these two organisms alike?",
+        "level_2": "Think about the fish scale and a leaf – what do they have in common?",
+        "level_3": "Are there any other living things you've learned about that fit this description of being made of cells?"
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_capstone_1",
+      "stage": "capstone",
+      "difficulty": "hard",
+      "text": "A student is studying two organisms. One is made of just one cell (like an amoeba), and one is made of many cells (like a maple tree). What are they both made of? Two parts to the question: 1. How are they similar? 2. What is one way they are different?",
+      "answer": "1. C. Both are made of cells. 2. One is unicellular, one is multicellular.",
+      "answer_explanation": "Both organisms are made of cells – this is the definition of a cell. One organism has cells that form one structure, and the other organism has many cells working together in different ways.",
+      "mc_choices": [
+        "C. Both are made of cells",
+        "A. Both are made of bacteria cells",
+        "B. Both are made of animal cells",
+        "D. Both are made of plant cells"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Students might think that one organism is made of one type of cell while the other is made of another type.",
+      "intervention_hints": {
+        "level_1": "Think back to the fish scale and the leaf. How were they different, and how were they similar?",
+        "level_2": "What is the basic building block of all living things?",
+        "level_3": "If we compare an amoeba and a tree, both are living. What do they each have in common?"
+      },
+      "nova_guiding_question": "Think back to the fish scale and the leaf. How were they different, and how were they similar?"
+    },
+    {
+      "id": "p_capstone_2",
+      "stage": "capstone",
+      "difficulty": "hard",
+      "text": "Luis draws a diagram of a plant and an animal cell. What part should he include in BOTH types of cells?",
+      "answer": "C. Nucleus",
+      "answer_explanation": "The nucleus is found in all cells (plant, animal, fungal, bacterial), where it controls the activities and stores genetic information.",
+      "mc_choices": [
+        "C. Nucleus",
+        "A. Cell Wall",
+        "B. Chloroplast",
+        "D. Mitochondria"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Some students might believe that only plant cells contain chloroplasts or that only animal cells contain mitochondria.",
+      "intervention_hints": {
+        "level_1": "Are all cells the same inside or are there key differences?",
+        "level_2": "What does the nucleus do?",
+        "level_3": "If you look at a diagram of plant and animal cells, which feature do they both share?"
+      },
+      "nova_guiding_question": ""
+    }
+  ]
+}

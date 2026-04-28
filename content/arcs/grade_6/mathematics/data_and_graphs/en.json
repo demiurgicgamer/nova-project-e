@@ -1,0 +1,123 @@
+{
+  "meta": {
+    "subject": "mathematics",
+    "topic_key": "data_and_graphs",
+    "topic_display": "Data and Graphs",
+    "grade": 6,
+    "region": "canada",
+    "language_code": "en",
+    "status": "approved",
+    "review_flags": []
+  },
+  "hook_stories": [
+    {
+      "id": "hook_a",
+      "culture_hint": "canadian",
+      "text": "It's January in Vancouver, and the weather is cold and snowy. In the morning, a science teacher brings a chart to the class showing temperature data over a week. \"We've been collecting the high temperatures every day for a week,\" she says. \"Let's take a look.\"\n\nThe chart shows the temperatures for the days:\n- Monday: 3°C\n- Tuesday: 0°C\n- Wednesday: -2°C\n- Thursday: 1°C\n- Friday: 4°C\n- Saturday: 5°C\n- Sunday: 2°C\n\n\"Now, you see the chart?\" the teacher asks. \"Which day had the highest temperature? And which day had the lowest? Do you notice any patterns in the temperatures over the week?\"\n\nThe children start to make observations, but suddenly a student raises her hand and wonders, \"How do we even know which graph is the best way to show this data?\"\n\n\"That's a really good question,\" says the teacher. \"We use graphs to help us understand and compare data. Today, we're going to learn how.\"",
+      "closing_line": "We use graphs to help us understand and compare data. Today, we're going to learn how."
+    }
+  ],
+  "concept": {
+    "explanation_steps": [
+      "A bar graph shows categories on one axis and the amounts or numbers on the other axis.",
+      "Each bar represents the amount of data for a specific category.",
+      "The height of the bar tells you how many items are in that category."
+    ],
+    "whiteboard_text": "Bar graphs help compare amounts. Each bar's height represents the count of items in a category.",
+    "comprehension_check": "In a bar graph showing the number of pets students own, what does the height of each bar represent?",
+    "reteach_angles": [
+      "Think of each bar as showing a count, like a tally of how many students have a certain type of pet.",
+      "Imagine you're stacking blocks by color — the height shows how many of each color block there are."
+    ]
+  },
+  "problems": [
+    {
+      "id": "p_guided_1",
+      "stage": "guided",
+      "difficulty": "medium",
+      "text": "A survey was done to find out how many hours students spent reading each day. Here are the results:\n\n| Hours Spent Reading | Number of Students |\n|---------------------|--------------------|\n| 0–1 hour            | 5                  |\n| 1–2 hours           | 8                  |\n| 2–3 hours           | 3                  |\n| 3–4 hours           | 4                  |\n\nWhich type of graph would best show this data?",
+      "answer": "A",
+      "answer_explanation": "A bar graph is best because it compares different categories (hours spent reading) with the number of students in each category. It makes it easy to see which range had the most and least students.",
+      "mc_choices": [
+        "A. Bar graph",
+        "B. Pie chart",
+        "C. Line graph",
+        "D. Line plot"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Students might choose a pie chart because they know it shows parts of a whole, but the data here shows discrete categories, not parts of a total.",
+      "intervention_hints": {
+        "level_1": "What kind of data are we showing? Is it amounts that can be compared and grouped like here?",
+        "level_2": "Look at what the data is — we have categories (hours) and numbers of students. What kind of chart shows categories and how many in each category?",
+        "level_3": "We want to show how many students read how many hours. We don't want a smooth line or show parts of a whole — what chart best shows this grouping?"
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_1",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "A line graph shows the number of students at a school from 2015 to 2020. In 2018, there were 450 students. Which statement is best supported by a line graph?",
+      "answer": "B",
+      "answer_explanation": "A line graph shows values over time. The point at 2018 with a height of 450 directly tells us how many students were in that year.",
+      "mc_choices": [
+        "A. In 2018, there were more students than in 2016",
+        "B. The school had 450 students in 2018",
+        "C. The most students were in 2020",
+        "D. The school’s student number went up every year"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Students might choose A or D because they may misinterpret trend lines or compare values they don't see directly on the graph.",
+      "intervention_hints": {
+        "level_1": "A line graph shows changes over time. What can we read directly from a point on the graph?",
+        "level_2": "If we see a point at 2018 with a height of 450, what does that number tell us?",
+        "level_3": "We are told that there were 450 students in 2018. Is this a direct value we can read? What else is true?"
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_2",
+      "stage": "practice",
+      "difficulty": "medium_hard",
+      "text": "A pie chart shows the favorite lunch foods of students in Grade 6. If 30% of the students like sandwiches, and there are 60 students in total, how many students like sandwiches?",
+      "answer": "A",
+      "answer_explanation": "To find 30% of 60, convert 30% to a decimal (0.3), then multiply by 60: 0.3 × 60 = 18.",
+      "mc_choices": [
+        "A. 18",
+        "B. 20",
+        "C. 30",
+        "D. 15"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Some students might think 30% of 60 means just taking the 30 and putting it over 60, or they might confuse percentages with ratios.",
+      "intervention_hints": {
+        "level_1": "If 30% of 60 students like sandwiches, think of 30% as 30 out of 100. Then find what part of 60 is 30.",
+        "level_2": "You know 30% is like 30 out of 100. So 30% of 60 = (30/100) × 60.",
+        "level_3": "Break it down: 30% of 60 means 30 parts out of 100 of 60. That’s 30 × (60/100)."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_3",
+      "stage": "practice",
+      "difficulty": "medium_hard",
+      "text": "The table below shows how many hours students study on a typical school night.\n\n| Hours Studied | Number of Students |\n|---------------|--------------------|\n| 0–1 hour      | 4                  |\n| 1–2 hours     | 6                  |\n| 2–3 hours     | 8                  |\n| 3–4 hours     | 3                  |\n\nPart A: What type of graph would be best to show this data?\nPart B: If the teacher wants to create a pie chart based on this information, what percentage of students studied 2–3 hours?",
+      "answer": "D",
+      "answer_explanation": "Part A: A bar graph is appropriate for comparing groups (study hours). Part B: There are 4 + 6 + 8 + 3 = 21 total students. The number who studied 2–3 hours is 8. So, 8 out of 21 is about 38%, and 33% is the closest match.",
+      "mc_choices": [
+        "A. Part A: Line graph; Part B: 30%",
+        "B. Part A: Bar graph; Part B: 33%",
+        "C. Part A: Pie chart; Part B: 25%",
+        "D. Part A: Bar graph; Part B: 40%"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Students may confuse how to work out percentages or think that 8 students from 21 total equals 40% without calculating.",
+      "intervention_hints": {
+        "level_1": "How many total students are in the class based on the table?",
+        "level_2": "After you know the total, think about how many studied 2–3 hours, and then work out the percentage.",
+        "level_3": "What does the total help us do with the percentage?"
+      },
+      "nova_guiding_question": "How many total students are in the class based on the table?"
+    }
+  ]
+}

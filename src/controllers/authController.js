@@ -15,8 +15,10 @@ const buildTokenPair = (parent) => {
     };
 };
 
-const sanitizeParent = ({ id, email, subscription_active, consent_date, created_at }) =>
-    ({ id, email, subscriptionActive: subscription_active, consentDate: consent_date, createdAt: created_at });
+const VALID_REGIONS = ['canada', 'quebec', 'us', 'india', 'global'];
+
+const sanitizeParent = ({ id, email, subscription_active, consent_date, curriculum_region, created_at }) =>
+    ({ id, email, subscriptionActive: subscription_active, consentDate: consent_date, curriculumRegion: curriculum_region ?? 'canada', createdAt: created_at });
 
 // ── Controllers ───────────────────────────────────────────────────────────────
 
@@ -101,6 +103,49 @@ export const login = async (req, res) => {
         parent: sanitizeParent(parent),
         ...tokens,
     });
+};
+
+/**
+ * GET /api/auth/profile
+ * Returns the current parent's profile including curriculum_region.
+ * Header: Authorization: Bearer <access_token>
+ */
+export const getProfile = async (req, res) => {
+    const result = await query('SELECT * FROM parent_profiles WHERE id = $1', [req.user.sub]);
+    if (result.rows.length === 0) {
+        return res.status(404).json({ error: 'Profile not found.' });
+    }
+    return res.status(200).json({ parent: sanitizeParent(result.rows[0]) });
+};
+
+/**
+ * PATCH /api/auth/profile
+ * Updates curriculum_region for the current parent.
+ * Body: { curriculumRegion: 'canada' | 'quebec' | 'india' | 'global' }
+ * Header: Authorization: Bearer <access_token>
+ */
+export const updateProfile = async (req, res) => {
+    const { curriculumRegion } = req.body;
+
+    if (!curriculumRegion || !VALID_REGIONS.includes(curriculumRegion)) {
+        return res.status(400).json({
+            error: `curriculumRegion must be one of: ${VALID_REGIONS.join(', ')}`
+        });
+    }
+
+    const result = await query(
+        `UPDATE parent_profiles
+            SET curriculum_region = $1
+          WHERE id = $2
+          RETURNING *`,
+        [curriculumRegion, req.user.sub]
+    );
+
+    if (result.rows.length === 0) {
+        return res.status(404).json({ error: 'Profile not found.' });
+    }
+
+    return res.status(200).json({ parent: sanitizeParent(result.rows[0]) });
 };
 
 /**

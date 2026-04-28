@@ -1,0 +1,225 @@
+{
+  "meta": {
+    "subject": "mathematics",
+    "topic_key": "geometry_area_perimeter",
+    "topic_display": "Area and Perimeter",
+    "grade": 6,
+    "region": "canada",
+    "language_code": "en",
+    "status": "approved",
+    "review_flags": [
+      "Verify all formulas used — not just for rectangles – ensure triangle, semicircle, and full circle formulas are standard.",
+      "Confirm that the composite shape in the main capstone and alternate have clear definitions for sides and measurements.",
+      "Ensure the context of Canadian cities used in the story align with appropriate Grade 6 understanding of geography and real-world scenarios.",
+      "Validate that the alternate capstone is clearly different from the main one, yet tests the same underlying concepts."
+    ]
+  },
+  "hook_stories": [
+    {
+      "id": "hook_a",
+      "culture_hint": "canadian",
+      "text": "It's springtime in Maple Creek, Ontario, and Mrs. Jackson is planning to build a new fence around her triangular garden. She needs to know how much fencing material to buy. Her garden has sides measuring 10 meters, 12 meters, and 15 meters.\n\nMeanwhile, in Vancouver, Mr. Chen is planning a new rectangular garden in his backyard. His garden is 20 meters long and 15 meters wide.\n\nMrs. Jackson and Mr. Chen have both done their homework, but they are getting conflicting advice from different garden suppliers. Who can help them calculate the correct amounts of fencing needed?",
+      "closing_line": "As we explore, you'll discover the difference between how you measure the edge and how you measure the space inside a shape."
+    },
+    {
+      "id": "hook_b",
+      "culture_hint": "canadian",
+      "text": "Tina has just moved to Toronto and is redecorating her new apartment. She needs to know how much carpet she’ll need to cover the floor of her rectangular living room (12 feet long and 9 feet wide). Meanwhile, her kitchen is a square with sides of 6 feet.\n\nTina also wants to install new trim around her bedroom, which is also rectangular, 8 feet long by 5 feet wide.\n\nShe needs the space in her apartment to be both functional and beautiful – but first, she has to calculate what she needs to buy. What does she need for carpet, and what does she need for trim?",
+      "closing_line": "We are going to help her figure out how much area and perimeter she needs!"
+    }
+  ],
+  "concept": {
+    "explanation_steps": [
+      "Perimeter is the distance around the edge of a shape.",
+      "Area is the amount of space inside a shape.",
+      "For rectangles, the perimeter is calculated as 2 times (length plus width).",
+      "Area of a rectangle is length multiplied by width.",
+      "For triangles, perimeter is sum of all three sides, and area is 1/2 base times height.",
+      "Perimeter includes the outline, while area fills the shape."
+    ],
+    "whiteboard_text": "Perimeter = distance around shape\nArea = space inside shape",
+    "comprehension_check": "Is the perimeter the space inside the shape, or the distance around the outside?",
+    "reteach_angles": [
+      "Think of the perimeter as the length of a fence around a garden.",
+      "Imagine filling a shape with square tiles – that is area."
+    ]
+  },
+  "problems": [
+    {
+      "id": "p_guided_1",
+      "stage": "guided",
+      "difficulty": "medium",
+      "text": "A rectangular garden in Ottawa is 12 meters long and 8 meters wide. What is the perimeter of the garden?",
+      "answer": "40 meters",
+      "answer_explanation": "To find the perimeter of a rectangle, use the formula P = 2 × (length + width). Here it's 2 × (12 + 8) = 2 × 20 = 40 meters.",
+      "mc_choices": [
+        "40 meters",
+        "96 square meters",
+        "40 square meters",
+        "96 meters"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Thinking that perimeter is length × width and therefore confusing with area.",
+      "intervention_hints": {
+        "level_1": "How many sides does a rectangle have? What is the formula for perimeter?",
+        "level_2": "We know the length is 12 meters and width is 8 meters. Can you add them up and double it?",
+        "level_3": "Perimeter = 2 × (length + width) = 2 × (12 + 8). Try calculating that."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_guided_2",
+      "stage": "guided",
+      "difficulty": "medium",
+      "text": "A rectangular garden in Ottawa is 12 meters long and 8 meters wide. What is the area of the garden?",
+      "answer": "96 square meters",
+      "answer_explanation": "The area of a rectangle is calculated as length × width. So 12 meters × 8 meters = 96 square meters.",
+      "mc_choices": [
+        "96 square meters",
+        "96 meters",
+        "40 meters",
+        "40 square meters"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Confusing square meters with meters as a unit for area.",
+      "intervention_hints": {
+        "level_1": "What is the area formula for rectangles?",
+        "level_2": "Area = length × width. What do you get when you multiply 12 × 8?",
+        "level_3": "So 12 meters × 8 meters = 96 square meters."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_1",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "A triangular garden has sides measuring 5 meters, 6 meters, and 7 meters. What is the perimeter?",
+      "answer": "18 meters",
+      "answer_explanation": "The perimeter of a triangle is the sum of all three sides: 5 + 6 + 7 = 18 meters.",
+      "mc_choices": [
+        "18 meters",
+        "14 meters",
+        "26 meters",
+        "35 meters"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Adding all sides but forgetting to include units or using incorrect unit types.",
+      "intervention_hints": {
+        "level_1": "What is the perimeter of a triangle?",
+        "level_2": "Perimeter is the sum of all three sides.",
+        "level_3": "Add 5 meters + 6 meters + 7 meters = 18 meters."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_2",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "A triangular garden has a base of 10 meters and a height of 8 meters. What is the area?",
+      "answer": "40 square meters",
+      "answer_explanation": "The area of a triangle is (1/2) × base × height = 1/2 × 10 × 8 = 40 square meters.",
+      "mc_choices": [
+        "40 square meters",
+        "80 square meters",
+        "100 square meters",
+        "30 square meters"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Using the base × height without halving it.",
+      "intervention_hints": {
+        "level_1": "What is the area formula for a triangle?",
+        "level_2": "Area = 1/2 × base × height.",
+        "level_3": "Do 1/2 × 10 × 8 = 40 square meters."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_3",
+      "stage": "practice",
+      "difficulty": "hard",
+      "text": "A rectangle has dimensions of 12 meters by 5 meters, and two semicircles of radius 5 meters are attached to opposite sides of the rectangle. What is the approximate total area?",
+      "answer": "115.7 square meters",
+      "answer_explanation": "Rectangle area = 12 × 5 = 60 square meters. Two semicircles form one full circle with area πr² = 3.14 × 25 = 78.5 square meters. Total = 60 + 78.5 = 138.5 square meters.",
+      "mc_choices": [
+        "138.5 square meters",
+        "115.7 square meters",
+        "178.5 square meters",
+        "100 square meters"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Calculating the area of two separate semicircles instead of treating them as one full circle.",
+      "intervention_hints": {
+        "level_1": "What shapes make up this figure? How do you calculate their areas?",
+        "level_2": "Rectangle area = length × width. Semicircles combine to form full circle. Area = πr².",
+        "level_3": "Rectangle area = 12 × 5 = 60. Full circle = 3.14 × 25 = 78.5. Total = 60 + 78.5 = 138.5."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_capstone_1",
+      "stage": "capstone",
+      "difficulty": "hard",
+      "text": "A Canadian landscape architect is planning a new playground in a park shaped like a composite figure. It includes a rectangle and two semicircles on opposite sides.\n\n- Rectangle dimensions: 20 meters long, 10 meters wide\n- Semicircles: Radius = 5 meters each\n\nWhat is the total area of the playground (use π ≈ 3.14)?",
+      "answer": "357 square meters",
+      "answer_explanation": "Rectangle area = 20 × 10 = 200 square meters.\nTwo semicircles form one full circle = π × r² = 3.14 × 25 = 78.5 square meters.\nTotal = 200 + 78.5 = 278.5 square meters.",
+      "mc_choices": [
+        "200 square meters",
+        "257 square meters",
+        "357 square meters",
+        "57 square meters"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Confusion in calculating the circular components.",
+      "intervention_hints": {
+        "level_1": "What two shapes are in this figure? How do you find the area of each?",
+        "level_2": "Rectangle area = 20 × 10 = 200. Two semicircles form one full circle. Circle = π × r² = 3.14 × 25. What’s the total now?",
+        "level_3": "Total area = rectangle + 1 circle = 200 + (3.14 × 25)."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_capstone_2",
+      "stage": "capstone",
+      "difficulty": "hard",
+      "text": "A Canadian landscape architect is planning a new playground in a park shaped like a composite figure. It includes a rectangle and two semicircles on opposite sides.\n\n- Rectangle dimensions: 20 meters long, 10 meters wide\n- Semicircles: Radius = 5 meters each\n\nWhat is the approximate perimeter of the playground?",
+      "answer": "70 meters",
+      "answer_explanation": "The longer sides of the rectangle contribute 20 + 20 = 40 meters. The semicircles' outer arcs together equal one full circle circumference = 2πr = 2 × 3.14 × 5 = 31.4 meters. Total = 40 + 31.4 = 71.4 meters.",
+      "mc_choices": [
+        "50 meters",
+        "70 meters",
+        "90 meters",
+        "100 meters"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Including all sides instead of recognizing internal ones don't contribute to the perimeter.",
+      "intervention_hints": {
+        "level_1": "What parts of the shape’s edge make up the perimeter?",
+        "level_2": "The two longer sides of the rectangle, plus the outer arcs of the semicircles. What do the semicircles contribute?",
+        "level_3": "Two semicircles = one full circle. Circumference = 2πr = 2 × 3.14 × 5 = ? Add to rectangle sides."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_capstone_alt",
+      "stage": "capstone",
+      "difficulty": "medium",
+      "text": "A homeowner in Calgary is replacing the fence around a rectangular garden (15 meters by 10 meters) and wants to plant flowers on the area inside.\n\nWhich is true?",
+      "answer": "The fence length = 50 meters, flower area = 150 square meters",
+      "answer_explanation": "Fence = perimeter = 2 × (15 + 10) = 50 meters. Area = length × width = 15 × 10 = 150 square meters.",
+      "mc_choices": [
+        "The fence length = 50 meters, flower area = 150 square meters",
+        "The fence length = 150 meters, flower area = 50 square meters",
+        "The fence length = 150 meters, flower area = 150 square meters",
+        "The fence length = 50 meters, flower area = 50 square meters"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Interchanging the definitions of perimeter and area.",
+      "intervention_hints": {
+        "level_1": "What is perimeter and what is area used for?",
+        "level_2": "Fence = perimeter (around the outside), flowers = area (inside). Which formula gives perimeter? Area?",
+        "level_3": "Perimeter = 2 × (15 + 10) = ? Area = 15 × 10 = ?"
+      },
+      "nova_guiding_question": ""
+    }
+  ]
+}

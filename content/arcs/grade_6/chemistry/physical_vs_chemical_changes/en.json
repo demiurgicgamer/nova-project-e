@@ -1,0 +1,169 @@
+{
+  "meta": {
+    "subject": "chemistry",
+    "topic_key": "physical_vs_chemical_changes",
+    "topic_display": "Physical and Chemical Changes",
+    "grade": 6,
+    "region": "canada",
+    "language_code": "en",
+    "status": "approved",
+    "review_flags": []
+  },
+  "hook_stories": [
+    {
+      "id": "hook_a",
+      "culture_hint": "canadian",
+      "text": "In a small Canadian town, the annual community bake-off is coming up! Emma and her friend Mia are preparing their favourite cookies. Emma’s cookies are golden brown and smell amazing — they’re ready! Mia’s cookies seem raw and pale. Their science teacher, Mr. Chen, says they should check what happened in the oven. The mystery deepens when they realize that one of the ingredients — baking soda — has turned a different colour! Why did the cookies turn out differently? Is it because of the baking soda? Is this a good change or a bad one? What’s really happening in this kitchen?",
+      "closing_line": "In this story, the change in the cookies (browning, texture change, colour) represents what happens during chemical and physical changes. Baking soda being used in a reaction is a key hint that it’s a chemical change. The question of “What really happened?” sets up curiosity."
+    }
+  ],
+  "concept": {
+    "explanation_steps": [
+      "In this lesson, we will learn about the difference between physical and chemical changes when matter changes.",
+      "Physical Change: The substance changes form but stays the same inside (like ice melting or paper tearing). These changes can be reversed.",
+      "Chemical Change: The substance becomes a new thing (like iron rusting or food cooking). You can’t easily undo it.",
+      "Key Signs of a Chemical Change: A colour change, heat or light being produced, gas being made, a new solid forming (called a precipitate).",
+      "In Canada, many people cook using ingredients that involve chemical changes, for example, using yeast in bread or baking soda for crispy cookies. These are great examples of everyday chemical changes."
+    ],
+    "whiteboard_text": "Physical Change: Ice melts, Paper tears\nChemical Change: Bread bakes, Rust forms",
+    "comprehension_check": "Which is a chemical change?",
+    "reteach_angles": [
+      "Think of something that you can't easily reverse - that is likely a chemical change.",
+      "Physical changes just change the appearance, but chemical changes make completely new substances."
+    ]
+  },
+  "problems": [
+    {
+      "id": "p_guided_1",
+      "stage": "guided",
+      "difficulty": "medium",
+      "text": "Which of these is a good example of a chemical change?",
+      "answer": "C. A leaf falling and rotting",
+      "answer_explanation": "When a leaf rots, it changes into a different substance (the leaf becomes compost). This is a chemical change. A, B, and D are physical changes because the substance stays the same, even though it may change shape or form.",
+      "mc_choices": [
+        "C. A leaf falling and rotting",
+        "A. A rock being crushed into powder",
+        "B. Metal being bent into a shape",
+        "D. Water freezing into ice"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Many students confuse physical and chemical changes due to size or shape changes.",
+      "intervention_hints": {
+        "level_1": "Did the leaf become something else, or is it still the same leaf?",
+        "level_2": "Can you undo the changes? Was the leaf able to become a leaf again?",
+        "level_3": "Look at the signs of change: did the leaf break down and become compost?"
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_2a",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "What signs would tell us that a chemical change has happened in a science experiment?",
+      "answer": "A. Temperature rises and a gas is produced",
+      "answer_explanation": "Temperature rise and gas production are strong indicators of a chemical change because they involve the breaking and forming of chemical bonds, resulting in new substances.",
+      "mc_choices": [
+        "A. Temperature rises and a gas is produced",
+        "B. The container shakes",
+        "C. A solid is added",
+        "D. Light is added to make something glow"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Students confuse signs of motion or energy being applied with chemical changes; adding a solid isn't necessarily indicative of chemical change; light may occur in reactions but isn't a standard indicator.",
+      "intervention_hints": {
+        "level_1": "What do you see that tells you something new was made?",
+        "level_2": "Is this something that happens in a baking soda volcano reaction?",
+        "level_3": "If you see heat or gas, what kind of change happened?"
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_2b",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "Your mom makes pancakes, and one spills and burns in the pan. Which of these best describes what happened?",
+      "answer": "B. It was a chemical change",
+      "answer_explanation": "When food burns, it turns into ash or carbon and creates a new substance. This can’t be undone easily — a chemical change.",
+      "mc_choices": [
+        "B. It was a chemical change",
+        "A. It was a physical change",
+        "C. Nothing changed",
+        "D. It was a phase change"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Students often confuse the result of burning (creation of new material) with the physical nature of food items.",
+      "intervention_hints": {
+        "level_1": "Did the pancake turn into something else? Could it become a pancake again?",
+        "level_2": "Did anything new form, or was it just cooked?",
+        "level_3": "Does this process make a completely new substance that can't be reversed easily?"
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_2c",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "Sarah is playing in her backyard and accidentally drops her bicycle tire. It pops and releases air. Then, she puts it back on the bike and rides it around the neighbourhood. What are the changes that occurred in the tire, and which category do they fall in?\nQuestion A: The tire deflated due to a pop → What kind of change?",
+      "answer": "B. Physical",
+      "answer_explanation": "Inflating and deflating a tire changes its shape, but the air and tire material are the same — this is a physical change.",
+      "mc_choices": [
+        "B. Physical",
+        "A. Chemical",
+        "C. Phase",
+        "D. Biological"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Students often confuse a change in shape with a change in type of material.",
+      "intervention_hints": {
+        "level_1": "Did the rubber and air change into something else? Or was it still the same stuff?",
+        "level_2": "Can the tire return to being inflated without any additional materials?",
+        "level_3": "Did anything new form inside the tire, or were the components still the same?"
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_2d",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "Sarah is playing in her backyard and accidentally drops her bicycle tire. It pops and releases air. Then, she puts it back on the bike and rides it around the neighbourhood. What are the changes that occurred in the tire, and which category do they fall in?\nQuestion B: The tire was placed back on the bike and inflated → What kind of change?",
+      "answer": "C. Physical",
+      "answer_explanation": "Inflating the tire fills it with air — that changes its shape, but no new substance is formed. Another physical change.",
+      "mc_choices": [
+        "C. Physical",
+        "A. Not a change",
+        "B. Chemical",
+        "D. Biological"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Some students believe that adding air creates a new material or change, rather than recognizing it as a physical change of volume.",
+      "intervention_hints": {
+        "level_1": "Did something new (in the tire) appear, or did it still stay the same?",
+        "level_2": "Does inflating change the composition of the air inside or just push it into a new space?",
+        "level_3": "Can this change be undone simply by deflating the tire again?"
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_capstone_1",
+      "stage": "capstone",
+      "difficulty": "medium",
+      "text": "Sarah is playing in her backyard and accidentally drops her bicycle tire. It pops and releases air. Then, she puts it back on the bike and rides it around the neighbourhood.\n\nWhat are the changes that occurred in the tire, and which category do they fall in?\n\n1. The tire deflated due to a pop → What kind of change?\n2. The tire was placed back on the bike and inflated → What kind of change?",
+      "answer": "B. Physical",
+      "answer_explanation": "Inflating and deflating a tire changes its shape, but the air and tire material are the same — this is a physical change.",
+      "mc_choices": [
+        "B. Physical",
+        "A. Chemical",
+        "C. Phase",
+        "D. Biological"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Students might confuse the physical nature of changes with their purpose or result.",
+      "intervention_hints": {
+        "level_1": "Did the rubber and air change into something else? Or was it still the same stuff?",
+        "level_2": "Did something new form inside the tire, or were the components still the same?",
+        "level_3": "Was the air pressure the only variable changing or was the material changing too?"
+      },
+      "nova_guiding_question": "Did the rubber and air change into something else? Or was it still the same stuff?"
+    }
+  ]
+}

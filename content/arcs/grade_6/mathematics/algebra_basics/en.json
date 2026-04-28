@@ -1,0 +1,153 @@
+{
+  "meta": {
+    "subject": "mathematics",
+    "topic_key": "algebra_basics",
+    "topic_display": "Algebra Basics",
+    "grade": 6,
+    "region": "canada",
+    "language_code": "en",
+    "status": "approved",
+    "review_flags": []
+  },
+  "hook_stories": [
+    {
+      "id": "hook_a",
+      "culture_hint": "community_event",
+      "text": "You're at the local community fair and there's a new game called The Mysterious Number Box. It works like this: A number is hidden inside a box. Someone gives you a clue that involves a mystery number - let's call it \"n.\" The clue says: \"I'm thinking of a number. If I double it and add 5, I get 17.\" If we use the letter 'n' to stand for the unknown number, then the clue can be written as: **2n + 5 = 17** The question is: What number is hidden in the box?",
+      "closing_line": "Both stories introduce the idea that letters can be used to stand for numbers that we don’t yet know — that’s what “variables” mean!"
+    },
+    {
+      "id": "hook_b",
+      "culture_hint": "school_event",
+      "text": "At school, you have a class bake sale! You’re in charge of making sure everyone gets a fair share. There are 12 cupcakes to be shared equally among the students. If we call the number of students in your class \"s\", then how many cupcakes does everyone get? The answer is: 12 ÷ s (or 12/s) This is a case where we have a **variable** (s) standing in for something that can change - like the number of students who show up! So, if 4 students show up, everyone gets 12 ÷ 4 = 3 cupcakes. But if 6 students show up, everyone gets 6 cupcakes.",
+      "closing_line": "Both stories introduce the idea that letters can be used to stand for numbers that we don’t yet know — that’s what “variables” mean!"
+    }
+  ],
+  "concept": {
+    "explanation_steps": [
+      "We're going to learn how to use letters like **n**, **s**, or **x** to stand in for mystery numbers.",
+      "These letters are called **variables** because they can **vary** — or change.",
+      "Here’s how we work with them: Writing expressions with variables: If we have 3 apples and some unknown number (let's call it x) of oranges, we write it as: 3 + x.",
+      "Evaluating expressions: If x = 5, then 3 + x = 3 + 5 = 8.",
+      "Substituting values: If someone says x = 8, we put 8 where we see x in the expression."
+    ],
+    "whiteboard_text": "Variables are letters that stand for mystery numbers. They can change! Example: 3 + x",
+    "comprehension_check": "What does the expression 4x + 2 mean when x = 3?",
+    "reteach_angles": [
+      "Think of x like a placeholder for a number that we don't know yet.",
+      "When an expression has a variable, we can find its value if we know what number it stands for."
+    ]
+  },
+  "problems": [
+    {
+      "id": "p_guided_1",
+      "stage": "guided",
+      "difficulty": "medium",
+      "text": "A teacher puts some pencils into boxes. She knows that she had 5 pencils per box and that she filled \"b\" boxes. What is an expression for the total number of pencils?",
+      "answer": "5 × b",
+      "answer_explanation": "The total number of pencils is equal to the number of pencils per box multiplied by the number of boxes.",
+      "mc_choices": [
+        "5 × b",
+        "5 + b",
+        "5 - b",
+        "5 ÷ b"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Confusing multiplication with addition or subtraction when dealing with equal groups.",
+      "intervention_hints": {
+        "level_1": "Think of how many pencils in each box and how many boxes there are.",
+        "level_2": "Multiplication tells us how many when you have equal groups.",
+        "level_3": "If there are 5 pencils in EACH box and b boxes, how many are there all together? You multiply them!"
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_1",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "If y = 7, what is the value of 3y - 2?",
+      "answer": "19",
+      "answer_explanation": "Substitute y = 7 into the expression: 3(7) - 2 = 21 - 2 = 19.",
+      "mc_choices": [
+        "3 × 7 - 2 = 19",
+        "3 + 7 - 2 = 8",
+        "21 - 2 = 19",
+        "3 × 7 × 2 = 42"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Not following the order of operations — adding before multiplying.",
+      "intervention_hints": {
+        "level_1": "Plug in 7 for y and go step by step.",
+        "level_2": "Order of operations: multiply before subtracting.",
+        "level_3": "3y = 3 × 7 = 21. Then 21 - 2 = 19."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_2a",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "Which expression best matches: \"Three times a number divided by four\"?",
+      "answer": "3n ÷ 4",
+      "answer_explanation": "Three times a number (3n) divided by four (÷ 4) is the correct translation of the verbal statement.",
+      "mc_choices": [
+        "3n ÷ 4",
+        "3n + 4",
+        "3 + n ÷ 4",
+        "3n - 4"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Misunderstanding how to translate words into mathematical symbols, especially division.",
+      "intervention_hints": {
+        "level_1": "Break it down: \"a number\" = n, \"three times\" = 3n, \"divided by four\" = ÷ 4.",
+        "level_2": "\"Three times\" means multiplication and \"divided by\" means division.",
+        "level_3": "You wrote \"three times a number\" = 3n. This should be 3n ÷ 4."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_2b",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "Solve the one-step equation: 4x = 20",
+      "answer": "5",
+      "answer_explanation": "To solve for x, divide both sides of the equation by 4: x = 20 ÷ 4 = 5.",
+      "mc_choices": [
+        "x = 5",
+        "x = 24",
+        "x = 16",
+        "x = 80"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Confusing the process of solving equations, particularly with division.",
+      "intervention_hints": {
+        "level_1": "Think: what number, when multiplied by 4, gives 20?",
+        "level_2": "Division works to \"undo\" multiplication.",
+        "level_3": "4x = 20 → x = 20 ÷ 4 = 5"
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_capstone_1",
+      "stage": "capstone",
+      "difficulty": "capstone",
+      "text": "A recipe for cookies needs 3 cups of flour. So far, the chef has added 1 cup. What fraction of the total amount has been used? How much more flour is needed?",
+      "answer": "2 cups more, and 1/3 of total used",
+      "answer_explanation": "Total flour needed is 3 cups. Used so far is 1 cup. So left to use is 3 - 1 = 2 cups. The fraction used is 1 ÷ 3 = 1/3.",
+      "mc_choices": [
+        "2 cups more, and 1/3 of total used",
+        "1 cup more, and 1/3 of total used",
+        "1 cup more, and 1/4 of total used",
+        "2 cups more, and 2/3 of total used"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Combining subtraction and fraction division incorrectly.",
+      "intervention_hints": {
+        "level_1": "What’s the total? What’s what’s been used so far? Start there.",
+        "level_2": "Subtract to find how much is left. Divide to find the fraction.",
+        "level_3": "Total = 3 cups. Already used = 1 cup. Left = 3 - 1 = 2 cups. Fraction = 1 ÷ 3 = 1/3."
+      },
+      "nova_guiding_question": "What’s the total? What’s what’s been used so far? Start there."
+    }
+  ]
+}

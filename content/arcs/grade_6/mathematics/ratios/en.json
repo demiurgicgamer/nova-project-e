@@ -1,0 +1,152 @@
+{
+  "meta": {
+    "subject": "mathematics",
+    "topic_key": "ratios",
+    "topic_display": "Ratios and Rates",
+    "grade": 6,
+    "region": "canada",
+    "language_code": "en",
+    "status": "approved",
+    "review_flags": []
+  },
+  "hook_stories": [
+    {
+      "id": "hook_a",
+      "culture_hint": "canadian",
+      "text": "In Canada, maple syrup is a special product. The ratio of sugar to water when making syrup is 1 part sugar to 4 parts water. So if you use 1 cup of sugar, you need 4 cups of water. Now imagine a family wants to make 5 cups of syrup mix. How would they split the sugar and water?",
+      "closing_line": "Welcome to the world of ratios and rates. In this world, we're looking at how different things compare to one another. We’ll find out how ratios make recipes, sports teams, and store prices more understandable."
+    },
+    {
+      "id": "hook_b",
+      "culture_hint": "sports",
+      "text": "A basketball team has 12 players, and 8 of them are from Ontario, 4 are from Quebec. What can we say about the team's composition using ratios? For example, how many players from Ontario are there for every one from Quebec?",
+      "closing_line": "Welcome to the world of ratios and rates. In this world, we're looking at how different things compare to one another. We’ll find out how ratios make recipes, sports teams, and store prices more understandable."
+    }
+  ],
+  "concept": {
+    "explanation_steps": [
+      "Ratios are used to compare amounts of different things.",
+      "They show how one quantity relates to another.",
+      "For example, if there are 9 girls and 12 boys in a class, the ratio of girls to boys is 9:12 or 9 to 12.",
+      "We can also express this ratio in different forms like words or numbers separated by a colon."
+    ],
+    "whiteboard_text": "Ratio of girls to boys = 9:12",
+    "comprehension_check": "What is the ratio of girls to boys in a class that has 9 girls and 12 boys?",
+    "reteach_angles": [
+      "Think of it as comparing groups. If we talk about girls to boys, that order matters.",
+      "Use visual models such as drawing dots or blocks to represent the quantities to help see the ratio."
+    ]
+  },
+  "problems": [
+    {
+      "id": "p_guided_1",
+      "stage": "guided",
+      "difficulty": "medium",
+      "text": "A recipe calls for 3 cups of flour for every 2 cups of sugar. If you have 9 cups of flour, how many cups of sugar do you need?",
+      "answer": "6 cups",
+      "answer_explanation": "The ratio of flour to sugar is 3:2. Since 9 cups of flour is three times the original amount (3 cups), we multiply the sugar part of the ratio by three as well. 2 times 3 equals 6 cups of sugar.",
+      "mc_choices": [
+        "6 cups",
+        "3 cups",
+        "5 cups",
+        "9 cups"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Students sometimes add the parts of the ratio instead of multiplying them.",
+      "intervention_hints": {
+        "level_1": "The flour and sugar are in a ratio of 3 to 2. You know how many cups of flour you have. What is the relationship?",
+        "level_2": "3 cups of flour = 2 cups of sugar. So, 9 cups of flour would be how many times 3?",
+        "level_3": "9 (flour) ÷ 3 = 3. So, multiply the sugar part by 3 too: 2 × 3 = 6 cups of sugar."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_1",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "In a race, a runner covers 150 meters in 30 seconds. What is her speed in meters per second?",
+      "answer": "5 meters/second",
+      "answer_explanation": "Speed = Distance ÷ Time. In this case, 150 meters divided by 30 seconds equals 5 meters per second.",
+      "mc_choices": [
+        "5 meters/second",
+        "3 meters/second",
+        "15 meters/second",
+        "4500 meters/second"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Some students might confuse speed with distance or unit rate.",
+      "intervention_hints": {
+        "level_1": "Speed = Distance ÷ Time. You know the distance and the time.",
+        "level_2": "Try calculating 150 ÷ 30.",
+        "level_3": "Do the math: 150 ÷ 30 = 5. So, the speed is 5 meters/second."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_2",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "In a class of 30 students, 18 are wearing blue shirts, and 12 are wearing red shirts. What is the ratio of blue to red shirts?",
+      "answer": "18:12",
+      "answer_explanation": "The ratio compares blue shirts to red shirts. We have 18 blue shirts and 12 red shirts. Therefore, the ratio is 18:12.",
+      "mc_choices": [
+        "18:12",
+        "12:18",
+        "18 to 30",
+        "12 to 30"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Students might list blue to total instead of blue to red, or get confused about order of numbers.",
+      "intervention_hints": {
+        "level_1": "The question asks for blue to red shirts, not blue to total.",
+        "level_2": "Think – how many of each kind? Blue is 18, red is 12.",
+        "level_3": "The ratio is blue to red: 18:12."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_3",
+      "stage": "practice",
+      "difficulty": "medium_hard",
+      "text": "A car travels 120 kilometers in 2 hours. What is the unit rate?",
+      "answer": "60 km/hour",
+      "answer_explanation": "Unit rate means the distance traveled for 1 hour. We divide the total distance (120 km) by the total time (2 hours). 120 ÷ 2 = 60. So, the unit rate is 60 km/hour.",
+      "mc_choices": [
+        "60 km/hour",
+        "60 km/2 hours",
+        "120 km/2 hours",
+        "120 km/hour"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Students might not understand that unit rate involves calculating one hour.",
+      "intervention_hints": {
+        "level_1": "The unit rate means we want the distance for 1 hour only.",
+        "level_2": "Divide 120 km by 2 hours to get the distance per hour.",
+        "level_3": "120 ÷ 2 = 60. So, 60 km/hour is the unit rate."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_capstone_1",
+      "stage": "capstone",
+      "difficulty": "capstone",
+      "text": "At a local farmers market, one vendor sells 5 pounds of apples for $3. Another vendor sells 8 pounds for $4. Which vendor offers the better price per pound?",
+      "answer": "Second vendor, $0.50/lb",
+      "answer_explanation": "To find out which vendor has the better price, calculate the price per pound for both vendors. First vendor: $3 ÷ 5 pounds = $0.60/lb. Second vendor: $4 ÷ 8 pounds = $0.50/lb. The second vendor offers the better price for each pound.",
+      "mc_choices": [
+        "Second vendor, $0.50/lb",
+        "First vendor, $0.60/lb",
+        "Both vendors are equal",
+        "Cannot be determined"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Students might forget to calculate the price per pound or compare ratios incorrectly.",
+      "intervention_hints": {
+        "level_1": "We need to find the price for 1 pound of apples from each vendor.",
+        "level_2": "Divide the total price of apples by the number of pounds for each vendor.",
+        "level_3": "Calculate first vendor’s price as $3 ÷ 5 = $0.60/lb. Calculate second vendor’s as $4 ÷ 8 = $0.50/lb."
+      },
+      "nova_guiding_question": "What is the price of each pound of apples from each vendor?"
+    }
+  ]
+}

@@ -1,0 +1,169 @@
+{
+  "meta": {
+    "subject": "physics",
+    "topic_key": "electricity_basics",
+    "topic_display": "Electricity Basics",
+    "grade": 6,
+    "region": "canada",
+    "language_code": "en",
+    "status": "approved",
+    "review_flags": []
+  },
+  "hook_stories": [
+    {
+      "id": "hook_a",
+      "culture_hint": "canadian",
+      "text": "Imagine this — you're at home and you flip a switch. The lights go on. You take out your phone to watch a video, and it powers up. You turn on the microwave for a snack. All of these things use something called *electricity*. But what exactly is electricity? How does it move through wires to power the things you use every day?",
+      "closing_line": "So in this arc, you will learn about the basics of electricity — how it flows, how it powers things, and how we can stay safe when working with it."
+    }
+  ],
+  "concept": {
+    "explanation_steps": [
+      "Electricity is the flow of tiny particles called electrons.",
+      "When electrons move through a conductor (like a wire), we call that electric current.",
+      "Voltage is like the \"push\" that makes the electrons move — it’s the force behind the electricity.",
+      "Resistance is the opposition to the flow of electricity — some materials make it harder for electrons to pass through, like rubber or wood.",
+      "We can think of electricity like water flowing in a pipe: the current is how much water flows, the voltage is how hard the water is being pushed, and the resistance is how much the pipe narrows or gets blocked."
+    ],
+    "whiteboard_text": "Electricity = flowing electrons\nCurrent = flow of electrons\nVoltage = push behind the electrons\nResistance = blockage to flow",
+    "comprehension_check": "Which of the following BEST describes voltage in a circuit?",
+    "reteach_angles": [
+      "Think of voltage as the pressure that pushes water through a pipe.",
+      "Voltage is how hard the ‘electron pump’ pushes electrons through a circuit."
+    ]
+  },
+  "problems": [
+    {
+      "id": "p_guided_1",
+      "stage": "guided",
+      "difficulty": "medium",
+      "text": "You're helping your dad wire up a new light fixture. You find a wire that has a label saying \"copper.\" Your dad tells you that copper is a good conductor. What does that mean?",
+      "answer": "It allows electricity to flow easily",
+      "answer_explanation": "Copper is a good conductor of electricity, meaning electrons can easily pass through it. Metals like copper are used in wires because of this quality.",
+      "mc_choices": [
+        "It allows electricity to flow easily",
+        "It blocks electricity",
+        "It stores electricity",
+        "It makes it harder for electrons to pass through"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Students might think that conductors block electricity, or that they store electricity.",
+      "intervention_hints": {
+        "level_1": "What happens when you try to push a toy through a smooth surface vs. a rough one?",
+        "level_2": "Think about the materials in your classroom — which ones let electricity flow easily vs. ones that stop it.",
+        "level_3": "Copper is used in wires because it easily lets electrons move through it — it's not hard to push electrons through it."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_2a",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "You are building a simple circuit with a battery, a bulb, and a wire. When you complete the circuit, the bulb lights up. What must happen in order for the bulb to light up?",
+      "answer": "The circuit must be complete (no gaps)",
+      "answer_explanation": "For electricity to flow and power a bulb, the circuit must form a complete loop with no breaks in the path.",
+      "mc_choices": [
+        "The circuit must be complete (no gaps)",
+        "Only the battery needs to be present",
+        "The wire must be made of rubber",
+        "The bulb must be a fluorescent type"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Some students may think one component is enough to power a bulb.",
+      "intervention_hints": {
+        "level_1": "Imagine if someone broke a string in a flashlight — what happens?",
+        "level_2": "A closed loop is needed for electricity to flow. It’s like a full circle or path.",
+        "level_3": "Electricity needs a full path, like a river needing a full channel so water can flow from one end to the other."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_2b",
+      "stage": "practice",
+      "difficulty": "medium_hard",
+      "text": "You are building a string of holiday lights. You notice that if one bulb burns out, all the others go out, too. What type of circuit do these lights use?",
+      "answer": "A series circuit",
+      "answer_explanation": "In a series circuit, electricity must flow through all components one by one. If one part fails, the whole circuit breaks.",
+      "mc_choices": [
+        "A series circuit",
+        "A parallel circuit",
+        "An open circuit",
+        "A resistor circuit"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Students may confuse series and parallel circuits; they may think that in a series circuit all lights would stay on.",
+      "intervention_hints": {
+        "level_1": "What happens in a chain of friendship bracelets when one breaks?",
+        "level_2": "In a series circuit, electricity must go through all parts one by one. If one breaks, the whole path stops.",
+        "level_3": "Think of a water pipe system — if you block one part, the water stops everywhere after that."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_2c",
+      "stage": "practice",
+      "difficulty": "medium_hard",
+      "text": "You're testing a new tool with a circuit tester. You touch one part with a metal spoon and another with a wooden stick. What will happen?",
+      "answer": "The metal spoon will light up, the wooden stick won't",
+      "answer_explanation": "Metals are conductors that allow electricity to flow through them, while wood is an insulator that blocks electricity.",
+      "mc_choices": [
+        "The metal spoon will light up, the wooden stick won't",
+        "Both will light up the tester",
+        "Neither will light up",
+        "The wooden stick will light up, the metal spoon won't"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Some students might think that wood or plastic can conduct electricity easily.",
+      "intervention_hints": {
+        "level_1": "Which of these would let water through: a solid rock or a garden hose?",
+        "level_2": "Metals allow electricity to flow easily, wood blocks electricity.",
+        "level_3": "Look in your home — what objects are made of metal that let electricity through, and what objects are made of wood, plastic, or rubber that block it?"
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_capstone_1",
+      "stage": "capstone",
+      "difficulty": "capstone",
+      "text": "You're planning a small science fair project — a flashlight powered by a battery. You connect the battery to a bulb using wires. You test one wire and the bulb lights up. Then, you add another wire in the same path, but the bulb does not light up anymore. What is likely the issue?",
+      "answer": "You've broken the circuit",
+      "answer_explanation": "Adding another wire in the same path may cause a break or a short in the circuit, stopping the flow of electricity.",
+      "mc_choices": [
+        "You've broken the circuit",
+        "The battery is too old",
+        "The wires are made of plastic",
+        "You switched to a different type of bulb"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Students may think that adding more wires always makes the circuit stronger or that a broken path is due to battery issues.",
+      "intervention_hints": {
+        "level_1": "What happens to electricity when the circuit is broken?",
+        "level_2": "If something blocks the path, then electricity cannot flow through the wires.",
+        "level_3": "A break in the pathway stops all electricity flow."
+      },
+      "nova_guiding_question": "What happens to electricity when the circuit is broken?"
+    },
+    {
+      "id": "p_capstone_2",
+      "stage": "capstone",
+      "difficulty": "capstone",
+      "text": "You are helping your friend make a toy car that runs on batteries and has two motors. To make it work, one wire must be connected to each motor. What kind of circuit setup are you using?",
+      "answer": "Parallel circuit",
+      "answer_explanation": "In a parallel circuit, each motor has its own path for electricity to flow from the battery. If one motor is broken, the other can still run.",
+      "mc_choices": [
+        "Parallel circuit",
+        "Series circuit",
+        "Open circuit",
+        "Combination circuit"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Some students might think that because each motor needs electricity, the circuit must be series and not independent.",
+      "intervention_hints": {
+        "level_1": "How does voltage behave in a circuit where multiple paths exist?",
+        "level_2": "If each device gets electricity independently, it's a parallel circuit.",
+        "level_3": "Think of your home’s lighting — if one light fails, others still work, that's a parallel setup."
+      },
+      "nova_guiding_question": ""
+    }
+  ]
+}

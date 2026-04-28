@@ -1,0 +1,130 @@
+{
+  "meta": {
+    "subject": "biology",
+    "topic_key": "human_body_systems",
+    "topic_display": "Human Body Systems",
+    "grade": 6,
+    "region": "canada",
+    "language_code": "en",
+    "status": "approved",
+    "review_flags": []
+  },
+  "hook_stories": [
+    {
+      "id": "hook_a",
+      "culture_hint": "universal",
+      "text": "Miguel is training for a local charity marathon run in 6 weeks. He's been working hard on his physical fitness and nutrition. One week before the big day, he gets a fever and decides to rest. His coach tells him this is normal, but Miguel starts wondering: Why does his body respond to getting sick like this? Miguel also notices that he can't breathe as well during the last few km of his training runs. He is curious: What happens inside his body during running that helps him breathe harder?",
+      "closing_line": "Miguel’s curiosity led him to learn about the amazing systems that keep our bodies healthy and strong!"
+    },
+    {
+      "id": "hook_b",
+      "culture_hint": "universal",
+      "text": "Samantha's school cafeteria is changing their lunch options. They're trying to add more healthy choices. One day, Samantha sees her science teacher eating a salad and drinking water. She asks her teacher why she chose this meal, and her teacher says: 'I need to eat this because my body is working hard—my brain, my muscles, and my heart all require good fuel. And I need to drink water so my body can remove waste and keep my cells healthy.' Samantha has a question: how do the different parts of her body work together to stay healthy?",
+      "closing_line": "Samantha discovered that it's all about how body systems work together!"
+    }
+  ],
+  "concept": {
+    "explanation_steps": [
+      "Welcome to the world inside your body! Your body is made up of many parts called systems—just like a big machine that keeps you going every day. These systems work together to keep you healthy, strong, and alive.",
+      "Major Systems: 1. Digestive System – Breaks down food to get energy and nutrients. 2. Circulatory System – Carries blood, nutrients, and oxygen to all parts of the body. 3. Respiratory System – Helps you breathe in oxygen and get rid of carbon dioxide. 4. Skeletal System – Gives your body structure and support. 5. Muscular System – Lets your body move and help with everyday tasks.",
+      "They don’t work alone. For example, when you exercise: Your muscles work harder (muscular system), your heart beats faster (circulatory system), you breathe more quickly (respiratory system), you need food and water for energy (digestive and circulatory system), and your bones support you (skeletal system).",
+      "Lifestyle choices such as what you eat, how much you sleep, physical activity, and stress levels all affect how well your body systems function."
+    ],
+    "whiteboard_text": "Systems in the Human Body: Digestive, Circulatory, Respiratory, Skeletal, Muscular",
+    "comprehension_check": "Which body system helps you breathe?",
+    "reteach_angles": [
+      "Think about when you exercise. Your lungs help you breathe in oxygen and out carbon dioxide.",
+      "Recall how your body feels during a hard workout. You breathe harder because your respiratory system is working to give you more oxygen."
+    ]
+  },
+  "problems": [
+    {
+      "id": "p_guided_1",
+      "stage": "guided",
+      "difficulty": "medium",
+      "text": "When Sam plays hockey, his heart beats faster and he starts breathing quickly. Why does this happen?",
+      "answer": "His muscles need more oxygen when they work harder.",
+      "answer_explanation": "During exercise, your muscles need more energy to move. That energy comes from oxygen and nutrients that your blood carries. So, your heart beats faster to move more blood (and oxygen) to your muscles to keep them going.",
+      "mc_choices": [
+        "His muscles need more oxygen when they work harder.",
+        "His heart only needs to beat faster when his muscles work harder.",
+        "His body doesn't need energy when he exercises.",
+        "His heart beats faster to help him think better."
+      ],
+      "correct_index": 0,
+      "common_misconception": "Thinking that the heart beats faster only for the brain or because of muscle exertion alone.",
+      "intervention_hints": {
+        "level_1": "Think of a time when your heart pounds fast, maybe after playing outside or climbing stairs.",
+        "level_2": "Which system is responsible for carrying oxygen and nutrients to your muscles?",
+        "level_3": "Try to imagine what happens if your muscles don’t get enough oxygen while working hard!"
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_1",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "Which of these best describes what the respiratory system does?",
+      "answer": "Helps you get oxygen and get rid of carbon dioxide",
+      "answer_explanation": "The respiratory system brings oxygen into the lungs and removes carbon dioxide, which is a waste product.",
+      "mc_choices": [
+        "Helps you get oxygen and get rid of carbon dioxide",
+        "Gives shape and support to the body",
+        "Moves the body by contracting and relaxing",
+        "Breaks down food to provide energy"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Confusing the respiratory system with the digestive system or thinking it only brings in oxygen.",
+      "intervention_hints": {
+        "level_1": "When you breathe, you bring air in through your nose or mouth. Which part brings the oxygen to your body and removes the waste?",
+        "level_2": "Think of how your lungs work during exercise. Your respiratory system speeds up to bring in more oxygen.",
+        "level_3": "The respiratory system is directly involved in breathing in oxygen and breathing out carbon dioxide."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_2",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "Layla is training for a swimming competition. She feels tired and needs more energy. Her coach tells her she should eat a healthy breakfast and stay hydrated. Which body systems are involved in Layla getting energy and staying strong for training and why?",
+      "answer": "Digestive, Muscular, and Circulatory Systems",
+      "answer_explanation": "Digestive system breaks down food and provides nutrients, circulation moves those nutrients to muscles, and muscles use the energy to power movement.",
+      "mc_choices": [
+        "Digestive, Muscular, and Circulatory Systems",
+        "Skeletal, Respiratory, and Nervous Systems",
+        "Digestive, Respiratory, and Muscular Systems",
+        "Muscular, Circulatory, and Excretory Systems"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Thinking that one system is enough or confusing systems like the excretory or nervous system with providing energy for training.",
+      "intervention_hints": {
+        "level_1": "Layla is swimming, using her muscles. To make muscles work, they need energy. What do you need to get that energy?",
+        "level_2": "She must eat food and then her body gets nutrients. Who helps carry those nutrients through the body?",
+        "level_3": "What part makes her muscles move? Can you name all 3 systems that help her body prepare for exercise?"
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_3",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "After running, your body wants to cool down. Which body systems are involved in this cooling process?",
+      "answer": "Circulatory and Respiratory Systems",
+      "answer_explanation": "When the body cools down, your circulatory system sends blood near your skin to lose heat, and your respiratory system breathes faster to release heat.",
+      "mc_choices": [
+        "Circulatory and Respiratory Systems",
+        "Skeletal and Muscular Systems",
+        "Digestive and Excretory Systems",
+        "Nervous and Endocrine Systems"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Confusing cooling with digestion or other body processes unrelated to heat regulation.",
+      "intervention_hints": {
+        "level_1": "When you run, do you feel warmer? How does your body get rid of that extra heat?",
+        "level_2": "Think about how your heart rate changes and how fast you breathe after exercise.",
+        "level_3": "Can you relate how blood moves close to the skin and how you breathe faster to cool down?"
+      },
+      "nova_guiding_question": ""
+    }
+  ]
+}

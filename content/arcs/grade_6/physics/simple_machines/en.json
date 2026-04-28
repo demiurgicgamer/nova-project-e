@@ -1,0 +1,165 @@
+{
+  "meta": {
+    "subject": "physics",
+    "topic_key": "simple_machines",
+    "topic_display": "Simple Machines",
+    "grade": 6,
+    "region": "canada",
+    "language_code": "en",
+    "status": "approved",
+    "review_flags": [
+      "Verify that each term is used consistently and accurately (lever, wheel and axle, pulley, etc.)",
+      "Ensure all common-misconception distractors in MCQs are plausible for a Grade 6 learner",
+      "Double-check that the Canadian cultural references in hook stories are appropriate and respectful",
+      "Confirm that all three practice problems have correct answers and realistic distractors",
+      "Confirm all simple machines are clearly defined with correct examples and applications",
+      "Ensure that the capstone problem integrates ideas from all machines and challenges application",
+      "Review intervention hints to ensure they align with learner understanding and cognitive processes for Grade 6 students"
+    ]
+  },
+  "hook_stories": [
+    {
+      "id": "hook_a",
+      "culture_hint": "canadian",
+      "text": "It's a quiet morning in Toronto. Maya is at the construction site helping her dad with a new park. There are big wooden beams that need to be lifted onto a platform. The workers are using a lever, a long piece of wood, to help lift the heavy beam. Maya watches, curious. Her dad says, \"When you push down on one end, the other end goes up. It helps us move heavy things without using too much effort!\"",
+      "closing_line": "The next day, Maya goes to a local museum. She sees a model of an ancient Egyptian pyramid being built. The workers used ramps — a type of simple machine called an inclined plane — to carry stones up to the top of the pyramid, instead of lifting them straight up. Maya wonders, \"What would happen if they used a pulley instead?\""
+    },
+    {
+      "id": "hook_b",
+      "culture_hint": "canadian",
+      "text": "In the Yukon, Nyla is learning about the tools her grandmother used for building a shelter. Her grandmother explains that she used a wedge — like a sharp rock or blade — to split logs into smaller pieces. When the wedge is pushed into wood, it pushes the wood apart. Then, using a screw — the same kind you use on a bottle cap — she could tighten different parts and make her shelter secure.",
+      "closing_line": "Nyla sees something strange at a local outdoor exhibition. A display has several wheels and axles, like the ones used in sleds. Her guide says, \"You might not think a wheel and axle helps you move things, but it actually reduces effort in a big way!\" These examples show how simple machines have been used by people in different parts of Canada and around the world for thousands of years!"
+    }
+  ],
+  "concept": {
+    "explanation_steps": [
+      "Simple machines are basic tools that help us do work more easily. There are six main types: the lever, wheel and axle, pulley, inclined plane, wedge, and screw.",
+      "Each one works in a different way to reduce the effort we need to do.",
+      "1. Lever: A rigid rod that pivots around a point (fulcrum). It helps lift heavy objects using less force.",
+      "2. Wheel and Axle: A wheel attached to a shaft (axle). It makes it easier to move large weights by reducing friction.",
+      "3. Pulley: A wheel with a rope or cable around it. It changes the direction of force.",
+      "4. Inclined Plane: A slanted surface that reduces effort needed to move things upward.",
+      "5. Wedge: A thick object that ends in a thin edge. It pushes material apart.",
+      "6. Screw: A slanted surface wrapped around a cylinder. It can hold things securely and lift things.",
+      "Each machine increases your mechanical advantage, which means it allows you to do the same work using less applied effort."
+    ],
+    "whiteboard_text": "Simple Machines: Lever, Wheel & Axle, Pulley, Inclined Plane, Wedge, Screw",
+    "comprehension_check": "Which part of a lever can move up and down to help lift heavy things?",
+    "reteach_angles": [
+      "Imagine a seesaw — the part that moves when you sit on one side is the effort arm.",
+      "Think of how a crowbar lifts heavy rocks — the end you push down is the effort arm that moves."
+    ]
+  },
+  "problems": [
+    {
+      "id": "p_guided_1",
+      "stage": "guided",
+      "difficulty": "medium",
+      "text": "A carpenter is building a fence and needs to lift a heavy post. They choose to use a lever to make this easier. How does the lever help the carpenter?",
+      "answer": "By reducing the amount of force needed",
+      "answer_explanation": "A lever works by multiplying force. With a proper fulcrum placement, it allows you to do the same amount of work with less force.",
+      "mc_choices": [
+        "By reducing the amount of force needed",
+        "By increasing the distance the effort arm moves",
+        "By making the work harder",
+        "By using more energy"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Students might incorrectly think that levers increase distance or make work harder.",
+      "intervention_hints": {
+        "level_1": "What is the main job of a lever in a real-life situation?",
+        "level_2": "If you wanted to open a tight lid or lift a heavy rock, would you choose a lever or push with your hands?",
+        "level_3": "Try using a ruler as if it were a lever — can you see how one side goes up while the other goes down?"
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_4a",
+      "stage": "practice",
+      "difficulty": "easy",
+      "text": "Which simple machine is the best example of an inclined plane?",
+      "answer": "A ramp for wheelchair access",
+      "answer_explanation": "An inclined plane is a slanted surface that reduces effort needed to move objects upward, like a ramp.",
+      "mc_choices": [
+        "A ramp for wheelchair access",
+        "A bottle cap",
+        "A hammer",
+        "A door knob"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Students often mistake a bottle cap or door knob as an inclined plane because they are also rotating around a center.",
+      "intervention_hints": {
+        "level_1": "Can you think of a slanted surface that helps you move something up?",
+        "level_2": "Look through your home or school — what slanted thing can raise things up?",
+        "level_3": "If you had to move heavy boxes from the ground to a shelf without using a ramp, what would you have to do?"
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_4b",
+      "stage": "practice",
+      "difficulty": "medium_hard",
+      "text": "Which of the following simple machines gives the greatest mechanical advantage?",
+      "answer": "Lever",
+      "answer_explanation": "A lever can multiply force depending on the fulcrum position. The longer the effort arm, the more mechanical advantage you get.",
+      "mc_choices": [
+        "Lever",
+        "Inclined plane",
+        "Pulley",
+        "Screw"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Students might think pulleys or screws are always the best at multiplying force.",
+      "intervention_hints": {
+        "level_1": "Which machine helps you use less effort?",
+        "level_2": "Which one is the easiest to move something heavy when it's far from the fulcrum?",
+        "level_3": "Try using a long lever compared to a short lever and see if the effort is different."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_4c",
+      "stage": "practice",
+      "difficulty": "easy",
+      "text": "A kitchen knife is a type of which simple machine?",
+      "answer": "Wedge",
+      "answer_explanation": "A knife is a wedge. It is thick at one end and thin at the other. As it cuts into something, it pushes the material apart.",
+      "mc_choices": [
+        "Wedge",
+        "Pulley",
+        "Lever",
+        "Screw"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Students often think knives are screws or levers due to their cutting function.",
+      "intervention_hints": {
+        "level_1": "Think about how a knife cuts. Is it more like a thin wedge or a rotating tool?",
+        "level_2": "What happens when you push a sharp knife into food?",
+        "level_3": "Can you imagine how the edge of the knife is shaped to separate materials?"
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_capstone_1",
+      "stage": "guided",
+      "difficulty": "hard",
+      "text": "Which combination of simple machines would most effectively lift a heavy load?",
+      "answer": "Lever + Pulley",
+      "answer_explanation": "A lever multiplies force, while a pulley changes the direction of effort. Together, they can lift heavy loads efficiently.",
+      "mc_choices": [
+        "Lever + Pulley",
+        "Inclined plane + Screw",
+        "Wedge + Pulley",
+        "Wheel and axle + Lever"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Students may mistakenly think wheel and axle or wedge are better at lifting loads directly.",
+      "intervention_hints": {
+        "level_1": "Think about a crane. What does it do? Does it pull things up or move things along the floor?",
+        "level_2": "What machines help lift a load up and down?",
+        "level_3": "Which machines reduce effort by changing the direction or increasing force?"
+      },
+      "nova_guiding_question": "What do each of the machines do in a crane? Does one reduce effort while the other increases it?"
+    }
+  ]
+}

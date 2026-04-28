@@ -1,0 +1,153 @@
+{
+  "meta": {
+    "subject": "physics",
+    "topic_key": "light_and_optics",
+    "topic_display": "Light and Optics",
+    "grade": 6,
+    "region": "canada",
+    "language_code": "en",
+    "status": "approved",
+    "review_flags": [
+      "Verify all scientific facts in the arc, particularly those on reflection, refraction, and lens behavior",
+      "Ensure all real-world examples in the arc (Canadian contexts) are accurate and culturally sensitive",
+      "Confirm all vocabulary definitions are appropriate and precise for Grade 6 learners",
+      "Cross-check all multiple-choice questions for validity and realism of all distractors"
+    ]
+  },
+  "hook_stories": [
+    {
+      "id": "hook_a",
+      "culture_hint": "canadian",
+      "text": "Imagine you're on a sunny day at a Canadian lakeside. You're holding a wooden stick in the water and notice that it looks bent at the surface. You also see a rainbow in the sky after rain — what is happening with the light?",
+      "closing_line": "What causes objects to look bent underwater? Why do some things look different when light hits them? And how does light make rainbows appear in the sky?"
+    }
+  ],
+  "concept": {
+    "explanation_steps": [
+      "Today we're going to look at how light moves. You already know that we see things when light enters our eyes, but have you ever wondered if light has a direction?",
+      "Light always travels in straight lines through air and transparent materials like glass.",
+      "When you shine a flashlight into a room, the beam travels straight.",
+      "If you look at the beam, you’ll see it in a straight line, not curved.",
+      "Try this at home: Shine a flashlight through a clear glass of water. The light beam travels in one straight line through the glass.",
+      "We call this the path of light, and it always bends only when it moves from one material to another (like air to water)."
+    ],
+    "whiteboard_text": "Light travels in straight lines through air and transparent materials. It bends only when moving between materials.",
+    "comprehension_check": "What path does light take when moving through air?",
+    "reteach_angles": [
+      "Light behaves like a ray that travels in a straight line unless it hits a new material.",
+      "The path light takes is called the light ray and it always bends only when it hits a new material."
+    ]
+  },
+  "problems": [
+    {
+      "id": "p_guided_1",
+      "stage": "guided",
+      "difficulty": "medium",
+      "text": "You are walking near a lake and notice that the bottom of the water isn’t visible directly. Why is this?",
+      "answer": "Light bends when it hits the water",
+      "answer_explanation": "Light bends when it moves from air to water, which affects our ability to see objects directly beneath the surface.",
+      "mc_choices": [
+        "Light bends when it hits the water",
+        "Light travels in straight lines so you can only see what's directly in front",
+        "It's too dark in the water",
+        "The bottom of the lake is too far away"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Student might think the bottom is not visible because it is too dark or too far.",
+      "intervention_hints": {
+        "level_1": "Did you see the stick appear bent at the water surface? Why did that happen?",
+        "level_2": "Light bends when it moves from air to water. What happens to the light that tries to reach the bottom of the lake?",
+        "level_3": "When light hits water, it bends downward, which means we can’t see what is directly beneath us."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_1",
+      "stage": "practice",
+      "difficulty": "easy",
+      "text": "A beam of light is shone on a mirror. The light bounces off the surface and continues in a new direction. What is this called?",
+      "answer": "Reflection",
+      "answer_explanation": "When light hits a smooth surface and bounces back, it is called reflection.",
+      "mc_choices": [
+        "Reflection",
+        "Refraction",
+        "Absorption",
+        "Dispersion"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Student might confuse reflection with refraction.",
+      "intervention_hints": {
+        "level_1": "Did you ever see yourself in a mirror? What did the light do?",
+        "level_2": "When light hits a smooth surface and bounces back, we call that reflection.",
+        "level_3": "If light hits a mirror and changes direction, but goes back toward the source, that's what we call reflection."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_2",
+      "stage": "practice",
+      "difficulty": "easy",
+      "text": "Which of the following materials would allow you to see light traveling through it?",
+      "answer": "Clear glass",
+      "answer_explanation": "Clear glass is transparent, which means light can pass through it.",
+      "mc_choices": [
+        "Clear glass",
+        "A stone",
+        "A wooden block",
+        "A fabric"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Student might think that materials like wood or stone can let light pass through them.",
+      "intervention_hints": {
+        "level_1": "Can light travel through clear glass or a block of wood?",
+        "level_2": "Materials that let light pass through are called transparent.",
+        "level_3": "If something looks clear and you can see through it, light is allowed to pass through it."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_3",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "You see a rainbow after a rainstorm. What causes the colors of the rainbow?",
+      "answer": "Sunlight bending and separating through water droplets",
+      "answer_explanation": "The colors of the rainbow are formed when sunlight bends and separates as it passes through water droplets in the air.",
+      "mc_choices": [
+        "Sunlight bending and separating through water droplets",
+        "The color of the sky changing",
+        "Light from clouds mixing with sunlight",
+        "Reflection of light in water droplets"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Student might confuse refraction and reflection to explain the rainbow.",
+      "intervention_hints": {
+        "level_1": "What happens to light when it hits a droplet of water?",
+        "level_2": "Did you ever see light bending through a prism? Same idea!",
+        "level_3": "When sunlight goes through millions of tiny water droplets in the air, it bends and separates into different colors."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_capstone_1",
+      "stage": "capstone",
+      "difficulty": "capstone",
+      "text": "You're building a telescope to look at stars, and want to use two lenses. The lens that collects the light is convex, and the lens that magnifies the image is also convex. What is the main function of a convex lens?",
+      "answer": "It bends light inwards",
+      "answer_explanation": "Convex lenses bend light rays inward (converge them) which helps focus the light to form an image.",
+      "mc_choices": [
+        "It bends light inwards",
+        "It makes objects appear larger",
+        "It bends light outwards",
+        "It makes everything look smaller"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Student might think a convex lens makes things appear larger without understanding how it converges light.",
+      "intervention_hints": {
+        "level_1": "Did you ever use a magnifying glass? What happens when you look at something through it?",
+        "level_2": "Convex lenses are curved inward – they gather or focus light rays to a point.",
+        "level_3": "Think about how a magnifying glass focuses light to make images appear larger."
+      },
+      "nova_guiding_question": "What is the shape of a convex lens, and what does it do to light rays?"
+    }
+  ]
+}

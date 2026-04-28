@@ -1,7 +1,18 @@
 # Nova Curriculum Master File — Grade 6
 # =======================================
-# Scope: STEM only (Mathematics, Physics, Chemistry, Biology)
-# History and Geography deferred — see future regional curriculum files
+# MVP Scope : Mathematics + Science (Physics, Chemistry, Biology)
+# Markets   : North America — Canada (EN), Quebec (FR-CA), United States (EN)
+# Deferred  : History, Geography, Arts, Language Arts — see roadmap TBD-C
+#
+# Curriculum alignment:
+#   Canada  — Provincial K-12 (Ontario/BC/Alberta common core)
+#   Quebec  — Programme de formation de l'école québécoise (PFEQ)
+#   US      — Common Core State Standards (CCSS) + Next Generation Science Standards (NGSS)
+#
+# Note: Physics / Chemistry / Biology are taught as integrated "Science" in
+# most North American Grade 6 classrooms. They are kept separate here for
+# arc generation granularity. The app groups them under a single "Science"
+# subject tile on the Dashboard.
 #
 # Topic status lifecycle:
 #   pending      → not yet sent to agent
@@ -9,26 +20,37 @@
 #   approved     → .md reviewed and approved, ready for JSON export
 #   db_inserted  → .json exported and inserted into database
 #
-# Languages: en = English (Canadian context)
-#            fr = French Canadian (Quebec context)
+# Languages:
+#   en = English (North American context — Canada default; US hook stories via --region us)
+#   fr = French Canadian (Quebec context, colloquial French for ages 11-12)
+#
+# US content note:
+#   This file is the primary content source for Canada + US (topics overlap ~90%).
+#   A separate grade_6_us.yaml will be created only if US curriculum diverges
+#   significantly (e.g. different topic order, CCSS-specific standards).
+#   Until then, generate US arcs with: --region us (uses same topics, US hook stories)
 #
 # Usage:
 #   python generate_arc.py --grade 6 --subject mathematics --topic fractions --language en
-#   python generate_arc.py --grade 6 --subject mathematics   (all pending math topics)
-#   python generate_arc.py --grade 6 --all                   (all pending STEM topics)
-#   python generate_arc.py --grade 6 --all --dry-run         (preview only)
+#   python generate_arc.py --grade 6 --subject mathematics        (all pending math topics)
+#   python generate_arc.py --grade 6 --all                        (all pending topics)
+#   python generate_arc.py --grade 6 --all --dry-run              (preview only)
+#   python generate_arc.py --grade 6 --all --provider groq        (free — Groq)
+#   python generate_arc.py --grade 6 --all --provider ollama      (free — local)
 #
-#   python export_json.py --grade 6                          (export all approved)
+#   python export_json.py --grade 6                               (export all approved)
 
 grade: 6
-scope: STEM
-region: canada
-languages: [en, fr]
+scope: mathematics_science
+markets: [canada, quebec, us]
+region: canada          # primary content region for generation; override with --region us
+languages: [en, fr]     # fr applies to canada + quebec markets only; us is en-only
 
 # ─────────────────────────────────────────────────────────────────────────────
 subjects:
 
   # ── MATHEMATICS ─────────────────────────────────────────────────────────────
+  # Aligned to: Ontario Grade 6 · BC Grade 6 · CCSS Grade 6 (6.NS, 6.RP, 6.EE, 6.G, 6.SP)
   - subject: mathematics
     display: Mathematics
     topics:
@@ -38,9 +60,13 @@ subjects:
         description: >
           Understanding fractions as parts of a whole. Numerator and denominator.
           Comparing fractions with the same denominator. Adding and subtracting
-          fractions with the same denominator.
+          fractions with the same denominator. Real-world contexts (sharing food,
+          measuring ingredients, splitting costs).
         prerequisites: []
         estimated_sessions: 2
+        curriculum_refs:
+          canada: Number Sense — fractions (Grade 6)
+          us: CCSS 6.NS — Apply and extend previous understandings of numbers
         status:
           en: approved      # reference arc — arcs/grade_6/mathematics/fractions/en.md
           fr: pending
@@ -50,9 +76,12 @@ subjects:
         description: >
           Positive and negative whole numbers. The number line. Ordering integers.
           Adding and subtracting integers. Real-world contexts (temperature,
-          elevation, bank balance).
+          elevation, bank balance, sports scores).
         prerequisites: []
         estimated_sessions: 2
+        curriculum_refs:
+          canada: Number Sense — integers (Grade 6)
+          us: CCSS 6.NS.5-8 — Understand positive and negative numbers
         status:
           en: approved
           fr: pending
@@ -62,9 +91,12 @@ subjects:
         description: >
           Understanding ratios as comparisons. Part-to-part and part-to-whole.
           Equivalent ratios. Unit rates. Real-world contexts (recipes, speed,
-          price per unit).
+          price per unit, map scales).
         prerequisites: [fractions]
         estimated_sessions: 2
+        curriculum_refs:
+          canada: Number Sense — ratios and rates (Grade 6)
+          us: CCSS 6.RP — Ratios and Proportional Relationships
         status:
           en: approved
           fr: pending
@@ -74,23 +106,29 @@ subjects:
         description: >
           Percent as a fraction of 100. Converting between fractions, decimals,
           and percentages. Finding the percent of a number. Real-world contexts
-          (discounts, test scores, tips).
+          (discounts, tax, test scores, tips, sports statistics).
         prerequisites: [fractions, ratios]
         estimated_sessions: 2
+        curriculum_refs:
+          canada: Number Sense — percent (Grade 6)
+          us: CCSS 6.RP.3c — Find percent of a quantity
         status:
-          en: pending
+          en: approved
           fr: pending
 
       - key: algebra_basics
         display: Algebra Basics
         description: >
-          Introduction to variables as unknowns. Writing expressions.
-          Evaluating expressions by substituting values. Simple one-step
-          equations. Real-world contexts (mystery number problems, fair sharing).
+          Introduction to variables as unknowns. Writing and evaluating expressions.
+          Substituting values. Simple one-step equations. Real-world contexts
+          (mystery number problems, fair sharing, pattern rules).
         prerequisites: []
         estimated_sessions: 2
+        curriculum_refs:
+          canada: Patterning and Algebra (Grade 6)
+          us: CCSS 6.EE — Expressions and Equations
         status:
-          en: pending
+          en: approved
           fr: pending
 
       - key: linear_equations
@@ -101,8 +139,11 @@ subjects:
           and solving an equation.
         prerequisites: [algebra_basics]
         estimated_sessions: 2
+        curriculum_refs:
+          canada: Patterning and Algebra (Grade 6-7)
+          us: CCSS 6.EE.7-8 — Solve one-variable equations and inequalities
         status:
-          en: pending
+          en: approved
           fr: pending
 
       - key: geometry_area_perimeter
@@ -110,11 +151,14 @@ subjects:
         description: >
           Perimeter of polygons. Area of rectangles, triangles, and composite
           shapes. Understanding the difference between area and perimeter.
-          Real-world contexts (flooring, fencing, gardens).
+          Real-world contexts (flooring, fencing, gardens, blueprints).
         prerequisites: []
         estimated_sessions: 2
+        curriculum_refs:
+          canada: Measurement — area and perimeter (Grade 6)
+          us: CCSS 6.G — Solve real-world problems involving area
         status:
-          en: pending
+          en: approved
           fr: pending
 
       - key: probability
@@ -125,8 +169,15 @@ subjects:
           Theoretical vs experimental probability.
         prerequisites: [fractions]
         estimated_sessions: 2
+        review_note: >
+          US CCSS places probability at Grade 7 (7.SP). Most Canadian provincial
+          curricula include it at Grade 6. Include in MVP for Canada/Quebec;
+          tag as Grade 7 content for US arc generation.
+        curriculum_refs:
+          canada: Data Management and Probability (Grade 6)
+          us: CCSS 7.SP — Grade 7 (deferred for US market)
         status:
-          en: pending
+          en: approved
           fr: pending
 
       - key: data_and_graphs
@@ -134,16 +185,22 @@ subjects:
         description: >
           Reading and creating bar graphs, line graphs, and pie charts.
           Mean, median, and mode. Drawing conclusions from data.
-          Real-world contexts (sports stats, weather, class surveys).
+          Real-world contexts (sports stats, weather, class surveys, social media).
         prerequisites: []
         estimated_sessions: 2
+        curriculum_refs:
+          canada: Data Management (Grade 6)
+          us: CCSS 6.SP — Statistics and Probability
         status:
-          en: pending
+          en: approved
           fr: pending
 
-  # ── PHYSICS ──────────────────────────────────────────────────────────────────
+  # ── SCIENCE — PHYSICS ────────────────────────────────────────────────────────
+  # Grouped as "Science" in the app Dashboard. Kept separate here for arc granularity.
+  # Aligned to: Ontario Science Grade 6 · NGSS MS-PS (Middle School Physical Science)
   - subject: physics
-    display: Physics
+    display: Science — Physics
+    subject_group: science
     topics:
 
       - key: forces_and_motion
@@ -152,22 +209,29 @@ subjects:
           What a force is (push, pull). Contact vs non-contact forces.
           Gravity, friction, and air resistance. How forces affect motion —
           speed up, slow down, change direction. Balanced vs unbalanced forces.
+          Real-world contexts (sports, vehicles, playground equipment).
         prerequisites: []
         estimated_sessions: 2
+        curriculum_refs:
+          canada: Ontario Science Grade 6 — Structures and Forces
+          us: NGSS MS-PS2 — Motion and Stability
         status:
-          en: pending
+          en: approved
           fr: pending
 
       - key: simple_machines
         display: Simple Machines
         description: >
           The six simple machines (lever, wheel and axle, pulley, inclined plane,
-          wedge, screw). How each makes work easier. Mechanical advantage.
-          Real-world examples in everyday objects.
+          wedge, screw). How each reduces effort. Mechanical advantage.
+          Real-world examples in everyday objects and tools.
         prerequisites: [forces_and_motion]
         estimated_sessions: 2
+        curriculum_refs:
+          canada: Ontario Science Grade 6 — Structures and Forces
+          us: NGSS MS-PS2 — Forces and Interactions
         status:
-          en: pending
+          en: approved
           fr: pending
 
       - key: electricity_basics
@@ -175,40 +239,53 @@ subjects:
         description: >
           Electric current, voltage, and resistance. Simple circuits (series
           and parallel). Conductors and insulators. Safety with electricity.
-          Real-world contexts (household circuits, batteries).
+          Real-world contexts (household circuits, batteries, electronics).
         prerequisites: []
         estimated_sessions: 2
+        curriculum_refs:
+          canada: Ontario Science Grade 6 — Electricity and Electrical Devices
+          us: NGSS MS-PS3 — Energy
         status:
-          en: pending
+          en: approved
           fr: pending
 
       - key: light_and_optics
         display: Light and Optics
         description: >
-          Properties of light (travels in straight lines, speed). Reflection
-          and refraction. How mirrors and lenses work. The visible spectrum.
-          Real-world contexts (glasses, rainbows, cameras).
+          Properties of light (travels in straight lines, speed of light).
+          Reflection and refraction. How mirrors and lenses work.
+          The visible spectrum and colour. Real-world contexts (glasses,
+          rainbows, cameras, telescopes).
         prerequisites: []
         estimated_sessions: 2
+        curriculum_refs:
+          canada: Ontario Science Grade 6 — Space
+          us: NGSS MS-PS4 — Waves and Electromagnetic Radiation
         status:
-          en: pending
+          en: approved
           fr: pending
 
-  # ── CHEMISTRY ────────────────────────────────────────────────────────────────
+  # ── SCIENCE — CHEMISTRY ──────────────────────────────────────────────────────
+  # Aligned to: Ontario Science Grade 6 · NGSS MS-PS1 (Matter and Its Interactions)
   - subject: chemistry
-    display: Chemistry
+    display: Science — Chemistry
+    subject_group: science
     topics:
 
       - key: matter_and_materials
         display: Matter and Materials
         description: >
-          States of matter (solid, liquid, gas). Properties of materials.
-          How temperature causes state changes. Particle model of matter.
-          Real-world examples (ice, steam, cooking).
+          States of matter (solid, liquid, gas). Properties of materials
+          (hardness, flexibility, conductivity). How temperature causes state
+          changes. Particle model of matter. Real-world examples (ice, steam,
+          cooking, manufacturing).
         prerequisites: []
         estimated_sessions: 2
+        curriculum_refs:
+          canada: Ontario Science Grade 6 — Matter and Materials
+          us: NGSS MS-PS1-4 — States of matter and particle model
         status:
-          en: pending
+          en: approved
           fr: pending
 
       - key: mixtures_and_solutions
@@ -216,11 +293,15 @@ subjects:
         description: >
           Pure substances vs mixtures. Homogeneous and heterogeneous mixtures.
           Solutions (solute, solvent, solubility). Separating mixtures
-          (filtering, evaporation, distillation). Real-world examples.
+          (filtering, evaporation, distillation). Real-world examples
+          (saltwater, juice, soil, air).
         prerequisites: [matter_and_materials]
         estimated_sessions: 2
+        curriculum_refs:
+          canada: Ontario Science Grade 6 — Matter and Materials
+          us: NGSS MS-PS1-2 — Substances and mixtures
         status:
-          en: pending
+          en: approved
           fr: pending
 
       - key: physical_vs_chemical_changes
@@ -228,30 +309,38 @@ subjects:
         description: >
           Difference between physical changes (reversible, no new substance)
           and chemical changes (new substance formed). Signs of chemical change
-          (colour, gas, heat, light). Real-world examples (burning, rusting,
-          cooking, dissolving).
+          (colour change, gas produced, heat/light, precipitate). Real-world
+          examples (burning, rusting, cooking, dissolving, baking).
         prerequisites: [matter_and_materials]
         estimated_sessions: 2
+        curriculum_refs:
+          canada: Ontario Science Grade 6 — Matter and Materials
+          us: NGSS MS-PS1-2 — Chemical reactions
         status:
-          en: pending
+          en: approved
           fr: pending
 
-  # ── BIOLOGY ──────────────────────────────────────────────────────────────────
+  # ── SCIENCE — BIOLOGY ────────────────────────────────────────────────────────
+  # Aligned to: Ontario Science Grade 6 · NGSS MS-LS (Middle School Life Science)
   - subject: biology
-    display: Biology
+    display: Science — Biology
+    subject_group: science
     topics:
 
       - key: cells_and_life
         display: Cells and Life
         description: >
           The cell as the basic unit of life. Plant vs animal cells.
-          Key organelles and their functions (nucleus, mitochondria, cell wall).
-          Unicellular vs multicellular organisms. Real-world contexts
-          (why cells matter, how organisms grow).
+          Key organelles and their functions (nucleus, mitochondria, cell wall,
+          chloroplast). Unicellular vs multicellular organisms. Real-world
+          contexts (why cells matter, how organisms grow and repair).
         prerequisites: []
         estimated_sessions: 2
+        curriculum_refs:
+          canada: Ontario Science Grade 6 — Diversity of Living Things
+          us: NGSS MS-LS1-1 — Cell theory and organelle function
         status:
-          en: pending
+          en: approved
           fr: pending
 
       - key: ecosystems
@@ -259,31 +348,47 @@ subjects:
         description: >
           Producers, consumers, and decomposers. Food chains and food webs.
           Predator and prey relationships. How energy flows through an ecosystem.
-          Human impact on ecosystems. Canadian ecosystem examples.
+          Human impact on ecosystems. North American ecosystem examples
+          (boreal forest, Great Lakes, grasslands, Pacific coast).
         prerequisites: []
         estimated_sessions: 2
+        curriculum_refs:
+          canada: Ontario Science Grade 6 — Biodiversity
+          us: NGSS MS-LS2 — Ecosystems
         status:
-          en: pending
+          en: approved
           fr: pending
 
       - key: human_body_systems
         display: Human Body Systems
         description: >
           Overview of major systems (digestive, circulatory, respiratory,
-          skeletal, muscular). How systems work together. How lifestyle
-          choices affect the body. Real-world contexts (exercise, nutrition,
-          health decisions).
+          skeletal, muscular). How systems work together to maintain health.
+          How lifestyle choices affect the body. Real-world contexts (exercise,
+          nutrition, health decisions relevant to ages 11-12).
         prerequisites: [cells_and_life]
         estimated_sessions: 2
+        review_note: >
+          Some NA curricula place detailed body systems at Grade 7.
+          Keep at Grade 6 depth: overview + interconnections only.
+          Do not include reproduction — outside Nova MVP scope.
+        curriculum_refs:
+          canada: Ontario Science Grade 6 — Human Body Systems
+          us: NGSS MS-LS1-3 — Body systems
         status:
-          en: pending
+          en: approved
           fr: pending
 
 # ─────────────────────────────────────────────────────────────────────────────
-# DEFERRED — Not in current scope
+# DEFERRED — Not in MVP scope
 # ─────────────────────────────────────────────────────────────────────────────
-# history:   Regional — varies by country. Add via regions/canada/grade_6.yaml
-#            when expanding beyond STEM.
-# geography: Regional — same reason.
-# arts:      Not suitable for voice-first tutoring in MVP.
-# language:  Requires different arc structure (immersion model). Future phase.
+# history:      Regional — varies significantly by country/province/state.
+#               Add via curriculum/regions/canada/grade_6_history.yaml etc.
+# geography:    Same reason as history.
+# arts:         Not suitable for voice-first Socratic tutoring in MVP.
+# language_arts: Requires different arc structure (reading comprehension,
+#               writing feedback). Immersion model — future phase.
+# french_lang:  Separate immersion arc structure needed. Not Grade 6 priority.
+#
+# US-specific:
+# probability:  CCSS places this at Grade 7 (7.SP). Generate via grade_7_us.yaml.
