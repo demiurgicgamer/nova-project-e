@@ -13,116 +13,151 @@
     {
       "id": "hook_a",
       "culture_hint": "universal",
-      "text": "Sophie est entrain de planifier un voyage à Québec pour ses vacances. Elle a 120$ à dépenser. Elle a déjà réservé un hôtel qui coûte 60$. Pour le reste de sa dépense, elle veut acheter des billets pour le métro. Les billets coûtent 3$ chacun. Combien de billets peut-elle en acheter avec l'argent qui lui reste?",
-      "closing_line": "Alors, comment trouver combien de billets Sophie peut acheter ? On va résoudre cette équation en utilisant des opérations inverses."
+      "text": "Sophie est en train de planifier un voyage à Québec pour ses vacances. Elle a 120$ à dépenser. Elle a déjà réservé un hôtel qui coûte 60$. Pour le reste de sa dépense, elle veut acheter des billets pour le métro. Les billets coûtent 3$ chacun. Combien de billets peut-elle acheter avec l'argent qui lui reste?",
+      "closing_line": "Alors, comment trouver combien de billets Sophie peut acheter?"
     }
   ],
   "concept": {
     "explanation_steps": [
-      "Quand on résout une équation, on veut trouver la valeur de la lettre (comme \"x\") qui rend l'équation vraie.",
-      "Pour ce faire, on utilise des opérations inverses.",
-      "Si l’équation est : 3x + 60 = 120, on commence par soustraire 60 des deux côtés : 3x = 60.",
-      "Puis, on divise les deux côtés par 3 : x = 20.",
+      "Quand on résout une équation, on veut trouver la valeur de la lettre (comme «x») qui rend l'équation vraie. Pour ce faire, on utilise des opérations inverses.",
+      "Par exemple, si l'équation est : 3x + 60 = 120",
+      "On veut isoler «x» d'un côté. On commence par soustraire 60 des deux côtés : 3x + 60 - 60 = 120 - 60, ce qui donne 3x = 60.",
+      "Puis, on divise les deux côtés par 3 : 3x ÷ 3 = 60 ÷ 3, ce qui donne x = 20.",
       "Alors Sophie peut acheter 20 billets de métro."
     ],
-    "whiteboard_text": "3x + 60 = 120\n→ 3x = 120 - 60\n→ 3x = 60\n→ x = 60 / 3\n→ x = 20",
-    "comprehension_check": "Problème : 2x + 10 = 30 Quelle est la valeur de \"x\" ?",
+    "whiteboard_text": "3x + 60 = 120\n→ 3x = 120 - 60 = 60\n→ x = 60 ÷ 3 = 20",
+    "comprehension_check": "Problème : 2x + 10 = 30. Quelle est la valeur de x?",
     "reteach_angles": [
-      "Au lieu de penser à x comme un mystère, pense à x comme un nombre que tu dois trouver.",
-      "Imagine que la balance de l'équation doit rester équilibrée — ce que tu fais d'un côté, tu dois le faire de l'autre."
+      "On peut penser à cela comme une balance : les deux côtés doivent toujours rester équilibrés. Quand on soustrait ou on divise, on le fait des deux côtés en même temps.",
+      "Regarde l'équation : 3x + 60 = 120. La première chose à faire est d'enlever le +60. On soustrait 60 des deux côtés pour isoler le terme avec x."
     ]
   },
   "problems": [
     {
-      "id": "problem_a",
-      "equation": "20x + 180 = 400",
-      "problem_text": "Une classe de 30 élèves veut organiser un voyage. Il faut 10$ par élève pour aller au musée. La classe a déjà ramassé 150$. Combien d'élèves supplémentaires peuvent venir si la classe a 100$ de plus ?",
-      "choices": [
-        "5",
-        "6",
-        "7",
-        "8"
+      "id": "p_guided_1",
+      "stage": "guided",
+      "difficulty": "easy",
+      "question": "Résous l'équation suivante. Quelle est la valeur de x?\n\n2x + 10 = 30",
+      "mc_choices": [
+        "x = 5",
+        "x = 10",
+        "x = 15",
+        "x = 20"
       ],
-      "answer": "6",
-      "step_by_step": [
-        "Le total d'argent que la classe a : 150 + 100 = 250$.",
-        "Le coût total pour les élèves supplémentaires : 250 - 150 = 100$.",
-        "Nombre d'élèves supplémentaires : x = 100 / 10 = 10 élèves.",
-        "Mais la question était combien peuvent venir, pas combien peuvent payer.\nDonc : 10 élèves = 10 élèves supplémentaires."
+      "correct_index": 1,
+      "intervention_hints": [
+        "Pour isoler x, commence par soustraire 10 des deux côtés : 2x + 10 - 10 = 30 - 10.",
+        "Maintenant tu as 2x = 20. Comment trouver x quand 2 fois x = 20?",
+        "Divise les deux côtés par 2 : x = 20 ÷ 2. Quel est le résultat?"
       ],
-      "interventions": [
-        "Il y a 30 élèves, chacun paie 10$ pour aller au musée. La classe a déjà 150$, et elle a 100$ de plus. Quel est le total d'argent ? Combien d'élèves peuvent venir si elle a ce montant ?",
-        "10x + 150 = 250. Soustrais 150 de chaque côté. 10x = 100. Maintenant divise par 10.",
-        "x = 100 / 10 = 10. Donc 10 élèves supplémentaires peuvent venir."
-      ]
+      "answer_explanation": "On soustrait 10 des deux côtés : 2x = 20. Ensuite on divise par 2 : x = 10.",
+      "nova_guiding_question": "Qu'est-ce qu'il faut faire en premier pour isoler x dans 2x + 10 = 30?",
+      "common_misconception": "Certains élèves divisent par 2 avant de soustraire 10, ce qui complique les calculs. Il faut toujours commencer par éliminer l'addition ou la soustraction."
     },
     {
-      "id": "problem_b",
-      "equation": "5x = 30 + 20",
-      "problem_text": "Mathilde a 30$ et veut acheter 5 livres de même prix. Elle a encore besoin de 20$. Quel est le prix de chaque livre ?",
-      "choices": [
-        "2",
-        "4",
-        "6",
-        "10"
+      "id": "p_practice_1",
+      "stage": "practice",
+      "difficulty": "medium",
+      "question": "Sophie a 120$ pour son voyage. Elle a payé 60$ pour l'hôtel. Les billets de métro coûtent 3$ chacun. Combien peut-elle en acheter avec l'argent restant?\n\nÉquation : 3x + 60 = 120",
+      "mc_choices": [
+        "15 billets",
+        "18 billets",
+        "20 billets",
+        "25 billets"
       ],
-      "answer": "6",
-      "step_by_step": [
-        "Mathilde a 30$ et a besoin de 50$ en tout : 30 + 20 = 50$.",
-        "Elle achète 5 livres à un même prix : 5x = 50.",
-        "Divisons par 5 : x = 50 / 5 = 10.",
-        "Donc le prix de chaque livre est 10$."
+      "correct_index": 2,
+      "intervention_hints": [
+        "D'abord, soustrais 60 des deux côtés pour enlever le coût de l'hôtel : 3x = 120 - 60.",
+        "Tu as maintenant 3x = 60. Pour trouver x, divise les deux côtés par 3.",
+        "x = 60 ÷ 3. Quel est le résultat? C'est le nombre de billets."
       ],
-      "interventions": [
-        "Mathilde a 30$ et elle en a besoin de 50$ en tout. Elle achète 5 livres à un même prix. Comment trouver le prix de chaque livre ?",
-        "5x = 50. Est-ce que tu peux diviser 50 par 5 ? Quel est le prix d’un livre ?",
-        "x = 50 / 5 = 10. Donc, chaque livre coûte 10$. Cette valeur n'est pas parmi les réponses. Vérifie si l'équation est correcte."
-      ]
+      "answer_explanation": "3x + 60 = 120 → 3x = 60 → x = 20. Sophie peut acheter 20 billets de métro.",
+      "nova_guiding_question": "Si Sophie a déjà dépensé 60$ sur 120$, combien lui reste-t-il pour les billets?",
+      "common_misconception": "Attention à ne pas diviser 120 par 3 directement sans tenir compte des 60$ déjà dépensés."
     },
     {
-      "id": "problem_c",
-      "equation": "48 + 3x = 70",
-      "problem_text": "Un jardinier a 70$ pour acheter des plantes. Il achète 4 arbustes à 12$ chacun. Il veut acheter aussi des fleurs à 3$ chacune. Combien peut-il acheter de fleurs avec l'argent qui lui reste ?",
-      "choices": [
-        "3",
-        "4",
-        "5",
-        "6"
+      "id": "p_practice_2",
+      "stage": "practice",
+      "difficulty": "medium",
+      "question": "Un boulanger a déjà préparé 8 gâteaux ce matin. Il en prépare 4 de plus chaque heure. Après combien d'heures aura-t-il 24 gâteaux en tout?\n\nÉquation : 4x + 8 = 24",
+      "mc_choices": [
+        "3 heures",
+        "4 heures",
+        "5 heures",
+        "6 heures"
       ],
-      "answer": "6",
-      "step_by_step": [
-        "Calculons d'abord combien a coûté les arbustes : 4 x 12 = 48$.",
-        "Soustrayons 48 des 70$ : 70 - 48 = 22$ restants.",
-        "Combien de fleurs peut-il acheter avec 22$ à 3$ chacune ? 22 / 3 = environ 7.33 → 7 fleurs maximum.",
-        "On vérifie : 3 x 7 = 21 → 21 + 48 = 69. Il lui reste 1$. Donc max = 7 fleurs."
+      "correct_index": 1,
+      "intervention_hints": [
+        "Soustrais 8 des deux côtés pour enlever les gâteaux déjà faits : 4x = 24 - 8.",
+        "Tu obtiens 4x = 16. Pour trouver x, divise les deux côtés par 4.",
+        "x = 16 ÷ 4. Quel est le résultat? C'est le nombre d'heures."
       ],
-      "interventions": [
-        "Tu cherches combien de fleurs il peut acheter avec l'argent restant. On sait qu'il achète 4 arbustes à 12$ → 48$ dépensés. Il avait 70$. Donc il reste 22$. Combien de fleurs à 3$ peut-il acheter avec 22$ ?",
-        "3x = 22. Quel est le résultat de 22 / 3 ? Tu dois arrondir vers le bas.",
-        "22 / 3 = environ 7.33. Donc, il peut acheter au maximum combien de fleurs ?"
-      ]
+      "answer_explanation": "4x + 8 = 24 → 4x = 16 → x = 4. Le boulanger a besoin de 4 heures.",
+      "nova_guiding_question": "Si le boulanger a déjà 8 gâteaux, combien de gâteaux supplémentaires doit-il préparer pour arriver à 24?",
+      "common_misconception": "Ne pas oublier de soustraire les 8 gâteaux déjà prêts avant de diviser."
     },
     {
-      "id": "problem_d",
-      "equation": "2x + 8 = 30",
-      "problem_text": "On a l’équation : 2x + 8 = 30. Trouve x.",
-      "choices": [
-        "11",
-        "12",
-        "13",
-        "14"
+      "id": "p_practice_3",
+      "stage": "practice",
+      "difficulty": "medium_hard",
+      "question": "Alexis économise 5$ par semaine. Il a déjà 15$ dans sa tirelire. Dans combien de semaines aura-t-il 40$ en tout?\n\nÉquation : 5x + 15 = 40",
+      "mc_choices": [
+        "3 semaines",
+        "4 semaines",
+        "5 semaines",
+        "6 semaines"
       ],
-      "answer": "11",
-      "step_by_step": [
-        "Soustrayons 8 des deux côtés : 2x = 30 - 8 = 22.",
-        "Divisons maintenant par 2 : x = 22 / 2 = 11.",
-        "Donc, x = 11."
+      "correct_index": 2,
+      "intervention_hints": [
+        "Commence par soustraire 15 des deux côtés : 5x = 40 - 15.",
+        "Tu as 5x = 25. Maintenant divise les deux côtés par 5.",
+        "x = 25 ÷ 5. Quel nombre de semaines obtienes-tu?"
       ],
-      "interventions": [
-        "Il faut que tu trouves x. Tu as une équation : 2x + 8 = 30. Comment commencer ?",
-        "Soustrais 8 des deux côtés. 2x = 30 - 8 = 22.",
-        "Divise par 2. x = 22 / 2 = 11."
-      ]
+      "answer_explanation": "5x + 15 = 40 → 5x = 25 → x = 5. Alexis aura besoin de 5 semaines.",
+      "nova_guiding_question": "Alexis a déjà 15$. Combien de dollars de plus lui faut-il pour atteindre 40$?",
+      "common_misconception": "Certains oublient de soustraire les économies déjà accumulées (15$) avant de calculer le nombre de semaines."
+    },
+    {
+      "id": "p_capstone_1",
+      "stage": "capstone",
+      "difficulty": "hard",
+      "question": "Un jardinier a 63$ pour acheter des plantes. Il achète 4 arbustes à 12$ chacun (total : 48$). Il veut aussi acheter des fleurs à 3$ chacune. Combien de fleurs peut-il acheter avec l'argent restant?\n\nÉquation : 48 + 3x = 63",
+      "mc_choices": [
+        "3 fleurs",
+        "4 fleurs",
+        "5 fleurs",
+        "6 fleurs"
+      ],
+      "correct_index": 2,
+      "intervention_hints": [
+        "Tu cherches combien de fleurs il peut acheter. Les 4 arbustes coûtent 4 × 12 = 48$. Il avait 63$. Combien lui reste-t-il?",
+        "Il reste 63 - 48 = 15$. Chaque fleur coûte 3$. Comment trouver le nombre de fleurs?",
+        "3x = 15, donc x = 15 ÷ 3. Quel est le résultat?"
+      ],
+      "answer_explanation": "48 + 3x = 63 → 3x = 15 → x = 5. Le jardinier peut acheter 5 fleurs.",
+      "nova_guiding_question": "Après avoir dépensé 48$ sur les arbustes, combien d'argent reste-t-il pour les fleurs?",
+      "common_misconception": "Attention à bien calculer le coût total des arbustes (4 × 12 = 48$) avant de chercher le nombre de fleurs."
+    },
+    {
+      "id": "p_capstone_2",
+      "stage": "capstone",
+      "difficulty": "capstone",
+      "question": "Résous l'équation suivante et trouve la valeur de x.\n\n2x + 8 = 30",
+      "mc_choices": [
+        "x = 11",
+        "x = 12",
+        "x = 13",
+        "x = 14"
+      ],
+      "correct_index": 0,
+      "intervention_hints": [
+        "Quelle est la première étape pour isoler x? Il faut éliminer le +8.",
+        "Soustrais 8 des deux côtés : 2x = 30 - 8. Quel est 30 - 8?",
+        "Tu as 2x = 22. Maintenant divise par 2 : x = 22 ÷ 2. Quel est le résultat?"
+      ],
+      "answer_explanation": "2x + 8 = 30 → 2x = 22 → x = 11.",
+      "nova_guiding_question": "Si 2 fois un nombre plus 8 donne 30, quel est ce nombre?",
+      "common_misconception": "Ne pas additionner 8 et 30 au lieu de soustraire 8 de 30."
     }
   ]
 }

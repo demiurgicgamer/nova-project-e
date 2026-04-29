@@ -1,0 +1,152 @@
+{
+  "meta": {
+    "subject": "physics",
+    "topic_key": "light_and_optics",
+    "topic_display": "Light and Optics",
+    "grade": 6,
+    "region": "canada",
+    "language_code": "fr",
+    "status": "approved",
+    "review_flags": []
+  },
+  "hook_stories": [
+    {
+      "id": "hook_a",
+      "culture_hint": "universal",
+      "text": "Tu regardes un arc-en-ciel par une belle journée — ce demi-cercle brillant dans le ciel. Sais-tu comment il se forme? Ça arrive grâce à des gouttes d'eau suspendues dans l'air et à la lumière du soleil. La lumière entre dans la goutte, se sépare en couleurs, et ressort dans toutes les directions. C'est la science de la lumière en action!",
+      "closing_line": "On va apprendre comment la lumière voyage, se réfléchit et change de direction. C'est une science qui explique tout ce que tu vois!"
+    },
+    {
+      "id": "hook_b",
+      "culture_hint": "universal",
+      "text": "Tu portes peut-être des lunettes, ou tu connais quelqu'un qui en porte. Ces verres minces permettent à des gens de voir clairement. Mais comment? La lumière entre dans le verre et change de direction — exactement comme quand tu vois un objet qui semble « tordu » dans un verre d'eau. Les télescopes, les caméras et les microscopes fonctionnent tous sur le même principe.",
+      "closing_line": "On va découvrir comment la lumière se comporte quand elle rencontre différents matériaux."
+    }
+  ],
+  "concept": {
+    "explanation_steps": [
+      "La lumière voyage en ligne droite — on appelle ça un rayon lumineux.",
+      "Quand la lumière rencontre un miroir, elle se réfléchit. L'angle d'entrée est toujours égal à l'angle de sortie.",
+      "Quand la lumière passe d'un milieu à un autre (par exemple de l'air à l'eau), elle change de direction. C'est la réfraction.",
+      "Les lentilles utilisent la réfraction pour agrandir ou rapetisser les images. Une lentille convergente fait converger les rayons lumineux vers un point."
+    ],
+    "whiteboard_text": "Réflexion : angle d'incidence = angle de réflexion\nRéfraction : la lumière change de direction en changeant de milieu\nLentille convergente : fait converger la lumière",
+    "comprehension_check": "Comment la lumière voyage-t-elle normalement dans l'air?",
+    "reteach_angles": [
+      "Imagine une balle de tennis qui rebondit sur un mur — elle repart avec le même angle qu'elle est arrivée. La lumière fait pareil sur un miroir.",
+      "Quand tu mets un crayon dans un verre d'eau, il semble brisé. C'est parce que la lumière change de direction en entrant dans l'eau — c'est la réfraction."
+    ]
+  },
+  "problems": [
+    {
+      "id": "p_guided_1",
+      "stage": "guided",
+      "difficulty": "medium",
+      "text": "Un crayon plongé dans un verre d'eau semble brisé. Pourquoi?",
+      "answer": "Parce que la lumière est réfractée (elle change de direction)",
+      "answer_explanation": "Lorsque la lumière passe de l'air à l'eau, elle change de direction — c'est la réfraction. Le crayon semble brisé parce que notre cerveau pense que la lumière voyage en ligne droite.",
+      "mc_choices": [
+        "Parce que la lumière est réfractée (elle change de direction)",
+        "Parce que la lumière ne fait pas un angle droit",
+        "Parce que le crayon est trop long",
+        "Parce que l'eau est trop claire"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Les élèves pensent que c'est l'eau qui déforme le crayon, plutôt que la lumière qui change de direction.",
+      "intervention_hints": {
+        "level_1": "Est-ce que le crayon est vraiment brisé, ou est-ce juste une illusion?",
+        "level_2": "Pense à ce qui change quand la lumière passe de l'air à l'eau.",
+        "level_3": "La lumière voyage en ligne droite dans l'air, mais quand elle entre dans l'eau, elle change de direction. Comment ça affecte ce que tu vois?"
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_1",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "Un rayon de lumière frappe un miroir plat. L'angle d'incidence est de 30°. Quel est l'angle de réflexion?",
+      "answer": "30°",
+      "answer_explanation": "La loi de la réflexion dit que l'angle d'incidence est toujours égal à l'angle de réflexion. Donc si la lumière arrive à 30°, elle repart à 30°.",
+      "mc_choices": [
+        "30°",
+        "60°",
+        "90°",
+        "15°"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Les élèves pensent que l'angle de réflexion dépend de la force de la lumière ou de la couleur du miroir.",
+      "intervention_hints": {
+        "level_1": "La loi de la réflexion est simple — l'angle d'entrée et l'angle de sortie sont toujours...",
+        "level_2": "Imagine une balle qui rebondit sur un mur. Si elle frappe à 30°, à quel angle repart-elle?",
+        "level_3": "Angle d'incidence = angle de réflexion. C'est toujours vrai pour les miroirs."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_2",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "Quelqu'un regarde à travers une lentille convergente. Qu'est-ce qu'une lentille convergente fait aux rayons lumineux?",
+      "answer": "Elle fait converger les rayons lumineux vers un point",
+      "answer_explanation": "Une lentille convergente (comme dans des lunettes pour voir de loin) fait se rapprocher les rayons lumineux jusqu'à un point focal. C'est comme ça qu'elle agrandit les images.",
+      "mc_choices": [
+        "Elle fait converger les rayons lumineux vers un point",
+        "Elle déforme les images",
+        "Elle fait diverger les rayons lumineux",
+        "Elle arrête la lumière"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Les élèves confondent lentilles convergentes et divergentes.",
+      "intervention_hints": {
+        "level_1": "Le mot 'convergente' — qu'est-ce que ça veut dire? Vers où est-ce que quelque chose converge?",
+        "level_2": "Une loupe agrandit les choses parce qu'elle rassemble les rayons lumineux. C'est une lentille convergente.",
+        "level_3": "Convergente = les rayons se rapprochent. Divergente = les rayons s'éloignent."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_3",
+      "stage": "practice",
+      "difficulty": "hard",
+      "text": "Lequel de ces exemples est une application de la réfraction?",
+      "answer": "Un arc-en-ciel formé par des gouttes de pluie",
+      "answer_explanation": "Un arc-en-ciel se forme parce que la lumière est réfractée (et dispersée) lorsqu'elle entre et sort des gouttes d'eau. Chaque couleur change de direction différemment, ce qui sépare la lumière en ses couleurs.",
+      "mc_choices": [
+        "Un arc-en-ciel formé par des gouttes de pluie",
+        "Une image dans un miroir",
+        "Une ombre sur un mur",
+        "La lumière d'une lampe de poche"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Les élèves associent les arcs-en-ciel à la réflexion plutôt qu'à la réfraction.",
+      "intervention_hints": {
+        "level_1": "Réfraction, c'est quand la lumière change de direction en changeant de milieu. Lequel de ces exemples implique la lumière traversant un milieu?",
+        "level_2": "Un miroir réfléchit la lumière. Une goutte d'eau laisse la lumière entrer — qu'est-ce qui se passe alors?",
+        "level_3": "La lumière entre dans la goutte d'eau et change de direction — c'est la réfraction. Et chaque couleur change différemment, ce qui crée le spectre."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_capstone_1",
+      "stage": "capstone",
+      "difficulty": "hard",
+      "text": "Un rayon de lumière arrive perpendiculairement (à 90°) au centre d'une lentille convergente. Dans quelle direction continue-t-il après avoir traversé la lentille?",
+      "answer": "Il continue dans la même direction sans être dévié",
+      "answer_explanation": "Un rayon qui passe exactement par le centre optique d'une lentille n'est pas dévié — il continue en ligne droite. C'est une propriété importante des lentilles convergentes.",
+      "mc_choices": [
+        "Il continue dans la même direction sans être dévié",
+        "Il se divise en deux rayons",
+        "Il change de direction vers le bas",
+        "Il est réfléchi vers l'arrière"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Les élèves pensent que toute lumière traversant une lentille est toujours déviée.",
+      "intervention_hints": {
+        "level_1": "Rappelle-toi : une lentille convergente fait converger les rayons — mais seulement ceux qui ne passent pas par le centre.",
+        "level_2": "Si le rayon passe exactement par le milieu de la lentille, il ne rencontre pas de bord courbé. Qu'est-ce qui le ferait changer de direction?",
+        "level_3": "Un rayon au centre optique passe comme s'il n'y avait pas de lentille — il continue tout droit."
+      },
+      "nova_guiding_question": "Réfléchis : est-ce que tous les rayons sont déviés par une lentille, ou seulement certains?"
+    }
+  ]
+}

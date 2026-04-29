@@ -1,0 +1,179 @@
+{
+  "meta": {
+    "subject": "physics",
+    "topic_key": "forces_and_motion",
+    "topic_display": "Forces and Motion",
+    "grade": 6,
+    "region": "canada",
+    "language_code": "fr",
+    "status": "approved",
+    "review_flags": []
+  },
+  "hook_stories": [
+    {
+      "id": "hook_a",
+      "culture_hint": "canadian",
+      "text": "Un jour, trois amis jouent au parc — Léa, Samir et Max. Ils décident de descendre la glissoire. Léa descend lentement, Samir à vitesse moyenne, et Max dévale à toute vitesse. Mais pourquoi ne descendent-ils pas tous à la même vitesse? Et pourquoi s'arrêtent-ils tous en bas?",
+      "closing_line": "Quelle force influence leur vitesse — et quelle force les arrête?"
+    },
+    {
+      "id": "hook_b",
+      "culture_hint": "canadian",
+      "text": "Un joueur de hockey frappe une rondelle sur la glace. Elle glisse, glisse, puis ralentit et finit par s'arrêter. Si rien ne poussait la rondelle, elle continuerait pour toujours — alors quelle force l'arrête? Et si on voulait qu'elle accélère encore plus, qu'est-ce qu'il faudrait changer?",
+      "closing_line": "Les forces décident si les objets bougent, ralentissent ou s'arrêtent."
+    },
+    {
+      "id": "hook_c",
+      "culture_hint": "canadian",
+      "text": "Tu pousses une lourde boîte sur le sol de ta cuisine. Elle ne bouge pas, peu importe tes efforts. Ton ami arrive et pousse en même temps que toi — et la boîte se déplace enfin! Qu'est-ce qui a changé? Est-ce qu'on a changé la boîte? Non — on a changé les forces qui agissent sur elle.",
+      "closing_line": "Les forces peuvent s'équilibrer ou se déséquilibrer — et ça change tout."
+    }
+  ],
+  "concept": {
+    "explanation_steps": [
+      "Une force, c'est une poussée ou une traction qui agit sur un objet. Les forces peuvent faire bouger un objet, l'arrêter ou changer sa direction.",
+      "Quand les forces sont équilibrées (égales et opposées), l'objet ne change pas de mouvement : s'il était immobile, il reste immobile; s'il bougeait à vitesse constante, il continue.",
+      "Quand les forces sont déséquilibrées (une force est plus grande que l'autre), l'objet accélère, ralentit ou change de direction.",
+      "Types de forces courants :",
+      "La gravité attire tous les objets vers le bas, vers le centre de la Terre.",
+      "La friction (frottement) s'oppose au mouvement — elle ralentit les objets qui bougent.",
+      "La force normale est la force qu'une surface exerce sur un objet posé dessus (vers le haut).",
+      "La force appliquée, c'est quand tu pousses ou tires directement un objet.",
+      "Exemple : un livre posé sur une table. La gravité tire le livre vers le bas. La force normale de la table pousse vers le haut. Ces deux forces sont équilibrées — le livre ne bouge pas."
+    ],
+    "whiteboard_text": "Forces équilibrées → pas de changement de mouvement\nForces déséquilibrées → l'objet accélère ou ralentit\n\nTypes : gravité · friction · force normale · force appliquée",
+    "comprehension_check": "Un skateboard roule sur le trottoir et ralentit jusqu'à s'arrêter. Quelle force ralentit le skateboard?",
+    "reteach_angles": [
+      "Imagine une corde tirée des deux côtés par deux équipes de force égale — la corde ne bouge pas. C'est des forces équilibrées. Si une équipe tire plus fort, la corde bouge — des forces déséquilibrées.",
+      "La friction est toujours opposée au mouvement. Plus la surface est rugueuse, plus la friction est forte. Sur la glace, il y a peu de friction — c'est pourquoi la rondelle de hockey glisse si loin."
+    ]
+  },
+  "problems": [
+    {
+      "id": "p_guided_1",
+      "stage": "guided",
+      "difficulty": "easy",
+      "question": "Un élève pousse doucement une chaise. La chaise reste immobile. Quelle est la meilleure explication?",
+      "mc_choices": [
+        "Il n'y a aucune force qui agit sur la chaise",
+        "Les forces sur la chaise sont équilibrées",
+        "La gravité est plus forte que la poussée",
+        "La chaise est trop lourde pour avoir des forces"
+      ],
+      "correct_index": 1,
+      "intervention_hints": [
+        "Si la chaise ne bouge pas, qu'est-ce que ça nous dit sur les forces qui agissent sur elle?",
+        "La poussée de l'élève et la résistance du frottement s'opposent. Si la chaise ne bouge pas, ces forces doivent être...",
+        "Quand un objet est immobile, les forces qui agissent sur lui sont équilibrées — elles s'annulent."
+      ],
+      "answer_explanation": "La chaise reste immobile parce que les forces sont équilibrées : la force de poussée de l'élève est égale à la force de friction du sol. Les forces s'annulent.",
+      "nova_guiding_question": "Si la chaise ne bouge pas, qu'est-ce que ça nous dit sur les forces qui s'exercent dessus?",
+      "common_misconception": "Beaucoup pensent que si un objet ne bouge pas, c'est qu'il n'y a aucune force. En réalité, plusieurs forces peuvent agir en même temps et s'équilibrer."
+    },
+    {
+      "id": "p_guided_2",
+      "stage": "guided",
+      "difficulty": "easy",
+      "question": "Un bateau avance sur un lac à vitesse constante, sans accélérer ni ralentir. Quel est le type de forces en jeu?",
+      "mc_choices": [
+        "Aucune force n'agit sur le bateau",
+        "Des forces déséquilibrées — le moteur est plus fort",
+        "Des forces équilibrées — la poussée du moteur et la résistance de l'eau s'annulent",
+        "La force de gravité seule"
+      ],
+      "correct_index": 2,
+      "intervention_hints": [
+        "Le bateau avance à vitesse constante — il n'accélère pas. Qu'est-ce que ça indique sur les forces?",
+        "Si les forces étaient déséquilibrées, le bateau accélérerait ou ralentirait. Mais sa vitesse ne change pas...",
+        "Une vitesse constante signifie que la force de propulsion du moteur et la résistance de l'eau sont égales — les forces sont équilibrées."
+      ],
+      "answer_explanation": "Vitesse constante = forces équilibrées. La force du moteur (vers l'avant) et la résistance de l'eau (vers l'arrière) sont égales, donc le bateau ni n'accélère ni ne ralentit.",
+      "nova_guiding_question": "Qu'est-ce qui doit être vrai des forces pour qu'un objet continue à la même vitesse sans changer?",
+      "common_misconception": "Beaucoup pensent qu'il faut une force nette pour maintenir un mouvement. En réalité, un objet en mouvement à vitesse constante a des forces équilibrées."
+    },
+    {
+      "id": "p_practice_1",
+      "stage": "practice",
+      "difficulty": "medium",
+      "question": "Tu pousses une poussette vers l'avant, mais elle reste immobile. Quelle force explique le mieux pourquoi elle ne bouge pas?",
+      "mc_choices": [
+        "La force de friction est plus forte que ta poussée",
+        "Il n'y a aucune force en jeu",
+        "Ta force de poussée est plus forte que la friction",
+        "Les forces de poussée et de friction sont équilibrées"
+      ],
+      "correct_index": 3,
+      "intervention_hints": [
+        "La poussette ne bouge pas. Si une seule force était plus grande, elle bougerait. Qu'est-ce que ça indique?",
+        "Pour qu'un objet reste immobile quand on le pousse, la force qui s'oppose à la poussée doit être exactement égale.",
+        "Ta poussée et la friction sont de même grandeur mais de direction opposée — elles s'équilibrent."
+      ],
+      "answer_explanation": "La poussette reste immobile parce que ta force de poussée et la force de friction sont équilibrées. Elles s'annulent, donc il n'y a pas de mouvement.",
+      "nova_guiding_question": "Quelle condition doit exister pour qu'un objet reste parfaitement immobile malgré une poussée?",
+      "common_misconception": "Si l'objet ne bouge pas, certains pensent que leur poussée n'a aucun effet. En réalité, la friction a augmenté pour contrebalancer exactement la poussée."
+    },
+    {
+      "id": "p_practice_2",
+      "stage": "practice",
+      "difficulty": "medium",
+      "question": "Un joueur frappe un ballon de soccer. Le ballon roule sur le gazon et ralentit jusqu'à s'arrêter. Quelle force ralentit le ballon?",
+      "mc_choices": [
+        "La force de poussée de la jambe du joueur",
+        "La force de frottement entre le ballon et le gazon",
+        "La force de gravité qui tire le ballon vers le bas",
+        "La force normale du sol"
+      ],
+      "correct_index": 1,
+      "intervention_hints": [
+        "La jambe du joueur n'est plus en contact avec le ballon quand il roule. Quelle force agit encore sur lui?",
+        "Quelle force s'oppose au mouvement d'un objet qui roule sur une surface?",
+        "Le frottement entre le ballon et le gazon s'oppose au mouvement du ballon — c'est lui qui le ralentit."
+      ],
+      "answer_explanation": "La force de frottement (friction) entre le ballon et le gazon s'oppose au mouvement du ballon, le ralentissant jusqu'à l'arrêt. La jambe ne pousse plus le ballon une fois qu'il est en l'air.",
+      "nova_guiding_question": "Une fois que le ballon n'est plus en contact avec la jambe du joueur, quelle est la seule force horizontale qui agit encore sur lui?",
+      "common_misconception": "La gravité tire vers le bas mais n'arrête pas le ballon qui roule horizontalement. C'est le frottement (horizontal) qui ralentit le mouvement."
+    },
+    {
+      "id": "p_capstone_1",
+      "stage": "capstone",
+      "difficulty": "hard",
+      "question": "Un livre est posé immobile sur une table. La gravité tire le livre vers le bas. Quelle force s'oppose à la gravité et empêche le livre de tomber?",
+      "mc_choices": [
+        "La force de friction de la table",
+        "La force appliquée par une main",
+        "La force normale de la table",
+        "La force magnétique de la table"
+      ],
+      "correct_index": 2,
+      "intervention_hints": [
+        "Quelque chose empêche le livre de traverser la table et de tomber. Quelle force une surface exerce-t-elle sur un objet posé dessus?",
+        "La force normale, c'est la force perpendiculaire qu'une surface exerce pour soutenir un objet. Dans quelle direction est-elle ici?",
+        "La table pousse le livre vers le haut avec une force exactement égale à la gravité — c'est la force normale."
+      ],
+      "answer_explanation": "La force normale est la force que la table exerce sur le livre, perpendiculairement à la surface, vers le haut. Elle équilibre exactement la force de gravité vers le bas — c'est pourquoi le livre reste immobile.",
+      "nova_guiding_question": "Si la gravité tire le livre vers le bas et qu'il ne bouge pas, quelle force doit agir vers le haut?",
+      "common_misconception": "La friction ne s'applique pas ici car le livre ne glisse pas horizontalement. C'est la force normale (vers le haut) qui contrebalance la gravité (vers le bas)."
+    },
+    {
+      "id": "p_capstone_2",
+      "stage": "capstone",
+      "difficulty": "capstone",
+      "question": "Une personne pousse un chariot. La force de friction est plus faible que la force de poussée. Que va-t-il se passer?",
+      "mc_choices": [
+        "Le chariot reste immobile car les forces s'équilibrent",
+        "Le chariot accélère car les forces sont déséquilibrées",
+        "Le chariot ralentit car la friction est présente",
+        "Le chariot tombe car la gravité est plus forte"
+      ],
+      "correct_index": 1,
+      "intervention_hints": [
+        "La force de poussée est plus grande que la friction. Les forces sont-elles équilibrées ou déséquilibrées?",
+        "Quand les forces sont déséquilibrées, qu'est-ce qui arrive au mouvement de l'objet?",
+        "Une force nette vers l'avant (poussée > friction) fait que le chariot accélère dans la direction de la force la plus grande."
+      ],
+      "answer_explanation": "Puisque la force de poussée est plus grande que la friction, les forces sont déséquilibrées. Il y a une force nette vers l'avant, donc le chariot accélère.",
+      "nova_guiding_question": "Si la poussée est plus grande que la résistance, dans quelle direction va la force nette — et qu'est-ce que ça fait au chariot?",
+      "common_misconception": "Certains pensent que la friction ralentit toujours l'objet jusqu'à l'arrêt. Mais si la poussée est plus forte que la friction, la force nette fait accélérer l'objet."
+    }
+  ]
+}

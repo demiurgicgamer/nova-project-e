@@ -1,0 +1,169 @@
+{
+  "meta": {
+    "subject": "biology",
+    "topic_key": "ecosystems",
+    "topic_display": "Ecosystems",
+    "grade": 6,
+    "region": "canada",
+    "language_code": "fr",
+    "status": "approved",
+    "review_flags": []
+  },
+  "hook_stories": [
+    {
+      "id": "hook_a",
+      "culture_hint": "canadian",
+      "text": "Tu es en randonnée avec ton frère dans la forêt québécoise et vous trouvez un ours brun qui mange des baies. Tu te demandes ce que mange cet ours. Il est très gros et mange des choses qui pourraient te surprendre. Il est végétarien mais pas vraiment. Il peut même manger des poissons, tu sais. Tu te dis : \"Qu'est-ce que tous ces animaux mangent ? Comment ils se nourrissent les uns les autres ?\" Tu décides de demander à un biologiste qui travaille dans une réserves naturelle.",
+      "closing_line": "Comme tu es curieux, tu dis à ton frère, \"Qu'est-ce qui se passe dans cet écosystème ?\" Quel est le rôle des différents êtres vivants?"
+    }
+  ],
+  "concept": {
+    "explanation_steps": [
+      "Dans un écosystème, chaque être vivant a un rôle différent.",
+      "Les producteurs font leur propre nourriture, généralement à partir du soleil.",
+      "Les consommateurs mangent d'autres êtres vivants pour vivre.",
+      "Les décomposeurs décomposent les restes des animaux et des plantes, les transformant en nutriments.",
+      "Tous les êtres vivants interagissent entre eux dans un écosystème."
+    ],
+    "whiteboard_text": "Producteur → Consommateur → Décomposeur",
+    "comprehension_check": "Dans un écosystème, quelle est la fonction d’un producteur ?",
+    "reteach_angles": [
+      "Les producteurs sont comme les fabricants de nourriture dans la nature.",
+      "Pense à une plante dans ton jardin qui vit avec le soleil, l'eau et la terre – c’est un producteur."
+    ]
+  },
+  "problems": [
+    {
+      "id": "p_guided_1",
+      "stage": "guided",
+      "difficulty": "medium",
+      "text": "Qu’est-ce qu’une chaîne alimentaire ?",
+      "answer": "B. Un seul fil de nourriture",
+      "answer_explanation": "Une chaîne alimentaire montre comment l'énergie se transmet d’un être vivant à un autre dans un écosystème.",
+      "mc_choices": [
+        "B. Un seul fil de nourriture",
+        "A. Un ensemble de petits animaux",
+        "C. Un système de nourriture complexe",
+        "D. Un endroit où les plantes poussent"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Les élèves peuvent confondre une chaine alimentaire avec une roue alimentaire.",
+      "intervention_hints": {
+        "level_1": "Réfléchis à ce qu'est une chaîne dans ta vie. Elle est comme un fil de nourriture.",
+        "level_2": "Une chaîne alimentaire est un fil simple qui montre comment la nourriture se déplace d’un être vivant à un autre.",
+        "level_3": "Tu as une chaîne qui va de la plante → escargot → grenouille, c’est bien une chaîne alimentaire."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_1",
+      "stage": "practice",
+      "difficulty": "easy",
+      "text": "Quels sont les rôles d’un producteur dans un écosystème ?",
+      "answer": "B. Faire sa propre nourriture",
+      "answer_explanation": "Les producteurs fabriquent leur propre nourriture à partir du soleil et de la lumière, par exemple les plantes.",
+      "mc_choices": [
+        "B. Faire sa propre nourriture",
+        "A. Manger d’autres êtres vivants",
+        "C. Décomposer les restes",
+        "D. Avoir des prédateurs"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Certains élèves peuvent penser que les producteurs mangent d'autres êtres vivants.",
+      "intervention_hints": {
+        "level_1": "Réfléchis à un arbre. Il fait sa propre nourriture par la photosynthèse. C’est un producteur ?",
+        "level_2": "Qu'est-ce qu’un producteur ? Il crée la nourriture pour vivre.",
+        "level_3": "Pense à une plante qui vit avec la lumière, l’eau, et la terre – c’est un producteur."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_2",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "Quel écosystème est décrit par ces éléments : arbres, oiseaux, insectes, champignons ?",
+      "answer": "B. Forêt de feuillus",
+      "answer_explanation": "Une forêt de feuillus contient des arbres, des oiseaux, et des champignons qui interagissent entre eux dans un écosystème.",
+      "mc_choices": [
+        "B. Forêt de feuillus",
+        "A. Désert",
+        "C. Marais",
+        "D. Prairie"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Les élèves peuvent identifier de manière incorrecte les types d'écosystèmes selon les éléments présents dans les descriptions.",
+      "intervention_hints": {
+        "level_1": "Regarde les éléments mentionnés : arbres, oiseaux, insectes, champignons.",
+        "level_2": "Ce genre d'écosystème peut se retrouver dans les forêts du Québec, avec des animaux et des plantes qui vivent ensemble.",
+        "level_3": "Une forêt de feuillus a beaucoup d'arbres, des oiseaux et des champignons — ce sont souvent des arbres feuillus."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_3",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "Qu'est-ce qui se passe si les plantes disparaissent dans un écosystème ?",
+      "answer": "B. Le nombre de souris diminue",
+      "answer_explanation": "Les plantes sont les producteurs de base dans une chaine alimentaire. Leur disparition affecte directement tous les niveaux suivants.",
+      "mc_choices": [
+        "B. Le nombre de souris diminue",
+        "A. Le nombre de hiboux augmente",
+        "C. Le nombre de serpents augmente",
+        "D. La prairie devient plus fertile"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Les élèves peuvent croire que la disparition des producteurs n’a pas d'effet sur les autres éléments.",
+      "intervention_hints": {
+        "level_1": "Si les plantes disparaissent, les animaux qui les mangent n’ont plus de nourriture.",
+        "level_2": "Si les producteurs ont disparu, ça détruit la base de la chaîne alimentaire.",
+        "level_3": "Quel est le rôle de la plante ? Faire la nourriture, ça nourrit les autres."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_capstone_a",
+      "stage": "capstone",
+      "difficulty": "hard",
+      "text": "Le rôle des herbes dans cet écosystème :",
+      "answer": "D. Elles produisent leur propre nourriture",
+      "answer_explanation": "Les herbes sont les producteurs de base dans les écosystèmes de prairie, fournissant l’énergie à tous les autres niveaux.",
+      "mc_choices": [
+        "D. Elles produisent leur propre nourriture",
+        "A. Elles sont des consommateurs",
+        "B. Elles décomposent les restes",
+        "C. Elles nourrissent les souris"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Certains élèves peuvent identifier les herbes comme des consommateurs ou des décomposeurs.",
+      "intervention_hints": {
+        "level_1": "Refléchis à l'impact de la destruction de la prairie sur les herbes. Comment ça affecte la chaîne ?",
+        "level_2": "Quelle est la chaîne alimentaire de la prairie ? Elle commence par les herbes qui mangent les souris.",
+        "level_3": "Qu'est-ce qui se passe si on enlève les plantes d’une chaîne ?"
+      },
+      "nova_guiding_question": "Refléchis à l'impact de la destruction de la prairie sur les herbes. Comment ça affecte la chaîne ?"
+    },
+    {
+      "id": "p_capstone_b",
+      "stage": "capstone",
+      "difficulty": "hard",
+      "text": "Les conséquences de la réduction de la prairie :",
+      "answer": "B. Le nombre de souris diminue",
+      "answer_explanation": "Lorsque les herbes disparaissent, les souris n’ont plus de nourriture. Leur population diminue.",
+      "mc_choices": [
+        "B. Le nombre de souris diminue",
+        "A. Le nombre de hiboux augmente",
+        "C. Le nombre de serpents augmente",
+        "D. La prairie devient plus fertile"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Certains élèves peuvent penser que la disparition d'un producteur entraîne une augmentation d'autres niveaux de consommateurs.",
+      "intervention_hints": {
+        "level_1": "Refléchis à l'impact de la destruction de la prairie sur les herbes. Comment ça affecte la chaîne ?",
+        "level_2": "Quelle est la chaîne alimentaire de la prairie ? Elle commence par les herbes qui mangent les souris.",
+        "level_3": "Qu'est-ce qui se passe si on enlève les plantes d’une chaîne ?"
+      },
+      "nova_guiding_question": "Refléchis à l'impact de la destruction de la prairie sur les herbes. Comment ça affecte la chaîne ?"
+    }
+  ]
+}

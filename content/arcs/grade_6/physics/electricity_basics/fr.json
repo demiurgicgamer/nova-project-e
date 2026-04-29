@@ -1,0 +1,148 @@
+{
+  "meta": {
+    "subject": "physics",
+    "topic_key": "electricity_basics",
+    "topic_display": "Electricity Basics",
+    "grade": 6,
+    "region": "canada",
+    "language_code": "fr",
+    "status": "approved",
+    "review_flags": []
+  },
+  "hook_stories": [
+    {
+      "id": "hook_a",
+      "culture_hint": "universal",
+      "text": "Il est 11h30. Ton frère est en train de regarder un film sur le téléphone portable. Soudain, il fait noir dans la maison ! Tu entends le bruit d’un clic. Ton père arrive pour dire que la lumière du salon est éteinte, et le téléviseur ne fonctionne plus. Tu sais que c’est peut-être la raison pour laquelle, soudain, tout est éteint… C’est un **coupure de courant**.",
+      "closing_line": "Alors qu’arrive-t-il si ce courant est interrompu ? Et si un câble est mal connecté ? Et si un interrupteur est cassé ? Tu vas apprendre à voir l’électricité comme un **mouvement**. Mais l’électricité n’est pas comme une eau normale – elle est très dangereuse, donc il faut la maîtriser, comme un animal qui peut te blesser si tu n’as pas de respect."
+    }
+  ],
+  "concept": {
+    "explanation_steps": [
+      "Un courant électrique est un mouvement d'éléctrons, comme un flot d'eau, mais avec des particules très petites.",
+      "Pour qu’un courant passe, tous les ingrédients doivent être présents dans le circuit électrique.",
+      "Quand une lampe est connectée, le courant va de la source d'énergie à l’appareil via des câbles.",
+      "Si un câble est débranché ou un interrupteur est cassé, l’électricité ne peut pas aller à l’appareil – c’est une rupture du circuit.",
+      "Les trois grandeurs physiques sont : le courant (I), la tension (U), et la résistance (R).",
+      "Ces trois grandeurs sont reliées par la loi d’Ohm : U = I × R — comme une recette où tous les éléments doivent être en équilibre."
+    ],
+    "whiteboard_text": "I = U / R\nU = I × R\nI × R = U",
+    "comprehension_check": "Qu’est-ce qu’un circuit électrique ?",
+    "reteach_angles": [
+      "Imagine que l’électricité est un flot d’eau qui coule dans un tuyau, et que la résistance est une pierre dans le tuyau.",
+      "Regarde les trois grandeurs comme des éléments d’une recette : le courant, la tension et la résistance doivent tous être ajustés correctement pour que le circuit fonctionne."
+    ]
+  },
+  "problems": [
+    {
+      "id": "p_guided_1",
+      "stage": "guided",
+      "difficulty": "medium",
+      "text": "Dans ton salon, ton père a branché 2 lampes dans une seule prise. Tu remarques que les deux lampes s’éteignent ensemble quand il appuie sur l'interrupteur. Celles-ci sont connectées en parallèle. Qu’est-ce que cela signifie ?",
+      "answer": "B",
+      "answer_explanation": "Dans un circuit en parallèle, si une lampe est cassée, l’autre reste allumée parce qu’elles ont chacune leur propre chemin électrique vers la source.",
+      "mc_choices": [
+        "B. Si une lampe est cassée, l’autre reste allumée",
+        "A. Chaque lampe a son propre câble vers l'interrupteur",
+        "C. On peut contrôler chacune des lampes séparément",
+        "D. Toutes les lampes sont dans la même ligne électrique"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Croire que les lampes en parallèle sont connectées en série, ce qui ferait qu’elles s’éteignent ensemble si une est cassée.",
+      "intervention_hints": {
+        "level_1": "Imagine que tes lampes sont comme des routes : si le chemin pour une lampe est bloqué, l’autre peut encore marcher ?",
+        "level_2": "Si tu as deux sorties de voiture qui partent toutes les deux de la même source de courant, est-ce que si une est arrêtée, l’autre marche ?",
+        "level_3": "Dans un circuit en parallèle, chaque lampe a son propre chemin électrique, mais elles sont toutes connectées à la source. Donc si l’une est débranchée, l’autre marche encore."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_1",
+      "stage": "practice",
+      "difficulty": "easy",
+      "text": "Pierre essaie de comprendre le circuit de sa lampe de poche. Il voit que la pile est toujours connectée à la lampe par un fil. Quelle forme de circuit a-t-il ?",
+      "answer": "A",
+      "answer_explanation": "Il y a une seule boucle entre la pile et la lampe, ce qui fait un circuit en série.",
+      "mc_choices": [
+        "A. En série",
+        "B. En parallèle",
+        "C. En boucle seule",
+        "D. Avec un seul câble"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Croire que les circuits simples sont en parallèle.",
+      "intervention_hints": {
+        "level_1": "Si tu débranches une lampe, est-ce que l’autre reste allumée ? Si non, c’est en série.",
+        "level_2": "Dans ta maison, la plupart des appareils fonctionnent même si un autre est débranché. Cela signifie qu’ils ont plus d’un **chemin pour l’électricité**.",
+        "level_3": "Si un seul câble relie toutes les prises, cela signifie qu'il n’y a pas de dépendance entre elles."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_2",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "Dans une maison, les prises électriques sont connectées comment ?",
+      "answer": "B",
+      "answer_explanation": "Les prises électriques sont connectées en parallèle pour que débrancher un appareil n'affecte pas les autres.",
+      "mc_choices": [
+        "B. En parallèle",
+        "A. En série",
+        "C. En boucle seule",
+        "D. Avec un seul câble"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Croire que les prises sont en série à cause du fait qu'on peut les allumer/désactiver indépendamment.",
+      "intervention_hints": {
+        "level_1": "Si tu débranches une lampe, est-ce que l’autre reste allumée ? Si non, c’est en série.",
+        "level_2": "Dans ta maison, la plupart des appareils fonctionnent même si un autre est débranché. Cela signifie qu’ils ont plus d’un **chemin pour l’électricité**.",
+        "level_3": "Si un seul câble relie toutes les prises, cela signifie qu'il n’y a pas de dépendance entre elles."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_3",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "Sara veut allumer un appareil à partir d’une source d’énergie. Elle place un **câble entre le courant et l’appareil**. Qu’est-ce que le câble agit comme ?",
+      "answer": "B",
+      "answer_explanation": "Un câble est un conducteur, il permet au courant de passer facilement.",
+      "mc_choices": [
+        "B. Un conducteur",
+        "A. Un isolant",
+        "C. Un interrupteur",
+        "D. Une résistance"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Croire que le câble agit comme une résistance parce qu’il a une certaine longueur.",
+      "intervention_hints": {
+        "level_1": "Un câble, c’est fait de métal. Le métal permet au courant de passer, non ?",
+        "level_2": "Si le câble pouvait empêcher le courant, l’appareil ne marcherait jamais. C’est le contraire, c’est un **bon moyen qu’eau** pour que ça passe.",
+        "level_3": "Un câble est fait pour que le **courant traverse très facilement**, et il est très résistant – c’est ce qu’on appelle un **conducteur**."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_capstone_1",
+      "stage": "capstone",
+      "difficulty": "hard",
+      "text": "Pierre est en train de tester une lampe avec une pile. Il remarque qu’au début, la lampe brille très fort. Mais ensuite, il a mis plus de résistance dans le circuit (plus de fil ou de résistance) et maintenant, la lampe est plus faible. Qu’est-ce qui s’est passé à cause de la **résistance** ?",
+      "answer": "B",
+      "answer_explanation": "Selon la loi d’Ohm, si la résistance augmente et que la tension reste constante, le courant diminue.",
+      "mc_choices": [
+        "B. Le courant diminue",
+        "A. Le courant augmente",
+        "C. La tension est plus forte",
+        "D. La tension diminue"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Croire que l’augmentation de résistance augmente le courant ou la tension.",
+      "intervention_hints": {
+        "level_1": "Un plus de résistance, c’est comme un obstacle dans le tuyau. Que devient le courant alors ?",
+        "level_2": "En utilisant la formule de **loi d’Ohm : U = I × R**, si U est fixe, et R augmente, alors I doit **diminuer**.",
+        "level_3": "Plus il y a de résistance, moins de courant passe, donc plus l’éclairage s’éteint."
+      },
+      "nova_guiding_question": "Pierre a augmenté la résistance dans son circuit. Qu’est-ce que cela fait à l’électricité ?"
+    }
+  ]
+}

@@ -1,0 +1,187 @@
+{
+  "meta": {
+    "subject": "biology",
+    "topic_key": "human_body_systems",
+    "topic_display": "Human Body Systems",
+    "grade": 6,
+    "region": "canada",
+    "language_code": "fr",
+    "status": "approved",
+    "review_flags": []
+  },
+  "hook_stories": [
+    {
+      "id": "hook_a",
+      "culture_hint": "canadian",
+      "text": "Mme Dubois, une enseignante de sciences, est au gymnase avec ses élèves. Elle leur montre un jeune athlète qui court sur la piste avec des gestes rapides et fluides. — Regardez comme il respire profondément pendant qu'il court, dit-elle. Ses poumons travaillent fort pour avoir assez d'oxygène. Son cœur bat vite pour envoyer cet oxygène à ses muscles. Et ses muscles utilisent toute cette énergie pour le faire avancer. Un élève lève la main : — Est-ce que tous ces systèmes travaillent en même temps? — Exactement! répond Mme Dubois. Ton corps, c'est une équipe de systèmes qui coopèrent à chaque seconde.",
+      "closing_line": "Comment les systèmes du corps travaillent-ils ensemble pour nous garder en vie et en mouvement?"
+    }
+  ],
+  "concept": {
+    "explanation_steps": [
+      "Le corps humain est organisé en systèmes. Chaque système a un rôle précis, mais ils travaillent tous ensemble.",
+      "Le système digestif décompose les aliments en nutriments que le corps peut utiliser. Il comprend la bouche, l'estomac et les intestins.",
+      "Le système respiratoire apporte l'oxygène dans le corps et expulse le dioxyde de carbone. Les organes principaux sont les poumons.",
+      "Le système circulatoire transporte le sang, l'oxygène et les nutriments à travers tout le corps. Le cœur est la pompe principale, et les vaisseaux sanguins sont les «tuyaux».",
+      "Le système musculaire permet le mouvement. Les muscles se contractent et se relâchent pour bouger les os.",
+      "Le système squelettique donne la forme au corps, protège les organes internes et sert de point d'attache pour les muscles. Le corps humain a 206 os.",
+      "Le système nerveux contrôle et coordonne tout le reste. Le cerveau envoie des messages à travers les nerfs pour diriger les actions du corps.",
+      "Exemple de coopération : quand tu cours, le système musculaire bouge tes jambes, le système respiratoire apporte de l'oxygène, le système circulatoire livre cet oxygène aux muscles, et le système nerveux coordonne tout."
+    ],
+    "whiteboard_text": "6 systèmes principaux :\n1. Digestif → décompose les aliments\n2. Respiratoire → oxygène / CO₂\n3. Circulatoire → pompe le sang\n4. Musculaire → mouvement\n5. Squelettique → structure + protection\n6. Nerveux → contrôle + coordination",
+    "comprehension_check": "Quel système transporte l'oxygène depuis les poumons jusqu'aux muscles?",
+    "reteach_angles": [
+      "Pense à une usine : il y a les employés (muscles), les couloirs (vaisseaux sanguins), l'air frais (poumons), la nourriture (digestif), la structure du bâtiment (squelette) et le directeur (cerveau). Chacun a son rôle, mais ensemble ils font fonctionner l'usine.",
+      "Pour mémoriser les systèmes, pense à ce qui se passe quand tu fais du sport : tu respires (respiratoire), ton cœur bat (circulatoire), tes muscles bougent (musculaire), tes os bougent avec tes muscles (squelettique), ton cerveau dirige tes mouvements (nerveux), et tu as besoin d'énergie de ta nourriture (digestif)."
+    ]
+  },
+  "problems": [
+    {
+      "id": "p_guided_1",
+      "stage": "guided",
+      "difficulty": "easy",
+      "question": "Tu manges une pomme. Ton corps décompose la pomme en nutriments que tes cellules peuvent utiliser. Quel système est responsable de ce travail?",
+      "mc_choices": [
+        "Le système digestif",
+        "Le système respiratoire",
+        "Le système circulatoire",
+        "Le système nerveux"
+      ],
+      "correct_index": 0,
+      "intervention_hints": [
+        "Quel système traite les aliments que tu manges et les transforme en quelque chose que ton corps peut utiliser?",
+        "Pense aux organes impliqués : bouche, estomac, intestins. Quel système comprend ces organes?",
+        "Le système digestif est responsable de décomposer les aliments en nutriments."
+      ],
+      "answer_explanation": "Le système digestif décompose les aliments (comme la pomme) en nutriments que les cellules peuvent absorber et utiliser comme source d'énergie.",
+      "nova_guiding_question": "Quels organes sont impliqués quand tu manges et digères de la nourriture?",
+      "common_misconception": "Le système circulatoire transporte les nutriments après que le système digestif les a décomposés — ces deux systèmes coopèrent, mais ce n'est pas le même."
+    },
+    {
+      "id": "p_guided_2",
+      "stage": "guided",
+      "difficulty": "easy",
+      "question": "Quand tu cours, ton cœur bat plus vite et pompe le sang dans tout ton corps. Quel système fait ce travail?",
+      "mc_choices": [
+        "Le système digestif",
+        "Le système circulatoire",
+        "Le système respiratoire",
+        "Le système squelettique"
+      ],
+      "correct_index": 1,
+      "intervention_hints": [
+        "Le cœur est l'organe principal ici. À quel système le cœur appartient-il?",
+        "Ce système pompe le sang dans les vaisseaux sanguins à travers tout le corps. Comment s'appelle-t-il?",
+        "Le système circulatoire comprend le cœur, les artères, les veines et les capillaires."
+      ],
+      "answer_explanation": "Le système circulatoire est responsable de pomper le sang à travers le corps. Le cœur est la pompe, et les vaisseaux sanguins sont les voies de transport.",
+      "nova_guiding_question": "Quel organe pompe le sang — et à quel système appartient-il?",
+      "common_misconception": "Le système respiratoire apporte l'oxygène dans le sang, mais c'est le système circulatoire qui transporte ensuite ce sang oxygéné jusqu'aux muscles."
+    },
+    {
+      "id": "p_practice_1",
+      "stage": "practice",
+      "difficulty": "medium",
+      "question": "Tu inspires profondément. L'air entre dans tes poumons, et l'oxygène passe dans ton sang. Simultanément, le dioxyde de carbone quitte ton sang et tu expires. Quel système effectue ces échanges de gaz?",
+      "mc_choices": [
+        "Le système circulatoire",
+        "Le système digestif",
+        "Le système respiratoire",
+        "Le système nerveux"
+      ],
+      "correct_index": 2,
+      "intervention_hints": [
+        "Les poumons sont les organes principaux ici. À quel système appartiennent les poumons?",
+        "Ce système échange des gaz : il prend l'oxygène de l'air et rejette le dioxyde de carbone. Quel est son nom?",
+        "Le système respiratoire comprend les poumons, la trachée et les voies nasales."
+      ],
+      "answer_explanation": "Le système respiratoire gère les échanges de gaz : il apporte l'oxygène de l'air dans le sang et élimine le dioxyde de carbone produit par les cellules.",
+      "nova_guiding_question": "Quels organes sont impliqués dans l'inspiration et l'expiration — et quel système forment-ils?",
+      "common_misconception": "Le système circulatoire transporte le sang oxygéné, mais c'est le système respiratoire qui effectue l'échange entre l'air et le sang dans les poumons."
+    },
+    {
+      "id": "p_practice_2",
+      "stage": "practice",
+      "difficulty": "medium",
+      "question": "Tes os te donnent ta forme, te permettent de rester debout et protègent tes organes internes (comme le crâne qui protège le cerveau). Quel système remplit ces fonctions?",
+      "mc_choices": [
+        "Le système musculaire",
+        "Le système squelettique",
+        "Le système circulatoire",
+        "Le système nerveux"
+      ],
+      "correct_index": 1,
+      "intervention_hints": [
+        "On parle d'os ici. Quel système est composé d'os?",
+        "Ce système donne la structure du corps et protège les organes importants. Comment s'appelle-t-il?",
+        "Le système squelettique est formé de 206 os et sert de charpente pour tout le corps."
+      ],
+      "answer_explanation": "Le système squelettique comprend tous les os du corps. Il donne la forme et la structure, protège les organes internes, et sert de point d'attache pour les muscles.",
+      "nova_guiding_question": "Quel système est responsable de la structure de ton corps et de la protection de tes organes internes?",
+      "common_misconception": "Le système musculaire et le système squelettique travaillent ensemble pour le mouvement, mais ce sont deux systèmes distincts. Les os font partie du système squelettique."
+    },
+    {
+      "id": "p_practice_3",
+      "stage": "practice",
+      "difficulty": "medium_hard",
+      "question": "Ton cerveau envoie un signal à ta main pour attraper une balle. En une fraction de seconde, les nerfs transmettent le message et ta main se ferme. Quel système coordonne cette communication entre le cerveau et le corps?",
+      "mc_choices": [
+        "Le système musculaire",
+        "Le système squelettique",
+        "Le système circulatoire",
+        "Le système nerveux"
+      ],
+      "correct_index": 3,
+      "intervention_hints": [
+        "Le cerveau envoie des messages. Quel système comprend le cerveau et les nerfs?",
+        "Ce système contrôle et coordonne toutes les actions du corps. Comment s'appelle-t-il?",
+        "Le système nerveux comprend le cerveau, la moelle épinière et les nerfs qui parcourent tout le corps."
+      ],
+      "answer_explanation": "Le système nerveux coordonne toutes les fonctions du corps. Le cerveau envoie des signaux électriques par les nerfs pour contrôler les mouvements, les sensations et les réactions.",
+      "nova_guiding_question": "Quel organe envoie des messages à travers le corps pour contrôler ses actions — et à quel système appartient-il?",
+      "common_misconception": "Les muscles réalisent le mouvement, mais c'est le système nerveux qui envoie le signal pour que les muscles bougent. Les deux systèmes coopèrent."
+    },
+    {
+      "id": "p_capstone_1",
+      "stage": "capstone",
+      "difficulty": "hard",
+      "question": "Pendant une course, plusieurs systèmes du corps travaillent simultanément. Quel groupe de systèmes décrit le mieux ce qui se passe quand tu sprintes?",
+      "mc_choices": [
+        "Seulement le système musculaire — les muscles font tout le travail",
+        "Les systèmes respiratoire, circulatoire et musculaire — ils coopèrent pour fournir l'énergie et le mouvement",
+        "Seulement le système digestif — il fournit l'énergie nécessaire",
+        "Seulement le système squelettique — les os bougent les jambes"
+      ],
+      "correct_index": 1,
+      "intervention_hints": [
+        "Quand tu cours, tu respires plus vite (respiratoire), ton cœur bat plus vite (circulatoire) et tes muscles travaillent fort (musculaire). Est-ce qu'un seul système suffit?",
+        "L'oxygène doit arriver aux muscles pour qu'ils puissent travailler. Quel système apporte l'oxygène? Quel système le transporte? Quel système l'utilise?",
+        "Les systèmes respiratoire (O₂), circulatoire (transport) et musculaire (mouvement) doivent tous coopérer pour que tu puisses courir."
+      ],
+      "answer_explanation": "Courir nécessite la coopération de plusieurs systèmes : le respiratoire apporte l'oxygène, le circulatoire le transporte aux muscles, et le musculaire l'utilise pour produire le mouvement. Le système nerveux coordonne le tout.",
+      "nova_guiding_question": "Pense à tout ce qui se passe quand tu cours — quels systèmes sont actifs en même temps?",
+      "common_misconception": "Beaucoup pensent que seuls les muscles sont nécessaires pour courir. Mais sans oxygène (respiratoire) transporté par le sang (circulatoire), les muscles ne peuvent pas fonctionner longtemps."
+    },
+    {
+      "id": "p_capstone_2",
+      "stage": "capstone",
+      "difficulty": "capstone",
+      "question": "Tu manges un repas, et les nutriments doivent être transportés à toutes les cellules de ton corps. Quels deux systèmes travaillent directement ensemble pour accomplir cela?",
+      "mc_choices": [
+        "Le système nerveux et le système squelettique",
+        "Le système digestif et le système circulatoire",
+        "Le système musculaire et le système respiratoire",
+        "Le système squelettique et le système digestif"
+      ],
+      "correct_index": 1,
+      "intervention_hints": [
+        "Quel système décompose d'abord les aliments en nutriments?",
+        "Une fois les nutriments prêts, quel système les transporte à travers le corps jusqu'aux cellules?",
+        "Le système digestif prépare les nutriments, et le système circulatoire les livre — ils forment une équipe."
+      ],
+      "answer_explanation": "Le système digestif décompose les aliments en nutriments absorbables. Le système circulatoire transporte ensuite ces nutriments via le sang jusqu'à toutes les cellules du corps.",
+      "nova_guiding_question": "Après que les aliments sont digérés, comment les nutriments se rendent-ils jusqu'à chaque cellule du corps?",
+      "common_misconception": "La digestion seule ne suffit pas à nourrir les cellules. Sans le système circulatoire pour distribuer les nutriments, les cellules éloignées de l'intestin ne recevraient jamais leur énergie."
+    }
+  ]
+}

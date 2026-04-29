@@ -1,0 +1,170 @@
+{
+  "meta": {
+    "subject": "chemistry",
+    "topic_key": "physical_vs_chemical_changes",
+    "topic_display": "Physical and Chemical Changes",
+    "grade": 6,
+    "region": "canada",
+    "language_code": "fr",
+    "status": "approved",
+    "review_flags": []
+  },
+  "hook_stories": [
+    {
+      "id": "hook_a",
+      "culture_hint": "universal",
+      "text": "Tu aides ta maman à préparer le souper. Elle coupe des carottes en petits morceaux — les carottes changent de forme, mais ce sont toujours des carottes. Ensuite, elle met les carottes dans une poêle avec du beurre. La poêle chauffe, le beurre fond, et bientôt une odeur délicieuse remplit la cuisine. Après quelques minutes, les carottes sont dorées et leur goût a complètement changé. Est-ce que couper les carottes et les faire cuire, c'est la même chose?",
+      "closing_line": "Il y a une grande différence entre changer la forme d'un objet et créer quelque chose de nouveau."
+    },
+    {
+      "id": "hook_b",
+      "culture_hint": "universal",
+      "text": "Ton père allume un feu de camp. Il pose du bois sur le feu. Tu regardes les flammes et tu vois le bois se transformer lentement en cendres noires. Le lendemain matin, il ne reste plus de bois — seulement des cendres et de la fumée qui s'est envolée. Peux-tu retransformer les cendres en bois? Qu'est-ce qui a changé pour toujours?",
+      "closing_line": "Certains changements créent de nouvelles substances qu'on ne peut pas récupérer."
+    }
+  ],
+  "concept": {
+    "explanation_steps": [
+      "Pour comprendre la différence entre un changement physique et un changement chimique, regardons leurs caractéristiques principales.",
+      "Un changement physique : c'est une transformation où un objet change de forme, de taille ou d'état (solide → liquide → gaz), mais la substance reste la même. On peut souvent inverser ce changement.",
+      "Exemples de changements physiques : la glace qui fond en eau, l'eau qui bout en vapeur, le papier qu'on déchire, le beurre qui fond.",
+      "Un changement chimique : c'est une transformation où une ou plusieurs nouvelles substances sont créées. La substance d'origine n'existe plus sous la même forme.",
+      "Signes d'un changement chimique : nouvelle couleur, nouvelle odeur, production de gaz ou de chaleur, formation d'un dépôt solide.",
+      "Exemples de changements chimiques : le bois qui brûle (bois → cendres + fumée), le fer qui rouille (fer → oxyde de fer), les oeufs qui cuisent."
+    ],
+    "whiteboard_text": "Changement physique :\n→ Forme change, substance reste la même\n→ Souvent réversible\nEx : glace → eau → vapeur\n\nChangement chimique :\n→ Nouvelle substance créée\n→ Difficile à inverser\nEx : bois → cendres + fumée",
+    "comprehension_check": "La glace fond et devient de l'eau liquide. Est-ce un changement physique ou chimique?",
+    "reteach_angles": [
+      "Pense à une feuille de papier : si tu la plies ou la découpes, c'est toujours du papier — juste une forme différente. C'est un changement physique.",
+      "Mais si tu brûles cette feuille, elle devient des cendres. Tu ne peux pas «débrûler» le papier. Une nouvelle substance est créée — c'est un changement chimique."
+    ]
+  },
+  "problems": [
+    {
+      "id": "p_guided_1",
+      "stage": "guided",
+      "difficulty": "easy",
+      "question": "Tu fais cuire du chou à la vapeur. Le chou devient plus mou et change de texture, mais il reste du chou. C'est quel type de changement?",
+      "mc_choices": [
+        "Un changement physique",
+        "Un changement chimique",
+        "Une réaction de combustion",
+        "Aucun changement"
+      ],
+      "correct_index": 0,
+      "intervention_hints": [
+        "Le chou a-t-il été transformé en une nouvelle substance complètement différente, ou a-t-il seulement changé de texture?",
+        "Après la cuisson à la vapeur, le chou reste du chou — il n'est pas devenu autre chose. Quelle sorte de changement est-ce?",
+        "Quand la substance reste la même mais que sa forme ou sa texture change, c'est un changement physique."
+      ],
+      "answer_explanation": "Le chou cuit à la vapeur change de texture (il devient mou) mais reste chimiquement du chou. C'est un changement physique car aucune nouvelle substance n'est créée.",
+      "nova_guiding_question": "Après la cuisson à la vapeur, est-ce que le chou est encore du chou, ou est-ce devenu une substance complètement différente?",
+      "common_misconception": "La chaleur ne crée pas toujours un changement chimique. Chauffer de la glace pour la faire fondre est physique. Chauffer du bois jusqu'à ce qu'il brûle est chimique."
+    },
+    {
+      "id": "p_guided_2",
+      "stage": "guided",
+      "difficulty": "easy",
+      "question": "Tu mélangés du sucre avec des fraises coupées. Le sucre se dissout un peu, les fraises restent des fraises. Quel type de changement as-tu fait?",
+      "mc_choices": [
+        "Un changement chimique",
+        "Un changement physique",
+        "Les deux à la fois",
+        "Aucun changement"
+      ],
+      "correct_index": 1,
+      "intervention_hints": [
+        "Le sucre et les fraises ont-ils été transformés en une nouvelle substance, ou sont-ils encore du sucre et des fraises?",
+        "On peut encore retrouver le sucre et les fraises séparément si on voulait. Est-ce que ce changement est réversible?",
+        "Quand les substances restent les mêmes et qu'on peut les séparer à nouveau, c'est un changement physique."
+      ],
+      "answer_explanation": "Le sucre se dissout dans le jus des fraises, mais les substances restent les mêmes — c'est toujours du sucre et des fraises. Il n'y a pas de nouvelle substance créée. C'est un changement physique.",
+      "nova_guiding_question": "Est-ce que le sucre et les fraises sont encore du sucre et des fraises après les avoir mélangés?",
+      "common_misconception": "Dissoudre ou mélanger des substances n'est pas toujours un changement chimique. Si les substances peuvent être retrouvées, c'est physique."
+    },
+    {
+      "id": "p_practice_1",
+      "stage": "practice",
+      "difficulty": "medium",
+      "question": "Tu mets un morceau de fer dans de l'eau salée. Après quelques jours, tu vois de la rouille se former sur le fer. La rouille est une substance orangée différente du fer. Quel type de changement est la formation de rouille?",
+      "mc_choices": [
+        "Un changement physique, car le fer est toujours là",
+        "Un changement chimique, car une nouvelle substance est créée",
+        "Un changement de couleur seulement",
+        "Aucun changement — la rouille, c'est juste du fer mouillé"
+      ],
+      "correct_index": 1,
+      "intervention_hints": [
+        "La rouille a-t-elle les mêmes propriétés que le fer? Est-ce toujours la même substance?",
+        "La rouille est de l'oxyde de fer — une substance différente du fer. Est-ce qu'une nouvelle substance a été créée?",
+        "Quand une nouvelle substance différente est créée, c'est un changement chimique."
+      ],
+      "answer_explanation": "La formation de rouille est un changement chimique. Le fer réagit avec l'eau et l'oxygène pour créer de l'oxyde de fer (la rouille), une substance complètement différente du fer.",
+      "nova_guiding_question": "La rouille a-t-elle les mêmes propriétés que le fer? Est-ce vraiment la même substance?",
+      "common_misconception": "Parce qu'on peut encore voir le fer, certains pensent que c'est physique. Mais la rouille est une substance chimiquement différente du fer."
+    },
+    {
+      "id": "p_practice_2",
+      "stage": "practice",
+      "difficulty": "medium",
+      "question": "Tu mets un morceau de bois dans un feu. Le bois brûle et se transforme en cendres et en fumée. Quel type de changement est-ce?",
+      "mc_choices": [
+        "Un changement physique, car le bois change seulement de couleur",
+        "Un changement chimique, car le bois devient de nouvelles substances",
+        "Un changement physique, car on peut voir les flammes",
+        "Aucun changement — le bois est toujours présent sous forme de cendres"
+      ],
+      "correct_index": 1,
+      "intervention_hints": [
+        "Après que le bois a brûlé, peut-on retrouver le bois d'origine? Peut-on «débrûler» le bois?",
+        "Le bois est devenu des cendres et de la fumée. Ce sont des substances différentes du bois. Qu'est-ce que ça indique?",
+        "Quand des nouvelles substances sont créées et qu'on ne peut pas revenir en arrière, c'est un changement chimique."
+      ],
+      "answer_explanation": "Brûler du bois est un changement chimique. Le bois réagit avec l'oxygène pour produire des cendres, de la fumée et de la chaleur — des substances différentes du bois d'origine. Ce changement est irréversible.",
+      "nova_guiding_question": "Peut-on retransformer les cendres en bois? Qu'est-ce que ça nous dit sur ce type de changement?",
+      "common_misconception": "Certains pensent que parce que les cendres sont encore là, la substance n'a pas vraiment changé. Mais les cendres sont chimiquement différentes du bois."
+    },
+    {
+      "id": "p_capstone_1",
+      "stage": "capstone",
+      "difficulty": "hard",
+      "question": "Laquelle de ces observations est le meilleur signe qu'un changement chimique a eu lieu?",
+      "mc_choices": [
+        "La substance a changé de forme",
+        "Une nouvelle substance avec de nouvelles propriétés a été créée",
+        "La substance a changé de taille",
+        "La substance a changé de couleur seulement"
+      ],
+      "correct_index": 1,
+      "intervention_hints": [
+        "Changer de forme ou de taille — est-ce que ça crée une nouvelle substance?",
+        "Changer de couleur peut arriver dans les deux types de changements. Qu'est-ce qui est unique aux changements chimiques?",
+        "La création d'une nouvelle substance avec de nouvelles propriétés est la définition même d'un changement chimique."
+      ],
+      "answer_explanation": "Le signe principal d'un changement chimique est la création d'une nouvelle substance avec des propriétés différentes. Un changement de forme ou de taille seul indique un changement physique.",
+      "nova_guiding_question": "Quelle est la différence essentielle entre changer la forme d'une substance et créer une nouvelle substance?",
+      "common_misconception": "Un changement de couleur peut indiquer un changement chimique (comme la rouille), mais pas toujours — une feuille d'automne qui change de couleur peut avoir une explication plus complexe. La création d'une nouvelle substance est l'indicateur le plus fiable."
+    },
+    {
+      "id": "p_capstone_2",
+      "stage": "capstone",
+      "difficulty": "capstone",
+      "question": "Parmi ces groupes d'exemples, lequel contient uniquement des changements chimiques?",
+      "mc_choices": [
+        "La glace qui fond + le papier qu'on découpe",
+        "Le bois qui brûle + le fer qui rouille",
+        "Le sel qui se dissout + le beurre qui fond",
+        "Le verre qui se brise + l'eau qui bout"
+      ],
+      "correct_index": 1,
+      "intervention_hints": [
+        "Pour chaque exemple, demande-toi : est-ce qu'une nouvelle substance est créée, ou est-ce que la substance reste la même?",
+        "La glace qui fond reste de l'eau. Le papier découpé reste du papier. Le sel dissous reste du sel. Aucun de ces exemples ne crée de nouvelle substance.",
+        "Le bois brûlé devient des cendres (nouvelle substance). Le fer rouillé devient de l'oxyde de fer (nouvelle substance). Ces deux-là sont chimiques."
+      ],
+      "answer_explanation": "Brûler du bois et rouiller du fer sont tous les deux des changements chimiques car ils créent de nouvelles substances (cendres/fumée et oxyde de fer). Les autres exemples sont des changements physiques.",
+      "nova_guiding_question": "Pour chaque exemple, pose-toi la question : est-ce qu'il reste toujours la même substance au bout du changement?",
+      "common_misconception": "L'eau qui bout semble «disparaître» mais reste de l'eau (H₂O) sous forme gazeuse — c'est un changement physique, pas chimique."
+    }
+  ]
+}

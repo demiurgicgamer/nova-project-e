@@ -1,0 +1,173 @@
+{
+  "meta": {
+    "subject": "chemistry",
+    "topic_key": "mixtures_and_solutions",
+    "topic_display": "Mixtures and Solutions",
+    "grade": 6,
+    "region": "canada",
+    "language_code": "fr",
+    "status": "approved",
+    "review_flags": []
+  },
+  "hook_stories": [
+    {
+      "id": "hook_a",
+      "culture_hint": "universal",
+      "text": "Sophie prépare un gâteau pour la fête de fin d'année. Elle mélange de la farine, du beurre et du sucre ensemble — la pâte devient uniforme, on ne distingue plus les ingrédients séparément. Mais quand elle ajoute des raisins secs à la pâte, on peut clairement voir les raisins ici et là. Sophie se demande : «Est-ce que les deux mélanges sont la même chose?»",
+      "closing_line": "Certains mélanges sont uniformes — d'autres laissent les parties visibles. Quelle est la différence?"
+    },
+    {
+      "id": "hook_b",
+      "culture_hint": "canadian",
+      "text": "Papa déteste le café trop fort. Il met une cuillère de café en poudre dans sa tasse, ajoute de l'eau chaude, et remue bien. La poudre disparaît complètement — on ne la voit plus. Mais quand son fils met du sable dans un verre d'eau, le sable reste visible au fond. Les deux sont des mélanges, mais ils se comportent très différemment. Pourquoi?",
+      "closing_line": "Tout dépend de si les substances se dissolvent ou restent visibles."
+    }
+  ],
+  "concept": {
+    "explanation_steps": [
+      "Un mélange, c'est deux substances ou plus combinées ensemble — mais elles ne forment pas une nouvelle substance chimique. On peut les séparer.",
+      "Une solution est un mélange spécial où une substance (le soluté) se dissout complètement dans une autre (le solvant). On ne peut plus voir le soluté.",
+      "Exemples de solutions : eau salée, café, sirop d'érable, eau sucrée.",
+      "Il y a deux types de mélanges :",
+      "Mélange homogène : uniforme partout, on ne voit pas les parties séparées. Exemples : l'air, l'eau salée, le café.",
+      "Mélange hétérogène : on peut voir les différentes parties. Exemples : sable dans l'eau, mélange de noix et de raisins, lait avec des morceaux de fruits.",
+      "Pour séparer un mélange, on utilise des méthodes physiques :",
+      "Filtration : retient les solides, laisse passer le liquide (ex. sable dans l'eau).",
+      "Évaporation : chauffe le liquide pour le faire évaporer, laisse le soluté dissous derrière (ex. sel dans l'eau)."
+    ],
+    "whiteboard_text": "Mélange = substances combinées, pas liées chimiquement\nSolution (homogène) = soluté dissous, invisible\nMélange hétérogène = parties visibles\n\nSéparation : filtration (solides) · évaporation (solutés dissous)",
+    "comprehension_check": "Sophie mélange du sel et du sucre dans de l'eau chaude. Tout se dissout. Est-ce un mélange homogène, hétérogène, ou les deux?",
+    "reteach_angles": [
+      "Pense au café : la poudre disparaît dans l'eau, tout devient uniforme — c'est homogène. Maintenant pense aux raisins dans un muffin : tu peux voir chaque raisin clairement — c'est hétérogène.",
+      "Pour savoir si c'est homogène ou hétérogène, pose-toi cette question : «Peut-on voir les différentes parties du mélange?» Oui → hétérogène. Non → homogène."
+    ]
+  },
+  "problems": [
+    {
+      "id": "p_guided_1",
+      "stage": "guided",
+      "difficulty": "easy",
+      "question": "Sophie mélange une cuillère de café en poudre dans de l'eau chaude. La poudre se dissout complètement — on ne la voit plus. Quel type de mélange Sophie a-t-elle créé?",
+      "mc_choices": [
+        "Une solution homogène",
+        "Un mélange hétérogène",
+        "Une suspension",
+        "Un mélange impossible"
+      ],
+      "correct_index": 0,
+      "intervention_hints": [
+        "Est-ce qu'on peut encore voir la poudre de café après avoir remué? Qu'est-ce que ça indique?",
+        "Quand une substance se dissout complètement et qu'on ne la voit plus, le mélange est uniforme. Comment appelle-t-on ça?",
+        "Un mélange où tout est uniforme et où les parties sont invisibles s'appelle une solution homogène."
+      ],
+      "answer_explanation": "Quand la poudre de café se dissout complètement dans l'eau, elle forme une solution homogène. Le café est le soluté, l'eau est le solvant — et on ne peut plus voir les parties séparément.",
+      "nova_guiding_question": "Si la poudre a complètement disparu dans l'eau, est-ce que le mélange est uniforme ou y a-t-il des parties visibles?",
+      "common_misconception": "Certains élèves pensent que dissoudre crée une nouvelle substance chimique. Non — c'est toujours un mélange physique. Le café est toujours là chimiquement, juste dispersé uniformément."
+    },
+    {
+      "id": "p_guided_2",
+      "stage": "guided",
+      "difficulty": "easy",
+      "question": "Paul mélange 10 g de sel dans 50 ml d'eau. Le sel se dissout complètement et l'eau semble claire et uniforme. Qu'est-ce que Paul a créé?",
+      "mc_choices": [
+        "Un mélange hétérogène, car il y a deux substances",
+        "Une suspension, car le sel était solide",
+        "Une solution, car le sel est dissous et invisible",
+        "Un mélange non-homogène"
+      ],
+      "correct_index": 2,
+      "intervention_hints": [
+        "Est-ce qu'on peut encore voir les grains de sel? Qu'est-ce qui se passe quand une substance disparaît complètement dans un liquide?",
+        "Quand les particules sont complètement dissoutes et invisibles, quel type de mélange obtient-on?",
+        "Une solution se forme quand le soluté (sel) se dissout complètement dans le solvant (eau) — les particules sont invisibles à l'œil nu."
+      ],
+      "answer_explanation": "L'eau salée est une solution : le sel (soluté) s'est dissous complètement dans l'eau (solvant). Le mélange est clair, uniforme, et homogène.",
+      "nova_guiding_question": "Si on ne peut plus voir le sel, est-ce qu'il a disparu ou est-ce qu'il est juste trop petit pour être vu?",
+      "common_misconception": "Dissoudre n'est pas la même chose que disparaître. Le sel est encore là — il est juste dispersé en particules trop petites pour être vues. On peut retrouver le sel par évaporation."
+    },
+    {
+      "id": "p_practice_1",
+      "stage": "practice",
+      "difficulty": "medium",
+      "question": "Luc mélange du sable dans de l'eau. On peut voir clairement les grains de sable. Ensuite, il filtre le mélange. Quel type de mélange avait-il au départ?",
+      "mc_choices": [
+        "Une solution homogène",
+        "Un mélange hétérogène",
+        "Un mélange gazeux",
+        "Une solution saturée"
+      ],
+      "correct_index": 1,
+      "intervention_hints": [
+        "Si Luc peut voir les grains de sable dans l'eau, est-ce que le mélange est uniforme ou y a-t-il des parties visibles?",
+        "Quand les composants d'un mélange sont clairement visibles et distincts, comment appelle-t-on ce type de mélange?",
+        "Un mélange hétérogène a des composants qu'on peut voir et qui restent distincts — comme le sable et l'eau."
+      ],
+      "answer_explanation": "L'eau et le sable forment un mélange hétérogène car le sable ne se dissout pas dans l'eau — les grains restent visibles. La filtration peut séparer les deux, ce qui confirme que c'est un mélange physique.",
+      "nova_guiding_question": "Si les grains de sable sont encore visibles après avoir mélangé, est-ce que le sable s'est dissous dans l'eau?",
+      "common_misconception": "Le fait de pouvoir filtrer un mélange est un signe que c'est hétérogène — si le sable s'était dissous (comme le sel), il passerait à travers le filtre."
+    },
+    {
+      "id": "p_practice_2",
+      "stage": "practice",
+      "difficulty": "medium",
+      "question": "Pierre prépare un jus de pomme maison : il mélange du jus de pomme avec des petits morceaux de pomme et du sucre. On peut voir les morceaux de fruit flotter dans le jus. Quel type de mélange Pierre a-t-il créé?",
+      "mc_choices": [
+        "Une solution, car le sucre s'est dissous",
+        "Un mélange homogène, car c'est du jus",
+        "Un mélange hétérogène, car les morceaux de pomme sont visibles",
+        "Aucun mélange — c'est un aliment"
+      ],
+      "correct_index": 2,
+      "intervention_hints": [
+        "Est-ce que les morceaux de pomme sont visibles dans le jus? Qu'est-ce que ça indique sur le type de mélange?",
+        "Pour être homogène, le mélange doit être uniforme — est-ce que des morceaux de fruit visibles le rendent uniforme?",
+        "Puisque les morceaux de pomme sont visibles et distincts, c'est un mélange hétérogène — même si le sucre s'est dissous dans le jus."
+      ],
+      "answer_explanation": "Le jus avec des morceaux de pomme est hétérogène car les morceaux sont visibles et distincts. Même si le sucre s'est dissous (partie homogène), la présence de morceaux solides rend l'ensemble hétérogène.",
+      "nova_guiding_question": "Si tu peux voir et ramasser les morceaux de pomme, est-ce que le mélange est uniforme?",
+      "common_misconception": "Un mélange peut avoir des parties homogènes et hétérogènes à la fois. Dès qu'on voit des parties distinctes, le mélange global est classifié comme hétérogène."
+    },
+    {
+      "id": "p_capstone_1",
+      "stage": "capstone",
+      "difficulty": "hard",
+      "question": "Au laboratoire, on doit séparer un mélange de sable et d'eau. Le sable n'est pas dissous — on peut voir les grains. Quelle méthode est la meilleure pour séparer ces deux substances?",
+      "mc_choices": [
+        "Évaporation — chauffer jusqu'à ce que l'eau disparaisse",
+        "Distillation — bouillir et condenser les vapeurs",
+        "Filtration — faire passer par un filtre fin",
+        "Fusion — faire fondre le sable"
+      ],
+      "correct_index": 2,
+      "intervention_hints": [
+        "Le sable n'est pas dissous — il reste sous forme de grains solides. Est-ce qu'un filtre peut retenir des grains solides?",
+        "L'évaporation enlèverait l'eau mais laisserait le sable derrière — c'est une option, mais tu perdrais l'eau. Quelle méthode garde les deux et les sépare?",
+        "La filtration est parfaite ici : l'eau passe à travers le filtre, et le sable (solide) est retenu par le filtre."
+      ],
+      "answer_explanation": "La filtration est la méthode idéale pour séparer le sable (solide non-dissous) de l'eau. Le filtre retient les grains de sable et laisse passer l'eau propre.",
+      "nova_guiding_question": "Le sable est encore solide et visible. Quelle méthode de séparation fonctionne sur des solides non-dissous?",
+      "common_misconception": "L'évaporation fonctionnerait aussi, mais elle élimine l'eau plutôt que de la séparer. La filtration est préférable quand on veut récupérer les deux parties."
+    },
+    {
+      "id": "p_capstone_2",
+      "stage": "capstone",
+      "difficulty": "capstone",
+      "question": "On a dissous 20 g de sel dans 100 ml d'eau. On veut récupérer le sel. Le sel ne peut pas être filtré car il est complètement dissous. Quelle méthode faut-il utiliser?",
+      "mc_choices": [
+        "Filtration — passer par un filtre très fin",
+        "Évaporation — chauffer pour faire disparaître l'eau",
+        "Distillation — séparer en bouillant",
+        "Chromatographie — séparer les couleurs"
+      ],
+      "correct_index": 1,
+      "intervention_hints": [
+        "Le sel est dissous — ses particules sont trop petites pour un filtre. La filtration fonctionnerait-elle?",
+        "Qu'est-ce qui arrive à l'eau quand on la chauffe? Et qu'est-ce qui reste quand l'eau est partie?",
+        "L'évaporation fait disparaître l'eau en vapeur, et le sel — qui ne peut pas s'évaporer — reste derrière sous forme solide."
+      ],
+      "answer_explanation": "Puisque le sel est dissous et ne peut pas être filtré, on utilise l'évaporation. En chauffant l'eau, elle se transforme en vapeur et s'échappe, laissant le sel solide derrière.",
+      "nova_guiding_question": "Si le sel est invisible dans l'eau, comment peut-on le récupérer sans filtre?",
+      "common_misconception": "Beaucoup tentent la filtration d'abord parce que c'est plus simple. Mais les solutés dissous passent à travers n'importe quel filtre — il faut utiliser l'évaporation pour les récupérer."
+    }
+  ]
+}

@@ -1,0 +1,176 @@
+{
+  "meta": {
+    "subject": "chemistry",
+    "topic_key": "matter_and_materials",
+    "topic_display": "Matter and Materials",
+    "grade": 6,
+    "region": "canada",
+    "language_code": "fr",
+    "status": "approved",
+    "review_flags": []
+  },
+  "hook_stories": [
+    {
+      "id": "hook_a",
+      "culture_hint": "universal",
+      "text": "Tu es en train de cuisiner avec ta mère. Elle a mis de l’eau dans une casserole et la met sur le feu. Tu entends un bruit et tu regardes, et soudain, de la vapeur sort de la casserole. Ta mère dit alors que l’eau est passée de liquide à gaz. Tu as vu ce qui est arrivé à l’eau, mais tu te demandes… pourquoi ça s’est passé comme ça?",
+      "closing_line": "Tu te demandes pourquoi ça s’est passé comme ça?"
+    },
+    {
+      "id": "hook_b",
+      "culture_hint": "universal",
+      "text": "Le matin, tu vois ta fenêtre couverte de givre. Tu regardes un peu plus et tu vois que ton verre de café, qui était à température ambiante, est rempli d’eau. Tu te demandes si cela pourrait être le même truc. Pourquoi ça se passe ainsi?",
+      "closing_line": "Tu te demandes pourquoi ça se passe ainsi?"
+    }
+  ],
+  "concept": {
+    "explanation_steps": [
+      "Les trois états de la matière sont le solide, le liquide et le gaz.",
+      "Dans un solide, les particules sont serrées et bougent peu.",
+      "Dans un liquide, les particules sont proches mais peuvent bouger librement.",
+      "Dans un gaz, les particules sont très éloignées et bougent librement.",
+      "La température influence les états de la matière : quand on chauffe, le solide devient liquide et le liquide devient gaz.",
+      "Quand on refroidit, les états se inversent : le gaz devient liquide et le liquide devient solide."
+    ],
+    "whiteboard_text": "Solide ↔ Liquide ↔ Gaz\nTempérature = changement d'état",
+    "comprehension_check": "Quel est le changement d'état quand l'eau devient vapeur ?",
+    "reteach_angles": [
+      "Expliquer le changement d'état comme un déplacement de particules.",
+      "Utiliser des exemples simples comme la glace qui fond ou l'eau qui bout."
+    ]
+  },
+  "problems": [
+    {
+      "id": "p_guided_1",
+      "stage": "guided",
+      "difficulty": "medium",
+      "text": "Qu’est-ce que la température a à voir avec les changements d'état ?",
+      "answer": "La température détermine si une matière reste solide ou change d’état.",
+      "answer_explanation": "La température influence directement les changements d'état de la matière.",
+      "mc_choices": [
+        "La température détermine si une matière reste solide ou change d’état.",
+        "La température n’a pas d’effet sur les états de la matière.",
+        "La température n’est pas importante quand on parle de gaz.",
+        "La température ne change pas les états de la matière, seulement le volume."
+      ],
+      "correct_index": 0,
+      "common_misconception": "Confondre l’effet de la température sur le volume ou l’état.",
+      "intervention_hints": {
+        "level_1": "Penses-tu à ce qui arrive quand on met de la glace au soleil ?",
+        "level_2": "Qu’est-ce qui arrive à la glace quand tu la places sur une table chaude ?",
+        "level_3": "Tu vois ce qui arrive à une glace quand on la chauffe – elle devient liquide. Et ce que tu fais avec l’eau en la refroidissant – elle devient solide. Alors, tu crois que la température a de l'importance ?"
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_1",
+      "stage": "practice",
+      "difficulty": "easy",
+      "text": "Quel état de la matière a une forme fixe et ne se déforme pas facilement ?",
+      "answer": "Solide",
+      "answer_explanation": "Le solide a une forme fixe et ne se déforme pas facilement.",
+      "mc_choices": [
+        "Solide",
+        "Liquide",
+        "Gaz",
+        "Plasma"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Confondre les propriétés des états de la matière.",
+      "intervention_hints": {
+        "level_1": "Qu’est-ce qui arrive à l’eau quand on la laisse sur la table ?",
+        "level_2": "Est-ce que l’eau qui est dans la casserole, après un moment, devient... ?",
+        "level_3": "Tu vois l’eau qui part en vapeur, c’est quand elle va de liquide à gaz. C’est un peu comme la chaleur qui \"pousse\" les gouttes d’eau à se transformer."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_2",
+      "stage": "practice",
+      "difficulty": "easy",
+      "text": "Quel est l’état de la matière qui s’écoule dans le récipient ?",
+      "answer": "Liquide",
+      "answer_explanation": "Le liquide s’écoule dans un récipient et prend la forme de ce récipient.",
+      "mc_choices": [
+        "Liquide",
+        "Solide",
+        "Gaz",
+        "Plasma"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Confondre les états de la matière selon leur comportement.",
+      "intervention_hints": {
+        "level_1": "Regarde comment un verre d’eau change de forme si on le penche.",
+        "level_2": "Un liquide peut s’écouler, et il prend la forme du récipient qu’il remplit.",
+        "level_3": "Penses-tu à ce que fait l’eau qui sort de la casserole chaude ?"
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_3",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "Quel phénomène explique le passage d’un liquide à un gaz ?",
+      "answer": "Vaporisation",
+      "answer_explanation": "La vaporisation est le passage d’un liquide à un gaz, souvent causé par un chauffage.",
+      "mc_choices": [
+        "Vaporisation",
+        "Condensation",
+        "Fusion",
+        "Solidification"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Confondre les changements d'état.",
+      "intervention_hints": {
+        "level_1": "Qu’est-ce qui arrive à l’eau quand on la laisse sur la table ?",
+        "level_2": "Est-ce que l’eau qui est dans la casserole, après un moment, devient... ?",
+        "level_3": "Tu vois l’eau qui part en vapeur, c’est quand elle va de liquide à gaz. C’est un peu comme la chaleur qui \"pousse\" les gouttes d’eau à se transformer."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_capstone_1",
+      "stage": "capstone",
+      "difficulty": "medium",
+      "text": "Au laboratoire, un scientifique observe que le glaçon fond quand il est mis à température ambiante. Cela montre que la température affecte :",
+      "answer": "L’état de la glace",
+      "answer_explanation": "La température influence l’état de la matière : le glaçon devient liquide en chauffant.",
+      "mc_choices": [
+        "L’état de la glace",
+        "La masse de la glace",
+        "La couleur de la glace",
+        "Le goût de la glace"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Trouver une réponse incorrecte liée à d'autres caractéristiques de la matière.",
+      "intervention_hints": {
+        "level_1": "Est-ce que tu te souviens ce qui se passe quand on met de la glace en chaleur ?",
+        "level_2": "Quelle chose change quand il fond ? Le solide devient liquide – ça change le... ?",
+        "level_3": "La glace c’est un solide, et quand elle devient liquide, on appelle ça... ?"
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_capstone_2",
+      "stage": "capstone",
+      "difficulty": "medium",
+      "text": "Tu vois l’eau bouillante sortir du fourneau. Qu’est-ce qui arrive à l’eau ?",
+      "answer": "Elle devient gaz",
+      "answer_explanation": "L'eau bouillante devient vapeur, ce qui est le passage d'un liquide vers un gaz.",
+      "mc_choices": [
+        "Elle devient gaz",
+        "Elle devient solide",
+        "Elle devient liquide",
+        "Elle devient opaque"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Confondre entre les changements d’état ou les effets visuels.",
+      "intervention_hints": {
+        "level_1": "Penses-tu à ce que fait l’eau qui sort de la casserole chaude ?",
+        "level_2": "Tu regardes la vapeur qui sort – est-ce que l’eau est encore liquide ?",
+        "level_3": "Regarde comment l’eau est passée de liquide à... ?"
+      },
+      "nova_guiding_question": ""
+    }
+  ]
+}

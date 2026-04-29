@@ -1,0 +1,115 @@
+{
+  "meta": {
+    "subject": "biology",
+    "topic_key": "cells_and_life",
+    "topic_display": "Cells and Life",
+    "grade": 6,
+    "region": "canada",
+    "language_code": "fr",
+    "status": "approved",
+    "review_flags": [
+      "Vérifiez les termes biologiques, le contexte Québecois (ex. usage de \"cellule\" vs \"cellule vivante\"), et la précision des concepts biologiques.",
+      "Les termes comme \"cellule vivante\" ne sont pas utilisés dans le texte mais peuvent être importants dans le contexte Québecois."
+    ]
+  },
+  "hook_stories": [
+    {
+      "id": "hook_a",
+      "culture_hint": "canadian",
+      "text": "Tu es en voyage à Montréal et tu rencontres un petit garçon qui te montre un aquarium rempli de poissons d'Or. Il te dit que chaque poisson est fait de milliards de petits « trucs » qui s’appellent des **cellules**. Tu regards le poisson et tu te demandes comment ces cellules peuvent vivre dedans. Puis, le garçon te montre un poisson de verre et explique que les cellules dans le poisson sont tellement petites qu’on ne peut même pas les voir à l’œil nu. Il te dit que le poisson se sent bien dans l’eau parce que sa cellule est conçue pour ça.",
+      "closing_line": "Aujourd’hui, on te va dire comment les cellules composent la vie, comme les petits bâtisseurs du monde."
+    },
+    {
+      "id": "hook_b",
+      "culture_hint": "canadian",
+      "text": "Tu es dans une ferme au Québec, et tu regardes les ouvriers récolter des cerises. Ils utilisent un grand filet pour ramasser les cerises, mais tu te demandes : comment peuvent les pousses de cerises croître pour donner tant de cerises ? Tu vois un agricole te dire qu’il est possible de voir les grains de pollen (des cellules de plante) avec un microscope. Il te montre qu’en utilisant un microscope, on peut voir des cellules vivantes dans les feuilles ou un grain de maïs. Toutes ces cellules ensemble font vie, et elles sont les fondements de la vie partout. Et tu comprends pourquoi les plantes et animaux grandissent.",
+      "closing_line": "Aujourd’hui, on te va dire comment les cellules composent la vie, comme les petits bâtisseurs du monde."
+    }
+  ],
+  "concept": {
+    "explanation_steps": [
+      "Tu dois comprendre que les cellules sont les bases de la vie.",
+      "Les cellules animales et végétales sont différentes, mais chacune est essentielle.",
+      "Les organites aident les cellules à fonctionner.",
+      "Certains organismes sont composés d’une seule cellule, mais peuvent grandir et se reproduire."
+    ],
+    "whiteboard_text": "La cellule est le cœur de la vie. Les cellules sont les fondements de tout être vivant.",
+    "comprehension_check": "Combien de cellules composent un être humain ?",
+    "reteach_angles": [
+      "Penses-tu qu’un être humain est composé d’une seule cellule ou de milliards ?",
+      "Imagine un organisme unicellulaire comme une bactérie. Comment peut-il grandir si c’est une seule cellule ?"
+    ]
+  },
+  "problems": [
+    {
+      "id": "p_guided_1",
+      "stage": "guided",
+      "difficulty": "medium",
+      "text": "Quelle structure fait partie d’une cellule végétale, mais **pas** d’une cellule animale ?",
+      "answer": "La paroi cellulaire",
+      "answer_explanation": "La paroi cellulaire est une couche rigide autour de la cellule végétale. Elle est présente uniquement dans les cellules végétales et aide à les protéger et maintenir leur forme.",
+      "mc_options": [
+        "Une mitochondrie",
+        "Un noyau",
+        "La paroi cellulaire",
+        "Un chloroplaste"
+      ]
+    },
+    {
+      "id": "p_practice_1",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "Dans quel organelle se trouve l'ADN qui contient les instructions pour faire une cellule ?",
+      "answer": "Dans le noyau",
+      "answer_explanation": "Le noyau est comme le chef de la cellule – il contient l’ADN, qui est l'information génétique qui dicte comment la cellule doit fonctionner.",
+      "mc_options": [
+        "Dans le cytoplasme",
+        "Dans le noyau",
+        "Dans les mitochondries",
+        "Dans le réticulum endoplasmique"
+      ]
+    },
+    {
+      "id": "p_practice_2",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "Quelle cellule a une chloroplaste ?",
+      "answer": "Une cellule végétale",
+      "answer_explanation": "La chloroplaste est présente seulement dans les cellules végétales. Elle utilise la lumière du soleil pour produire de la nourriture.",
+      "mc_options": [
+        "Une cellule animale",
+        "Une cellule végétale",
+        "Une cellule bactérienne",
+        "Une cellule fongique"
+      ]
+    },
+    {
+      "id": "p_practice_3",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "Un organisme unicellulaire est composé de :",
+      "answer": "Une seule cellule",
+      "answer_explanation": "Un organisme unicellulaire est fait d’une seule cellule qui est vivante, mais qui n’est pas composée de plusieurs parties.",
+      "mc_options": [
+        "Plusieurs cellules",
+        "Un seul organisme",
+        "Une seule cellule",
+        "Des organes multiples"
+      ]
+    },
+    {
+      "id": "p_capstone_1",
+      "stage": "capstone",
+      "difficulty": "medium",
+      "text": "Pourquoi un organisme unicellulaire peut-il se développer et grandir malgré qu’il n’ait qu’une cellule ?",
+      "answer": "Parce que sa cellule peut se multiplier et se diviser",
+      "answer_explanation": "Une cellule unicellulaire peut se diviser, produire de nouvelles cellules, et grandir par augmentation du nombre de cellules.",
+      "mc_options": [
+        "Parce qu’il a trop de cellules",
+        "Parce que son organelle peut produire du stock de nutriments",
+        "Parce que sa cellule peut se multiplier et se diviser",
+        "Parce que le sol lui donne de l’énergie"
+      ]
+    }
+  ]
+}
