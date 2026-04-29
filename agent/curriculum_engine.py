@@ -1,17 +1,19 @@
 """
 curriculum_engine.py — Topic and problem selection for Ms. Nova sessions.
-Day 30: Grade-appropriate topic/problem selection with difficulty adaptation.
 
 Responsibilities:
   - Query curriculum_topics + curriculum_problems from PostgreSQL
   - Select the best topic for this session (weak areas first, then unexplored, then any)
-  - Pick a problem at the right difficulty, never repeating one seen this session
+  - Pick a problem at the right difficulty AND arc stage, never repeating seen problems
   - Build Socratic coaching context for Ms. Nova (what step to guide toward next)
   - Adapt difficulty after each problem based on accuracy
+  - Deliver the 5-stage arc: concept → guided → practice → capstone
+  - Persist arc progress in DB arc_checkpoint table (resumes across sessions)
 
 Integration:
-  nova_agent.py calls this from node_select_pedagogy.
+  nova_agent.py calls CurriculumEngine from node_select_pedagogy and session endpoints.
   Session curriculum state is stored in Redis: nova:session:{id}:curriculum
+  Arc progress is persisted in DB: arc_checkpoint (child_id, topic_id)
 """
 
 import json
@@ -19,6 +21,7 @@ import logging
 import os
 import random
 from dataclasses import dataclass, field
+from datetime import datetime, timezone, timedelta
 from typing import Optional
 
 import asyncpg
@@ -26,6 +29,18 @@ import asyncpg
 log = logging.getLogger("curriculum_engine")
 
 DATABASE_URL = os.getenv("DATABASE_URL", "")
+
+# ── Arc stage ordering ────────────────────────────────────────────────────────
+
+ARC_STAGES = ["concept", "guided", "practice", "capstone"]
+
+def next_arc_stage(current: str) -> str:
+    """Advance to the next arc stage. Stays at capstone if already there."""
+    try:
+        idx = ARC_STAGES.index(current)
+    except ValueError:
+        return "guided"
+    return ARC_STAGES[min(idx + 1, len(ARC_STAGES) - 1)]
 
 
 # ── Data classes ──────────────────────────────────────────────────────────────
@@ -39,6 +54,7 @@ class Problem:
     difficulty:         int
     text:               str
     steps:              list[str]
+    stage:              str       = "practice"
     context:            str       = ""
     correct_answer:     str       = ""
     distractor_answers: list[str] = field(default_factory=list)
@@ -58,22 +74,36 @@ class CurriculumState:
 
     Tracks which problem is active, how many hints have been given,
     and running accuracy so difficulty can be adjusted between problems.
+
+    Arc delivery fields:
+      arc_stage           — current stage in the 5-stage arc
+      stage_problems_seen — problem IDs seen in the current arc stage
+      stage_correct       — correct answers in the current stage
+      stage_total         — problems attempted in the current stage
+      warmup_pending      — True when child returns after 3+ day gap (serve 1 recap first)
     """
-    topic_key:       str          = ""
-    topic_name:      str          = ""
-    problem_id:      str          = ""
-    problem_text:    str          = ""
-    solution_steps:  list[str]    = field(default_factory=list)
-    difficulty:      int          = 2     # 1–5; start at medium-low
-    hints_given:     int          = 0     # steps revealed for current problem
-    problems_seen:   list[str]    = field(default_factory=list)  # IDs shown this session
-    turn_count:      int          = 0     # total conversation turns this session
-    session_correct:  int       = 0     # correct answers this session
-    session_total:    int       = 0     # problems attempted this session
-    question_choices: list[str] = field(default_factory=list)  # shuffled [A,B,C,D] texts
-    question_correct: int       = -1   # index of correct choice in question_choices
-    mc_answered:      bool      = False  # True after MC tap; prevents double-counting in select_pedagogy
-    is_resuming:      bool      = False  # True when child has prior history on this topic (checkpoint OR DB mastery)
+    topic_key:           str          = ""
+    topic_name:          str          = ""
+    problem_id:          str          = ""
+    problem_text:        str          = ""
+    solution_steps:      list[str]    = field(default_factory=list)
+    difficulty:          int          = 2       # 1–5; start at medium-low
+    hints_given:         int          = 0       # steps revealed for current problem
+    problems_seen:       list[str]    = field(default_factory=list)
+    turn_count:          int          = 0
+    session_correct:     int          = 0
+    session_total:       int          = 0
+    question_choices:    list[str]    = field(default_factory=list)
+    question_correct:    int          = -1
+    mc_answered:         bool         = False
+    is_resuming:         bool         = False
+
+    # ── Arc delivery fields ───────────────────────────────────────────────────
+    arc_stage:           str          = "concept"   # concept|guided|practice|capstone
+    stage_problems_seen: list[str]    = field(default_factory=list)
+    stage_correct:       int          = 0
+    stage_total:         int          = 0
+    warmup_pending:      bool         = False
 
     # ── Serialisation ─────────────────────────────────────────────────────────
 
@@ -107,17 +137,8 @@ class CurriculumState:
         """
         Returns the current pedagogical phase based on problems completed.
         Drives the 4-dot progress strip in the Unity HUD.
-
-        Using problems_seen (count of distinct problems attempted this session)
-        rather than turn_count gives accurate, child-visible progress — one dot
-        advances per problem, not per conversation exchange.
-
-          intro       — 0 problems done  (dot 0)  warming up / first problem
-          chunk_a     — 1 problem done   (dot 1)  building understanding
-          chunk_b     — 2 problems done  (dot 2)  deepening practice
-          consolidate — 3+ problems done (dot 3)  wrap-up / mastery check
         """
-        done = max(0, len(self.problems_seen) - 1)  # -1: first problem is "intro" not "done"
+        done = max(0, len(self.problems_seen) - 1)
         if done == 0:
             return "intro"
         elif done == 1:
@@ -129,13 +150,42 @@ class CurriculumState:
 
     @property
     def is_exhausted(self) -> bool:
-        """
-        True when the student has had enough time with this problem.
-        Either:
-          - Hints have exceeded all steps + 2 buffer turns (verbal path), OR
-          - An MC answer was submitted (mc_answered flag set by /answer endpoint)
-        """
+        """True when the student has had enough time with this problem."""
         return self.mc_answered or self.hints_given >= len(self.solution_steps) + 2
+
+    @property
+    def should_advance_stage(self) -> bool:
+        """
+        Returns True when the current arc stage has been completed and the
+        student should move to the next stage.
+
+        Thresholds:
+          concept  → guided   : after 1 attempt (comprehension check answered)
+          guided   → practice : after 1 correct OR 2+ problems seen
+          practice → capstone : after 2+ correct OR 3+ problems attempted
+          capstone            : no auto-advance (repeat harder problems)
+        """
+        stage = self.arc_stage
+        if stage == "concept":
+            return self.stage_total >= 1
+        elif stage == "guided":
+            return self.stage_correct >= 1 or len(self.stage_problems_seen) >= 2
+        elif stage == "practice":
+            return self.stage_correct >= 2 or self.stage_total >= 3
+        return False   # capstone: no auto-advance
+
+    def advance_stage(self) -> str:
+        """
+        Advance to the next arc stage and reset per-stage counters.
+        Returns the new stage name.
+        """
+        new_stage = next_arc_stage(self.arc_stage)
+        log.info(f"[CurriculumState] Arc stage: {self.arc_stage} → {new_stage}")
+        self.arc_stage           = new_stage
+        self.stage_problems_seen = []
+        self.stage_correct       = 0
+        self.stage_total         = 0
+        return new_stage
 
     def load_problem(self, problem: "Problem") -> None:
         self.topic_key      = problem.topic_key
@@ -144,13 +194,15 @@ class CurriculumState:
         self.problem_text   = problem.text
         self.solution_steps = problem.steps
         self.hints_given    = 0
+
         if problem.id not in self.problems_seen:
             self.problems_seen.append(problem.id)
+        if problem.id not in self.stage_problems_seen:
+            self.stage_problems_seen.append(problem.id)
 
         # Build shuffled multiple-choice choices for the question card
         if problem.correct_answer and len(problem.distractor_answers) >= 1:
             choices = list(problem.distractor_answers[:3])
-            # Ensure we always have 4 choices (pad with placeholders if fewer distractors)
             while len(choices) < 3:
                 choices.append("—")
             choices.append(problem.correct_answer)
@@ -158,9 +210,39 @@ class CurriculumState:
             self.question_choices = choices
             self.question_correct = choices.index(problem.correct_answer)
         else:
-            # No MC data — question card will stay hidden
             self.question_choices = []
             self.question_correct = -1
+
+
+# ── Solution steps parser ─────────────────────────────────────────────────────
+
+def _parse_steps(raw) -> list[str]:
+    """
+    Parse solution_steps from DB, which can be a list (old format) or a JSONB
+    dict (new arc format with intervention_hints, explanation_steps, etc.).
+
+    Old seed problems: list of strings ["step 1", "step 2", ...]
+    New arc problems:  dict {"intervention_hints": [...], "answer_explanation": "..."}
+    Concept problems:  dict {"explanation_steps": [...], "whiteboard_text": "..."}
+    """
+    if isinstance(raw, str):
+        try:
+            raw = json.loads(raw)
+        except Exception:
+            return [raw]
+    if raw is None:
+        return []
+    if isinstance(raw, list):
+        return [str(s) for s in raw if s]
+    if isinstance(raw, dict):
+        # Try keys in priority order
+        for key in ("intervention_hints", "explanation_steps", "reteach_angles"):
+            val = raw.get(key)
+            if isinstance(val, list) and val:
+                return [str(s) for s in val if s]
+        # Fallback: collect all non-empty string values
+        return [str(v) for v in raw.values() if isinstance(v, str) and v]
+    return []
 
 
 # ── CurriculumEngine ──────────────────────────────────────────────────────────
@@ -168,18 +250,14 @@ class CurriculumState:
 class CurriculumEngine:
     """
     Selects grade-appropriate topics and problems from the database.
-    Adapts difficulty based on in-session performance.
-
-    Usage (in nova_agent.py startup):
-        engine = CurriculumEngine()
-        await engine.init()
+    Delivers the 5-stage arc: concept → guided → practice → capstone.
+    Persists arc progress in DB arc_checkpoint.
     """
 
     def __init__(self) -> None:
         self._pool: Optional[asyncpg.Pool] = None
 
     async def init(self) -> None:
-        """Create PostgreSQL connection pool. Call once at app startup."""
         if not DATABASE_URL:
             log.warning("[CurriculumEngine] DATABASE_URL not set — using fallback problems only.")
             return
@@ -197,19 +275,180 @@ class CurriculumEngine:
 
     @staticmethod
     def _fallback_topic_key(grade: int) -> str:
-        """Return the default topic key for a grade when no topic is cached yet."""
         return _FALLBACK_TOPICS.get(grade, _FALLBACK_TOPICS[6])["topic_key"]
+
+    # ── Topic ID lookup ───────────────────────────────────────────────────────
+
+    async def get_topic_id(self, topic_key: str, grade: int) -> Optional[str]:
+        """Look up curriculum_topics.id (UUID) by topic_key + grade."""
+        if not self._pool:
+            return None
+        try:
+            async with self._pool.acquire() as conn:
+                row = await conn.fetchrow(
+                    "SELECT id::text FROM curriculum_topics WHERE topic_key = $1 AND grade = $2 LIMIT 1",
+                    topic_key, grade,
+                )
+            return row["id"] if row else None
+        except Exception as e:
+            log.warning(f"[CurriculumEngine] get_topic_id error: {e}")
+            return None
+
+    # ── Arc checkpoint (DB) ───────────────────────────────────────────────────
+
+    async def load_arc_checkpoint(self, child_id: str, topic_key: str, grade: int) -> dict:
+        """
+        Load arc progress from DB arc_checkpoint.
+        Returns dict with: arc_stage, completed_stages, stage_stats, last_seen.
+        Returns {} if no checkpoint exists (first time on this topic).
+        """
+        if not self._pool or not child_id or not topic_key:
+            return {}
+        topic_id = await self.get_topic_id(topic_key, grade)
+        if not topic_id:
+            return {}
+        try:
+            async with self._pool.acquire() as conn:
+                row = await conn.fetchrow(
+                    """
+                    SELECT current_stage, completed_stages, stage_stats,
+                           last_seen, mastery_snapshot
+                    FROM   arc_checkpoint
+                    WHERE  child_id = $1::uuid
+                    AND    topic_id = $2::uuid
+                    """,
+                    child_id, topic_id,
+                )
+            if row:
+                return {
+                    "arc_stage":        row["current_stage"],
+                    "completed_stages": list(row["completed_stages"] or []),
+                    "stage_stats":      dict(row["stage_stats"] or {}),
+                    "last_seen":        row["last_seen"],
+                    "mastery_snapshot": row["mastery_snapshot"],
+                }
+        except Exception as e:
+            log.warning(f"[CurriculumEngine] load_arc_checkpoint error: {e}")
+        return {}
+
+    async def save_arc_checkpoint(
+        self,
+        child_id:   str,
+        topic_key:  str,
+        grade:      int,
+        cs:         CurriculumState,
+    ) -> None:
+        """Upsert arc progress into DB arc_checkpoint."""
+        if not self._pool or not child_id or not topic_key:
+            return
+        topic_id = await self.get_topic_id(topic_key, grade)
+        if not topic_id:
+            return
+
+        # Track which stages have been completed
+        completed = []
+        for s in ARC_STAGES:
+            if s == cs.arc_stage:
+                break
+            completed.append(s)
+
+        stage_stats = {
+            cs.arc_stage: {
+                "problems_seen": len(cs.stage_problems_seen),
+                "correct":       cs.stage_correct,
+                "total":         cs.stage_total,
+            }
+        }
+        mastery = min(100, (cs.session_correct * 100 // max(cs.session_total, 1)))
+
+        try:
+            async with self._pool.acquire() as conn:
+                await conn.execute(
+                    """
+                    INSERT INTO arc_checkpoint
+                        (child_id, topic_id, current_stage, completed_stages,
+                         stage_stats, last_seen, mastery_snapshot)
+                    VALUES ($1::uuid, $2::uuid, $3, $4, $5, NOW(), $6)
+                    ON CONFLICT (child_id, topic_id) DO UPDATE
+                        SET current_stage   = EXCLUDED.current_stage,
+                            completed_stages= EXCLUDED.completed_stages,
+                            stage_stats     = EXCLUDED.stage_stats,
+                            last_seen       = NOW(),
+                            mastery_snapshot= EXCLUDED.mastery_snapshot
+                    """,
+                    child_id, topic_id,
+                    cs.arc_stage,
+                    completed,
+                    json.dumps(stage_stats),
+                    mastery,
+                )
+            log.info(
+                f"[CurriculumEngine] arc_checkpoint saved — "
+                f"child={child_id[:8]}, topic={topic_key}, stage={cs.arc_stage}"
+            )
+        except Exception as e:
+            log.warning(f"[CurriculumEngine] save_arc_checkpoint error: {e}")
+
+    # ── Hook story ────────────────────────────────────────────────────────────
+
+    async def get_hook_story(
+        self,
+        topic_key:    str,
+        grade:        int,
+        language:     str,
+        culture_hint: Optional[str] = None,
+    ) -> Optional[str]:
+        """
+        Fetch a hook story from topic_stories for the given topic + language.
+        Returns "story_text  closing_line" as a single string, or None.
+        Prefers the culture_hint if provided; otherwise picks randomly.
+        """
+        if not self._pool:
+            return None
+        topic_id = await self.get_topic_id(topic_key, grade)
+        if not topic_id:
+            return None
+        try:
+            async with self._pool.acquire() as conn:
+                if culture_hint:
+                    rows = await conn.fetch(
+                        """
+                        SELECT story_text, closing_line
+                        FROM   topic_stories
+                        WHERE  topic_id      = $1::uuid
+                        AND    language_code = $2
+                        AND    culture_hint  = $3
+                        ORDER  BY order_index
+                        LIMIT  1
+                        """,
+                        topic_id, language, culture_hint,
+                    )
+                else:
+                    rows = await conn.fetch(
+                        """
+                        SELECT story_text, closing_line
+                        FROM   topic_stories
+                        WHERE  topic_id      = $1::uuid
+                        AND    language_code = $2
+                        ORDER  BY RANDOM()
+                        LIMIT  1
+                        """,
+                        topic_id, language,
+                    )
+            if rows:
+                row = rows[0]
+                text   = (row["story_text"] or "").strip()
+                closer = (row["closing_line"] or "").strip()
+                if closer and closer not in text:
+                    return f"{text}\n\n{closer}"
+                return text
+        except Exception as e:
+            log.warning(f"[CurriculumEngine] get_hook_story error: {e}")
+        return None
 
     # ── Child progress queries ────────────────────────────────────────────────
 
     async def get_child_topic_progress(self, child_id: str, topic_key: str) -> dict:
-        """
-        Look up a child's recorded progress for a topic from the DB.
-        Returns {"mastery_level": int, "attempt_count": int} or {} if not found / DB unavailable.
-
-        mastery_level is 0–100.  attempt_count > 0 means the child has done at least
-        one session on this topic, even if mastery is still low.
-        """
         if not self._pool or not child_id or not topic_key:
             return {}
         try:
@@ -243,17 +482,6 @@ class CurriculumEngine:
         weak_topics: list[str],
         covered_today: list[str],
     ) -> dict:
-        """
-        Select the most appropriate topic for this session.
-
-        Priority:
-          1. Weak topics not yet covered today   (address gaps, fresh start)
-          2. Any weak topic                       (keep reviewing gaps)
-          3. Any uncovered topic for this grade   (explore new content)
-          4. Any topic for this grade             (repeat as needed)
-
-        Returns {"topic_key": str, "topic_name": str}
-        """
         if not self._pool:
             return _fallback_topic(grade)
 
@@ -265,7 +493,6 @@ class CurriculumEngine:
                     FROM   curriculum_topics   ct
                     JOIN   curriculum_problems cp ON cp.topic_id = ct.id
                     WHERE  ct.grade      = $1
-                    AND    ct.subject    = 'math'
                     AND    cp.language_code = $2
                     ORDER  BY ct.order_index
                     """,
@@ -278,27 +505,17 @@ class CurriculumEngine:
 
             topics = [{"key": r["topic_key"], "name": r["display_name"]} for r in rows]
 
-            # Priority 1: weak + not covered today
             for t in topics:
                 if t["key"] in weak_topics and t["key"] not in covered_today:
-                    log.info(f"[CurriculumEngine] Topic (weak, fresh): {t['key']}")
                     return {"topic_key": t["key"], "topic_name": t["name"]}
-
-            # Priority 2: any weak topic
             for t in topics:
                 if t["key"] in weak_topics:
-                    log.info(f"[CurriculumEngine] Topic (weak): {t['key']}")
                     return {"topic_key": t["key"], "topic_name": t["name"]}
-
-            # Priority 3: uncovered topic
             for t in topics:
                 if t["key"] not in covered_today:
-                    log.info(f"[CurriculumEngine] Topic (fresh): {t['key']}")
                     return {"topic_key": t["key"], "topic_name": t["name"]}
 
-            # Priority 4: any topic
             chosen = random.choice(topics)
-            log.info(f"[CurriculumEngine] Topic (repeat): {chosen['key']}")
             return {"topic_key": chosen["key"], "topic_name": chosen["name"]}
 
         except Exception as e:
@@ -306,22 +523,12 @@ class CurriculumEngine:
             return _fallback_topic(grade)
 
     async def get_topic_by_key(self, topic_key: str, grade: int, language: str) -> dict:
-        """
-        Look up a specific topic by its key.
-        Used when the child has already chosen a topic in the UI — skip the
-        priority-selection algorithm and use exactly what they picked.
-
-        Returns {"topic_key": str, "topic_name": str}.
-        Falls back to a title-cased version of the key if the DB lookup fails.
-        """
         fallback = {
             "topic_key":  topic_key,
             "topic_name": topic_key.replace("_", " ").title(),
         }
-
         if not self._pool:
             return fallback
-
         try:
             async with self._pool.acquire() as conn:
                 row = await conn.fetchrow(
@@ -330,36 +537,37 @@ class CurriculumEngine:
                     FROM   curriculum_topics
                     WHERE  topic_key = $1
                     AND    grade     = $2
-                    AND    subject   = 'math'
                     LIMIT  1
                     """,
                     topic_key, grade,
                 )
             if row:
                 return {"topic_key": row["topic_key"], "topic_name": row["display_name"]}
-            log.warning(f"[CurriculumEngine] topic_key '{topic_key}' not found in DB — using fallback")
         except Exception as e:
             log.warning(f"[CurriculumEngine] get_topic_by_key error: {e}")
-
         return fallback
 
     # ── Problem selection ─────────────────────────────────────────────────────
 
     async def select_problem(
         self,
-        topic_key: str,
-        grade: int,
-        language: str,
-        difficulty: int,
+        topic_key:   str,
+        grade:       int,
+        language:    str,
+        difficulty:  int,
+        arc_stage:   str             = "practice",
         exclude_ids: list[str] | None = None,
-    ) -> Optional[Problem]:
+    ) -> Optional["Problem"]:
         """
-        Select a problem at the target difficulty, never repeating an excluded ID.
-        If the exact difficulty has no unseen problems, searches adjacent difficulty
-        levels (closest first) until one is found.
+        Select a problem at the target arc stage + difficulty, skipping already-seen IDs.
 
-        Returns None only if the database has no problems at all for this topic.
-        Falls back to hardcoded problems if the DB is unavailable.
+        Search order:
+          1. Requested stage × target difficulty
+          2. Requested stage × adjacent difficulties (closest first)
+          3. Any stage × target difficulty  (stage pool exhausted — fall through gracefully)
+          4. Any stage × any difficulty     (last resort before hardcoded fallback)
+
+        Returns None only if the DB is unavailable.
         """
         exclude_ids = exclude_ids or []
 
@@ -368,12 +576,13 @@ class CurriculumEngine:
 
         try:
             async with self._pool.acquire() as conn:
+                # Pass 1: target stage × difficulty search order
                 for target_diff in _difficulty_search_order(difficulty):
                     rows = await conn.fetch(
                         """
                         SELECT cp.id::text,
                                ct.topic_key, ct.display_name,
-                               cp.language_code, cp.difficulty,
+                               cp.language_code, cp.difficulty, cp.stage,
                                cp.problem_text, cp.solution_steps,
                                cp.cultural_context,
                                cp.correct_answer, cp.distractor_answers
@@ -382,54 +591,64 @@ class CurriculumEngine:
                         WHERE  ct.topic_key     = $1
                         AND    ct.grade         = $2
                         AND    cp.language_code = $3
-                        AND    cp.difficulty    = $4
+                        AND    cp.stage         = $4
+                        AND    cp.difficulty    = $5
                         ORDER  BY RANDOM()
                         LIMIT  20
                         """,
-                        topic_key, grade, language, target_diff,
+                        topic_key, grade, language, arc_stage, target_diff,
                     )
-
                     for row in rows:
-                        pid = row["id"]
-                        if pid in exclude_ids:
-                            continue
+                        if row["id"] not in exclude_ids:
+                            return _build_problem(row)
 
-                        steps = row["solution_steps"]
-                        if isinstance(steps, str):
-                            steps = json.loads(steps)
-                        elif steps is None:
-                            steps = []
+                # Pass 2: stage exhausted — try any difficulty in same stage
+                log.info(
+                    f"[CurriculumEngine] No unseen problems at stage={arc_stage} for "
+                    f"{topic_key}/{grade}/{language} — trying all difficulties in stage"
+                )
+                rows = await conn.fetch(
+                    """
+                    SELECT cp.id::text,
+                           ct.topic_key, ct.display_name,
+                           cp.language_code, cp.difficulty, cp.stage,
+                           cp.problem_text, cp.solution_steps,
+                           cp.cultural_context,
+                           cp.correct_answer, cp.distractor_answers
+                    FROM   curriculum_problems cp
+                    JOIN   curriculum_topics   ct ON ct.id = cp.topic_id
+                    WHERE  ct.topic_key     = $1
+                    AND    ct.grade         = $2
+                    AND    cp.language_code = $3
+                    AND    cp.stage         = $4
+                    ORDER  BY RANDOM()
+                    LIMIT  20
+                    """,
+                    topic_key, grade, language, arc_stage,
+                )
+                for row in rows:
+                    if row["id"] not in exclude_ids:
+                        return _build_problem(row)
 
-                        distractors = row["distractor_answers"]
-                        if distractors is None:
-                            distractors = []
-                        elif isinstance(distractors, str):
-                            distractors = json.loads(distractors)
+                # Pass 3: entire stage pool seen this session — recycle within stage
+                if rows:
+                    row = random.choice(rows)
+                    log.info(
+                        f"[CurriculumEngine] Recycling problem in stage={arc_stage} "
+                        f"(all seen): {row['id'][:8]}"
+                    )
+                    return _build_problem(row)
 
-                        return Problem(
-                            id                 = pid,
-                            topic_key          = row["topic_key"],
-                            topic_name         = row["display_name"],
-                            language           = row["language_code"],
-                            difficulty         = row["difficulty"],
-                            text               = row["problem_text"],
-                            steps              = steps,
-                            context            = row["cultural_context"] or "",
-                            correct_answer     = row["correct_answer"] or "",
-                            distractor_answers = list(distractors),
-                        )
-
-            # All DB problems for this topic have been seen this session.
-            # Rather than falling back to the same hardcoded problem every time,
-            # query the full pool (ignoring exclude_ids) and pick one at random
-            # so the student gets variety even after exhausting new material.
-            log.warning(f"[CurriculumEngine] No unseen problems for {topic_key}/{grade}/{language} — recycling from full pool")
-            async with self._pool.acquire() as conn:
+                # Pass 4: no problems at all in this stage — fall through to any stage
+                log.warning(
+                    f"[CurriculumEngine] No problems for stage={arc_stage}, "
+                    f"{topic_key}/{grade}/{language} — falling back to any stage"
+                )
                 all_rows = await conn.fetch(
                     """
                     SELECT cp.id::text,
                            ct.topic_key, ct.display_name,
-                           cp.language_code, cp.difficulty,
+                           cp.language_code, cp.difficulty, cp.stage,
                            cp.problem_text, cp.solution_steps,
                            cp.cultural_context,
                            cp.correct_answer, cp.distractor_answers
@@ -443,35 +662,15 @@ class CurriculumEngine:
                     """,
                     topic_key, grade, language,
                 )
+                for row in all_rows:
+                    if row["id"] not in exclude_ids:
+                        return _build_problem(row)
+                if all_rows:
+                    return _build_problem(random.choice(all_rows))
 
-            if all_rows:
-                row = random.choice(all_rows)
-                steps = row["solution_steps"]
-                if isinstance(steps, str):
-                    steps = json.loads(steps)
-                elif steps is None:
-                    steps = []
-                distractors = row["distractor_answers"]
-                if distractors is None:
-                    distractors = []
-                elif isinstance(distractors, str):
-                    distractors = json.loads(distractors)
-                log.info(f"[CurriculumEngine] Recycled problem id={row['id']} (pool exhausted)")
-                return Problem(
-                    id                 = row["id"],
-                    topic_key          = row["topic_key"],
-                    topic_name         = row["display_name"],
-                    language           = row["language_code"],
-                    difficulty         = row["difficulty"],
-                    text               = row["problem_text"],
-                    steps              = steps,
-                    context            = row["cultural_context"] or "",
-                    correct_answer     = row["correct_answer"] or "",
-                    distractor_answers = list(distractors),
-                )
-
-            # DB truly has no problems at all for this topic — use hardcoded fallback
-            log.warning(f"[CurriculumEngine] No DB problems at all for {topic_key}/{grade}/{language} — using hardcoded fallback")
+            log.warning(
+                f"[CurriculumEngine] No DB problems at all for {topic_key}/{grade}/{language}"
+            )
             return _fallback_problem(topic_key, grade, language)
 
         except Exception as e:
@@ -481,19 +680,7 @@ class CurriculumEngine:
     # ── Difficulty adaptation ─────────────────────────────────────────────────
 
     @staticmethod
-    def next_difficulty(
-        session_correct: int,
-        session_total: int,
-        current: int,
-    ) -> int:
-        """
-        Recommend a difficulty adjustment after each problem attempt.
-
-        Up by 1:   accuracy ≥ 100% over last session (≥3 attempts)
-        Down by 1: accuracy < 40% over ≥2 attempts
-        Otherwise: hold
-        Clamp to [1, 5].
-        """
+    def next_difficulty(session_correct: int, session_total: int, current: int) -> int:
         if session_total < 1:
             return current
         accuracy = session_correct / session_total
@@ -507,12 +694,6 @@ class CurriculumEngine:
 
     @staticmethod
     def build_question_data(cs: "CurriculumState") -> Optional[dict]:
-        """
-        Build the question_display payload sent to Unity's question card.
-
-        Returns None if no choices are available (voice-only fallback).
-        The choices are already shuffled when load_problem() is called.
-        """
         if not cs.has_problem or not cs.question_choices or cs.question_correct < 0:
             return None
         return {
@@ -524,16 +705,10 @@ class CurriculumEngine:
     # ── Socratic coaching context ─────────────────────────────────────────────
 
     @staticmethod
-    def build_coaching_context(cs: CurriculumState, language: str) -> str:
+    def build_coaching_context(cs: "CurriculumState", language: str) -> str:
         """
         Build the [Internal coaching] block injected into Ms. Nova's system prompt.
-
-        This tells Nova:
-          - What problem the student is working on
-          - Which steps have already been guided
-          - What to guide toward next (Socratically — never state it directly)
-
-        The student never sees this block.
+        Includes arc stage context so Nova's tone matches the current phase.
         """
         if not cs.has_problem:
             return ""
@@ -541,8 +716,25 @@ class CurriculumEngine:
         next_hint = cs.next_hint
         revealed  = cs.solution_steps[: cs.hints_given]
 
+        # Arc stage coaching prefix
+        if language == "fr":
+            stage_prefix = {
+                "concept":  "[Phase : Explication du concept — présente clairement, utilise le tableau blanc, pose la question de compréhension.]",
+                "guided":   "[Phase : Pratique guidée — guide l'élève étape par étape avec des questions Socratiques. Scaffolding fort.]",
+                "practice": "[Phase : Pratique autonome — coaching léger seulement. Laisse l'élève essayer seul avant d'offrir de l'aide.]",
+                "capstone": "[Phase : Évaluation finale — observe et évalue. Guidance minimale — l'élève doit démontrer sa maîtrise.]",
+            }.get(cs.arc_stage, "")
+        else:
+            stage_prefix = {
+                "concept":  "[Stage: Concept Explanation — introduce clearly, use whiteboard, then ask the comprehension check.]",
+                "guided":   "[Stage: Guided Practice — walk through step-by-step with Socratic questions. Heavy scaffolding.]",
+                "practice": "[Stage: Independent Practice — light coaching only. Let the student attempt before offering hints.]",
+                "capstone": "[Stage: Capstone Assessment — observe and assess. Minimal guidance — student must demonstrate mastery.]",
+            }.get(cs.arc_stage, "")
+
         if language == "fr":
             lines = [
+                stage_prefix,
                 "[Contexte pédagogique — usage interne uniquement, ne pas divulguer à l'élève]",
                 f"Sujet : {cs.topic_name}",
                 f"Problème actuel : {cs.problem_text}",
@@ -562,6 +754,7 @@ class CurriculumEngine:
                 )
         else:
             lines = [
+                stage_prefix,
                 "[Pedagogical context — internal use only, do NOT reveal to student]",
                 f"Topic: {cs.topic_name}",
                 f"Current problem: {cs.problem_text}",
@@ -580,7 +773,37 @@ class CurriculumEngine:
                     "Encourage them to present their full solution."
                 )
 
-        return "\n".join(lines)
+        return "\n".join(line for line in lines if line)
+
+
+# ── Problem builder helper ────────────────────────────────────────────────────
+
+def _build_problem(row) -> "Problem":
+    """Build a Problem object from an asyncpg row dict."""
+    steps = _parse_steps(row["solution_steps"])
+
+    distractors = row["distractor_answers"]
+    if distractors is None:
+        distractors = []
+    elif isinstance(distractors, str):
+        try:
+            distractors = json.loads(distractors)
+        except Exception:
+            distractors = []
+
+    return Problem(
+        id                 = str(row["id"]),
+        topic_key          = row["topic_key"],
+        topic_name         = row["display_name"],
+        language           = row["language_code"],
+        difficulty         = row["difficulty"],
+        stage              = row.get("stage", "practice"),
+        text               = row["problem_text"],
+        steps              = steps,
+        context            = row["cultural_context"] or "",
+        correct_answer     = row["correct_answer"] or "",
+        distractor_answers = list(distractors),
+    )
 
 
 # ── Fallback data (no DB connection) ─────────────────────────────────────────
@@ -593,7 +816,7 @@ _FALLBACK_TOPICS: dict[int, dict] = {
 _FALLBACK_PROBLEMS: dict[tuple, Problem] = {
     ("fractions", "en"): Problem(
         id="fb_frac_en", topic_key="fractions", topic_name="Fractions",
-        language="en", difficulty=1,
+        language="en", difficulty=1, stage="guided",
         text="What is 1/2 + 1/4?",
         steps=[
             "Find a common denominator: LCM of 2 and 4 is 4",
@@ -606,7 +829,7 @@ _FALLBACK_PROBLEMS: dict[tuple, Problem] = {
     ),
     ("fractions", "fr"): Problem(
         id="fb_frac_fr", topic_key="fractions", topic_name="Fractions",
-        language="fr", difficulty=1,
+        language="fr", difficulty=1, stage="guided",
         text="Combien fait 1/2 + 1/4 ?",
         steps=[
             "Trouver le PPCM de 2 et 4 : PPCM = 4",
@@ -619,33 +842,25 @@ _FALLBACK_PROBLEMS: dict[tuple, Problem] = {
     ),
     ("integers", "en"): Problem(
         id="fb_int_en", topic_key="integers", topic_name="Integers",
-        language="en", difficulty=1,
+        language="en", difficulty=1, stage="guided",
         text="What is (-5) + 3?",
-        steps=[
-            "Start at -5 on the number line",
-            "Move 3 steps to the right",
-            "Land on -2",
-        ],
+        steps=["Start at -5 on the number line", "Move 3 steps to the right", "Land on -2"],
         context="number_line",
         correct_answer="-2",
         distractor_answers=["2", "-8", "8"],
     ),
     ("integers", "fr"): Problem(
         id="fb_int_fr", topic_key="integers", topic_name="Entiers",
-        language="fr", difficulty=1,
+        language="fr", difficulty=1, stage="guided",
         text="Combien fait (-5) + 3 ?",
-        steps=[
-            "Partir de -5 sur la droite numerique",
-            "Avancer de 3 pas vers la droite",
-            "Arriver a -2",
-        ],
+        steps=["Partir de -5 sur la droite numérique", "Avancer de 3 pas vers la droite", "Arriver à -2"],
         context="number_line",
         correct_answer="-2",
         distractor_answers=["2", "-8", "8"],
     ),
     ("ratios", "en"): Problem(
         id="fb_ratios_en", topic_key="ratios", topic_name="Ratios and Rates",
-        language="en", difficulty=2,
+        language="en", difficulty=2, stage="practice",
         text=(
             "A hockey team won 12 games and lost 8 games. "
             "What is the ratio of wins to total games played?"
@@ -661,7 +876,7 @@ _FALLBACK_PROBLEMS: dict[tuple, Problem] = {
     ),
     ("ratios", "fr"): Problem(
         id="fb_ratios_fr", topic_key="ratios", topic_name="Ratios et taux",
-        language="fr", difficulty=2,
+        language="fr", difficulty=2, stage="practice",
         text=(
             "Une équipe de hockey a gagné 12 parties et en a perdu 8. "
             "Quel est le ratio de victoires par rapport aux parties jouées?"
@@ -677,7 +892,7 @@ _FALLBACK_PROBLEMS: dict[tuple, Problem] = {
     ),
     ("linear_equations", "en"): Problem(
         id="fb_lineq_en", topic_key="linear_equations", topic_name="Linear Equations",
-        language="en", difficulty=2,
+        language="en", difficulty=2, stage="practice",
         text=(
             "A cell phone plan costs $25 per month plus $0.10 per text message. "
             "Maya's bill was $35. How many text messages did she send?"
@@ -693,7 +908,7 @@ _FALLBACK_PROBLEMS: dict[tuple, Problem] = {
     ),
     ("linear_equations", "fr"): Problem(
         id="fb_lineq_fr", topic_key="linear_equations", topic_name="Équations linéaires",
-        language="fr", difficulty=2,
+        language="fr", difficulty=2, stage="practice",
         text=(
             "Un forfait téléphonique coûte 25 $ par mois plus 0,10 $ par texto. "
             "La facture de Maya était de 35 $. Combien de textos a-t-elle envoyés?"
@@ -709,30 +924,24 @@ _FALLBACK_PROBLEMS: dict[tuple, Problem] = {
     ),
     ("percentages", "en"): Problem(
         id="fb_pct_en", topic_key="percentages", topic_name="Percentages",
-        language="en", difficulty=2,
+        language="en", difficulty=2, stage="practice",
         text=(
             "A Tim Hortons muffin costs $2.50. During Roll Up the Rim, "
             "prices are discounted 20%. What is the sale price?"
         ),
-        steps=[
-            "Find the discount amount: 20% × $2.50 = $0.50",
-            "Subtract from original: $2.50 − $0.50 = $2.00",
-        ],
+        steps=["Find the discount amount: 20% × $2.50 = $0.50", "Subtract from original: $2.50 − $0.50 = $2.00"],
         context="tim_hortons",
         correct_answer="$2.00",
         distractor_answers=["$1.50", "$2.25", "$2.50"],
     ),
     ("percentages", "fr"): Problem(
         id="fb_pct_fr", topic_key="percentages", topic_name="Pourcentages",
-        language="fr", difficulty=2,
+        language="fr", difficulty=2, stage="practice",
         text=(
             "Un muffin chez Tim Hortons coûte 2,50 $. Pendant Roulez pour gagner, "
             "les prix sont réduits de 20 %. Quel est le prix de vente?"
         ),
-        steps=[
-            "Calculer la réduction : 20 % × 2,50 $ = 0,50 $",
-            "Soustraire du prix original : 2,50 $ − 0,50 $ = 2,00 $",
-        ],
+        steps=["Calculer la réduction : 20 % × 2,50 $ = 0,50 $", "Soustraire du prix original : 2,50 $ − 0,50 $ = 2,00 $"],
         context="tim_hortons",
         correct_answer="2,00 $",
         distractor_answers=["1,50 $", "2,25 $", "2,50 $"],
@@ -745,28 +954,21 @@ def _fallback_topic(grade: int) -> dict:
 
 
 def _fallback_problem(topic_key: str, grade: int, language: str) -> Optional[Problem]:
-    # Exact match
     p = _FALLBACK_PROBLEMS.get((topic_key, language))
     if p:
         return p
-    # Same topic, English
     p = _FALLBACK_PROBLEMS.get((topic_key, "en"))
     if p:
         return p
-    # Grade default topic, same language
     default_key = _FALLBACK_TOPICS.get(grade, _FALLBACK_TOPICS[6])["topic_key"]
     p = _FALLBACK_PROBLEMS.get((default_key, language))
     if p:
         return p
-    # Grade default topic, English
     return _FALLBACK_PROBLEMS.get((default_key, "en"))
 
 
 def _difficulty_search_order(target: int) -> list[int]:
-    """
-    Return difficulty levels to query, in order of preference (closest to target first).
-    E.g. target=3 → [3, 2, 4, 1, 5]
-    """
+    """Return difficulty levels to query, in order of preference (closest to target first)."""
     order = [target]
     for delta in range(1, 5):
         lower = target - delta

@@ -71,7 +71,10 @@ ARCS_DIR       = CONTENT_DIR / "arcs"
 PROVIDER_DEFAULTS = {
     "anthropic": "claude-opus-4-5",
     "gemini":    "gemini-2.0-flash",
-    "groq":      "llama-3.3-70b-versatile",
+    # groq free tier: llama-3.3-70b-versatile has 12K TPM limit — too small for
+    # arc generation (~15K tokens/request). Use llama-3.1-8b-instant (higher TPM)
+    # or switch to gemini (recommended) for bulk arc generation.
+    "groq":      "llama-3.1-8b-instant",
     "ollama":    "llama3.1",
 }
 
@@ -250,20 +253,26 @@ def _generate_anthropic(item: dict, model: str) -> tuple[str, dict]:
 
 
 def _generate_gemini(item: dict, model: str) -> tuple[str, dict]:
-    import google.generativeai as genai
+    # Uses google-genai (new SDK) — same package as nova_agent.py
+    # pip install google-genai   (NOT google-generativeai)
+    from google import genai
+    from google.genai import types as genai_types
+
     api_key = os.environ.get("GEMINI_API_KEY")
     if not api_key:
         print("\n  ERROR: GEMINI_API_KEY not set in .env", file=sys.stderr)
         print("  Get a free key at https://aistudio.google.com → Get API Key", file=sys.stderr)
         sys.exit(1)
-    genai.configure(api_key=api_key)
-    gemini = genai.GenerativeModel(
-        model_name=model,
-        system_instruction=build_system_prompt(),
-    )
-    response = gemini.generate_content(
-        build_user_prompt(item),
-        generation_config=genai.types.GenerationConfig(max_output_tokens=8192),
+
+    client = genai.Client(api_key=api_key)
+    response = client.models.generate_content(
+        model=model,
+        contents=build_user_prompt(item),
+        config=genai_types.GenerateContentConfig(
+            system_instruction=build_system_prompt(),
+            max_output_tokens=8192,
+            temperature=0.7,
+        ),
     )
     usage = {
         "input_tokens":  getattr(response.usage_metadata, "prompt_token_count", 0),
@@ -400,7 +409,9 @@ def main():
     if args.dry_run:
         print("  DRY RUN — no API calls will be made\n")
 
-    total_cost = 0.0
+    total_cost  = 0.0
+    saved_count = 0
+    error_count = 0
 
     for i, item in enumerate(pending, 1):
         label = f"{item['subject']}/{item['topic_key']}/{item['language']}"
@@ -415,10 +426,13 @@ def main():
         try:
             content, usage = generate_arc_md(item, model, args.provider)
         except Exception as e:
-            print(f"\n         ERROR: {e}")
+            print(f"\n         ERROR: {type(e).__name__}: {e}")
+            print(f"         *** SKIPPED — fix the error above and re-run ***")
+            error_count += 1
             continue
 
         path = save_arc(item, content)
+        saved_count += 1
 
         total_cost += usage["cost_usd"]
         cost_str = f"${usage['cost_usd']:.4f}" if usage["cost_usd"] > 0 else "free"
@@ -434,7 +448,7 @@ def main():
     if not args.dry_run and len(pending) > 0:
         total_str = f"~${total_cost:.4f} USD" if total_cost > 0 else "free"
         print(f"\n  {'=' * 56}")
-        print(f"  Done. {len(pending)} arc(s) generated.")
+        print(f"  Done. {saved_count}/{len(pending)} arc(s) saved.  Errors: {error_count}")
         print(f"  Total cost: {total_str}")
         print(f"\n  NEXT STEPS:")
         print(f"  1. Review .md files in content/arcs/grade_{args.grade}/")

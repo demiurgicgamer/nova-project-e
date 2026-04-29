@@ -14,6 +14,8 @@ import agoraRoutes         from './routes/agora.js';
 import notificationsRoutes from './routes/notifications.js';
 import { SessionWebSocketServer } from './services/SessionWebSocketServer.js';
 import { ElevenLabsTTSService }   from './services/ElevenLabsTTSService.js';
+import { sendDailyReminders }     from './services/NotificationService.js';
+import cron                       from 'node-cron';
 
 const app = express();
 
@@ -123,6 +125,38 @@ const start = async () => {
         console.log(`[Nova API] Running on port ${env.port} (${env.nodeEnv})`);
         console.log(`[Nova WSS] WebSocket listening on ws://localhost:${env.port}/session/{sessionId}`);
     });
+
+    // ── Daily reminder cron ───────────────────────────────────────────────────
+    // Fires at 17:00 server time every day. Sends FCM push to parents whose
+    // child hasn't had a session today. Set DAILY_REMINDER_CRON in .env to
+    // override the schedule (standard cron syntax), or set to 'off' to disable.
+    //
+    // Examples:
+    //   DAILY_REMINDER_CRON=0 17 * * *   → 5pm daily (default)
+    //   DAILY_REMINDER_CRON=0 9 * * *    → 9am daily
+    //   DAILY_REMINDER_CRON=off          → disabled
+    const cronSchedule = process.env.DAILY_REMINDER_CRON ?? '0 17 * * *';
+
+    if (cronSchedule !== 'off') {
+        if (!cron.validate(cronSchedule)) {
+            console.error(`[Nova Cron] Invalid DAILY_REMINDER_CRON expression: "${cronSchedule}" — cron not scheduled.`);
+        } else {
+            cron.schedule(cronSchedule, async () => {
+                console.log('[Nova Cron] Firing daily reminders…');
+                try {
+                    await sendDailyReminders();
+                    console.log('[Nova Cron] Daily reminders done.');
+                } catch (err) {
+                    console.error('[Nova Cron] sendDailyReminders error:', err.message);
+                }
+            }, {
+                timezone: process.env.REMINDER_TIMEZONE ?? 'America/Toronto',
+            });
+            console.log(`[Nova Cron] Daily reminder scheduled: "${cronSchedule}" (tz: ${process.env.REMINDER_TIMEZONE ?? 'America/Toronto'})`);
+        }
+    } else {
+        console.log('[Nova Cron] Daily reminder disabled (DAILY_REMINDER_CRON=off).');
+    }
 };
 
 start().catch((err) => {

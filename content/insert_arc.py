@@ -49,7 +49,7 @@ def map_difficulty(value) -> int:
 
 # ── Curriculum topic ordering ─────────────────────────────────────────────────
 TOPIC_ORDER = {
-    # Mathematics
+    # ── Grade 6 Mathematics ───────────────────────────────────────────────────
     "fractions":                    0,
     "integers":                     1,
     "ratios":                       2,
@@ -59,19 +59,38 @@ TOPIC_ORDER = {
     "geometry_area_perimeter":      6,
     "probability":                  7,
     "data_and_graphs":              8,
-    # Physics
+    # ── Grade 6 Physics ───────────────────────────────────────────────────────
     "forces_and_motion":            0,
     "simple_machines":              1,
     "electricity_basics":           2,
     "light_and_optics":             3,
-    # Chemistry
+    # ── Grade 6 Chemistry ─────────────────────────────────────────────────────
     "matter_and_materials":         0,
     "mixtures_and_solutions":       1,
     "physical_vs_chemical_changes": 2,
-    # Biology
+    # ── Grade 6 Biology ───────────────────────────────────────────────────────
     "cells_and_life":               0,
     "ecosystems":                   1,
     "human_body_systems":           2,
+    # ── Grade 7 Mathematics ───────────────────────────────────────────────────
+    "proportional_reasoning":       0,
+    "rational_numbers":             1,
+    "two_step_equations":           2,
+    "geometry_circles":             3,
+    "surface_area_and_volume":      4,
+    "statistics_and_sampling":      5,
+    "probability_compound":         6,
+    # ── Grade 7 Physics ───────────────────────────────────────────────────────
+    "heat_and_thermal_energy":      0,
+    "the_solar_system":             1,
+    "energy_and_work":              2,
+    # ── Grade 7 Chemistry ─────────────────────────────────────────────────────
+    "atoms_and_elements":           0,
+    "acids_and_bases":              1,
+    # ── Grade 7 Biology ───────────────────────────────────────────────────────
+    "diversity_of_living_things":   0,
+    "cell_division_and_growth":     1,
+    "heredity_and_traits":          2,
 }
 
 # ── DB connection ─────────────────────────────────────────────────────────────

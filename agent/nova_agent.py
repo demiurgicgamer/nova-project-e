@@ -25,6 +25,7 @@ import json
 import os
 import logging
 import random
+from datetime import datetime, timezone
 from typing import Optional
 
 import redis.asyncio as aioredis
@@ -33,7 +34,7 @@ from pydantic import BaseModel
 from langgraph.graph import StateGraph, END
 from dotenv import load_dotenv
 
-from curriculum_engine import CurriculumEngine, CurriculumState
+from curriculum_engine import CurriculumEngine, CurriculumState, next_arc_stage
 
 load_dotenv()
 
@@ -188,12 +189,16 @@ class SessionIntroRequest(BaseModel):
 
 # ── System prompt builder ─────────────────────────────────────────────────────
 
-def build_system_prompt(child_profile: ChildProfile, current_topic_name: Optional[str] = None) -> str:
+def build_system_prompt(
+    child_profile:      ChildProfile,
+    current_topic_name: Optional[str] = None,
+    arc_stage:          str           = "concept",
+) -> str:
     """
     Build Ms. Nova's system prompt for this child's session.
     Language-specific variants for EN and FR (Canadian).
     current_topic_name — human-readable topic the child selected (e.g. "Fractions").
-    When provided, Nova is told to teach that topic and NOT ask what to work on.
+    arc_stage — current pedagogical arc stage (concept/guided/practice/capstone).
     """
     name    = child_profile.name
     grade   = child_profile.grade
@@ -215,17 +220,61 @@ def build_system_prompt(child_profile: ChildProfile, current_topic_name: Optiona
         topic_line_fr = ""
         topic_line_en = ""
 
+    # ── Stage-specific teaching mode ─────────────────────────────────────────
+    _stage_en = {
+        "concept":  (
+            "CURRENT STAGE: CONCEPT — You have just explained the topic. "
+            "Check understanding with your comprehension-check question. "
+            "Do NOT jump to calculation problems yet."
+        ),
+        "guided":   (
+            "CURRENT STAGE: GUIDED — Scaffold heavily. Break every problem into micro-steps. "
+            "Ask one small leading question at a time. The student must feel fully supported."
+        ),
+        "practice": (
+            "CURRENT STAGE: PRACTICE — Coach from the sideline. Let the student lead. "
+            "Give hints only after 2+ turns without progress. Celebrate persistence."
+        ),
+        "capstone": (
+            "CURRENT STAGE: CAPSTONE — Near-assessment mode. Provide minimal scaffolding. "
+            "Let the student demonstrate mastery independently. Short, warm responses."
+        ),
+    }
+    _stage_fr = {
+        "concept":  (
+            "PHASE ACTUELLE: CONCEPT — Tu viens d'expliquer le sujet. "
+            "Vérifie la compréhension avec ta question de vérification. "
+            "Ne passe PAS encore aux problèmes calculatoires."
+        ),
+        "guided":   (
+            "PHASE ACTUELLE: GUIDÉ — Guide pas à pas. Décompose chaque problème en micro-étapes. "
+            "Pose une seule petite question à la fois."
+        ),
+        "practice": (
+            "PHASE ACTUELLE: PRATIQUE — Reste en retrait, laisse l'élève mener. "
+            "Ne donne des indices qu'après 2+ réponses sans progrès. Célèbre la persévérance."
+        ),
+        "capstone": (
+            "PHASE ACTUELLE: CAPSTONE — Mode évaluation. Offre un minimum d'aide. "
+            "Laisse l'élève démontrer sa maîtrise de façon indépendante. Réponses brèves."
+        ),
+    }
+    stage_block_en = _stage_en.get(arc_stage, _stage_en["practice"])
+    stage_block_fr = _stage_fr.get(arc_stage, _stage_fr["practice"])
+
     if lang == "fr":
-        return f"""Tu es Mme Nova, une tutrice de mathématiques chaleureuse et professionnelle pour des élèves de {grade}e année au Canada.
+        return f"""Tu es Mme Nova, une tutrice chaleureuse et professionnelle pour des élèves de {grade}e année au Canada.
 
 Personnalité:
 - Patiente, encourageante et positive
 - Tu utilises un langage simple et adapté à l'âge de l'élève
 - Tu poses des questions guidantes plutôt que de donner des réponses directes
 - Tu félicites les efforts, pas seulement les bonnes réponses
-- Tu restes toujours dans le sujet des mathématiques
+- Tu restes toujours dans le sujet enseigné
 
 L'élève s'appelle {name}. Ses points faibles actuels: {weak_str}.{topic_line_fr}
+
+{stage_block_fr}
 
 Règles pédagogiques strictes:
 1. Ne jamais donner la réponse directement — guide l'élève par des questions
@@ -238,16 +287,18 @@ Règles pédagogiques strictes:
 Tu réponds uniquement en français canadien. Sois concise et chaleureuse."""
 
     else:  # default: English Canadian
-        return f"""You are Ms. Nova, a warm and professional math tutor for Grade {grade} students in Canada.
+        return f"""You are Ms. Nova, a warm and professional tutor for Grade {grade} students in Canada.
 
 Personality:
 - Patient, encouraging, and positive at all times
 - You use age-appropriate language — clear, never condescending
 - You guide with questions rather than giving direct answers
 - You celebrate effort and persistence, not just correct answers
-- You stay strictly on-topic (mathematics)
+- You stay strictly on-topic
 
 Your student is named {name}. Their current weak areas: {weak_str}.{topic_line_en}
+
+{stage_block_en}
 
 Strict pedagogical rules:
 1. NEVER give the answer directly — guide the student with leading questions
@@ -345,21 +396,37 @@ async def node_select_pedagogy(state: AgentState) -> AgentState:
                 )
                 if not cs.mc_answered:
                     cs.session_total += 1
+                    cs.stage_total   += 1
                 cs.mc_answered = False   # reset flag for the next problem
-                log.info(f"[{state['session_id']}] Problem exhausted — next difficulty: {cs.difficulty}")
+
+                # ── Arc stage advancement (PTT/hint path) ─────────────────────
+                if cs.should_advance_stage:
+                    old_stage = cs.arc_stage
+                    cs.advance_stage()
+                    log.info(
+                        f"[{state['session_id']}] Arc stage: {old_stage} → {cs.arc_stage} "
+                        f"(hint path)"
+                    )
+
+                log.info(
+                    f"[{state['session_id']}] Problem exhausted — "
+                    f"next difficulty: {cs.difficulty}, arc_stage: {cs.arc_stage}"
+                )
 
             problem = await _curriculum.select_problem(
                 topic_key   = cs.topic_key or _curriculum._fallback_topic_key(profile.grade),
                 grade       = profile.grade,
                 language    = profile.language,
                 difficulty  = cs.difficulty,
+                arc_stage   = cs.arc_stage,
                 exclude_ids = cs.problems_seen,
             )
             if problem:
                 cs.load_problem(problem)
                 log.info(
                     f"[{state['session_id']}] New problem loaded: "
-                    f"{problem.topic_key} / diff={problem.difficulty} / id={problem.id[:8]}"
+                    f"{problem.topic_key} / stage={problem.stage} / "
+                    f"diff={problem.difficulty} / id={problem.id[:8]}"
                 )
 
         coaching = CurriculumEngine.build_coaching_context(cs, profile.language)
@@ -377,7 +444,11 @@ async def node_select_pedagogy(state: AgentState) -> AgentState:
 async def node_generate_response(state: AgentState) -> AgentState:
     """Call Claude API as Ms. Nova and produce a response."""
     profile = ChildProfile(**state["child_profile"])
-    system  = build_system_prompt(profile)
+    _arc_stage = (
+        CurriculumState.from_dict(state["curriculum_state"]).arc_stage
+        if state.get("curriculum_state") else "concept"
+    )
+    system = build_system_prompt(profile, arc_stage=_arc_stage)
 
     # Append the pedagogy hint as a final system instruction
     pedagogy = state.get("pedagogy_hint", "")
@@ -615,11 +686,13 @@ async def _save_checkpoint(child_id: str, topic_key: str, cs: "CurriculumState")
     payload = {
         "problems_seen": cs.problems_seen,
         "difficulty":    cs.difficulty,
+        "arc_stage":     cs.arc_stage,
     }
     try:
         await _redis_client.set(key, json.dumps(payload), ex=CHECKPOINT_TTL_SEC)
         log.info(f"[checkpoint] Saved for child={child_id} topic={topic_key}: "
-                 f"{len(cs.problems_seen)} problems seen, diff={cs.difficulty}")
+                 f"{len(cs.problems_seen)} problems seen, diff={cs.difficulty}, "
+                 f"arc_stage={cs.arc_stage}")
     except Exception as e:
         log.warning(f"[checkpoint] Save failed for {child_id}/{topic_key}: {e}")
 
@@ -716,10 +789,12 @@ async def session_start(req: SessionStartRequest):
             if checkpoint and checkpoint.get("problems_seen"):
                 cs.problems_seen = checkpoint.get("problems_seen", [])
                 cs.difficulty    = checkpoint.get("difficulty", cs.difficulty)
+                cs.arc_stage     = checkpoint.get("arc_stage", "concept")
                 cs.is_resuming   = True
                 log.info(
                     f"[{req.session_id}] Resuming from Redis checkpoint — "
-                    f"{len(cs.problems_seen)} problems already seen, diff={cs.difficulty}"
+                    f"{len(cs.problems_seen)} problems seen, diff={cs.difficulty}, "
+                    f"arc_stage={cs.arc_stage}"
                 )
             else:
                 # No checkpoint: fall back to DB mastery to detect returning users
@@ -738,6 +813,39 @@ async def session_start(req: SessionStartRequest):
                 else:
                     cs.is_resuming = False
                     log.info(f"[{req.session_id}] Fresh start — no prior history for topic: {cs.topic_key}")
+
+            # ── DB arc checkpoint: arc_stage fallback + 3-day warmup rule ────
+            if _curriculum and cs.topic_key:
+                try:
+                    arc_cp = await _curriculum.load_arc_checkpoint(
+                        profile.child_id, cs.topic_key
+                    )
+                    if arc_cp:
+                        # Use DB arc_stage only if Redis checkpoint didn't provide one
+                        if not checkpoint or not checkpoint.get("arc_stage"):
+                            cs.arc_stage = arc_cp.get("current_stage", "concept")
+                            log.info(
+                                f"[{req.session_id}] arc_stage from DB checkpoint: {cs.arc_stage}"
+                            )
+                        # 3-day warmup rule: if last session was 3+ days ago, add a
+                        # warm-up problem from the previous stage before resuming
+                        last_seen_str = arc_cp.get("last_seen")
+                        if last_seen_str and cs.is_resuming:
+                            try:
+                                last_seen = datetime.fromisoformat(
+                                    last_seen_str.replace("Z", "+00:00")
+                                )
+                                days_gap = (datetime.now(timezone.utc) - last_seen).days
+                                if days_gap >= 3:
+                                    cs.warmup_pending = True
+                                    log.info(
+                                        f"[{req.session_id}] 3-day gap ({days_gap}d) — "
+                                        f"warmup_pending=True, will back up one stage"
+                                    )
+                            except Exception:
+                                pass
+                except Exception as arc_err:
+                    log.warning(f"[{req.session_id}] DB arc checkpoint load failed: {arc_err}")
 
             problem = await _curriculum.select_problem(
                 topic_key  = cs.topic_key,
@@ -899,11 +1007,36 @@ async def session_intro(req: SessionIntroRequest):
             except Exception:
                 pass
 
+        # ── Hook story for fresh starts ───────────────────────────────────────
+        # Pull a hook narrative from topic_stories (stage 1 of the arc).
+        # Only for fresh starts — returning students skip straight to their problem.
+        hook_prefix = ""
+        if not is_resuming and _curriculum and topic_key:
+            try:
+                story = await _curriculum.get_hook_story(
+                    topic_key = topic_key,
+                    grade     = profile.grade,
+                    language  = lang,
+                )
+                if story and story.get("story_text"):
+                    hook_text = story["story_text"].strip()
+                    closing   = (story.get("closing_line") or "").strip()
+                    hook_prefix = (hook_text + " " + closing).strip() + " "
+                    log.info(
+                        f"[{req.session_id}] Hook story loaded "
+                        f"(culture={story.get('culture_hint', '?')}, "
+                        f"{len(hook_prefix)} chars)"
+                    )
+            except Exception as he:
+                log.warning(f"[{req.session_id}] Hook story load failed: {he}")
+
         # Hardcoded intro — topic always announced, never asks "what topic?"
         # Two variants: fresh start vs. resuming a previous session.
         #
         # Resume variant: skips the "what do you know" warmup — presents the
         # next problem directly so the child continues real work immediately.
+        # Fresh-start variant: opens with the hook story (if available) to
+        # motivate the topic before asking what the student already knows.
         if lang == "fr":
             if is_resuming:
                 if resume_problem:
@@ -920,9 +1053,10 @@ async def session_intro(req: SessionIntroRequest):
                     )
             else:
                 intro_text = (
-                    f"Bonjour {name}! Je suis Mme Nova, ta tutrice de maths. "
+                    f"Bonjour {name}! Je suis Mme Nova, ta tutrice. "
                     f"Pour me parler, maintiens le bouton appuyé et relâche quand tu as terminé. "
-                    f"Aujourd'hui on travaille sur {topic_name} — super choix! "
+                    f"{hook_prefix}"
+                    f"Aujourd'hui on travaille sur {topic_name}. "
                     f"Pour commencer, dis-moi ce que tu sais déjà sur {topic_name}."
                 )
         else:
@@ -943,7 +1077,8 @@ async def session_intro(req: SessionIntroRequest):
                 intro_text = (
                     f"Hi {name}, I'm Ms. Nova — great to see you! "
                     f"Hold the button to talk, release when you're done. "
-                    f"Today we're working on {topic_name} — excellent choice! "
+                    f"{hook_prefix}"
+                    f"Today we're working on {topic_name}. "
                     f"To kick things off, tell me what you already know about {topic_name}."
                 )
         log.info(
@@ -1050,9 +1185,20 @@ async def session_checkpoint(req: SessionEndRequest):
                     if profile_raw:
                         profile = ChildProfile.model_validate_json(profile_raw)
                         await _save_checkpoint(profile.child_id, cs.topic_key, cs)
+                        # Also persist to DB arc_checkpoint (survives Redis eviction)
+                        if _curriculum:
+                            try:
+                                await _curriculum.save_arc_checkpoint(
+                                    profile.child_id, cs.topic_key, profile.grade, cs
+                                )
+                            except Exception as arc_err:
+                                log.warning(
+                                    f"[{req.session_id}] DB arc checkpoint save failed: {arc_err}"
+                                )
                         log.info(
                             f"[{req.session_id}] Mid-session checkpoint saved — "
                             f"child={profile.child_id}, topic={cs.topic_key}, "
+                            f"arc_stage={cs.arc_stage}, "
                             f"problems_seen={len(cs.problems_seen)}"
                         )
                         return {"status": "ok", "problems_seen": len(cs.problems_seen)}
@@ -1084,13 +1230,18 @@ async def session_end(req: SessionEndRequest):
                 session_total   = cs.session_total
 
                 # ── Save resume checkpoint ────────────────────────────────────
-                # Persist problems_seen + difficulty so the child continues from
-                # here when they return to this topic in a future session.
+                # Persist problems_seen + difficulty + arc_stage so the child
+                # continues from here when they return to this topic.
                 profile_raw = await _redis_client.get(profile_key)
                 if profile_raw and cs.topic_key:
                     try:
                         profile = ChildProfile.model_validate_json(profile_raw)
                         await _save_checkpoint(profile.child_id, cs.topic_key, cs)
+                        # Also persist to DB arc_checkpoint (survives Redis eviction)
+                        if _curriculum:
+                            await _curriculum.save_arc_checkpoint(
+                                profile.child_id, cs.topic_key, profile.grade, cs
+                            )
                     except Exception as cp_err:
                         log.warning(f"[{req.session_id}] Checkpoint save failed: {cp_err}")
 
@@ -1160,8 +1311,10 @@ async def record_answer(req: AnswerRequest):
             if raw:
                 cs = CurriculumState.from_dict(json.loads(raw))
                 cs.session_total += 1
+                cs.stage_total   += 1
                 if req.is_correct:
                     cs.session_correct += 1
+                    cs.stage_correct   += 1
                 cs.mc_answered = True   # signal to node_select_pedagogy: don't double-count
                 await _redis_client.set(
                     curr_key, json.dumps(cs.to_dict()), ex=SESSION_TTL_SEC
@@ -1169,7 +1322,9 @@ async def record_answer(req: AnswerRequest):
                 log.info(
                     f"[{req.session_id}] Answer recorded: "
                     f"{'✓ correct' if req.is_correct else '✗ wrong'} "
-                    f"({cs.session_correct}/{cs.session_total})"
+                    f"({cs.session_correct}/{cs.session_total}) "
+                    f"stage={cs.arc_stage} "
+                    f"stage_correct={cs.stage_correct}/{cs.stage_total}"
                 )
         except Exception as e:
             log.warning(f"[{req.session_id}] Failed to record answer: {e}")
@@ -1214,7 +1369,15 @@ async def record_answer(req: AnswerRequest):
         else:
             try:
                 history = await _load_history(req.session_id)
-                system  = build_system_prompt(profile)
+                _arc_stage_ans = "concept"
+                if _redis_client:
+                    try:
+                        _raw_cs = await _redis_client.get(f"nova:session:{req.session_id}:curriculum")
+                        if _raw_cs:
+                            _arc_stage_ans = CurriculumState.from_dict(json.loads(_raw_cs)).arc_stage
+                    except Exception:
+                        pass
+                system = build_system_prompt(profile, arc_stage=_arc_stage_ans)
 
                 if lang == "fr":
                     explain_prompt = (
@@ -1293,7 +1456,8 @@ async def session_continue(req: SessionContinueRequest):
 
     # ── Advance to next problem ───────────────────────────────────────────────
     prev_problem_text = cs.problem_text  # for transition context
-    advanced = False
+    advanced       = False
+    stage_advanced = False
 
     if _curriculum and cs.has_problem:
         # mc_answered was set by /answer; is_exhausted is now True
@@ -1303,19 +1467,30 @@ async def session_continue(req: SessionContinueRequest):
         cs.difficulty  = new_difficulty
         cs.mc_answered = False   # consumed here
 
+        # ── Arc stage advancement (MC path) ───────────────────────────────────
+        if cs.should_advance_stage:
+            old_arc_stage = cs.arc_stage
+            cs.advance_stage()
+            stage_advanced = True
+            log.info(
+                f"[{req.session_id}] Arc stage: {old_arc_stage} → {cs.arc_stage} "
+                f"(MC path, correct={cs.stage_correct})"
+            )
+
         problem = await _curriculum.select_problem(
             topic_key   = cs.topic_key or _curriculum._fallback_topic_key(profile.grade),
             grade       = profile.grade,
             language    = profile.language,
             difficulty  = cs.difficulty,
+            arc_stage   = cs.arc_stage,
             exclude_ids = cs.problems_seen,
         )
         if problem:
             cs.load_problem(problem)
             advanced = True
             log.info(
-                f"[{req.session_id}] session/continue — advanced to next problem: "
-                f"{problem.id[:8]} diff={problem.difficulty}"
+                f"[{req.session_id}] session/continue — next problem: "
+                f"{problem.id[:8]} stage={problem.stage} diff={problem.difficulty}"
             )
         else:
             log.warning(f"[{req.session_id}] session/continue — no unseen problems available.")
@@ -1335,39 +1510,66 @@ async def session_continue(req: SessionContinueRequest):
     history = await _load_history(req.session_id)
 
     if advanced and cs.has_problem:
-        # Tell Nova to transition from the last answer to the new problem
+        # Tell Nova to transition from the last answer to the new problem.
+        # When the arc stage just advanced, add a brief stage-change announcement.
         if lang == "fr":
+            stage_announce = ""
+            if stage_advanced:
+                _stage_names_fr = {
+                    "guided":   "exercices guidés",
+                    "practice": "exercices de pratique",
+                    "capstone": "problèmes avancés",
+                }
+                stage_announce = (
+                    f"L'élève vient de passer à la phase «{_stage_names_fr.get(cs.arc_stage, cs.arc_stage)}». "
+                    f"Mentionne ce progrès brièvement et avec enthousiasme avant de présenter le problème. "
+                )
             if req.is_correct:
                 transition_note = (
+                    f"{stage_announce}"
                     f"L'élève vient de répondre correctement. "
-                    f"Maintenant, présente le prochain problème de façon naturelle et enthousiaste. "
+                    f"Présente le prochain problème de façon naturelle et enthousiaste. "
                     f"Problème: {cs.problem_text}. "
                     f"1-2 phrases max. Pose une question d'ouverture sur ce problème."
                 )
             else:
                 transition_note = (
+                    f"{stage_announce}"
                     f"L'élève vient d'avoir une erreur et Nova a expliqué. "
                     f"Passons maintenant au prochain problème pour continuer à progresser. "
                     f"Problème: {cs.problem_text}. "
                     f"1-2 phrases max. Introduis-le chaleureusement."
                 )
         else:
+            stage_announce = ""
+            if stage_advanced:
+                _stage_names_en = {
+                    "guided":   "guided practice",
+                    "practice": "independent practice",
+                    "capstone": "challenge problems",
+                }
+                stage_announce = (
+                    f"The student just levelled up to the «{_stage_names_en.get(cs.arc_stage, cs.arc_stage)}» stage. "
+                    f"Briefly and enthusiastically acknowledge this milestone before presenting the problem. "
+                )
             if req.is_correct:
                 transition_note = (
+                    f"{stage_announce}"
                     f"The student just answered correctly. "
-                    f"Transition warmly and naturally to the next problem. "
+                    f"Transition warmly to the next problem. "
                     f"Problem: {cs.problem_text}. "
                     f"1-2 sentences max. Ask an opening question about this problem."
                 )
             else:
                 transition_note = (
+                    f"{stage_announce}"
                     f"The student got the last question wrong and Nova explained it. "
                     f"Move on to the next problem to keep momentum. "
                     f"Problem: {cs.problem_text}. "
                     f"1-2 sentences max. Introduce it warmly."
                 )
 
-        system = build_system_prompt(profile)
+        system = build_system_prompt(profile, arc_stage=cs.arc_stage)
         system += f"\n\n[Internal note — do NOT reveal to student]\n{transition_note}"
 
         if lang == "fr":
