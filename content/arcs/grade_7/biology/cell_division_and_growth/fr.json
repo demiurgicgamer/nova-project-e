@@ -1,0 +1,175 @@
+{
+  "meta": {
+    "subject": "biology",
+    "topic_key": "cell_division_and_growth",
+    "topic_display": "Cell Division and Growth",
+    "grade": 7,
+    "region": "canada",
+    "language_code": "fr",
+    "status": "approved",
+    "review_flags": []
+  },
+  "hook_stories": [
+    {
+      "id": "hook_a",
+      "culture_hint": "canadian",
+      "text": "Alors que tu es en train de jouer au parc, tu remarques un petit bouton sur un arbre. Au début, il est tout petit, mais à chaque jour, il grossit, grossit, et finit par devenir une pomme. Tu te demandes : Comment ça marche ? Comment un petit bouton peut-il devenir gros ? Est-ce que ça a quelque chose à voir avec des cellules qui deviennent plus grandes ?",
+      "closing_line": "Est-ce que ça a quelque chose à voir avec des cellules qui deviennent plus grandes ?"
+    },
+    {
+      "id": "hook_b",
+      "culture_hint": "canadian",
+      "text": "Tu as fait une petite chute et ton bras est un peu rouge et douloureux. Tu vas à la pharmacie et ta mère te dit que tu peux utiliser du glair pour cicatriser. Mais comment ça marche, ce glair ? Est-ce que ton bras a besoin de plus de cellules pour se réparer ? Comment les cellules de ton bras savent-elles comment se remettre en place ?",
+      "closing_line": "Comment les cellules de ton bras savent-elles comment se remettre en place ?"
+    }
+  ],
+  "concept": {
+    "explanation_steps": [
+      "Les cellules se divisent pour trois raisons principales : croissance, réparation et reproduction.",
+      "La division cellulaire spéciale est appelée mitose.",
+      "Il y a quatre grandes étapes de la mitose : prophase, métaphase, anaphase et télophase.",
+      "Une cellule copie son ADN pendant la mitose dans chaque cellule nouvelle.",
+      "La différenciation cellulaire permet à une cellule fertilisée de devenir un être humain complet."
+    ],
+    "whiteboard_text": "Les cellules se divisent pour croître, réparer et se reproduire. La mitose est une division spéciale. La différenciation fait que les cellules deviennent des tissus différents.",
+    "comprehension_check": "Pourquoi les cellules se divisent-elles ?",
+    "reteach_angles": [
+      "Pense à un bébé qui grandit. Comment arrive-t-il à devenir aussi grand ?",
+      "Imagine que tu as une plaie. Quel processus permet à ta peau de guérir et de se reconstruire ?"
+    ]
+  },
+  "problems": [
+    {
+      "id": "p_guided_1",
+      "stage": "guided",
+      "difficulty": "easy",
+      "text": "La plaie de ta main a cicatrisé, ce qui signifie que les cellules se sont divisées. On dit qu’une cellule de ta peau se divise en deux, et qu’ensuite chacune de ces nouvelles cellules peut encore se diviser. Si chaque cellule se divise **une fois**, combien de nouvelles cellules obtiens-tu ?",
+      "answer": "Deux cellules",
+      "answer_explanation": "Une cellule se divise une fois pour former deux nouvelles cellules.",
+      "mc_choices": [
+        "Deux cellules",
+        "Une cellule",
+        "Trois cellules",
+        "Quatre cellules"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Croire que la cellule se divise en trois cellules.",
+      "intervention_hints": {
+        "level_1": "Tu as **une** cellule. Elle se divise… combien de cellules ça donne ?",
+        "level_2": "Compose-toi : une cellule devient deux. Donc quand une cellule se divise une fois, tu as…",
+        "level_3": "Pense à un puzzle. Une pièce se transforme en deux morceaux. Une cellule devient deux cellules."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_1",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "Quelle étape de la mitose se déroule **avant** l’anaphase ?",
+      "answer": "Métaphase",
+      "answer_explanation": "Dans la mitose, les étapes sont : prophase, métaphase, anaphase, puis télophase. Métaphase précède anaphase.",
+      "mc_choices": [
+        "Métaphase",
+        "Prophase",
+        "Télophase",
+        "Anaphase"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Croire que prophase précède anaphase.",
+      "intervention_hints": {
+        "level_1": "Tu as vu la plaie de ton bras. La peau se reconstruit… comment ?",
+        "level_2": "Si tu dois faire un puzzle, tu dois trouver **des morceaux**. Ici, des cellules !",
+        "level_3": "Tu sais que les cellules se divisent pour **se réparer**. C’est comme **se reconstruire en plus**."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_2",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "Quand une plaie se cicatrise, pourquoi la peau repousse ?",
+      "answer": "Parce que les cellules se divisent pour réparer le tissu",
+      "answer_explanation": "La peau repousse grâce à la division des cellules pour remplacer les cellules endommagées.",
+      "mc_choices": [
+        "Parce que les cellules se divisent pour réparer le tissu",
+        "Parce qu’elle a besoin d’air",
+        "Parce que la lumière aide à la guérison",
+        "Parce que les animaux viennent nettoyer la plaie"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Croire que la plaie repousse à cause d’air, lumière ou animaux.",
+      "intervention_hints": {
+        "level_1": "Tu as vu la plaie de ton bras. La peau se reconstruit… comment ?",
+        "level_2": "Si tu dois faire un puzzle, tu dois trouver **des morceaux**. Ici, des cellules !",
+        "level_3": "Tu sais que les cellules se divisent pour **se réparer**. C’est comme **se reconstruire en plus**."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_3",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "Qu’est-ce que les cellules **différentient** ?",
+      "answer": "Elles deviennent différentes pour faire des tissus différents",
+      "answer_explanation": "La différenciation cellulaire permet aux cellules de devenir des cellules spécialisées pour créer différents tissus.",
+      "mc_choices": [
+        "Elles deviennent différentes pour faire des tissus différents",
+        "Elles deviennent des cellules identiques",
+        "Elles restent toutes pareilles",
+        "Elles deviennent des cellules de plus en plus grandes"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Croire que la différenciation veut dire devenir plus grandes ou identiques.",
+      "intervention_hints": {
+        "level_1": "Une cellule devient une peau, une autre devient un muscle.",
+        "level_2": "Ce mot signifie : **devenir différent** — comme si une peau pouvait être **une peau ou un muscle**",
+        "level_3": "Réfléchis à un puzzle : chaque morceau forme un truc différent. C’est ça que les cellules font."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_capstone_1",
+      "stage": "capstone",
+      "difficulty": "hard",
+      "text": "Un bébé qui grandit dans la matrice (un endroit très spécial dans le corps de la mère) se développe. Il y a **10 cellules au début**. Chaque cellule se divise **trois fois**. Combien de cellules y a-t-il finalement ?",
+      "answer": "80 cellules",
+      "answer_explanation": "10 cellules initiales × 2^3 = 10 × 8 = 80 cellules finales.",
+      "mc_choices": [
+        "80 cellules",
+        "30 cellules",
+        "1000 cellules",
+        "300 cellules"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Croire que c’est une multiplication directe de 3.",
+      "intervention_hints": {
+        "level_1": "Une cellule se divise une fois = 2 cellules.",
+        "level_2": "Tu fais **trois divisions** : 1 → 2 → 4 → 8.",
+        "level_3": "Si les cellules se divisent 3 fois, tu multiplies par 2 trois fois. C’est 2^3 = 8."
+      },
+      "nova_guiding_question": "Comme c’est un bébé, comment se fait-il que les cellules de son corps aient besoin de se diviser beaucoup de fois ?"
+    },
+    {
+      "id": "p_capstone_2",
+      "stage": "capstone",
+      "difficulty": "hard",
+      "text": "Comme c’est un bébé, comment se fait-il que les cellules de son corps aient besoin de se diviser beaucoup de fois ?",
+      "answer": "Pour que le bébé grandisse",
+      "answer_explanation": "Les cellules se divisent pour permettre à un bébé de grandir, fabriquer de nouveaux tissus et remplacer les cellules mortes.",
+      "mc_choices": [
+        "Pour que le bébé grandisse",
+        "Pour faire une autre personne",
+        "Pour qu’il puisse courir et manger",
+        "Pour que le bébé devienne un adulte"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Croire que se diviser est pour faire d'autres personnes.",
+      "intervention_hints": {
+        "level_1": "Une cellule se divise une fois = 2 cellules.",
+        "level_2": "Tu fais **trois divisions** : 1 → 2 → 4 → 8.",
+        "level_3": "Si les cellules se divisent 3 fois, tu multiplies par 2 trois fois. C’est 2^3 = 8."
+      },
+      "nova_guiding_question": ""
+    }
+  ]
+}

@@ -1,0 +1,136 @@
+{
+  "meta": {
+    "subject": "mathematics",
+    "topic_key": "rational_numbers",
+    "topic_display": "Rational Numbers",
+    "grade": 7,
+    "region": "canada",
+    "language_code": "fr",
+    "status": "approved",
+    "review_flags": [
+      "Confirmer la précision mathématique de tous les problèmes (addition, soustraction, multiplication, division de fractions et décimaux avec entiers positifs et négatifs).",
+      "Vérifier l’utilisation appropriée et naturelle du vocabulaire en français québécois pour des jeunes de 12-13 ans.",
+      "S'assurer que les contextes réels et culturellement pertinents pour le Québec sont utilisés (température, football, elevation, etc.).",
+      "Vérifier l'exactitude des choix de réponses distorsion et leur alignement avec des erreurs fréquentes des élèves.",
+      "Assurer que les interventions sont suffisamment ciblées pour le niveau de l’élève (7e année)."
+    ]
+  },
+  "hook_stories": [
+    {
+      "id": "hook_a",
+      "culture_hint": "canadian",
+      "text": "Il fait -8 degrés Celsius à Québec. Le matin, il gèle, mais par la suite, la température augmente de 5 degrés. Quelle est la nouvelle température ?",
+      "closing_line": "Quelle est la nouvelle température ?"
+    },
+    {
+      "id": "hook_b",
+      "culture_hint": "canadian",
+      "text": "Un équipe de football au Canada joue sur un terrain qui mesure 100 mètres de long. La boule est tombée à 12 mètres avant le but, puis est repartie de là de 18 mètres vers l'avant. À quelle distance du milieu du terrain se trouve la boule maintenant ?",
+      "closing_line": "À quelle distance du milieu du terrain se trouve la boule maintenant ?"
+    }
+  ],
+  "concept": {
+    "explanation_steps": [
+      "Les nombres rationnels comprennent les nombres entiers (positifs et négatifs), les fractions et les décimaux (positifs et négatifs).",
+      "La ligne numérique est une droite qui montre tous les nombres rationnels. Les nombres positifs sont à droite du zéro et les nombres négatifs sont à gauche du zéro.",
+      "La valeur absolue d’un nombre est sa distance par rapport à zéro sur la ligne numérique.",
+      "La valeur absolue de +5 = 5 et la valeur absolue de -5 = 5."
+    ],
+    "whiteboard_text": "Les nombres rationnels incluent entiers, fractions et décimaux positifs et négatifs. Utilisez une ligne numérique pour représenter les nombres positifs à droite du zéro, négatifs à gauche.",
+    "comprehension_check": "1. Quel est l'opposé de -7 ? 2. Trouve la valeur absolue de -4.",
+    "reteach_angles": [
+      "Revoir les concepts de nombres entiers positifs et négatifs.",
+      "Utiliser la ligne numérique pour aider à comprendre les nombres négatifs."
+    ]
+  },
+  "problems": [
+    {
+      "id": "p_guided_1",
+      "stage": "guided",
+      "difficulty": "medium",
+      "text": "Sur une balance de laboratoire, un scientifique a mis 3.5 kg de sel, puis a retiré 1.2 kg de sel. Quelle est la quantité totale de sel restante ?",
+      "answer": "2.3 kg",
+      "answer_explanation": "3.5 - 1.2 = 2.3 kg",
+      "mc_choices": [
+        "2.3 kg",
+        "4.7 kg",
+        "2.7 kg",
+        "1.3 kg"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Soustraction mal effectuée ou erreur de placement décimal",
+      "intervention_hints": {
+        "level_1": "Revois le calcul. 5 - 2 ?",
+        "level_2": "Tu peux additionner les fractions comme 3/5 + 2/5 = 5/5 = 1. Essaye la même chose avec des décimaux.",
+        "level_3": "Tu avais 3.5 kg. Tu en as enlevé 1.2 kg. Quel est le reste ?"
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_1a",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "Un thermomètre montre une température de -12°C. La température augmente de 5°C. Quelle est la nouvelle température ?",
+      "answer": "-7°C",
+      "answer_explanation": "-12 + 5 = -7°C",
+      "mc_choices": [
+        "-17°C",
+        "-7°C",
+        "17°C",
+        "-5°C"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Confusion entre addition et soustraction de nombres négatifs",
+      "intervention_hints": {
+        "level_1": "La température diminue ou augmente ?",
+        "level_2": "Tu commences à -12. Tu augmentes de 5 : tu vas vers zéro ?",
+        "level_3": "Tu es à -12. Tu montes de 5. Quel est ton point final ?"
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_1b",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "Un montagnard est à 950 mètres d'altitude. Il descend de 200 mètres. Quelle est maintenant son altitude ?",
+      "answer": "750 mètres",
+      "answer_explanation": "950 - 200 = 750 mètres",
+      "mc_choices": [
+        "1150 m",
+        "750 m",
+        "-750 m",
+        "950 m"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Utiliser l'opération incorrecte (addition au lieu de soustraction)",
+      "intervention_hints": {
+        "level_1": "Tu descends donc tu ajoutes ou tu soustrais ?",
+        "level_2": "Tu es à 950 mètres. Tu descends (t'es en dessous). Quelle est la différence ?",
+        "level_3": "Tu es à 950 m et tu descends de 200 m. Quelle est l’altitude finale ?"
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_1c",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "Dans un jeu de cartes, une piste de course est marquée sur une ligne numérique. Un joueur commence à la position +10. Il se déplace : 1. Avance de 4 unités (donc +4) 2. Puis recule de 9 unités (donc -9) 3. Ensuite avance de 3 unités (donc +3). Quelle est sa position finale ?",
+      "answer": "+8",
+      "answer_explanation": "10 + 4 - 9 + 3 = 8",
+      "mc_choices": [
+        "+5",
+        "+18",
+        "+8",
+        "-8"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Erreur dans le calcul étape par étape ou mauvaise interprétation des mouvements",
+      "intervention_hints": {
+        "level_1": "Quelle est la première étape ? Tu avances ou recules ?",
+        "level_2": "Tu es à +10. Tu avances puis recules. Écris chaque changement.",
+        "level_3": "Fais-le étape par étape : +10 → + (4) → - (9) → + (3) = ?"
+      },
+      "nova_guiding_question": ""
+    }
+  ]
+}

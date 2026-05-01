@@ -1,0 +1,161 @@
+{
+  "meta": {
+    "subject": "mathematics",
+    "topic_key": "surface_area_and_volume",
+    "topic_display": "Surface Area and Volume",
+    "grade": 7,
+    "region": "canada",
+    "language_code": "en",
+    "status": "approved",
+    "review_flags": [
+      "Check that all surface area and volume formulas are correct and match Grade 7 curriculum expectations",
+      "Confirm that the use of imperial units (cm, cm², cm³) aligns with Canadian math standards and contexts",
+      "Review all multiple choice distractors for mathematical accuracy and realistic student misconceptions",
+      "Verify all story contexts are age-appropriate and culturally relevant to Canadian children",
+      "Ensure no confusion between surface area and volume in story lines and question prompts"
+    ]
+  },
+  "hook_stories": [
+    {
+      "id": "hook_a",
+      "culture_hint": "universal",
+      "text": "Emma is packing a gift box for her grandmother. The box is shaped like a rectangular prism, and she wants to wrap it in beautiful wrapping paper. The box measures 10 cm long, 6 cm wide, and 4 cm high. Emma wants to know how much wrapping paper she needs to cover the entire box.",
+      "closing_line": "How much paper should Emma buy?"
+    },
+    {
+      "id": "hook_b",
+      "culture_hint": "canadian",
+      "text": "Liam is at a soup shop in Montreal. He orders a can of soup. The label says the can is 10 cm tall and has a diameter of 6 cm. Liam’s curious: 'How much soup can the can actually hold?' This is a question about volume – how much space is inside the container.",
+      "closing_line": "How much soup will the can hold?"
+    }
+  ],
+  "concept": {
+    "explanation_steps": [
+      "A rectangular prism has 6 faces: 2 length × width, 2 length × height, and 2 width × height.",
+      "To find the total surface area, we calculate the area of each pair of faces and add them together.",
+      "For a rectangular prism with dimensions length (l), width (w), and height (h):",
+      "1. Area of 2 length × width faces is 2 × l × w",
+      "2. Area of 2 length × height faces is 2 × l × h",
+      "3. Area of 2 width × height faces is 2 × w × h",
+      "4. Total surface area = 2lw + 2lh + 2wh"
+    ],
+    "whiteboard_text": "Surface Area = 2lw + 2lh + 2wh",
+    "comprehension_check": "What is the surface area of a rectangular prism that is 8 cm long, 5 cm wide, and 3 cm high?",
+    "reteach_angles": [
+      "Think of it like covering a box — how much wrapping paper do you need?",
+      "Imagine unfolding the box into a flat surface, then adding up all the rectangles."
+    ]
+  },
+  "problems": [
+    {
+      "id": "p_guided_1",
+      "stage": "guided",
+      "difficulty": "medium",
+      "text": "A gift box is shaped like a rectangular prism with dimensions 12 cm × 8 cm × 5 cm. How much wrapping paper does the gift box need to cover the full surface?",
+      "answer": "392 cm²",
+      "answer_explanation": "The box has three pairs of faces:",
+      "mc_choices": [
+        "392 cm²",
+        "320 cm²",
+        "340 cm²",
+        "370 cm²"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Students might forget to double the area of each pair of identical faces.",
+      "intervention_hints": {
+        "level_1": "Which dimensions are paired together?",
+        "level_2": "Are all faces the same? How many are the same?",
+        "level_3": "If the 12 × 8 faces total 192 cm², what about the 12 × 5 faces?"
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_1",
+      "stage": "practice",
+      "difficulty": "medium_hard",
+      "text": "Find the surface area of a triangular prism with triangular bases of height 4 cm, base 6 cm, and side lengths 5 cm, 5 cm, 6 cm. The prism is 8 cm long.",
+      "answer": "120 cm²",
+      "answer_explanation": "Triangular prism surface area includes two triangular bases and three rectangular faces.",
+      "mc_choices": [
+        "120 cm²",
+        "100 cm²",
+        "140 cm²",
+        "160 cm²"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Students might confuse the formula of prism surface area with that of a pyramid or rectangular prism.",
+      "intervention_hints": {
+        "level_1": "How many triangular faces are there in a triangular prism?",
+        "level_2": "Can you calculate the area of each face using base × height?",
+        "level_3": "The lateral faces are rectangles — what are their dimensions?"
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_2",
+      "stage": "practice",
+      "difficulty": "medium_hard",
+      "text": "A cylindrical water tank has a radius of 4 cm and a height of 10 cm. What is the surface area of the tank?",
+      "answer": "401.92 cm²",
+      "answer_explanation": "Total surface area = 2πr² + 2πrh (two circular bases plus curved surface).",
+      "mc_choices": [
+        "401.92 cm²",
+        "351.68 cm²",
+        "502.4 cm²",
+        "602.88 cm²"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Students might forget to add the area of the two circular bases.",
+      "intervention_hints": {
+        "level_1": "What’s the difference between the curved surface and the total surface?",
+        "level_2": "You have the curved surface from 2πrh. Add the two circles with πr².",
+        "level_3": "Did you calculate both 2πr² + 2πrh?"
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_3",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "A pyramid has a square base of 6 cm × 6 cm and a height of 8 cm. What is the surface area of the pyramid?",
+      "answer": "120 cm²",
+      "answer_explanation": "Surface area includes 1 square base and 4 triangular lateral faces.",
+      "mc_choices": [
+        "120 cm²",
+        "180 cm²",
+        "240 cm²",
+        "300 cm²"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Students might confuse pyramid surface area with cube surface area.",
+      "intervention_hints": {
+        "level_1": "A pyramid has how many faces?",
+        "level_2": "Is one of the faces the base, and others are triangles?",
+        "level_3": "How do you find the area of a triangular face in a pyramid?"
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_capstone_1",
+      "stage": "capstone",
+      "difficulty": "medium",
+      "text": "You are designing a packaging box for a Canadian-made candle company. The box is a rectangular prism with dimensions 10 cm × 5 cm × 3 cm. You want to know: 1. How much wrapping paper (surface area) will be needed? 2. How much candle wax (volume) the box can hold.",
+      "answer": "190 cm² and 150 cm³",
+      "answer_explanation": "Surface area = 2(10×5) + 2(10×3) + 2(5×3) = 100 + 60 + 30 = 190 cm²; Volume = 10 × 5 × 3 = 150 cm³.",
+      "mc_choices": [
+        "190 cm² and 150 cm³",
+        "170 cm² and 120 cm³",
+        "210 cm² and 180 cm³",
+        "230 cm² and 200 cm³"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Confusing surface area and volume formulas or making calculation errors.",
+      "intervention_hints": {
+        "level_1": "What shapes do you see on the box? Which formulas do you need?",
+        "level_2": "Which faces are identical? What’s the area of those?",
+        "level_3": "Did you double-check both surface area and volume?"
+      },
+      "nova_guiding_question": "Start by listing what you know: dimensions and type of shape. Then identify which calculations are needed."
+    }
+  ]
+}

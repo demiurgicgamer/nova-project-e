@@ -1,0 +1,178 @@
+{
+  "meta": {
+    "subject": "chemistry",
+    "topic_key": "atoms_and_elements",
+    "topic_display": "Atoms and Elements",
+    "grade": 7,
+    "region": "canada",
+    "language_code": "en",
+    "status": "approved",
+    "review_flags": []
+  },
+  "hook_stories": [
+    {
+      "id": "hook_a",
+      "culture_hint": "universal",
+      "text": "Imagine you're building a sandcastle on a sunny day in Halifax. You collect sand from the beach and use it to make your masterpiece. But when you look at the sand closer with a magnifying glass, you notice something interesting — the sand is made of tiny grains that look almost identical. You wonder: what happens if you keep breaking those grains down until they're so small that you can’t see them anymore? What would the tiniest piece of sand be called?\n\nNow think about your dinner table. What's in the glass of water you're drinking? It turns out that your water is made of invisible pieces — not just one kind, but two kinds joined together! The atoms in water are like tiny ingredients in a recipe — hydrogen and oxygen atoms that stick together.\n\nLet's explore the world of tiny spaces inside everything around us, from the sand in your sandbox to the food in your lunchbox.",
+      "closing_line": "Everything around us is made of atoms — the smallest units of matter that keep their identity as a certain type of substance."
+    }
+  ],
+  "concept": {
+    "explanation_steps": [
+      "Everything around you is made of atoms — the smallest units of matter that keep their identity as a certain type of substance.",
+      "These atoms are made up of even tinier parts called protons, neutrons, and electrons.",
+      "Protons: Found in the nucleus. They have a positive charge. The number of protons tells us what element an atom is.",
+      "Neutrons: Also found in the nucleus. Neutral charge (no charge). They help keep the nucleus stable.",
+      "Electrons: Found outside the nucleus. They have a negative charge and are involved in chemical bonds.",
+      "We can also understand the difference between elements, compounds, and mixtures.",
+      "Elements are pure substances made of only one type of atom (e.g., gold, iron).",
+      "Compounds are substances made of two or more elements chemically bonded (e.g., water, carbon dioxide).",
+      "Mixtures are materials that contain more than one substance that are not chemically joined (e.g., salt water, air).",
+      "The periodic table is like a map. It organizes all known elements by their atomic structure and properties.",
+      "Periods (horizontal rows): Elements with similar outer electron arrangements.",
+      "Groups (vertical columns): Elements with similarly reactive chemical behavior.",
+      "Chemical symbols (e.g., H for hydrogen, O for oxygen) and formulas (e.g., H₂O) are tools to represent atoms and compounds clearly.",
+      "These are the building blocks that make up everything around us — from your school desk to the air you breathe."
+    ],
+    "whiteboard_text": "Everything around us is made of atoms – the smallest units of matter.\nAtoms are made of protons, neutrons, and electrons.\nProtons: Positive charge in nucleus.\nNeutrons: Neutral charge in nucleus.\nElectrons: Negative charge outside nucleus.\nElements: Pure substances made of one type of atom.\nCompounds: Made of two or more elements chemically joined.\nMixtures: More than one substance that are not chemically joined.\nPeriodic Table: Organizes elements by atomic structure and properties.",
+    "comprehension_check": "Can you name something that's made of atoms and identify whether it's an element, compound, or mixture?",
+    "reteach_angles": [
+      "You can think of atoms like the pieces of a LEGO set that make up everything around you.",
+      "Atoms are like tiny ingredients in a recipe – hydrogen and oxygen atoms in water are like ingredients in a dish."
+    ]
+  },
+  "problems": [
+    {
+      "id": "p_guided_1",
+      "stage": "guided",
+      "difficulty": "medium",
+      "text": "Which of the following best describes a complete atom?",
+      "answer": "B",
+      "answer_explanation": "A complete atom has a center nucleus with electrons surrounding it. The nucleus is made up of protons and neutrons, and the electrons orbit around the nucleus.",
+      "mc_choices": [
+        "B",
+        "A",
+        "C",
+        "D"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Some students may think that atoms only have one type of charge or assume that all particles are inside the nucleus.",
+      "intervention_hints": {
+        "level_1": "Think about where the charges in an atom are found – inside or outside the nucleus?",
+        "level_2": "What part of an atom is neutral in charge? It's the part inside the nucleus.",
+        "level_3": "The nucleus is made of protons and neutrons, while electrons orbit outside the nucleus. Do you know in which direction electrons move and how the charges balance out?"
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_guided_2",
+      "stage": "guided",
+      "difficulty": "medium",
+      "text": "Which of the following correctly describes what an element is?",
+      "answer": "B",
+      "answer_explanation": "An element is a substance consisting of only one type of atom. For example, gold is an element because it is made of only gold atoms.",
+      "mc_choices": [
+        "B",
+        "A",
+        "C",
+        "D"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Students often confuse elements with compounds, thinking that elements must be made of multiple atoms.",
+      "intervention_hints": {
+        "level_1": "What does \"only one type\" mean in describing something from science?",
+        "level_2": "Elements have special names like \"oxygen\", \"carbon\", or \"gold\". Each has only one kind of atom and is not mixed with other substances.",
+        "level_3": "If carbon is an element, how would you say it’s different from the way it could be in a compound like carbon dioxide?"
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_1",
+      "stage": "practice",
+      "difficulty": "medium_hard",
+      "text": "Which pair of particles both have a positive charge?",
+      "answer": "B",
+      "answer_explanation": "Protons and neutrons are found in the nucleus and have positive charge and neutral charge respectively. Both particles have a positive charge.",
+      "mc_choices": [
+        "B",
+        "A",
+        "C",
+        "D"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Students may incorrectly associate electrons with having a positive charge, as they might not understand where particles reside in an atom.",
+      "intervention_hints": {
+        "level_1": "Where are particles located in the atom?",
+        "level_2": "The nucleus is where protons and neutrons stay. What are the charges of particles in the nucleus?",
+        "level_3": "Electrons surround the nucleus, but what charge do they carry?"
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_2",
+      "stage": "practice",
+      "difficulty": "medium_hard",
+      "text": "Which is NOT an example of a compound?",
+      "answer": "C",
+      "answer_explanation": "Gold (Au) is an element. A compound must be made of two or more different elements chemically bonded together.",
+      "mc_choices": [
+        "C",
+        "A",
+        "B",
+        "D"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Students often confuse elements with compounds based on familiarity or simple associations.",
+      "intervention_hints": {
+        "level_1": "Do compounds consist of just one kind of atom or more than one?",
+        "level_2": "When we think of gold, do the atoms stay separate or are they joined in some way in compounds?",
+        "level_3": "If gold is pure gold, is it really a compound?"
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_3",
+      "stage": "practice",
+      "difficulty": "medium_hard",
+      "text": "What determines an element’s identity?",
+      "answer": "C",
+      "answer_explanation": "The number of protons in the nucleus determines an element's identity. For example, all atoms with 6 protons are carbon atoms.",
+      "mc_choices": [
+        "C",
+        "A",
+        "B",
+        "D"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Some students may assume that it's the number of electrons that determines an element, ignoring the role of protons.",
+      "intervention_hints": {
+        "level_1": "The number of protons is the number of positive charges in the nucleus.",
+        "level_2": "Protons define how many positive charges an atom has in its nucleus.",
+        "level_3": "How do the protons in an atom affect its identity compared to another atom?"
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_4",
+      "stage": "practice",
+      "difficulty": "medium_hard",
+      "text": "A science lab has a mixture of sand and iron filings. Which process can be used to separate them?",
+      "answer": "C",
+      "answer_explanation": "Iron filings are attracted to magnets, while sand is not. Therefore, magnetism can be used to separate the mixture.",
+      "mc_choices": [
+        "C",
+        "A",
+        "B",
+        "D"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Students may not recognize that magnetic properties are used to separate mixtures and instead select techniques like evaporation or filtration.",
+      "intervention_hints": {
+        "level_1": "Remember the properties of each type of material — iron filings are attracted to magnets, sand is not.",
+        "level_2": "What physical separation method would best help remove something magnetic from a dry mixture?",
+        "level_3": "How does a magnet help in separating a mixture based on physical properties?"
+      },
+      "nova_guiding_question": ""
+    }
+  ]
+}

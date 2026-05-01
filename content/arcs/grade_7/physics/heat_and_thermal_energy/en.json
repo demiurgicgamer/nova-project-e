@@ -1,0 +1,203 @@
+{
+  "meta": {
+    "subject": "physics",
+    "topic_key": "heat_and_thermal_energy",
+    "topic_display": "Heat and Thermal Energy",
+    "grade": 7,
+    "region": "canada",
+    "language_code": "en",
+    "status": "approved",
+    "review_flags": []
+  },
+  "hook_stories": [
+    {
+      "id": "hook_a",
+      "culture_hint": "canadian",
+      "text": "Imagine it's a hot summer day in Vancouver and two friends, Maya and Alex, are having a fun challenge. They each have a cup of hot tea. The cups are identical, and both teas are the same temperature.\n\nMaya's cup is placed on a metal table. Alex's cup is on a wooden table.\n\nAfter five minutes, they check their tea.\n\nMaya's tea is cooler, and Alex's tea is still hot.\n\nWhy did this happen?",
+      "closing_line": "The idea of \"temperature\" and \"thermal energy\" are both related to heat, but they are different things!\n\nThe hotter the tea, the more thermal energy it has."
+    },
+    {
+      "id": "hook_b",
+      "culture_hint": "canadian",
+      "text": "In a small town in Ontario, it's a snowy winter day and Sarah goes outside to fetch her mail. She has on thick gloves and notices that it feels quite cold outside.\n\nAs she holds her mittens, they quickly warm up, but Sarah's fingers stay cold.\n\nShe notices that:\n- The mittens warm up because they're good *thermal insulators*.\n- Her fingers stay cold because they're good *thermal conductors*.",
+      "closing_line": ""
+    }
+  ],
+  "concept": {
+    "explanation_steps": [
+      "We will learn about heat, temperature, and thermal energy.",
+      "1. **Temperature** – how hot or cold something is (measured with a thermometer).",
+      "2. **Thermal Energy** – the total energy of all the particles (tiny invisible pieces) of matter. The more particles move back and forth, the more thermal energy.",
+      "Example: A cup of hot coffee has a high temperature, but a large swimming pool filled with warm water has more thermal energy than the coffee.",
+      "3. **Heat Transfer** – Heat always moves from a hot object to a cold object until both are at the same temperature.",
+      "   - **Conduction**: Heat moves through direct contact (like when you touch a hot pan).",
+      "   - **Convection**: Heat moves through fluids (liquids or gases) as currents (like hot air rising).",
+      "   - **Radiation**: Heat moves through empty space (like sunlight warming the earth).",
+      "4. **Conductors and Insulators**:",
+      "   - **Conductors** – let heat move through them easily. (Examples: metal spoon, copper wires)",
+      "   - **Insulators** – don’t let heat move through them easily. (Examples: wood, ceramic, plastic)",
+      "5. **Thermal Expansion** – when materials are heated, they usually expand or get bigger. When cooled, they contract or get smaller.",
+      "Example: Railway tracks expand in hot weather to prevent buckling."
+    ],
+    "whiteboard_text": "Temperature vs. Thermal Energy: Temperature is how hot/cold something is; Thermal Energy is the total energy of particles.",
+    "comprehension_check": "Which statement correctly explains the difference between temperature and thermal energy?",
+    "reteach_angles": [
+      "Think about a pot of hot soup and a large swimming pool. Both are hot, but which has more energy?",
+      "Imagine shaking a ball very fast versus shaking it slowly — how does that relate to molecules moving in a hot object compared to a cold one?"
+    ]
+  },
+  "problems": [
+    {
+      "id": "p_guided_1",
+      "stage": "guided",
+      "difficulty": "medium",
+      "text": "In a science experiment, you place a metal rod and a wooden rod side by side, with a candle at one end of each. At the other end, a piece of wax is attached to each rod. The candle heats one end and melts the wax on the opposite side. Which rod will melt the wax more quickly if both are the same size and heat source?",
+      "explanation": "The metal rod conducts heat more easily than the wooden rod. If heat travels quickly, which will melt wax faster?",
+      "mc_choices": [
+        "B. The metal rod, because it is a better thermal conductor.",
+        "A. The wooden rod, because it allows heat to travel slowly.",
+        "C. Both rods will melt the wax at the same rate.",
+        "D. It depends on the type of wax used."
+      ],
+      "correct_index": 0,
+      "intervention_hints": {
+        "level_1": "The metal rod conducts heat more easily than the wooden rod. If heat travels quickly, which will melt wax faster?",
+        "level_2": "The metal rod conducts heat more easily than the wooden rod. If heat travels quickly, which will melt wax faster?",
+        "level_3": "The metal rod conducts heat more easily than the wooden rod. If heat travels quickly, which will melt wax faster?"
+      }
+    },
+    {
+      "id": "p_guided_2",
+      "stage": "guided",
+      "difficulty": "medium",
+      "text": "A science teacher wants to demonstrate how heat moves through different materials using a metal rod and a wooden rod. At one end of each rod, a candle is held, while at the other end, a piece of wax is attached. The candle heats one end and melts the wax on the opposite side.\n\nWhich rod will melt the wax more quickly if both are the same size and heat source?",
+      "explanation": "The metal rod conducts heat more easily than the wooden rod. If heat travels quickly, which will melt wax faster?",
+      "mc_choices": [
+        "B. The metal rod, because it is a better thermal conductor.",
+        "A. The wooden rod, because it allows heat to travel slowly.",
+        "C. Both rods will melt the wax at the same rate.",
+        "D. It depends on the type of wax used."
+      ],
+      "correct_index": 0,
+      "intervention_hints": {
+        "level_1": "The metal rod conducts heat more easily than the wooden rod. If heat travels quickly, which will melt wax faster?",
+        "level_2": "The metal rod conducts heat more easily than the wooden rod. If heat travels quickly, which will melt wax faster?",
+        "level_3": "The metal rod conducts heat more easily than the wooden rod. If heat travels quickly, which will melt wax faster?"
+      }
+    },
+    {
+      "id": "p_guided_3",
+      "stage": "guided",
+      "difficulty": "medium",
+      "text": "In a cold winter day, why should you wear a jacket with thick insulation inside?",
+      "explanation": "",
+      "mc_choices": [
+        "B. The insulation prevents heat from escaping your body.",
+        "A. The insulation increases your body temperature.",
+        "C. The jacket reflects the sun’s heat.",
+        "D. The jacket is heavy, so it stops heat from escaping."
+      ],
+      "correct_index": 0,
+      "intervention_hints": {
+        "level_1": "Think about what type of heat transfer is described in this problem.",
+        "level_2": "Consider whether heat is moving through direct contact, through a fluid, or through empty space.",
+        "level_3": "Remember: conduction = direct contact, convection = fluids/currents, radiation = through space (no matter needed)."
+      }
+    },
+    {
+      "id": "p_guided_4",
+      "stage": "guided",
+      "difficulty": "medium",
+      "text": "Why does a car dashboard get hot in summer?",
+      "explanation": "",
+      "mc_choices": [
+        "B. It is made of a material that conducts heat.",
+        "A. It has many insulators.",
+        "C. It is exposed to sunlight.",
+        "D. It heats up only from the engine."
+      ],
+      "correct_index": 0,
+      "intervention_hints": {
+        "level_1": "Think about what type of heat transfer is described in this problem.",
+        "level_2": "Consider whether heat is moving through direct contact, through a fluid, or through empty space.",
+        "level_3": "Remember: conduction = direct contact, convection = fluids/currents, radiation = through space (no matter needed)."
+      }
+    },
+    {
+      "id": "p_capstone_1",
+      "stage": "capstone",
+      "difficulty": "hard",
+      "text": "A science teacher wants to demonstrate how heat moves through different materials using a metal rod and a wooden rod. At one end of each rod, a candle is held, while at the other end, a piece of wax is attached. The candle heats one end and melts the wax on the opposite side.\n\nWhich rod will melt the wax more quickly if both are the same size and heat source?",
+      "explanation": "Excellent! You've used your knowledge of conductors and heat transfer to understand what happens in real science. This is how thermometers are made, how stoves work, and how we keep our homes warm.",
+      "mc_choices": [
+        "B. The metal rod, because it is a better thermal conductor.",
+        "A. The wooden rod, because it allows heat to travel slowly.",
+        "C. Both rods will melt the wax at the same rate.",
+        "D. It depends on the type of wax used."
+      ],
+      "correct_index": 0,
+      "intervention_hints": {
+        "level_1": "The metal rod conducts heat more easily than the wooden rod. If heat travels quickly, which will melt wax faster?",
+        "level_2": "The metal rod conducts heat more easily than the wooden rod. If heat travels quickly, which will melt wax faster?",
+        "level_3": "The metal rod conducts heat more easily than the wooden rod. If heat travels quickly, which will melt wax faster?"
+      }
+    },
+    {
+      "id": "p_capstone_2",
+      "stage": "capstone",
+      "difficulty": "hard",
+      "text": "Which of these best explains why a home's basement stays cooler in the summer than the upstairs?",
+      "explanation": "",
+      "mc_choices": [
+        "B. Cool air sinks, so it settles in the basement.",
+        "A. The basement has more insulation.",
+        "C. The basement is smaller, so it gets less sun.",
+        "D. Water in the basement cools the air."
+      ],
+      "correct_index": 0,
+      "intervention_hints": {
+        "level_1": "Warm air rises. Which part of the house would be warmer – the basement or the upstairs? Why does that happen?",
+        "level_2": "Warm air rises. Which part of the house would be warmer – the basement or the upstairs? Why does that happen?",
+        "level_3": "Warm air rises. Which part of the house would be warmer – the basement or the upstairs? Why does that happen?"
+      }
+    },
+    {
+      "id": "p_assessment_1",
+      "stage": "capstone",
+      "difficulty": "medium",
+      "text": "Which of the following best describes the process of thermal expansion?",
+      "explanation": "",
+      "mc_choices": [
+        "B. A steel bridge expands in summer heat.",
+        "A. Water expands when it turns to ice.",
+        "C. A cup breaks when heated too quickly.",
+        "D. Hot air rises and cold air sinks."
+      ],
+      "correct_index": 0,
+      "intervention_hints": {
+        "level_1": "Think about what type of heat transfer is described in this problem.",
+        "level_2": "Consider whether heat is moving through direct contact, through a fluid, or through empty space.",
+        "level_3": "Remember: conduction = direct contact, convection = fluids/currents, radiation = through space (no matter needed)."
+      }
+    },
+    {
+      "id": "p_assessment_2",
+      "stage": "capstone",
+      "difficulty": "medium",
+      "text": "Think about a bridge in summer. It gets longer and wider because of heat. What is this a good example of?",
+      "explanation": "",
+      "mc_choices": [
+        "B. Thermal expansion.",
+        "A. Radiation.",
+        "C. Conduction.",
+        "D. Convection."
+      ],
+      "correct_index": 0,
+      "intervention_hints": {
+        "level_1": "Think about what type of heat transfer is described in this problem.",
+        "level_2": "Consider whether heat is moving through direct contact, through a fluid, or through empty space.",
+        "level_3": "Remember: conduction = direct contact, convection = fluids/currents, radiation = through space (no matter needed)."
+      }
+    }
+  ]
+}

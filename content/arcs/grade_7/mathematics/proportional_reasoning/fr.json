@@ -1,0 +1,135 @@
+{
+  "meta": {
+    "subject": "mathematics",
+    "topic_key": "proportional_reasoning",
+    "topic_display": "Proportional Reasoning",
+    "grade": 7,
+    "region": "canada",
+    "language_code": "fr",
+    "status": "approved",
+    "review_flags": [
+      "Vérifier l’exactitude mathématique de tous les problèmes",
+      "Valider la qualité du langage naturel pour enfants de 12-13 ans dans le contexte québécois",
+      "S'assurer que les exemples et situations réelles sont adaptés au quotidien québécois"
+    ]
+  },
+  "hook_stories": [
+    {
+      "id": "hook_a",
+      "culture_hint": "canadian",
+      "text": "Maman a fait du shopping au Marché Boni, au centre-ville de Montréal. Elle a acheté 3 kg de pommes pour 6,50 dollars. À la station-service près de chez elle, elle a vu que les pommes coûtent 2 kg pour 5 dollars. Maman s’est demandé : « Est-ce qu’il y a la même valeur entre les deux lieux ? Et si je veux acheter 1 kg de pommes, est-ce que ça vaut le coup d’aller au Marché Boni ou bien au station-service ? »",
+      "closing_line": "Est-ce que ça vaut le coup d'aller au Marché Boni ou bien au station-service ?"
+    },
+    {
+      "id": "hook_b",
+      "culture_hint": "sports",
+      "text": "Dans le match de hockey entre les Canadiens de Montréal et les Canadiens de Québec, les Canadiens de Montréal ont marqué 6 buts en 20 minutes. Les Canadiens de Québec ont marqué 4 buts en 15 minutes. Le coach a voulu savoir : « Quel équipe marque un but en moins de temps, en moyenne ? Laquelle est meilleure en terme de vitesse de score ? »",
+      "closing_line": "Quelle équipe marque un but en moins de temps, en moyenne ?"
+    }
+  ],
+  "concept": {
+    "explanation_steps": [
+      "Quand on a deux quantités qui changent ensemble, parfois elles le font dans un rapport fixe. On appelle ça une relation proportionnelle.",
+      "Si je mange 2 pommes en 30 minutes, et que j’en mange 4 en 60 minutes, j’ai le même rythme, donc c’est proportionnel.",
+      "Mais si je mange 2 pommes en 30 minutes, et que j’en mange 5 en 60 minutes, mon rythme est différent, donc ce n’est pas proportionnel.",
+      "La valeur unitaire est le nombre qu’on obtient quand on divise une quantité par une autre — par exemple, combien de dollars pour 1 kg de pommes ?",
+      "Le coefficient de proportionnalité (ou taux unitaire) est ce nombre qui dit combien vaut 1 unité."
+    ],
+    "whiteboard_text": "Relation proportionnelle : deux quantités qui changent dans un rapport fixe. Valeur unitaire = prix pour 1 kg.",
+    "comprehension_check": "Si je mange 2 pommes en 30 minutes, et que j’en mange 4 en 60 minutes, est-ce proportionnel ?",
+    "reteach_angles": [
+      "Comparer les ratios à l'aide de l'unité pour comprendre la proportion.",
+      "Utiliser la division pour trouver le prix unitaire et comparer les deux quantités."
+    ]
+  },
+  "problems": [
+    {
+      "id": "p_guided_1",
+      "stage": "guided",
+      "difficulty": "easy",
+      "text": "Le restaurant au coin de la rue vend des pâtes à 3 portions pour 9 dollars. Tu as 15 dollars à dépenser. Combien peux-tu acheter de portions au maximum ?",
+      "answer": "5 portions",
+      "answer_explanation": "3 portions = 9 dollars donc 1 portion = 3 dollars. Avec 15 dollars, tu peux acheter : 15 ÷ 3 = 5 portions.",
+      "mc_choices": [
+        "5 portions",
+        "3 portions",
+        "4 portions",
+        "6 portions"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Confondre les quantités de portions ou les prix.",
+      "intervention_hints": {
+        "level_1": "Pense à combien coûtent 3 portions. Ensuite, divise pour obtenir le prix de 1 portion.",
+        "level_2": "Si 3 portions = 9 dollars, 1 portion = 9 ÷ 3 = 3 dollars. Alors combien peut-on acheter de portions avec 15 dollars ?",
+        "level_3": "Tu sais que 3 portions = 9 dollars → 1 portion = 3 dollars. Alors : 15 ÷ 3 = 5 portions."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_1",
+      "stage": "practice",
+      "difficulty": "easy",
+      "text": "Dans un marché de village, des pommes coûtent 4 dollars pour 2 kg. Un vendeur veut vendre 10 kg de pommes à 20 dollars. Une autre personne achète 6 kg de pommes pour 15 dollars. Est-ce que les deux prix donnent la même valeur ?",
+      "answer": "Non, le premier vendeur est meilleur",
+      "answer_explanation": "2 kg = 4 dollars → 1 kg = 2 dollars; 10 kg = 20 dollars → 1 kg = 2 dollars; 6 kg = 15 dollars → 1 kg = 2,5 dollars. Le second vendeur donne une mauvaise valeur.",
+      "mc_choices": [
+        "Non, le premier est meilleur",
+        "Oui, mêmes prix",
+        "Non, le second est meilleur",
+        "Impossible à comparer"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Ne pas calculer la valeur unitaire correctement.",
+      "intervention_hints": {
+        "level_1": "Calcule le prix pour 1 kg dans chaque cas. Puis compare les deux prix pour 1 kg.",
+        "level_2": "2 kg = 4 dollars → 1 kg = 2 dollars; 10 kg = 20 dollars → 1 kg = 2 dollars; 6 kg = 15 dollars → 1 kg = 2,5 dollars",
+        "level_3": "Pourcentage = (2 ÷ 2,5) × 100 = 0,8 × 100 = 80 %"
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_2",
+      "stage": "practice",
+      "difficulty": "easy",
+      "text": "Un pantalon coûte 80 dollars. Il y a une remise de 20 %. Combien coûte le pantalon après la remise ?",
+      "answer": "64 dollars",
+      "answer_explanation": "20 % de 80 = (20 ÷ 100) × 80 = 0,2 × 80 = 16 dollars de remise. Prix final = 80 – 16 = 64 dollars.",
+      "mc_choices": [
+        "64 dollars",
+        "60 dollars",
+        "65 dollars",
+        "70 dollars"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Calculer mal la remise ou s'oublier de soustraire.",
+      "intervention_hints": {
+        "level_1": "Calcule combien coûte 20 % du prix.",
+        "level_2": "20 % de 80 = 0,2 × 80 = 16 dollars. Alors, 80 – 16 = 64 dollars",
+        "level_3": "20 % de 80 dollars = 16 dollars. Donc le prix final = 80 – 16 = 64 dollars."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_3",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "Dans un marché de village, des pommes coûtent 4 dollars pour 2 kg. Un vendeur veut vendre 10 kg de pommes à 20 dollars. Une autre personne achète 6 kg de pommes pour 15 dollars. Quel est le pourcentage de ce que le second vendeur a payé par rapport au premier ?",
+      "answer": "80 %",
+      "answer_explanation": "1 kg = 2 dollars pour le premier ; 1 kg = 2,5 dollars pour le second ; Donc % = (2 ÷ 2,5) × 100 = 80 %",
+      "mc_choices": [
+        "80 %",
+        "75 %",
+        "90 %",
+        "100 %"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Ne pas comprendre comment faire le pourcentage.",
+      "intervention_hints": {
+        "level_1": "Calcule le prix pour 1 kg dans chaque cas. Puis compare les deux prix pour 1 kg.",
+        "level_2": "2 kg = 4 dollars → 1 kg = 2 dollars ; 10 kg = 20 dollars → 1 kg = 2 dollars ; 6 kg = 15 dollars → 1 kg = 2,5 dollars",
+        "level_3": "Pourcentage = (2 ÷ 2,5) × 100 = 0,8 × 100 = 80 %"
+      },
+      "nova_guiding_question": ""
+    }
+  ]
+}

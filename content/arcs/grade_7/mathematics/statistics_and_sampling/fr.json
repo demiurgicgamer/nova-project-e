@@ -1,0 +1,142 @@
+{
+  "meta": {
+    "subject": "mathematics",
+    "topic_key": "statistics_and_sampling",
+    "topic_display": "Statistics and Sampling",
+    "grade": 7,
+    "region": "canada",
+    "language_code": "fr",
+    "status": "approved",
+    "review_flags": [
+      "Vérifier les contextes culturels et les exemples pour s'assurer qu'ils sont pertinents et naturels pour les enfants québécois de 11 à 12 ans.",
+      "Assurez-vous que les exemples d’enquête et d’échantillonnage sont pertinents pour les enfants québécois.",
+      "Confirmer que les démonstrations sont accessibles pour le niveau de 7e année."
+    ]
+  },
+  "hook_stories": [
+    {
+      "id": "hook_a",
+      "culture_hint": "canadian",
+      "text": "Tu es membre du comité de la ville, et tu veux savoir si les habitants veulent construire un nouveau parc de jeux près de l’école. Il y a 500 enfants dans la ville, mais il est impossible de demander à tous. Alors, ton équipe décide de faire une enquête avec une sélection aléatoire de 50 enfants. Un enfant dit : « On doit demander à tous les enfants de la ville, sinon on n'est pas certain que notre sondage est juste. »",
+      "closing_line": "Qu’est-ce que ça veut dire \"aléatoire\" dans ce contexte ?"
+    },
+    {
+      "id": "hook_b",
+      "culture_hint": "canadian",
+      "text": "L'école a organisé une course de ski, et les résultats sont affichés comme ceci : - 15 élèves ont terminé en 5 minutes - 20 élèves ont terminé en 6 minutes - 12 élèves ont terminé en 7 minutes - 8 élèves ont terminé en 8 minutes - 4 élèves ont terminé en 9 minutes Tu te demandes si beaucoup d’élèves ont eu la même durée. Un autre élève dit : « Il faut comparer la moyenne et la médiane pour voir si les élèves ont eu des temps similaires. »",
+      "closing_line": "Tu penses que c’est important de regarder la moyenne ou la médiane pour comprendre les données ?"
+    }
+  ],
+  "concept": {
+    "explanation_steps": [
+      "La moyenne = (somme de toutes les valeurs) divisée par (nombre de valeurs).",
+      "La médiane est la valeur qui se trouve à la moitié des données quand elles sont rangées par ordre croissant.",
+      "La plage = valeur maximale − valeur minimale.",
+      "L’écart interquartile (IQR) = troisième quartile (Q3) − premier quartile (Q1).",
+      "Un diagramme en boîte et moustaches (box-and-whisker plot) montre une distribution de données avec : minimum, premier quartile (Q1), médiane, troisième quartile (Q3), maximum."
+    ],
+    "whiteboard_text": "Moyenne : somme des valeurs / nombre de valeurs. Médiane : valeur centrale. Plage : max - min. IQR : Q3 - Q1. Diagrammes en boîte : visualisation des points clés de la distribution.",
+    "comprehension_check": "Comment peux-tu comparer deux jeux de données à l’aide de la médiane et de la moyenne ?",
+    "reteach_angles": [
+      "Utilise des visuels comme les diagrammes en boîte pour illustrer la distribution des données.",
+      "Explique comment trouver la médiane dans des séries de données avec un nombre impair et pair."
+    ]
+  },
+  "problems": [
+    {
+      "id": "p_guided_1",
+      "stage": "guided",
+      "difficulty": "medium",
+      "text": "La ville de Quebec veut savoir si les habitants préfèrent un nouveau restaurant ou une nouvelle bibliothèque dans leur quartier. Une équipe a fait un sondage auprès de 100 personnes, et voici les résultats : Restaurant : 58 votes Bibliothèque : 42 votes Un autre groupe de 50 personnes a été interrogé, et voici les résultats : Restaurant : 25 votes Bibliothèque : 25 votes Quel groupe a une plus forte préférence pour la bibliothèque ?",
+      "explanation": "Dans Groupe 1, 42 personnes sur 100 veulent une bibliothèque (42 %). Dans Groupe 2, 25 personnes sur 50 veulent une bibliothèque (50 %). Bien que Groupe 2 ait une proportion plus élevée, le nombre de personnes exprimant leur préférence est plus faible. On compare les proportions pour déterminer la préférence globale.",
+      "mc_choices": [
+        "Groupe 1",
+        "Groupe 2",
+        "Les deux groupes ont la même préférence",
+        "Impossible de déterminer"
+      ],
+      "correct_index": 0,
+      "intervention_hints": {
+        "level_1": "Combien de personnes ont vote pour la bibliotheque dans chaque groupe ?",
+        "level_2": "Regarde les pourcentages : Groupe 1 = 42/100 = 42 %, Groupe 2 = 16/50 = 32 %.",
+        "level_3": "42 % > 32 %, donc la bibliotheque est plus populaire dans le premier groupe. Reponse : B."
+      }
+    },
+    {
+      "id": "p_practice_1",
+      "stage": "practice",
+      "difficulty": "easy",
+      "text": "Classe A : 70, 75, 78, 80, 82 Classe B : 80, 81, 82, 83, 85 Quelles sont les moyennes des deux classes ?",
+      "explanation": "Classe A : (70 + 75 + 78 + 80 + 82) / 5 = 385 / 5 = 77. Classe B : (80 + 81 + 82 + 83 + 85) / 5 = 411 / 5 = 82.3.",
+      "mc_choices": [
+        "Classe A = 77 ; Classe B = 82",
+        "Classe A = 80 ; Classe B = 80",
+        "Classe A = 78 ; Classe B = 81",
+        "Classe A = 76 ; Classe B = 81"
+      ],
+      "correct_index": 0,
+      "intervention_hints": {
+        "level_1": "Compte combien de nombres tu as et identifie le milieu.",
+        "level_2": "Tu as 10 nombres. Le milieu se trouve entre le 5e et le 6e nombre.",
+        "level_3": "Le 5e nombre est 6, le 6e est 7. Mediane = (6 + 7) / 2 = 6.5. Reponse : C."
+      }
+    },
+    {
+      "id": "p_practice_2",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "Voici les scores d’un examen : 10, 12, 14, 16, 18, 20, 22, 24, 26, 28 Quel est l’IQR (écart interquartile) ?",
+      "explanation": "Médiane = 20. Premier quartile = 14. Troisième quartile = 24. IQR = 24 - 14 = 10.",
+      "mc_choices": [
+        "10",
+        "14",
+        "16",
+        "12"
+      ],
+      "correct_index": 0,
+      "intervention_hints": {
+        "level_1": "Trouve la somme de chaque classe, puis divise par le nombre de resultats.",
+        "level_2": "Classe A : (70+75+78+80+82)/5 = 385/5 = 77.",
+        "level_3": "Classe A = 77, Classe B = (80+81+82+83+85)/5 = 411/5 = 82.2, donc Classe B = 82. Reponse : A."
+      }
+    },
+    {
+      "id": "p_practice_3",
+      "stage": "practice",
+      "difficulty": "hard",
+      "text": "Voici les résultats pour 2 groupes qui font du vélo chaque semaine : Groupe 1 (20 personnes) : 1, 1, 2, 2, 3, 3, 4, 4, 5, 6, 7, 8, 8, 9, 9, 10, 10, 10, 10, 10 Groupe 2 (15 personnes) : 0, 0, 1, 2, 3, 4, 5, 5, 6, 7, 8, 9, 10, 10, 10 Quelle est la plage pour chaque groupe ?",
+      "explanation": "Groupe 1 : max = 10, min = 1 → plage = 9. Groupe 2 : max = 10, min = 0 → plage = 10.",
+      "mc_choices": [
+        "Groupe 1 = 9 ; Groupe 2 = 10",
+        "Groupe 1 = 10 ; Groupe 2 = 9",
+        "Groupe 1 = 10 ; Groupe 2 = 10",
+        "Groupe 1 = 9 ; Groupe 2 = 9"
+      ],
+      "correct_index": 0,
+      "intervention_hints": {
+        "level_1": "Decoupe les donnees en 4 parties egales : 1er quartile, mediane, 3e quartile.",
+        "level_2": "Mediane = 20. 1er quartile (Q1) = 14. 3e quartile (Q3) = 24.",
+        "level_3": "IQR = Q3 - Q1 = 24 - 14 = 10. Reponse : D."
+      }
+    },
+    {
+      "id": "p_capstone_1",
+      "stage": "capstone",
+      "difficulty": "hard",
+      "text": "Les résultats pour deux groupes : Groupe 1 (20 personnes) : 1, 1, 2, 2, 3, 3, 4, 4, 5, 6, 7, 8, 8, 9, 9, 10, 10, 10, 10, 10 Groupe 2 (15 personnes) : 0, 0, 1, 2, 3, 4, 5, 5, 6, 7, 8, 9, 10, 10, 10 Trouve la médiane de chaque groupe.",
+      "explanation": "Groupe 1 (20 éléments) → médiane = (5 + 6) / 2 = 5.5 → arrondi à 5. Groupe 2 (15 éléments) → médiane = 6e valeur = 5.",
+      "mc_choices": [
+        "Médiane Groupe 1 = 5 ; Médiane Groupe 2 = 5",
+        "Médiane Groupe 1 = 5 ; Médiane Groupe 2 = 6",
+        "Médiane Groupe 1 = 6 ; Médiane Groupe 2 = 5",
+        "Médiane Groupe 1 = 6 ; Médiane Groupe 2 = 6"
+      ],
+      "correct_index": 0,
+      "intervention_hints": {
+        "level_1": "Commence par classer les donnees de chaque groupe en ordre croissant et trouver la mediane.",
+        "level_2": "Pour trouver la plage, soustrais la plus petite valeur de la plus grande valeur dans chaque groupe.",
+        "level_3": "Groupe 1 : mediane = 5, plage = 9. Groupe 2 : mediane = 5, plage = 10. Quel groupe a une distribution plus concentree ?"
+      }
+    }
+  ]
+}

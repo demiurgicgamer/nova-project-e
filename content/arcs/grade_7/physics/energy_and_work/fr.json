@@ -1,0 +1,159 @@
+{
+  "meta": {
+    "subject": "physics",
+    "topic_key": "energy_and_work",
+    "topic_display": "Energy and Work",
+    "grade": 7,
+    "region": "canada",
+    "language_code": "fr",
+    "status": "approved",
+    "review_flags": [
+      "Vérification du contenu physique et de la précision de la formule EP = m × g × h.",
+      "Assurer que les exemples sont pertinents et familiers aux enfants du Québec.",
+      "Vérifier la cohérence entre les niveaux de difficulté des problèmes et les concepts présentés.",
+      "Validation de la traduction en français québécois naturel et appropriée pour des enfants de 11–13 ans."
+    ]
+  },
+  "hook_stories": [
+    {
+      "id": "hook_a",
+      "culture_hint": "canadian",
+      "text": "Il y a une montagne russe dans le parc du Mont-Royal qui est un peu particulière : elle part du sommet d’une colline haute de 20 mètres, descend et repart de nouveau vers le haut. Lorsque la voiture est en haut, elle a beaucoup de potentiel énergétique, elle n’est pas en mouvement, mais elle va bientôt tomber. Et quand la voiture est en bas, elle a beaucoup d’énergie cinétique, elle va très vite. Elle va de l’énergie potentielle à l’énergie cinétique et inversement. Elle ne perd pas d’énergie au cours du parcours, sauf si elle s’arrête à cause du frottement. La montagne russe en question est utilisée pour la science, et elle montre comment l’énergie peut se transformer d’une forme à une autre.",
+      "closing_line": "La montagne russe en question est utilisée pour la science, et elle montre comment l’énergie peut se transformer d’une forme à une autre."
+    },
+    {
+      "id": "hook_b",
+      "culture_hint": "canadian",
+      "text": "Le château d’eau d’une centrale hydroélectrique est une grande structure qui stocke l’eau d’un lac ou d’une rivière très haut dans les montagnes. Cette eau haute a beaucoup d’énergie potentielle. Quand l’eau tombe, elle fait tourner des turbines qui produisent de l’énergie électrique. L’énergie potentielle est transformée en énergie cinétique, puis en énergie électrique. La centrale ne crée pas d’énergie, elle la transforme. C’est pareil que les montagnes russes !",
+      "closing_line": "C’est pareil que les montagnes russes !"
+    }
+  ],
+  "concept": {
+    "explanation_steps": [
+      "L’énergie cinétique (EC) est l’énergie d’un objet en mouvement.",
+      "L’énergie potentielle (EP) est l’énergie stockée en raison de la position ou de la forme d’un objet.",
+      "L’énergie potentielle gravitationnelle = m × g × h, où m = masse (kg), g = gravité (9,8 m/s²), h = hauteur (m).",
+      "Un objet en mouvement possède de l’énergie cinétique. Lorsqu’il est soulevé, il possède de l’énergie potentielle.",
+      "L’énergie peut se transformer : EC → EP (quand un objet monte) et EP → EC (quand un objet descend).",
+      "L’énergie totale d’un système est constante. L’énergie ne se crée ni ne se détruit, seulement se transforme."
+    ],
+    "whiteboard_text": "EP = m × g × h\nEC = ½ mv²\nTransformation: EP → EC",
+    "comprehension_check": "Qu’est-ce qui arrive à l’énergie potentielle lorsqu’un objet monte ?",
+    "reteach_angles": [
+      "Imagine que tu portes une boîte d’un étage à l’autre — tu fais travailler ton bras, donc tu augmentes l’énergie potentielle de la boîte.",
+      "L’énergie potentielle est comme une réserve accumulée : plus un objet est haut, plus il a d’énergie potentielle prête à se transformer."
+    ]
+  },
+  "problems": [
+    {
+      "id": "p_guided_1",
+      "stage": "guided",
+      "difficulty": "medium",
+      "text": "Un livre de 2 kg est à 2 mètres de haut. Quelle est son énergie potentielle gravitationnelle?",
+      "answer": "39,2 joules",
+      "answer_explanation": "EP = m × g × h = 2 × 9,8 × 2 = 39,2 J.",
+      "mc_choices": [
+        "39,2 joules",
+        "19,6 joules",
+        "20 kg·m²/s²",
+        "40 joules"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Confondre EP avec EC ou se tromper en multipliant juste deux grandeurs.",
+      "intervention_hints": {
+        "level_1": "Quelles sont les grandeurs que tu dois multiplier?",
+        "level_2": "Tu as 2 kg et 2 mètres. Que faut-il ajouter pour avoir l’énergie potentielle?",
+        "level_3": "L’énergie potentielle est calculée comme : E = m × g × h. Tu dois multiplier m × g × h, pas juste deux d’entre eux."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_1",
+      "stage": "practice",
+      "difficulty": "easy",
+      "text": "En haut de la balançoire, un enfant a beaucoup d’énergie potentielle. En bas, l’énergie est entièrement cinétique. Quelle forme d’énergie diminue quand l’enfant monte sur la balançoire ?",
+      "answer": "Énergie cinétique",
+      "answer_explanation": "Lorsque l’enfant monte, l’énergie cinétique diminue et l’énergie potentielle augmente.",
+      "mc_choices": [
+        "Énergie cinétique",
+        "Énergie potentielle",
+        "Énergie calorifique",
+        "Énergie sonore"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Croire que l’énergie potentielle diminue.",
+      "intervention_hints": {
+        "level_1": "À quoi correspond l’énergie potentielle au sommet?",
+        "level_2": "Quelle forme d’énergie dépend de la hauteur?",
+        "level_3": "L’énergie potentielle augmente quand un objet monte. Donc, l’énergie cinétique diminue."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_2",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "Une voiture se déplace et monte. Quelle forme d’énergie est convertie en énergie potentielle?",
+      "answer": "Énergie cinétique",
+      "answer_explanation": "L’énergie cinétique est convertie en énergie potentielle lorsqu’un objet monte.",
+      "mc_choices": [
+        "Énergie cinétique",
+        "Énergie sonore",
+        "Énergie gravitationnelle",
+        "Énergie lumineuse"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Croire que c’est l’énergie potentielle qui est convertie.",
+      "intervention_hints": {
+        "level_1": "La voiture se déplace — est-ce que sa vitesse change?",
+        "level_2": "Quelle forme d’énergie dépend de la vitesse?",
+        "level_3": "L’énergie cinétique est convertie en énergie potentielle lorsqu’un objet monte."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_3",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "Une balle de tennis de 0,06 kg est lancée à une hauteur de 3 mètres. Si l’on ne tient pas compte de la perte d’énergie, quelle serait l’énergie cinétique au moment où elle atteint le sol?",
+      "answer": "1,764 J",
+      "answer_explanation": "L’énergie potentielle au départ est EP = m × g × h = 0,06 × 9,8 × 3 = 1,764 J. Elle est équivalente à l’énergie cinétique au sol.",
+      "mc_choices": [
+        "1,764 J",
+        "0,1764 J",
+        "0,01764 J",
+        "3,528 J"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Se tromper dans le calcul ou oublier la transformation.",
+      "intervention_hints": {
+        "level_1": "Quelle énergie est présente au départ?",
+        "level_2": "L’énergie potentielle est convertie en quelle autre forme?",
+        "level_3": "Au moment où la balle atteint le sol, toute son énergie potentielle est convertie en énergie cinétique."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_capstone_1",
+      "stage": "capstone",
+      "difficulty": "hard",
+      "text": "Une balle de tennis de 0,06 kg est lancée à une hauteur de 3 mètres. S’il n’y avait pas de frottement, quelle serait l’énergie cinétique au moment où elle atteint le sol ? (On ne tient pas compte de toute perte d’énergie.)",
+      "answer": "1,764 J",
+      "answer_explanation": "Énergie potentielle au départ = m × g × h = 0,06 × 9,8 × 3 = 1,764 J. Énergie cinétique au sol = 1,764 J.",
+      "mc_choices": [
+        "1,764 J",
+        "1,764 kg·m²/s²",
+        "0,1764 J",
+        "3,528 J"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Méconnaître la conservation de l’énergie.",
+      "intervention_hints": {
+        "level_1": "À quelle hauteur a été lancée la balle?",
+        "level_2": "Est-ce que l’énergie cinétique au sol est équivalente à l’énergie potentielle au départ?",
+        "level_3": "En l’absence de frottement, l’énergie potentielle se transforme entièrement en énergie cinétique."
+      },
+      "nova_guiding_question": "À quelle hauteur a été lancée la balle ? Est-ce que l’énergie cinétique au sol est équivalente à l’énergie potentielle au départ ?"
+    }
+  ]
+}

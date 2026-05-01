@@ -1,0 +1,158 @@
+{
+  "meta": {
+    "subject": "physics",
+    "topic_key": "the_solar_system",
+    "topic_display": "The Solar System",
+    "grade": 7,
+    "region": "canada",
+    "language_code": "en",
+    "status": "approved",
+    "review_flags": []
+  },
+  "hook_stories": [
+    {
+      "id": "hook_a",
+      "culture_hint": "canadian",
+      "text": "Imagine you're outside in the freezing cold of winter in Vancouver, BC. You look up, and you see the Moon high in the sky. The sky is so dark that stars are visible, too. You know the stars are far away, but you wonder: how far away are they? And why can't you see the Sun during this part of the night?",
+      "closing_line": "Now, let's talk about what is up there above us — a place called the Solar System. It's where we live — in our home planet, Earth! You might not realize it, but we're not the only thing spinning in space around the Sun. There are planets, moons, comets, asteroids, and gases — all in their own orbits. But how do they stay in motion? What gives them their orbits?"
+    },
+    {
+      "id": "hook_b",
+      "culture_hint": "canadian",
+      "text": "Picture yourself in a place like Yellowknife, Northwest Territories — a long, dark winter night, far from any city lights. You're looking at something very strange: even in darkness, the sky shows small lights — but not stars. You're seeing the aurora borealis — Northern Lights! Why do these lights appear in Canada and not in other places? Why is Earth, the only planet that has life, so special?",
+      "closing_line": "Let’s explore the world of space, the Sun, planets, and how Earth fits in the bigger picture. We're going to understand why everything orbits, how the Moon cycles, and how all this affects the world we live in."
+    }
+  ],
+  "concept": {
+    "explanation_steps": [
+      "The solar system consists of the Sun and everything that orbits around it, including planets, moons, comets, and asteroids.",
+      "We have 8 planets in our solar system, listed in order from closest to farthest from the Sun: Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune.",
+      "Each planet is different in size and distance from the Sun.",
+      "Mercury is the closest planet to the Sun.",
+      "Earth has one natural satellite, the Moon.",
+      "Jupiter is the largest planet.",
+      "Saturn is known for its beautiful ring system.",
+      "Uranus and Neptune are called \"ice giants\" due to their composition.",
+      "Each planet orbits the Sun because of gravity.",
+      "Gravity is the force that pulls two objects toward each other. The Sun is so large that it pulls the planets towards it, but they don't crash into the Sun. Instead, they keep orbiting around it like a spinning top – they have enough sideways motion to stay away from the Sun, but gravity constantly pulls them inward."
+    ],
+    "whiteboard_text": "Solar System: Sun + planets, moons, comets, asteroids",
+    "comprehension_check": "Which planet is the farthest from the Sun?",
+    "reteach_angles": [
+      "Remind students to remember the order of the planets from the Sun using a memory trick.",
+      "Ask students to visualize the solar system with the Sun in the middle and planets orbiting outward."
+    ]
+  },
+  "problems": [
+    {
+      "id": "p_guided_1",
+      "stage": "guided",
+      "difficulty": "easy",
+      "text": "Which of the following correctly lists the first four planets of the solar system in order, starting from the Sun?",
+      "answer": "A. Mercury, Venus, Earth, Mars",
+      "answer_explanation": "The correct order from the Sun is Mercury, Venus, Earth, and Mars, which are the first four planets in our solar system.",
+      "mc_choices": [
+        "A. Mercury, Venus, Earth, Mars",
+        "B. Earth, Venus, Mercury, Mars",
+        "C. Mercury, Earth, Venus, Mars",
+        "D. Venus, Mercury, Earth, Mars"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Students often mix up the order or forget which planet is adjacent to another due to size or orbit distance.",
+      "intervention_hints": {
+        "level_1": "Start with the very first one from the Sun – which is closest?",
+        "level_2": "Use your memory or recall from the order: Sun → Mercury, Venus, Earth, Mars...",
+        "level_3": "Visualize where these planets are located if you lined them up with the Sun."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_2a",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "What causes the seasons on Earth?",
+      "answer": "A. The tilt of Earth's axis",
+      "answer_explanation": "Seasons are caused by the tilt of Earth's axis as our planet orbits the Sun. When the Northern Hemisphere is tilted toward the Sun, it receives more direct sunlight, leading to summer. When it's tilted away from the Sun, it receives less light, leading to winter.",
+      "mc_choices": [
+        "A. The tilt of Earth's axis",
+        "B. Earth's distance from the Sun",
+        "C. The Moon's gravity",
+        "D. The Sun's temperature"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Many students believe that Earth's distance from the Sun causes seasons.",
+      "intervention_hints": {
+        "level_1": "What happens to daylight hours over the year in Canada?",
+        "level_2": "When it's summer in Canada, which hemisphere is tilted towards the Sun?",
+        "level_3": "Is Earth closer to the Sun in summer or winter?"
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_2b",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "Which planet would look the biggest in the night sky if you could see it from Earth?",
+      "answer": "C. Jupiter",
+      "answer_explanation": "Jupiter is the largest planet in our solar system. Although other planets like Venus can appear very bright from Earth due to their proximity, Jupiter would look the biggest because of its sheer size.",
+      "mc_choices": [
+        "A. Mars",
+        "B. Saturn",
+        "C. Jupiter",
+        "D. Venus"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Students often incorrectly think that bright planets such as Venus would appear largest due to brightness, not considering size.",
+      "intervention_hints": {
+        "level_1": "Look at the size of each planet.",
+        "level_2": "Which of the planets is the largest in our solar system?",
+        "level_3": "Think about how brightness and size affect observation from Earth."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_2c",
+      "stage": "practice",
+      "difficulty": "medium_hard",
+      "text": "What happens during a solar eclipse?",
+      "answer": "B. The Moon moves in front of the Sun",
+      "answer_explanation": "A solar eclipse occurs when the Moon passes directly in front of the Sun, blocking its light from reaching Earth.",
+      "mc_choices": [
+        "A. The Moon doesn’t affect Earth's tides",
+        "B. The Moon moves in front of the Sun",
+        "C. Earth's rotation causes the tides",
+        "D. Only the Sun causes tides"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Some students might confuse the eclipse with a lunar eclipse, where the Moon passes through Earth’s shadow.",
+      "intervention_hints": {
+        "level_1": "Which celestial object directly blocks sunlight during an eclipse?",
+        "level_2": "Does the Moon's orbit pass between the Earth and the Sun during a solar eclipse?",
+        "level_3": "Is the Sun entirely covered by one of the other planets during a solar eclipse?"
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_3",
+      "stage": "practice",
+      "difficulty": "hard",
+      "text": "Which of the following is the most accurate statement about tides?",
+      "answer": "C. Tides depend on the Moon and Earth's position",
+      "answer_explanation": "Tides are mostly influenced by the gravitational pull of the Moon on Earth's oceans, but also influenced by the Sun. The Moon's pull causes water to bulge outward on the side facing it and the side away from it, creating high and low tides. The Moon's position relative to Earth affects this process.",
+      "mc_choices": [
+        "A. The Moon doesn’t affect Earth's tides",
+        "B. Earth's rotation causes the tides",
+        "C. Tides depend on the Moon and Earth's position",
+        "D. Only the Sun causes tides"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Some students incorrectly believe that Earth's rotation alone creates tides or that only the Sun influences tides.",
+      "intervention_hints": {
+        "level_1": "Which force pulls Earth’s water in different directions?",
+        "level_2": "Does it matter where the Moon is in its orbit?",
+        "level_3": "What other celestial object influences the sea levels?"
+      },
+      "nova_guiding_question": ""
+    }
+  ]
+}

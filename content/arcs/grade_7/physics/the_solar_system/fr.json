@@ -1,0 +1,159 @@
+{
+  "meta": {
+    "subject": "physics",
+    "topic_key": "the_solar_system",
+    "topic_display": "The Solar System",
+    "grade": 7,
+    "region": "canada",
+    "language_code": "fr",
+    "status": "approved",
+    "review_flags": [
+      "Vérifier le contenu sur la distance Terre-Soleil et le nombre de kilomètres précisé",
+      "Confirmer que Mars est considérée comme habitable par les scientifiques actuels et qu’elle a été explorée",
+      "Valider le phénomène des phases lunaires avec précision et l’explication de la lumière réfléchie",
+      "Vérifier que la cause des marées dépendent de la gravité de la Lune, pas des autres facteurs",
+      "Confirmer que les éclipses solaires sont causées par la Lune, pas la Terre ou le Soleil",
+      "Assurer la cohérence du langage utilisé pour les termes astronomiques dans le contexte québécois pour l'âge cible"
+    ]
+  },
+  "hook_stories": [
+    {
+      "id": "hook_a",
+      "culture_hint": "universal",
+      "text": "Hélène est allée observer le ciel avec son grand-père le soir, et ils ont vu un groupe de planètes alignées dans le firmament. Son grand-père lui a dit que c'était comme si les planètes étaient en train de jouer ensemble, mais elles tournent autour du Soleil, pas les unes autour des autres. Il a ajouté que l’on peut les voir à partir de chez nous, même en hiver, car elles reflètent la lumière du Soleil.",
+      "closing_line": ""
+    },
+    {
+      "id": "hook_b",
+      "culture_hint": "canadian",
+      "text": "Au Canada, certains endroits du pays ont des journées très longues en été. Lors des mois de juin, le Soleil reste en haut du ciel pendant plus de 20 heures, et c’est parce que la Terre tourne sur elle-même inclinée. Le même phénomène arrive dans les régions arctiques, mais ça change les saisons. En hiver, par contre, les soirées sont très courtes en raison de ce même inclinaison de la Terre.",
+      "closing_line": ""
+    }
+  ],
+  "concept": {
+    "explanation_steps": [
+      "Le Soleil est une étoile au centre d’un système solaire. Il est composé de gaz chauds (hydrogène et hélium) et produit de l’énergie par fusion nucléaire.",
+      "Les huit planètes qui gravitent autour du Soleil sont : Mercure, Vénus, Terre, Mars, Jupiter, Saturne, Uranus, Neptune.",
+      "Le Soleil attire toutes les planètes avec sa force gravitationnelle, ce qui fait qu’elles tournent autour de lui.",
+      "La Terre tourne sur elle-même et autour du Soleil ; c’est cette rotation et révolution qui créent les saisons."
+    ],
+    "whiteboard_text": "Le Soleil est l’étoile centrale du système solaire. Il attire les planètes avec sa gravité. Les planètes tournent autour du Soleil sur leurs orbites elliptiques.",
+    "comprehension_check": "Comment les planètes tournent-elles autour du Soleil ?",
+    "reteach_angles": [
+      "Regarde la force gravitationnelle comme un fil invisible qui attire les planètes vers le Soleil.",
+      "Imagine que le Soleil est un aimant puissant qui attire toutes les planètes."
+    ]
+  },
+  "problems": [
+    {
+      "id": "p_guided_1",
+      "stage": "guided",
+      "difficulty": "medium",
+      "text": "Quelle est la distance approximative entre la Terre et le Soleil ?",
+      "answer": "150 millions de kilomètres",
+      "answer_explanation": "La distance moyenne Terre-Soleil est d’environ 150 millions de kilomètres, soit une unité astronomique.",
+      "mc_choices": [
+        "150 millions de kilomètres",
+        "100 millions de kilomètres",
+        "10 millions de kilomètres",
+        "1 milliard de kilomètres"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Les élèves peuvent confondre la distance avec d'autres grandeurs astronomiques ou estimer faussement la grandeur de l'univers.",
+      "intervention_hints": {
+        "level_1": "Le Soleil est très loin. En gros, combien de kilomètres ?",
+        "level_2": "La Terre tourne autour du Soleil. C’est une orbite elliptique. L’écart entre le Soleil et la Terre varie légèrement. Quel nombre est proche ?",
+        "level_3": "Tu peux te représenter la distance à partir de quel point de référence ? La distance Terre-Soleil est utilisée souvent comme unité astronomique."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_1",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "Laquelle de ces planètes est habitable ?",
+      "answer": "Mars",
+      "answer_explanation": "Mars est la planète la plus proche de la Terre et est considérée comme habitable par certains scientifiques actuels. Elle a été explorée.",
+      "mc_choices": [
+        "Mars",
+        "Jupiter",
+        "Neptune",
+        "Vénus"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Certains élèves pensent que Jupiter ou Vénus sont habitables malgré leurs environnements extrêmes.",
+      "intervention_hints": {
+        "level_1": "La planète la plus proche de la Terre est ?",
+        "level_2": "On pense que la vie existe ici, peut-être encore maintenant ?",
+        "level_3": "Il y a un endroit où des scientifiques ont trouvé des traces d'eau."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_2",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "Quel phénomène fait que nous voyons différentes phases de la Lune dans le ciel ?",
+      "answer": "La lumière réfléchie par la Lune",
+      "answer_explanation": "Les phases lunaires sont visibles parce que la Lune réfléchit la lumière du Soleil.",
+      "mc_choices": [
+        "La lumière réfléchie par la Lune",
+        "La Lune émet sa propre lumière",
+        "La Terre bloque la lumière du Soleil",
+        "Les rayons du Soleil changent de direction"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Plusieurs élèves confondent les phases avec les éclipses ou pensent que la Lune produit sa propre lumière.",
+      "intervention_hints": {
+        "level_1": "Pourquoi voyons-nous des portions différentes de la Lune ?",
+        "level_2": "Quelle est la source lumineuse pour les phases de la Lune ?",
+        "level_3": "Comment la position de la Lune affecte-t-elle le ciel que nous voyons ?"
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_3",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "Quelle force cause les marées sur Terre ?",
+      "answer": "La gravité de la Lune",
+      "answer_explanation": "Les marées sont causées par la gravité de la Lune qui attire les masses d'eau sur Terre.",
+      "mc_choices": [
+        "La gravité de la Lune",
+        "La gravité du Soleil",
+        "La rotation de la Terre",
+        "La chaleur du Soleil"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Certains pensent que la lumière du Soleil ou la chaleur cause les marées.",
+      "intervention_hints": {
+        "level_1": "Quelle influence a la Lune sur les océans ?",
+        "level_2": "Dans quelle direction attire-t-elle l'eau ?",
+        "level_3": "Quel corps céleste a la plus grande influence sur les marées ?"
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_capstone_1",
+      "stage": "capstone",
+      "difficulty": "hard",
+      "text": "Un observateur sur Terre voit un éclipse solaire à l'endroit où ils sont. Cela arrive parce que :",
+      "answer": "La Lune se met entre le Soleil et la Terre",
+      "answer_explanation": "Une éclipse solaire se produit lorsque la Lune passe entre le Soleil et la Terre, obscurcissant le Soleil.",
+      "mc_choices": [
+        "La Lune se met entre le Soleil et la Terre",
+        "La Terre se met entre le Soleil et la Lune",
+        "Le Soleil se met entre la Terre et la Lune",
+        "La Terre est plus proche du Soleil qu’elle ne l’est de la Lune"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Souvent les élèves confondent les éclipses avec d’autres phénomènes ou se trompent sur la position des corps célestes.",
+      "intervention_hints": {
+        "level_1": "Pourquoi voit-on une ombre pendant une éclipse ?",
+        "level_2": "Dans quelle position doivent se trouver le Soleil, la Lune et la Terre pour une éclipse ?",
+        "level_3": "C’est une ombre qui couvre le Soleil. Quel corps céleste est en travers du Soleil ?"
+      },
+      "nova_guiding_question": "Avec une éclipse solaire, il faut que qui ? Et qui ? Et qui ?"
+    }
+  ]
+}

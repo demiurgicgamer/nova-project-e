@@ -1,0 +1,175 @@
+{
+  "meta": {
+    "subject": "mathematics",
+    "topic_key": "probability_compound",
+    "topic_display": "Compound Probability",
+    "grade": 7,
+    "region": "canada",
+    "language_code": "en",
+    "status": "approved",
+    "review_flags": []
+  },
+  "hook_stories": [
+    {
+      "id": "hook_a",
+      "culture_hint": "canadian",
+      "text": "Sarah, a Grade 7 student in Ontario, is excited about the upcoming school board game tournament. There are two rounds of games — one with a deck of cards and one with rolling dice. For the card game, players must draw a red card and a queen. For the dice game, players must roll a 6, then roll an even number. Sarah wants to know her likelihood of winning the entire tournament.",
+      "closing_line": "This arc will teach students to figure out how these compound events work, in a real-life way."
+    },
+    {
+      "id": "hook_b",
+      "culture_hint": "canadian",
+      "text": "In a small Canadian town, the weekly lottery has a prize for matching numbers in a row. The chances of winning are one-in-a-million. But what if one could predict a winning number based on a weather forecast? It's not just a dream — many people play a lottery that has the chance of winning in different weather conditions.",
+      "closing_line": "This arc will teach students to figure out how these compound events work, in a real-life way."
+    }
+  ],
+  "concept": {
+    "explanation_steps": [
+      "Compound probability involves multiple independent or dependent events.",
+      "It can be found by multiplying the probabilities of each event.",
+      "Independent events don’t affect each other, while dependent events do.",
+      "We use tree diagrams, lists, or the Fundamental Counting Principle to find total outcomes.",
+      "Theoretical probability differs from experimental probability."
+    ],
+    "whiteboard_text": "Compound probability = probability of event 1 × probability of event 2",
+    "comprehension_check": "How to determine the probability of picking a red card first and then a black card?",
+    "reteach_angles": [
+      "Think of probabilities like dividing a pie into slices — how does the number of slices change when one is taken?",
+      "Imagine drawing two marbles from a bag without replacement — how does the second draw depend on the first?"
+    ]
+  },
+  "problems": [
+    {
+      "id": "p_guided_1",
+      "stage": "guided",
+      "difficulty": "medium",
+      "text": "You spin a spinner with 4 equal sections (red, blue, green, yellow) and flip a coin. What is the probability of spinning red and flipping heads?",
+      "answer": "4. $\\frac{1}{4} \\times \\frac{1}{2}$",
+      "answer_explanation": "Since spinning the spinner and flipping the coin are independent events, we multiply their probabilities. P(spinner red) = 1/4, P(coin heads) = 1/2, so P(red and heads) = 1/4 × 1/2.",
+      "mc_choices": [
+        "$\\frac{1}{4}$",
+        "$\\frac{1}{8}$",
+        "$\\frac{1}{4} + \\frac{1}{2}$",
+        "$\\frac{1}{4} \\times \\frac{1}{2}$"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Students might add probabilities for independent events instead of multiplying them.",
+      "intervention_hints": {
+        "level_1": "Are the spinner and coin flips affecting each other? Can the result of one change the result of the other?",
+        "level_2": "These events are independent. How do we calculate the probability of two independent events occurring together?",
+        "level_3": "Independent events are calculated by multiplying the probability of each event. What fraction is the chance of landing on red? What’s the chance of flipping heads?"
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_1a",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "In a deck of cards, what is the chance of drawing a king, replacing it, then drawing a heart?",
+      "answer": "2. $\\frac{4}{52} \\times \\frac{13}{52}$",
+      "answer_explanation": "Since the card is replaced, the events are independent. P(king) = 4/52, P(heart) = 13/52, so we multiply them.",
+      "mc_choices": [
+        "$\\frac{4}{52} + \\frac{13}{52}$",
+        "$\\frac{4}{52} \\times \\frac{13}{52}$",
+        "$\\frac{4}{52}$",
+        "$\\frac{4}{52} \\times \\frac{1}{52}$"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Students may incorrectly add probabilities of independent events.",
+      "intervention_hints": {
+        "level_1": "What happens when you replace a card back into the deck before drawing again?",
+        "level_2": "If items are replaced, is the second draw affected by the first draw?",
+        "level_3": "When a card is replaced, the conditions reset. What is the chance of drawing a king from 52 cards? What is the chance of drawing a heart from 52 new cards?"
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_1b",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "You are picking a marble from a bag and not replacing it, then picking another marble. What is the probability of picking a red marble first and a blue marble second?",
+      "answer": "1. $\\frac{4}{10} \\times \\frac{3}{9}$",
+      "answer_explanation": "Picking marbles without replacement means one marble is gone, so the number of outcomes changes. P(red first) = 4/10, P(blue second) = 3/9, so we multiply them.",
+      "mc_choices": [
+        "$\\frac{4}{10} \\times \\frac{3}{9}$",
+        "$\\frac{4}{10} \\times \\frac{4}{9}$",
+        "$\\frac{4}{10} + \\frac{3}{9}$",
+        "$\\frac{4}{10} \\times \\frac{1}{10}$"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Students might use the same denominator for both draws when replacing items.",
+      "intervention_hints": {
+        "level_1": "What happens to the number of marbles in the bag after one is picked and not replaced?",
+        "level_2": "The number of total marbles changes — does this change the probability of the next draw?",
+        "level_3": "After removing one marble, the denominator changes. What’s the chance of picking a red marble? What changes after that?"
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_1c",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "You are picking a marble from a bag and not replacing it, then picking another marble. What is the probability of picking a red marble first and a blue marble second?",
+      "answer": "1. $\\frac{4}{10} \\times \\frac{3}{9}$",
+      "answer_explanation": "Picking marbles without replacement means one marble is gone, so the number of outcomes changes. P(red first) = 4/10, P(blue second) = 3/9, so we multiply them.",
+      "mc_choices": [
+        "$\\frac{4}{10} \\times \\frac{3}{9}$",
+        "$\\frac{4}{10} \\times \\frac{4}{9}$",
+        "$\\frac{4}{10} + \\frac{3}{9}$",
+        "$\\frac{4}{10} \\times \\frac{1}{10}$"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Students might use the same denominator for both draws when replacing items.",
+      "intervention_hints": {
+        "level_1": "What happens to the number of marbles in the bag after one is picked and not replaced?",
+        "level_2": "The number of total marbles changes — does this change the probability of the next draw?",
+        "level_3": "After removing one marble, the denominator changes. What’s the chance of picking a red marble? What changes after that?"
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_capstone_1",
+      "stage": "capstone",
+      "difficulty": "hard",
+      "text": "A school board game tournament has two rounds. 1. Round One: Flip a coin and roll a die. If you get tails and a number greater than 3, you move to Round Two. 2. Round Two: Pick a card from a deck. If it’s a heart, you win a prize. What is the probability of winning a prize? What’s the probability of reaching Round Two?",
+      "answer": "1. $\\frac{1}{2} \\times \\frac{3}{6}$",
+      "answer_explanation": "P(coin tails) = 1/2, P(die >3) = 3/6, so P(reaching Round Two) = 1/2 × 3/6.",
+      "mc_choices": [
+        "$\\frac{1}{2} \\times \\frac{3}{6}$",
+        "$\\frac{1}{2} + \\frac{3}{6}$",
+        "$\\frac{1}{2} \\times \\frac{3}{5}$",
+        "$\\frac{1}{2} \\times \\frac{1}{6}$"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Students may be confused about which type of event (independent or dependent) is occurring at different stages.",
+      "intervention_hints": {
+        "level_1": "Think of how to find the probability of one event. Multiply or add?",
+        "level_2": "Round Two has a card draw — what’s the chance of drawing a heart from a full deck?",
+        "level_3": "Remember that probabilities are multiplied in independent events. Find the probability of reaching Round Two, then the chance of winning."
+      },
+      "nova_guiding_question": "Think about what events must happen together for a student to win the prize."
+    },
+    {
+      "id": "p_capstone_2",
+      "stage": "capstone",
+      "difficulty": "hard",
+      "text": "A school board game tournament has two rounds. 1. Round One: Flip a coin and roll a die. If you get tails and a number greater than 3, you move to Round Two. 2. Round Two: Pick a card from a deck. If it’s a heart, you win a prize. What is the probability of winning a prize? What’s the final probability of winning the prize?",
+      "answer": "1. $\\frac{1}{2} \\times \\frac{3}{6} \\times \\frac{13}{52}$",
+      "answer_explanation": "The probability of winning is the probability of reaching Round Two multiplied by the probability of drawing a heart. P(reaching Round Two)= 1/2 × 3/6, P(drawing heart) = 13/52, so total = 1/2 × 3/6 × 13/52.",
+      "mc_choices": [
+        "$\\frac{1}{2} \\times \\frac{3}{6} \\times \\frac{13}{52}$",
+        "$\\frac{1}{2} \\times \\frac{1}{2} \\times \\frac{13}{52}$",
+        "$\\frac{1}{2} \\times \\frac{3}{6} \\times \\frac{1}{52}$",
+        "$\\frac{1}{2} + \\frac{3}{6} + \\frac{13}{52}$"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Students may think that the events combine by adding rather than multiplying.",
+      "intervention_hints": {
+        "level_1": "Think of how to find the probability of one event. Multiply or add?",
+        "level_2": "Round Two has a card draw — what’s the chance of drawing a heart from a full deck?",
+        "level_3": "Remember that probabilities are multiplied in independent events. Find the probability of reaching Round Two, then the chance of winning."
+      },
+      "nova_guiding_question": "How many separate probabilities do you need to multiply together to find the full probability of winning?"
+    }
+  ]
+}

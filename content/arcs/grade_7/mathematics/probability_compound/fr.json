@@ -1,0 +1,127 @@
+{
+  "meta": {
+    "subject": "mathematics",
+    "topic_key": "probability_compound",
+    "topic_display": "Compound Probability",
+    "grade": 7,
+    "region": "canada",
+    "language_code": "fr",
+    "status": "approved",
+    "review_flags": []
+  },
+  "hook_stories": [
+    {
+      "id": "hook_a",
+      "culture_hint": "canadian",
+      "text": "En France, les enfants s'amusent à tirer des cartes du jeu de carte pour prédire leur journée. Alors qu'un groupe de garçons et de filles au jardin d'enfants français fait ça, l'un d'eux est très surpris.",
+      "closing_line": "Tu te demandes peut-être si c'était vraiment une coïncidence ou peut-être, le jeu n’est pas juste ?"
+    },
+    {
+      "id": "hook_b",
+      "culture_hint": "canadian",
+      "text": "Au Québec, on a beaucoup de chance avec les pronostics de météo. L’été, les enfants comme toi s’amusent à prédire le temps – s'il va pleuvoir ou non. Tu vas imaginer un défi mathématique avec ces probabilités !",
+      "closing_line": "Bonne chance, et continue à explorer les probabilités du monde réel !"
+    }
+  ],
+  "problems": [
+    {
+      "id": "practice_a",
+      "stage": "practice",
+      "difficulty": "basic",
+      "text": "Tu es en train de jouer à un jeu très simple – un dé en bois à 6 faces. Tu lances le dé deux fois. Quelle est la probabilité de tomber sur deux 6 ?",
+      "answer": "C. 1/36",
+      "answer_explanation": "P(6) = 1/6, P(6) = 1/6 P(6 et 6) = 1/6 × 1/6 = 1/36",
+      "mc_choices": [
+        "C. 1/36",
+        "A. 1/6",
+        "B. 1/6",
+        "D. 2/6"
+      ],
+      "correct_index": 0,
+      "common_misconception": "",
+      "intervention_hints": {
+        "level_1": "Un dé à 6 faces, combien de façons différentes à tomber ?",
+        "level_2": "Quelle est la probabilité de tomber sur un 6 ?",
+        "level_3": "P(6) = 1/6 P(6) = 1/6 Donc P(6 et 6) = ?"
+      }
+    },
+    {
+      "id": "practice_b",
+      "stage": "practice",
+      "difficulty": "intermediate",
+      "text": "On fait un tirage de deux cartes dans un jeu de 52 cartes, sans remise. Quelle est la probabilité de tirer deux cartes de cœur ?",
+      "answer": "B. 1/26",
+      "answer_explanation": "P(cœur) = 13/52 P(deuxième cœur) = 12/51 P(2 cœurs) = 13/52 × 12/51 = 156/2652 = 1/26",
+      "mc_choices": [
+        "B. 1/26",
+        "A. 1/36",
+        "C. 1/13",
+        "D. 1/4"
+      ],
+      "correct_index": 0,
+      "common_misconception": "",
+      "intervention_hints": {
+        "level_1": "Le jeu ne remet pas les cartes. Est-ce que ça change la probabilité ?",
+        "level_2": "La probabilité de la première carte est 13/52. Quelle est la probabilité de la deuxième ?",
+        "level_3": "P(cœur) = 13/52 P(deuxième cœur) = 12/51 P(2 cœurs) = ?"
+      }
+    },
+    {
+      "id": "practice_c",
+      "stage": "practice",
+      "difficulty": "advanced",
+      "text": "Tu as 10 billets dans une loterie de 30 billets. Quelle est la chance que ta numérotation ait été tirée deux fois consécutivement ?",
+      "answer": "B. 9/100",
+      "answer_explanation": "P(tirer ton numéro) = 10/30 = 1/3 P(tirer ton numéro deux fois) = 1/3 × 1/3 = 1/9 Mais dans le problème, c’était \"3 chances sur 10\" = 0.3 Donc: 0.3 × 0.3 = 0.09 → 9/100",
+      "mc_choices": [
+        "B. 9/100",
+        "A. 3/10",
+        "C. 6/10",
+        "D. 9/10"
+      ],
+      "correct_index": 0,
+      "common_misconception": "",
+      "intervention_hints": {
+        "level_1": "Tu tires un billet au sort : combien de chances de tomber sur ton numéro ?",
+        "level_2": "Si les tirages sont indépendants, qu’est-ce que tu peux faire ?",
+        "level_3": "P(tirer ton numéro) = 10/30 = 1/3 P(même numéro deux fois) = ?"
+      }
+    },
+    {
+      "id": "culminating",
+      "stage": "capstone",
+      "difficulty": "advanced",
+      "text": "Dans une partie de jeu, vous jouez avec deux dés, et vous souhaitez que la somme des deux dés vous donne 6. Quelle est la probabilité qu’un lancer vous donne une somme de 6?",
+      "answer": "C. 5/36",
+      "answer_explanation": "Les combinaisons pour faire 6 = (1,5), (2,4), (3,3), (4,2), (5,1) = 5 façons. Total des combinaisons = 6 × 6 = 36 P(somme = 6) = 5/36",
+      "mc_choices": [
+        "C. 5/36",
+        "A. 1/36",
+        "B. 1/12",
+        "D. 1/6"
+      ],
+      "correct_index": 0,
+      "common_misconception": "",
+      "intervention_hints": {
+        "level_1": "Combien de combinaisons possible dans deux dés à 6 faces ?",
+        "level_2": "Comment faire pour obtenir une somme de 6 ?",
+        "level_3": "Sommations possibles = 1+5, 2+4, 3+3, 4+2, 5+1 Donc 5 combinaisons possibles sur 36 = ?"
+      }
+    }
+  ],
+  "concept": {
+    "explanation_steps": [
+      "Un evenement compose est la combinaison de deux evenements simples ou plus. Exemple : tirer un roi ET un coeur dans un jeu de cartes.",
+      "Pour des evenements independants (avec remise), on multiplie les probabilites : P(A et B) = P(A) x P(B).",
+      "Pour des evenements dependants (sans remise), la probabilite du deuxieme evenement change selon ce qui s est passe au premier.",
+      "Un diagramme en arbre t aide a compter tous les resultats possibles et a calculer les probabilites composees.",
+      "La probabilite theorique = nombre de resultats favorables / nombre total de resultats possibles."
+    ],
+    "whiteboard_text": "P(A et B) = P(A) x P(B) [si independants]",
+    "comprehension_check": "Tu lances un de (6 faces) deux fois. Quelle est la probabilite d obtenir un 6 aux deux lancers ?",
+    "reteach_angles": [
+      "Imagine une machine a boules : tu tires une boule, tu la remets, et tu tires encore. Chaque tirage est independant, alors on multiplie les chances.",
+      "Pense a un arbre de decision : chaque branche represente un resultat possible. La probabilite d un chemin = produit des probabilites de chaque etape."
+    ]
+  }
+}

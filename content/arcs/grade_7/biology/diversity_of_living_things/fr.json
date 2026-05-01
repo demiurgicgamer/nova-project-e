@@ -1,0 +1,152 @@
+{
+  "meta": {
+    "subject": "biology",
+    "topic_key": "diversity_of_living_things",
+    "topic_display": "Diversity of Living Things",
+    "grade": 7,
+    "region": "canada",
+    "language_code": "fr",
+    "status": "approved",
+    "review_flags": []
+  },
+  "hook_stories": [
+    {
+      "id": "hook_a",
+      "culture_hint": "canadian",
+      "text": "Il était une fois, dans une forêt près de Québec, un groupe d’élèves du secondaire a découvert au sol un étrange organismes. Ce petit être semblait avoir des parties de plante et d’animal à la fois, il avait des cellules sans noyau comme une bactérie, mais aussi des organes pour se nourrir comme une plante. Les élèves se sont demandés à quoi cela pouvait ressembler dans la classification des organismes. Et si ce que vous avez vu dans une forêt était un être vivant qui ne se classait pas comme une plante ou comme un animal? Est-ce que ce serait un nouveau *royaume*?",
+      "closing_line": "Est-ce que ce serait un nouveau *royaume*?"
+    },
+    {
+      "id": "hook_b",
+      "culture_hint": "canadian",
+      "text": "Dans un hôpital à Montréal, un docteur a découvert une bactérie qui causait une grave maladie chez les enfants. Cette bactérie était très différente des autres. Elle ne pouvait pas se reproduire comme une plante, pas comme un animal, et même pas comme une bactérie comme on en voit au microscope. Ces bactéries, elles aussi, ont leur place dans la classification des organismes, mais elles se comportent très différemment des autres. Et c’est grâce à leur classification que les médecins peuvent penser à leurs traitements. Et si une bactérie était aussi mystérieuse qu’un animal ou une plante?",
+      "closing_line": "Et si une bactérie était aussi mystérieuse qu’un animal ou une plante?"
+    }
+  ],
+  "concept": {
+    "explanation_steps": [
+      "La classification est un outil qui permet de classer les organismes vivants selon leurs caractéristiques.",
+      "Ce système va du plus général au plus spécifique : Domaine → Royaume → Phylum → Classe → Ordre → Famille → Genre → Espèce.",
+      "Les cinq royaumes de la vie sont : Royaume Monera (bactéries), Royaume Protista (protozoaires, algues), Royaume Fungi (champignons, levures), Royaume Plantae (plantes), Royaume Animalia (animaux).",
+      "Parfois, les organismes ne rentrent pas dans un seul royaume. Les bactéries sont toujours considérées comme du Royaume Monera, et les champignons sont dans le Royaume Fungi."
+    ],
+    "whiteboard_text": "Classer les organismes vivants selon leurs caractéristiques. Cinq royaumes : Monera, Protista, Fungi, Plantae, Animalia.",
+    "comprehension_check": "Quel royaume contient les organismes avec des cellules sans noyau et des filaments fins ?",
+    "reteach_angles": [
+      "Un organisme sans noyau est dans le Royaume Monera.",
+      "Les champignons absorbent les nutriments et n’ont pas de cellules avec noyau."
+    ]
+  },
+  "problems": [
+    {
+      "id": "p_conceptual",
+      "stage": "guided",
+      "difficulty": "medium",
+      "text": "À quel royaume appartient l'organisme qui a : Des cellules sans noyau, Est composé de filaments fins, Ne se nourrit pas par photosynthèse, Est un parasite ?",
+      "answer": "Royaume Fungi",
+      "answer_explanation": "Le Royaume Fungi comprend les champignons, qui ont des cellules sans noyau, se nourrissent par absorption, et peuvent être parasites.",
+      "mc_choices": [
+        "Royaume Fungi",
+        "Royaume Monera",
+        "Royaume Protista",
+        "Royaume Animalia"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Croire que ce genre d'organisme est un animal ou une bactérie.",
+      "intervention_hints": {
+        "level_1": "Quel est le type principal des cellules? Une cellule avec ou sans noyau?",
+        "level_2": "Quel royaume utilise des cellules sans noyau et est composé de filament?",
+        "level_3": "Les champignons sont-ils des bactéries? Comment se nourrissent-ils?"
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_guided_1",
+      "stage": "guided",
+      "difficulty": "medium",
+      "text": "Le chercheur de l'hôpital a découvert un nouvel organisme : c’est une bactérie qui a des cellules sans noyau et vit dans le sol. Ce que l’on a appris, c’est qu’elles se nourrissent en mangeant les déchets organiques. À quelle classe appartient cet organisme ?",
+      "answer": "Royaume Monera",
+      "answer_explanation": "Les bactéries ont des cellules sans noyau, donc appartiennent au Royaume Monera.",
+      "mc_choices": [
+        "Royaume Monera",
+        "Royaume Protista",
+        "Royaume Fungi",
+        "Royaume Plantae"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Croire qu’une bactérie avec un noyau est dans un autre royaume.",
+      "intervention_hints": {
+        "level_1": "Comment se nourrit une bactérie ?",
+        "level_2": "Est-ce que la bactérie a une cellule avec ou sans noyau ?",
+        "level_3": "Est-ce que la bactérie est un champignon ou une plante ?"
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_1",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "Une chercheuse étudie un organisme qui a : Une cellule eucaryote avec noyau, Des cellules avec des membranes cellulaires, Se nourrit en mangeant des organismes vivants. À quel royaume appartient cet organisme ?",
+      "answer": "Royaume Animalia",
+      "answer_explanation": "Les animaux sont des organismes avec une cellule eucaryote et se nourrissent de d'autres organismes vivants.",
+      "mc_choices": [
+        "Royaume Animalia",
+        "Royaume Monera",
+        "Royaume Protista",
+        "Royaume Fungi"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Confondre les caractéristiques des champignons avec celles des animaux.",
+      "intervention_hints": {
+        "level_1": "Qu'est-ce que fait un animal pour se nourrir?",
+        "level_2": "Quel royaume utilise des cellules avec noyau et se nourrit en mangeant d'autres individus?",
+        "level_3": "Y a-t-il des champignons qui mangent d'autres organismes?"
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_2",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "La scientifique observe un être vivant dans un champignon à la maison. Cet organisme a des cellules sans noyau, ne fait pas de photosynthèse et se nourrit en absorbant les nutriments de son environnement. Quel royaume devrait-on lui assigner ?",
+      "answer": "Royaume Fungi",
+      "answer_explanation": "Les champignons absorbent les nutriments à partir de leur environnement à travers leurs cellules sans noyau.",
+      "mc_choices": [
+        "Royaume Fungi",
+        "Royaume Protista",
+        "Royaume Monera",
+        "Royaume Plantae"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Croire qu’un organisme sans noyau est une bactérie.",
+      "intervention_hints": {
+        "level_1": "Comment se nourrit un champignon ?",
+        "level_2": "Est-ce que le champignon a une cellule avec ou sans noyau?",
+        "level_3": "Est-ce qu'un champignon est une plante? Est-ce une bactérie ?"
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_3",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "Un scientifique observe une communauté animale dans une forêt québécoise, avec des champignons qui absorbent les nutriments de feuilles mortes, des bactéries qui mangent les déchets, des vers de terre qui transforment les déchets en engrais, et des plantes qui font la photosynthèse. Quel rôle jouent ces organismes dans l'écosystème ?",
+      "answer": "Ils se nourrissent de déchets et aident à la décomposition.",
+      "answer_explanation": "Les champignons, bactéries et vers de terre contribuent à décomposer les déchets et recycling des nutriments.",
+      "mc_choices": [
+        "Ils se nourrissent de déchets et aident à la décomposition.",
+        "Ils produisent de l'énergie et se nourrissent d'autres êtres vivants.",
+        "Ils n'ont aucun effet sur le milieu.",
+        "Ils produisent de la lumière et de l’air."
+      ],
+      "correct_index": 0,
+      "common_misconception": "Croire que seul le photSynthèse joue un rôle dans l’écosystème.",
+      "intervention_hints": {
+        "level_1": "Qu’est-ce que font les champignons dans les forêts ?",
+        "level_2": "Quel rôle jouent les bactéries dans la décomposition ?",
+        "level_3": "Les plantes et les champignons jouent-ils un rôle dans le recyclage des nutriments ?"
+      },
+      "nova_guiding_question": ""
+    }
+  ]
+}

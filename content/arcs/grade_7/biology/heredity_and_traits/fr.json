@@ -1,0 +1,146 @@
+{
+  "meta": {
+    "subject": "biology",
+    "topic_key": "heredity_and_traits",
+    "topic_display": "Heredity and Traits",
+    "grade": 7,
+    "region": "canada",
+    "language_code": "fr",
+    "status": "approved",
+    "review_flags": [
+      "Vérifier le niveau de complexité des problèmes de Punnett : tous doivent être simples, à un seul trait uniquement.",
+      "Vérifier la faisabilité des exemples d’agriculture et de traits – doivent rester accessibles pour les enfants de 11-12 ans.",
+      "Assurer la précision des exemples de traits génétiques et pas d’exemples trop réalistes (ex. ne pas inclure la maladie du coagulage).",
+      "Tous les problèmes doivent contenir un seul trait dominant/récessif (pas d’hérédité complexe).",
+      "Vérifier la traduction et le ton linguistique pour qu’il soit naturel et compréhensible pour enfants de 11-12 ans."
+    ]
+  },
+  "hook_stories": [
+    {
+      "id": "hook_a",
+      "culture_hint": "universal",
+      "text": "Lucie a les yeux bleus – c’est un trait qu’elle hérite de sa mère. Mais sa sœur Jeanne a les yeux verts. Qu’est-ce qui explique ça? Pourquoi les enfants ressemblent-ils à leurs parents mais pas tout à fait?",
+      "closing_line": "Les traits sont passés de génération en génération grâce à des unités appelées gènes."
+    },
+    {
+      "id": "hook_b",
+      "culture_hint": "canadian",
+      "text": "À Vancouver, un jeune garçon a découvert que sa grand-mère avait un petit grain de beauté sur la joue – et lui aussi en a un. C’est comme ça qu’il a appris que ce trait est transmis de génération en génération!",
+      "closing_line": "Les traits se transmettent de parent en enfant grâce à des gènes."
+    },
+    {
+      "id": "hook_c",
+      "culture_hint": "universal",
+      "text": "Pierre peut roulé sa langue, mais ses frères et sœurs ne peuvent pas – c’est un trait qu’on appelle \"non-roulé\". Quelle est la chance que Pierre ait ce trait alors que ses frères ne l’ont pas?",
+      "closing_line": "Ce trait est transmis par des gènes – et les gènes peuvent être dominants ou récessifs."
+    }
+  ],
+  "concept": {
+    "explanation_steps": [
+      "Les enfants reçoivent des gènes de leurs deux parents.",
+      "Les gènes sont des morceaux d'ADN qui déterminent nos traits : couleur des yeux, forme du nez, etc.",
+      "Chaque gène peut avoir deux versions appelées allèles.",
+      "Un allèle dominant (gras) s'exprime toujours.",
+      "Un allèle récessif (italique) ne s'exprime que quand il y en a deux.",
+      "Un individu peut avoir deux allèles identiques (homozygote) ou deux allèles différents (hétérozygote).",
+      "Exemple : Le gène pour la couleur des yeux. Allèle dominant : Y (yeux bleus). Allèle récessif : y (yeux verts). Homozygote dominant (YY) → yeux bleus. Hétérozygote (Yy) → yeux bleus. Homozygote récessif (yy) → yeux verts.",
+      "Phénotype = ce qu’on voit (trait visible). Génotype = la combinaison d’allèles (ce qu’on a dans les gènes)."
+    ],
+    "whiteboard_text": "Gènes → Allèles (Dominant & Récessif) → Hétérozygote & Homozygote → Traits visibles",
+    "comprehension_check": "Qu’est-ce qu’un trait héréditaire?",
+    "reteach_angles": [
+      "Un trait héréditaire est une caractéristique transmise par les gènes, pas causée par un virus ou un aliment.",
+      "Les traits héréditaires viennent de l’ADN que nous héritons de nos parents."
+    ]
+  },
+  "problems": [
+    {
+      "id": "p_guided_1",
+      "stage": "guided",
+      "difficulty": "medium",
+      "text": "Quel est le génotype du parent qui peut roulé sa langue ? On sait que : R = roulé (dominant), r = non-roulé (récéssif). Un parent peut roulé sa langue, mais il ne peut pas avoir deux allèles r. Quel peut être son génotype ?",
+      "answer": "Rr ou RR",
+      "answer_explanation": "Puisque le parent peut rouler sa langue, il doit avoir au moins un allèle dominant R. Il peut donc être RR (homozygote dominant) ou Rr (hétérozygote).",
+      "mc_choices": [
+        "Rr ou RR",
+        "RR",
+        "rr",
+        "Rr"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Croire que le parent ne peut pas avoir un seul allèle R car c’est un trait dominant.",
+      "intervention_hints": {
+        "level_1": "Un allèle dominant s'exprime même s'il n'y en a qu'un.",
+        "level_2": "Il peut roulé = il a au moins un R.",
+        "level_3": "On peut avoir un ou deux R – donc Rr ou RR."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_2a",
+      "stage": "practice",
+      "difficulty": "medium_hard",
+      "text": "Un parent a le génotype **Yy** et l’autre a **yy** (yeux verts). Quel est le **génotype** possible pour leur enfant ?",
+      "answer": "Yy, yy",
+      "answer_explanation": "Le parent Yy peut donner Y ou y. Le parent yy peut seulement donner y. Les combinaisons possibles sont Yy ou yy.",
+      "mc_choices": [
+        "Yy, yy",
+        "YY, Yy",
+        "YY, yy",
+        "Yy, Yy"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Penser que l’enfant aura toujours les yeux bleus.",
+      "intervention_hints": {
+        "level_1": "Représente les allèles possibles de chaque parent.",
+        "level_2": "Utilise un carré de Punnett pour calculer les résultats.",
+        "level_3": "Les allèles y de l’autre parent combinent avec les Y et y du premier parent."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_2b",
+      "stage": "practice",
+      "difficulty": "medium_hard",
+      "text": "Un agriculteur veut cultiver des plants avec des **graines rouges** (RR). S’il utilise des plants **RR** et des plants **rr**, quels sont **les résultats possibles** ?",
+      "answer": "Moitié des plants auront des graines rouges et moitié jaunes",
+      "answer_explanation": "Les plants RR donnent R, les plants rr donnent r. La combinaison Rr donnera des graines rouges, car le trait dominant R est exprimé.",
+      "mc_choices": [
+        "Moitié des plants auront des graines rouges et moitié jaunes",
+        "Tous les plants auront des graines rouges",
+        "Tous les plants auront des graines jaunes",
+        "Certaines plants auront des graines rouges et d'autres jaunes"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Penser que tous les plants auront des graines rouges.",
+      "intervention_hints": {
+        "level_1": "Réfléchis comme si tu faisais un carré de Punnett – un parent donne R, l'autre donne r.",
+        "level_2": "On peut écrire : R de l’un et r de l’autre = Rr.",
+        "level_3": "En Rr, le trait dominant est exprimé = les graines rouges, mais il y a 50% de probabilité que l’enfant soit Rr."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_2c",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "Un agriculteur veut cultiver des plants avec des **graines rouges** (RR). S’il utilise des plants **RR** et des plants **rr**, quels sont **les résultats possibles** ?",
+      "answer": "Moitié des plants auront des graines rouges et moitié jaunes",
+      "answer_explanation": "Les plants RR donnent R, les plants rr donnent r. La combinaison Rr donnera des graines rouges, car le trait dominant R est exprimé.",
+      "mc_choices": [
+        "Moitié des plants auront des graines rouges et moitié jaunes",
+        "Tous les plants auront des graines rouges",
+        "Tous les plants auront des graines jaunes",
+        "Certaines plants auront des graines rouges et d'autres jaunes"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Penser que tous les plants auront des graines rouges.",
+      "intervention_hints": {
+        "level_1": "Réfléchis comme si tu faisais un carré de Punnett – un parent donne R, l'autre donne r.",
+        "level_2": "On peut écrire : R de l’un et r de l’autre = Rr.",
+        "level_3": "En Rr, le trait dominant est exprimé = les graines rouges, mais il y a 50% de probabilité que l’enfant soit Rr."
+      },
+      "nova_guiding_question": ""
+    }
+  ]
+}

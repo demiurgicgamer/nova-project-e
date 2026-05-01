@@ -1,0 +1,189 @@
+{
+  "meta": {
+    "subject": "physics",
+    "topic_key": "heat_and_thermal_energy",
+    "topic_display": "Heat and Thermal Energy",
+    "grade": 7,
+    "region": "canada",
+    "language_code": "fr",
+    "status": "approved",
+    "review_flags": []
+  },
+  "hook_stories": [
+    {
+      "id": "hook_a",
+      "culture_hint": "canadian",
+      "text": "Imagine que tu es à la bibliothèque de ton école en hiver, et tu as apporté un café chaud dans une tasse en verre avec un couvercle en plastique. Le café fait 70°C, mais il fait froid à l’extérieur, seulement 5°C. Quand tu poses ta tasse sur la table, tu remarques rapidement que le café devient moins chaud. En revanche, si tu mets ta tasse dans un endroit chaud, par exemple sur une fenêtre ensoleillée, elle devient encore plus chaude. Comment ça se passe? Le café perd ou gagne-t-il de la chaleur?",
+      "closing_line": "Le café perd de la chaleur à l’extérieur."
+    },
+    {
+      "id": "hook_b",
+      "culture_hint": "canadian",
+      "text": "Pendant qu’on fait les pâtes dans la cuisine, on met de l’eau dans une casserole en métal sur le fourneau. Tu observes que, peu à peu, l’eau commence à bouillir. Mais en même temps, ta main qui touche le fourneau est très chaude. Quand tu tiens la casserole, ton bras est aussi plus chaud. Pourquoi tout ça arrive-t-il? Comment la chaleur se déplace-t-elle de la casserole à ton bras?",
+      "closing_line": "La chaleur se déplace de la casserole à ton bras par conduction."
+    }
+  ],
+  "concept": {
+    "explanation_steps": [
+      "La température c’est comment chaud ou froid quelque chose est, donc une mesure.",
+      "L’énergie thermique c’est l’énergie totale qu’un objet a à cause de ses particules qui bougent.",
+      "Si on a de la chaleur, ça veut dire qu’il y a des particules qui bougent plus vite.",
+      "La chaleur arrive toujours de l'objet plus chaud vers l’objet plus froid.",
+      "Il y a trois façons que la chaleur se déplace : conduction, convection et rayonnement.",
+      "Les objets conductrices transmettent bien la chaleur (ex. : métal), tandis que les isolantes empêchent la chaleur de passer (ex. : bois ou plastique).",
+      "Quand un objet est chaud, il s’agrandit légèrement par expansion thermique."
+    ],
+    "whiteboard_text": "Conduction, Convection, Rayonnement - Les trois façons de transporter la chaleur.",
+    "comprehension_check": "Lequel de ces objets est un bon conducteur de chaleur?",
+    "reteach_angles": [
+      "La chaleur va toujours du plus chaud vers le plus froid, même si l’air froid semble «prendre» de la chaleur.",
+      "Pense à l’énergie thermique comme un flux d’objets chauds vers objets froids."
+    ]
+  },
+  "problems": [
+    {
+      "id": "p_guided_1",
+      "stage": "guided",
+      "difficulty": "medium",
+      "text": "Dans un laboratoire, un thermomètre de 25°C est mis dans un verre d’eau chaude de 65°C. L’eau est à 65°C, mais le thermomètre est à 25°C. Quelle est la raison de la variation de la température du thermomètre?",
+      "answer": 1,
+      "explanations": [
+        "La température du thermomètre change parce qu’il reçoit de l’énergie thermique de l’eau chaude.",
+        "Le thermomètre absorbe de la chaleur de l’eau chaude pour s’équilibrer à la température extérieure.",
+        "La conduction entre deux objets à différentes températures est le principal mode de transfert."
+      ],
+      "mc_choices": [
+        "La température du thermomètre reste constante.",
+        "Le thermomètre a absorbé la chaleur de l’eau.",
+        "L’air autour du thermomètre a refroidi le thermomètre.",
+        "Le thermomètre a perdu de la chaleur à cause du rayonnement."
+      ],
+      "correct_index": 0,
+      "intervention_hints": {
+        "level_1": "Pense au type de transfert de chaleur decrit dans ce probleme : conduction, convection ou radiation ?",
+        "level_2": "La conduction se passe par contact direct, la convection par des fluides en mouvement, la radiation par l energie rayonnante.",
+        "level_3": "Rappelle-toi : les conducteurs laissent passer la chaleur facilement, les isolants la bloquent. Quel type de materiau est decrit ici ?"
+      }
+    },
+    {
+      "id": "p_practice_1",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "Un enfant qui joue à la plage voit un grand parapluie. Le soleil brûle le sable, mais quand la personne s’assied sous le parapluie, il fait plus frais. Cela arrive parce que...",
+      "answer": 3,
+      "explanations": [
+        "Le parapluie bloque le rayonnement solaire.",
+        "Le parapluie fonctionne comme un obstacle à la lumière du soleil.",
+        "Le rayonnement est la chaleur qui vient du soleil à travers l’espace."
+      ],
+      "mc_choices": [
+        "La lumière du soleil ne chauffe pas le sable",
+        "L’air est plus froid sous le parapluie",
+        "Le parapluie empêche le rayonnement du soleil",
+        "Le sol n’est pas très conducteur"
+      ],
+      "correct_index": 0,
+      "intervention_hints": {
+        "level_1": "Est-ce que les objets sont en contact direct ?",
+        "level_2": "Si un liquide ou un gaz est implique et qu il se deplace, c est de la convection.",
+        "level_3": "La chaleur passe toujours du chaud vers le froid jusqu a l equilibre de temperature."
+      }
+    },
+    {
+      "id": "p_practice_2",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "Une casserole en métal est posée sur un fourneau. Ta main qui touche la casserole est chaude. Comment la chaleur passe-t-elle de la casserole à ta main?",
+      "answer": 1,
+      "explanations": [
+        "La chaleur passe directement à travers un objet solide.",
+        "Le métal est un bon conducteur de chaleur.",
+        "La chaleur est transportée en se déplaçant à travers un fluide."
+      ],
+      "mc_choices": [
+        "Conduction",
+        "Convection",
+        "Rayonnement",
+        "Radiation"
+      ],
+      "correct_index": 0,
+      "intervention_hints": {
+        "level_1": "Quel materiau est le meilleur conducteur ou le meilleur isolant ?",
+        "level_2": "Le metal conduit bien la chaleur ; le bois, le plastique et l air sont de bons isolants.",
+        "level_3": "Pour choisir le bon materiau, demande-toi : est-ce qu on veut que la chaleur passe ou qu elle reste ?"
+      }
+    },
+    {
+      "id": "p_practice_3",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "Un tuyau d’eau en plastique est très long. En été, il est chaud. Que se passe-t-il?",
+      "answer": 2,
+      "explanations": [
+        "Quand il est chaud, le plastique s'étire.",
+        "L’expansion thermique signifie que les matériaux s'étirent lorsqu'ils sont chauffés.",
+        "La chaleur du plastique ne change pas la longueur."
+      ],
+      "mc_choices": [
+        "Il se rétrécit",
+        "Il devient plus long",
+        "Il se déforme",
+        "Il chauffe l’eau autour"
+      ],
+      "correct_index": 0,
+      "intervention_hints": {
+        "level_1": "Que se passe-t-il quand un materiau est chauffe ? Se dilate-t-il ou se contracte-t-il ?",
+        "level_2": "La dilatation thermique : quand la temperature augmente, les particules bougent plus vite et l objet prend plus de place.",
+        "level_3": "Exemples de dilatation : les rails de train, les ponts, les thermometres a mercure. Quand il fait froid, les objets se contractent."
+      }
+    },
+    {
+      "id": "p_capstone_1",
+      "stage": "capstone",
+      "difficulty": "hard",
+      "text": "Dans un jardin, un thermomètre montre une température de 20°C. Une personne met un thermomètre dans un sac en plastique avec du sel et du givre. Elle enlève le sac, et le thermomètre affiche 15°C. Que s’est-il passé?",
+      "answer": 4,
+      "explanations": [
+        "Le sel et le givre sont froids, donc ils absorbent la chaleur du thermomètre.",
+        "Le sel et le givre sont des objets froids qui prennent de l’énergie thermique du thermomètre.",
+        "Le rayonnement de l’environnement n’est pas pertinent ici."
+      ],
+      "mc_choices": [
+        "Le thermomètre a perdu de la chaleur à cause de la conduction",
+        "L’air du plafond a réchauffé le thermomètre",
+        "Le thermomètre a absorbé du rayonnement",
+        "Le sel et le givre ont absorbé la chaleur du thermomètre"
+      ],
+      "correct_index": 0,
+      "intervention_hints": {
+        "level_1": "Reflechis a quelle etape du raisonnement te bloque. Est-ce le concept de temperature ou d energie thermique ?",
+        "level_2": "La temperature mesure la chaleur moyenne par particule ; l energie thermique depend aussi du nombre de particules.",
+        "level_3": "Un grand lac a plus d energie thermique qu une tasse de the, meme si la tasse est plus chaude, car il y a plus de particules en mouvement."
+      }
+    },
+    {
+      "id": "p_capstone_2",
+      "stage": "capstone",
+      "difficulty": "medium",
+      "text": "Un réchaud de camping a un feu à l’intérieur. Les flammes réchauffent l'air autour. Quelle méthode de transmission de chaleur est utilisée?",
+      "answer": 2,
+      "explanations": [
+        "Le flux d’air chaud montant et d’air froid descendant forme un mouvement.",
+        "La convection est le transfert de chaleur dans les fluides (liquides ou gaz).",
+        "La chaleur transporte l’air chaud en montant et crée un courant d’air."
+      ],
+      "mc_choices": [
+        "Conduction",
+        "Convection",
+        "Rayonnement",
+        "Absorption"
+      ],
+      "correct_index": 0,
+      "intervention_hints": {
+        "level_1": "Y a-t-il un systeme isole ou ouvert dans ce probleme ?",
+        "level_2": "Dans un systeme isole, la chaleur reste a l interieur. Dans un systeme ouvert, la chaleur peut s echapper.",
+        "level_3": "Pense a des exemples concrets : un thermos est bien isole, une casserole sans couvercle laisse la chaleur s echapper par convection et evaporation."
+      }
+    }
+  ]
+}

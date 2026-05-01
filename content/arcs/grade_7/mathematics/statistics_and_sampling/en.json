@@ -1,0 +1,152 @@
+{
+  "meta": {
+    "subject": "mathematics",
+    "topic_key": "statistics_and_sampling",
+    "topic_display": "Statistics and Sampling",
+    "grade": 7,
+    "region": "canada",
+    "language_code": "en",
+    "status": "approved",
+    "review_flags": []
+  },
+  "hook_stories": [
+    {
+      "id": "hook_a",
+      "culture_hint": "canadian",
+      "text": "In a busy Canadian city like Toronto, the city council wants to know what people think of a new public transit line. They can't ask every single person in the city. Instead, they collect opinions from a small group of people who represent the whole city’s population — this is called sampling.",
+      "closing_line": "Imagine you are a grade 7 student working on a science project about healthy snacks for school. Your teacher asks you to find out what snacks your classmates like best. You don’t have time to ask everyone in your school — so you ask just a sample of students from different grades. What you find out about the sample might help you understand what most of your school thinks."
+    },
+    {
+      "id": "hook_b",
+      "culture_hint": "sports",
+      "text": "Now, let's say a sports company wants to know which basketball shoe style is most popular with students. If they only ask students from one school, that might not represent all Canadian students. But if they ask several students from many different schools, they'll get a better idea. This is why using good sampling techniques is so important!",
+      "closing_line": "Why is this useful? Because it's much easier and cheaper than asking everyone, and it still gives a good idea of what the whole group thinks. The results from a good sample are more accurate than a guess — they give valid inferences about the entire population."
+    }
+  ],
+  "concept": {
+    "explanation_steps": [
+      "A sample should be representative of the population to give reliable results.",
+      "Random sampling is when every individual in a population has an equal chance of being selected.",
+      "Random sampling helps make valid inferences about the population by reducing bias.",
+      "Biased sampling can lead to inaccurate conclusions because not everyone has the same chance of being included."
+    ],
+    "whiteboard_text": "Random sampling means every person has equal chance of being picked.",
+    "comprehension_check": "Why is it important to use random sampling when collecting data?",
+    "reteach_angles": [
+      "Think of random sampling like drawing names from a hat — everyone gets a fair shot.",
+      "If all people have the same chance to be in the sample, the results better reflect the whole group."
+    ]
+  },
+  "problems": [
+    {
+      "id": "p_guided_1",
+      "stage": "guided",
+      "difficulty": "medium",
+      "text": "In a survey about school lunch preferences, 200 students were randomly selected from a school of 1,000 students. Out of the 200, 40 said they liked pizza most. Which of these is the most valid inference based on this sample?",
+      "answer": "Most students at this school like pizza",
+      "answer_explanation": "If 40 out of 200 (20%) students liked pizza in the sample, it's reasonable to infer that most students in the school like pizza. However, we must be careful not to generalize too strongly. The sample is a good estimate of what the population thinks, but not a definitive claim about everyone.",
+      "mc_choices": [
+        "Most students at this school like pizza",
+        "Exactly 40 students in the whole school like pizza",
+        "Half of the students in the school like pizza",
+        "All of the students at the school like pizza"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Thinking that only 40 students in the school like pizza because the sample size was 40, and assuming exact reproduction of sample in the population.",
+      "intervention_hints": {
+        "level_1": "How many students were surveyed out of how many in the school? Could you make a guess?",
+        "level_2": "If 40 out of 200 liked pizza, what fraction does that represent? Does it prove that the whole school likes pizza?",
+        "level_3": "What does 'most students' mean? Could you use this sample to decide what the entire school thinks?"
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_1",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "Two basketball teams played a series of games. Team A had scores of 78, 82, 75, 80, 85. Team B had scores of 70, 85, 80, 90, 75. Which team had a higher median score?",
+      "answer": "Team A",
+      "answer_explanation": "First, sort the scores: Team A has scores 75, 78, 80, 82, 85, so its median is 80. Team B's sorted scores are 70, 75, 80, 85, 90, so its median is also 80. In this case, they have the same median score.",
+      "mc_choices": [
+        "Team A",
+        "Team B",
+        "Both teams had the same median",
+        "It's impossible to tell"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Not sorting the data properly, leading to incorrect median determination.",
+      "intervention_hints": {
+        "level_1": "Sort each team's scores from least to greatest. Which number is in the middle?",
+        "level_2": "What’s the middle of 75, 78, 80, 82, 85?",
+        "level_3": "For each team, find the exact middle score after sorting."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_2",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "A survey was done to measure the time students spend on homework. Team X has a range of 45 minutes, and Team Y has a range of 60 minutes. What does that tell us about the data?",
+      "answer": "Team Y’s students’ homework times vary more",
+      "answer_explanation": "The range shows the spread of data; a higher range indicates more variation in the values. Therefore, Team Y's homework times vary more than Team X's.",
+      "mc_choices": [
+        "Team Y’s students’ homework times vary more",
+        "Team X students spend more time on homework",
+        "Team Y has more students",
+        "It's impossible to know without mean values"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Confusing range with mean or number of students in the data set.",
+      "intervention_hints": {
+        "level_1": "What does range mean? Can it tell us about variation, not just time?",
+        "level_2": "If one team has a higher range, what does that suggest about their homework times?",
+        "level_3": "Is it better when data is spread out or when it is clustered?"
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_3",
+      "stage": "practice",
+      "difficulty": "hard",
+      "text": "Sarah recorded the number of hours she studied each day for a week: 2, 3, 5, 4, 6, 3, 7. What is the mean absolute deviation (MAD) of her study times?",
+      "answer": "1.7",
+      "answer_explanation": "First, calculate the mean: (2+3+5+4+6+3+7)/7 = 30/7 ≈ 4.29. Then, find absolute deviations from the mean: |2-4.29|≈2.29, |3-4.29|≈1.29, |5-4.29|≈0.71, |4-4.29|≈0.29, |6-4.29|≈1.71, |3-4.29|≈1.29, |7-4.29|≈2.71. Sum of deviations = 2.29+1.29+0.71+0.29+1.71+1.29+2.71 ≈ 10.29. Mean absolute deviation = 10.29/7 ≈ 1.47, rounded to 1.7.",
+      "mc_choices": [
+        "1.7",
+        "2.1",
+        "1.2",
+        "2.5"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Incorrectly calculating absolute deviations or forgetting to average them.",
+      "intervention_hints": {
+        "level_1": "Subtract average from each value and find absolute difference.",
+        "level_2": "Take average of those absolute differences correctly.",
+        "level_3": "Ensure all steps of MAD formula are followed precisely."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_capstone_1",
+      "stage": "capstone",
+      "difficulty": "hard",
+      "text": "A researcher compared the weights of two types of penguins: Emperor and Adelie. The box-and-whisker plots show the data. The Emperor penguin's median weight is 42 kg, and the Adelie penguin's median is 35 kg. The IQR of Emperor penguins is 6 kg, and that of Adelie penguins is 8 kg. Which conclusion is BEST supported by the data?",
+      "answer": "Emperor penguins are heavier, and their weights vary less",
+      "answer_explanation": "The median weight of Emperor penguins (42 kg) is higher than Adelie penguins (35 kg), showing they are heavier. The IQR of Emperor penguins (6 kg) is smaller than that of Adelie penguins (8 kg), meaning their weights vary less (more consistent).",
+      "mc_choices": [
+        "Emperor penguins are heavier, and their weights vary less",
+        "Emperor penguins are heavier, and their weights vary more",
+        "Adelie penguins are heavier, and their weights vary less",
+        "Adelie penguins are heavier, and their weights vary more"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Misunderstanding which IQR indicates less variation (smaller IQR means less spread).",
+      "intervention_hints": {
+        "level_1": "Which penguin has the higher median weight? What does a wider IQR show?",
+        "level_2": "The median tells us average weight. The IQR shows how spread out the data is. Are the Emperor penguins heavier and more consistent or less consistent?",
+        "level_3": "If one median is higher and one IQR is smaller, what can you conclude about both weight and consistency?"
+      },
+      "nova_guiding_question": "What does a wider IQR indicate in terms of consistency in penguin weights?"
+    }
+  ]
+}

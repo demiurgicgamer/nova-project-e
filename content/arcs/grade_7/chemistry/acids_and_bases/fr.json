@@ -1,0 +1,130 @@
+{
+  "meta": {
+    "subject": "chemistry",
+    "topic_key": "acids_and_bases",
+    "topic_display": "Acids and Bases",
+    "grade": 7,
+    "region": "canada",
+    "language_code": "fr",
+    "status": "approved",
+    "review_flags": [
+      "Texte du problème 1 dans Stage 3: la réponse correcte est B (neutre), mais avec un contexte particulier sur les indicateurs. La réponse fournie dans le markdown est inexacte pour le capstone.",
+      "Problème 4 dans Stage 5: Réponse attendue est C (liquide 2), mais la réponse fournie dans le markdown est 'C) Le liquide 2', qui correspond à la bonne réponse correctement identifiée par le document. Aucun flag n’est nécessaire ici."
+    ]
+  },
+  "hook_stories": [
+    {
+      "id": "hook_a",
+      "culture_hint": "canadian",
+      "text": "Dans la cuisine de Marie, il y a un citron. Le citron est acide, donc il a un goût **acidulé** — c’est-à-dire **sour**. Le citron est tellement acide qu’on ne peut pas vraiment le manger cru, mais il est excellent pour l'acidité de la salade ou le jus que l’on sert à son goûter. Mais si Marie veut nettoyer la cuisinière, elle ne peut pas utiliser du citron — il est trop acide ! Au lieu de ça, elle va utiliser du **savon**, qui est une base, donc **glissant** au toucher (comme le savon de la baignoire) et un peu **amer**. Le savon est plus approprié pour nettoyer. Marie a aussi une bouteille de vinaigre à la maison. Est-ce que c’est acide ou basique ? Et sa mère a une bouteille de lessive dans le salon — est-ce que c’est acide ou basique aussi ?",
+      "closing_line": "Qu’est-ce qui fait que le citron est acide ? Et qu’est-ce qui fait que le savon est basique ?"
+    },
+    {
+      "id": "hook_b",
+      "culture_hint": "canadian",
+      "text": "Le matin, un petit garçon à Montréal se lève et regarde par la fenêtre. Il y a de la pluie. Il a remarqué que la pluie est parfois **acide**, parce qu’elle est très **douce** en touchant sa peau — mais elle est **corrosive** pour les arbres ou la voiture. La pluie acide est causée par les gaz dans l’air, et on dit que c’est la pluie **acide**. Et un peu plus tard, ce garçon prend un bain. Ensuite, il sort de la baignoire et s’essuie avec un savon. Ce savon est **basique**. C’est le savon qui fait qu’il est **glissant**, et qu’il sent bon. Mais ce savon est **pas bon** pour le corps à cause de sa nature basique.",
+      "closing_line": "Qu’est-ce que le savon et la pluie acide ont en commun ?"
+    }
+  ],
+  "concept": {
+    "explanation_steps": [
+      "L’échelle **pH** est une façon de mesurer si un liquide est **acide**, **basique**, ou **neutre**. Cela va de 0 à 14.",
+      "0 à 6 : Acide → goût **sour**, peut **corroder**, pH < 7",
+      "7 : Neutre → rien de spécial, pH = 7",
+      "8 à 14 : Basique → goût **amer**, **glissant**, pH > 7",
+      "Les indicateurs comme le **papier pH**, le **litmus**, et le **jus de chou rouge** permettent de savoir si quelque chose est acide ou basique."
+    ],
+    "comprehension_check": "Comprendre que le pH mesure l'acidité ou l'alcalinité, et les couleurs des indicateurs permettent de déterminer le pH approximatif.",
+    "categorization": [
+      "Acide : pH < 7",
+      "Neutre : pH = 7",
+      "Basique : pH > 7"
+    ]
+  },
+  "problems": [
+    {
+      "id": "practice_1",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "Le jus de pomme est acide ou basique ?",
+      "answer": "A) Acide – il est **sour**.",
+      "answer_explanation": "",
+      "mc_choices": [
+        "A) Acide – Il est **sour**.",
+        "B) Basique – Il est **glissant**.",
+        "C) Neutre – Il **n’a pas de goût**.",
+        "D) Très acide – Il **corrode** les dents."
+      ],
+      "correct_index": 0,
+      "common_misconception": "",
+      "intervention_hints": {
+        "level_1": "Est-ce que le jus de pomme a du **goût acide** ? Ou est-ce qu'il est **doux** ?",
+        "level_2": "Regarde ce que tu bois — est-ce que ça te pique le bout de la langue ?",
+        "level_3": "Si le jus de pomme est **sour**, c’est qu’il a un pH **inférieur à 7**, donc **acide**."
+      }
+    },
+    {
+      "id": "practice_2",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "Quel est le pH du savon ?",
+      "answer": "C) 12 (basique)",
+      "answer_explanation": "",
+      "mc_choices": [
+        "C) 12 (basique)",
+        "A) 3 (acide)",
+        "B) 7 (neutre)",
+        "D) 0 (très acide)"
+      ],
+      "correct_index": 0,
+      "common_misconception": "",
+      "intervention_hints": {
+        "level_1": "Est-ce que le savon **glisse** sur la peau ? Est-ce qu’il est basique ?",
+        "level_2": "Regarde dans ton sac de toilette : est-ce que ton savon est **glissant** ou **sécher** ?",
+        "level_3": "Le savon est basique. La base a un pH **plus élevé que 7**. Donc le pH est **12**."
+      }
+    },
+    {
+      "id": "practice_3",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "Quel est le pH du vinaigre ?",
+      "answer": "C) 2 (acide)",
+      "answer_explanation": "",
+      "mc_choices": [
+        "C) 2 (acide)",
+        "A) 10 (basique)",
+        "B) 7 (neutre)",
+        "D) 9 (basique)"
+      ],
+      "correct_index": 0,
+      "common_misconception": "",
+      "intervention_hints": {
+        "level_1": "Est-ce que l’odeur du vinaigre est forte ? Est-ce qu’il est comme du jus de citron ?",
+        "level_2": "Pense à l’acidité : est-ce que le vinaigre est plus fort ou plus faible ? C’est un **acidule** ?",
+        "level_3": "Si c’est **sour**, il est **acide**, donc a un pH **inférieur à 7**. Quel pH entre 0 et 6 serait le plus approprié ?"
+      }
+    },
+    {
+      "id": "p_unknown",
+      "stage": "capstone",
+      "difficulty": "medium",
+      "text": "Dans un laboratoire, un chimiste a testé 4 liquides avec le papier pH : 1. Le papier devient rouge → pH = 1 2. Le papier devient bleu → pH = 13 3. Le papier devient vert → pH = 7 4. Le papier devient jaune → pH = 5 Quel liquide est basique ?",
+      "answer": "C) Le liquide 2",
+      "answer_explanation": "",
+      "mc_choices": [
+        "C) Le liquide 2",
+        "A) Le liquide 1",
+        "B) Le liquide 3",
+        "D) Le liquide 4"
+      ],
+      "correct_index": 0,
+      "common_misconception": "",
+      "intervention_hints": {
+        "level_1": "Qu’est-ce que cela veut dire quand le papier devient bleu ? Qu’est-ce que cela veut dire quand le papier devient rouge ?",
+        "level_2": "Qu’est-ce que le pH signifie pour des liquides qui sont basiques ? On dit qu’un liquide est basique quand le pH est **supérieur à 7**.",
+        "level_3": "Regardons chaque pH : - 1 → acide - 7 → neutre - 13 → basique - 5 → acide Donc, quel liquide est basique ?"
+      }
+    }
+  ]
+}

@@ -319,11 +319,30 @@ def _generate_groq(item: dict, model: str) -> tuple[str, dict]:
 
 
 def _generate_ollama(item: dict, model: str) -> tuple[str, dict]:
-    text, usage = _generate_openai_compat(
-        item, model,
+    # Use higher timeout + max_tokens for local models — qwen3 think blocks are long
+    from openai import OpenAI
+    client = OpenAI(
         base_url="http://localhost:11434/v1",
         api_key="ollama",
+        timeout=900.0,   # 15 minutes — 30B models are slow
     )
+    system = build_system_prompt()
+    user   = build_user_prompt(item)
+    resp   = client.chat.completions.create(
+        model=model,
+        max_tokens=16384,   # think block can consume 6k+ tokens
+        messages=[
+            {"role": "system", "content": system},
+            {"role": "user",   "content": user},
+        ],
+        extra_body={"options": {"num_ctx": 32768}},  # override Ollama's default 4096 ctx
+    )
+    text  = resp.choices[0].message.content
+    usage = {
+        "input_tokens":  resp.usage.prompt_tokens     if resp.usage else 0,
+        "output_tokens": resp.usage.completion_tokens if resp.usage else 0,
+        "cost_usd":      0.0,
+    }
     # Strip Qwen3 / reasoning model <think>...</think> blocks
     text = re.sub(r"<think>.*?</think>", "", text, flags=re.DOTALL).strip()
     return text, usage

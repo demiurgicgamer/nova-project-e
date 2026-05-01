@@ -1,0 +1,113 @@
+{
+  "meta": {
+    "subject": "chemistry",
+    "topic_key": "atoms_and_elements",
+    "topic_display": "Atoms and Elements",
+    "grade": 7,
+    "region": "canada",
+    "language_code": "fr",
+    "status": "approved",
+    "review_flags": [
+      "Vérifier la précision des symboles chimiques et formules.",
+      "La représentation des charges atomiques est correcte.",
+      "Les explications pour l'atome de base sont cohérentes pour des enfants de 12 ans.",
+      "Le vocabulaire est naturel, compréhensible pour des enfants âgés de 11–12 ans.",
+      "Le langage est adéquat pour l'environnement québécois (ex: \"bordel\", \"trésor\", \"recette magique\" ont des usages appropriés)."
+    ]
+  },
+  "hook_stories": [
+    {
+      "id": "hook_a",
+      "culture_hint": "latino",
+      "text": "Il était une fois, dans un petit village en Colombie, un jeune explorateur nommé Miguel. Il aimait observer les choses autour de lui et découvrir leurs secrets. Un jour, il trouva un vieux journal d’un scientifique qui parlait d’un trésor caché dans la nature. Le trésor n’était pas un objet, mais la clé pour comprendre comment tout ce qui nous entoure est fait.\n\nLe scientifique avait laissé un message sur une feuille :\n\n> « Pour ouvrir le coffre, il faut comprendre le petit bout de ce qui fait le monde… ».\n\nMiguel était curieux. Il prit un grain de sable et le regarda bien. Il se dit : « Si un grain de sable est fait de beaucoup de choses invisibles, alors, peut-être que… ».\n\n**Et si on pouvait regarder ce grain de sable sous un microscope magique et découvrir ce qu'il est composé?**",
+      "closing_line": "Et si on pouvait regarder ce grain de sable sous un microscope magique et découvrir ce qu'il est composé?"
+    },
+    {
+      "id": "hook_b",
+      "culture_hint": "canadian",
+      "text": "Dans une grande ville canadienne, un étudiant nommé Luc a une idée incroyable : il veut faire une recette magique avec des ingrédients simples comme de l’eau et du sel. Il mélange bien, et… surprise ! Une autre substance apparaît : du sel en poudre qui s’est transformé en cristaux brillants.\n\nLuc veut en savoir plus :\n\"Pourquoi l’eau est devenue sale, et pourquoi le sel s’est transformé en cristal? Comment tout cela se passe à la plus petite échelle?\"\n\nLuc veut comprendre comment la matière change à l’intérieur même de ce qu’on appelle un **atome**.",
+      "closing_line": "Luc veut comprendre comment la matière change à l’intérieur même de ce qu’on appelle un **atome**."
+    }
+  ],
+  "concept": {
+    "explanation_steps": [
+      "Un atome est la plus petite partie d’un élément.",
+      "Un atome se compose de trois types de particules : protons, neutrons et électrons.",
+      "Les protons et neutrons forment le noyau de l'atome, tandis que les électrons tournent autour du noyau.",
+      "Chaque élément a un nombre spécial de protons, appelé numéro atomique, qui identifie l'élément.",
+      "Les éléments peuvent se combiner pour former des composés.",
+      "Le tableau périodique organise les éléments selon leur numéro atomique."
+    ],
+    "whiteboard_text": "Atome = Protons + Neutrons + Électrons. Noir = Noyau. Rouge = Électrons.",
+    "comprehension_check": "Une mole de sucre est composée de particules très petites. Quel est le nom de cette plus petite unité ?",
+    "reteach_angles": [
+      "Un atome est comme le petit bout de tout ce qui fait le monde. Imagine que tu as un grain de riz et tu essaies de le couper en deux. Peut-être que tu peux faire un demi-grain de riz… mais pas un grain. Et un grain est trop gros. Donc un atome c’est un peu comme ça.",
+      "Regarde ce qui est à l’intérieur de toi : ton corps est fait de millions de petites choses invisibles. Ce qui est encore plus petit, c’est ce que l’on appelle un atome. Et il est partout autour de toi."
+    ]
+  },
+  "problems": [
+    {
+      "id": "p_guided_1",
+      "stage": "guided",
+      "difficulty": "medium",
+      "text": "Un atome d'oxygène (O) contient 8 protons, 8 neutrons et 8 électrons. Que représente le nombre de protons?",
+      "answer": "Le type de l’atome.",
+      "answer_explanation": "Le nombre de protons définit le type d’atome, qui est aussi appelé le numéro atomique. Pour l’oxygène, les 8 protons lui donnent sa propriété unique.",
+      "mc_choices": [
+        "Le type de l’atome.",
+        "La charge totale de l’atome.",
+        "Le nombre d’orbitales.",
+        "La masse de l’atome."
+      ],
+      "correct_index": 0,
+      "common_misconception": "Certains élèves peuvent croire que le nombre de protons influence la masse ou la charge totale.",
+      "intervention_hints": {
+        "level_1": "Les protons dans un atome sont les mêmes que ceux dans un noyau. C’est comme leur nom unique.",
+        "level_2": "Chaque élément a un nombre spécial de protons, et on l’appelle **numéro atomique**.",
+        "level_3": "Tu peux identifier un élément simplement à partir de son nombre de protons : par exemple, un élément avec 8 protons est toujours de l’oxygène."
+      }
+    },
+    {
+      "id": "p_guided_2",
+      "stage": "guided",
+      "difficulty": "medium",
+      "text": "La table périodique est organisée par :",
+      "answer": "Le nombre de protons (numéro atomique)",
+      "answer_explanation": "La table périodique est organisée selon le numéro atomique, qui est le nombre de protons dans un atome. Cela permet de classer les éléments selon leur structure interne.",
+      "mc_choices": [
+        "Le nombre de protons (numéro atomique)",
+        "Le poids",
+        "Le nombre d’électrons",
+        "La couleur"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Certains élèves peuvent confondre le numéro atomique avec le nombre d’électrons ou de neutrons.",
+      "intervention_hints": {
+        "level_1": "Les éléments sont mis en ordre selon le numéro atomique.",
+        "level_2": "Regarde un tableau — le sodium a 11 protons, un autre 12 — ils sont dans l'ordre du plus petit au plus grand.",
+        "level_3": "Ce nombre de protons permet de déterminer l’élément, et c’est comment la table est faite."
+      }
+    },
+    {
+      "id": "p_challenge_1",
+      "stage": "capstone",
+      "difficulty": "hard",
+      "text": "Une recette chimique exige 1/4 d'atome d'hydrogène et 3/4 d'atome d'oxygène pour faire une molécule d'eau.\n1. Quel est le symbole chimique de l'eau ?\n2. Si tu avais 2 atome d'hydrogène et 1 atome d'oxygène, quelle molécule obtiendrais-tu ?",
+      "answer": "1. H₂O   2. H₂O (eau, qui est un composé)",
+      "answer_explanation": "Le symbole chimique de l’eau est H₂O. Dans une molécule d’eau, il y a toujours 2 atomes d’hydrogène et 1 atome d’oxygène.",
+      "mc_choices": [
+        "H₂O et H₂O",
+        "H₂O et H₃O",
+        "HO et H₂O",
+        "H₂O et H₂"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Peut-être confondre le symbole de l’eau avec un nombre incorrect d’atomes ou d’éléments.",
+      "intervention_hints": {
+        "level_1": "Quel symbole chimique est utilisé pour représenter l'eau ? Ensuite, combien d’atomes d’hydrogène et d’oxygène faut-il pour faire une molécule d'eau ?",
+        "level_2": "Regarde le symbole de base : H = hydrogène, O = oxygène. La molécule d'eau a toujours cette combinaison : H₂O.",
+        "level_3": "Pour résumer : H₂O signifie 2 atoms d’hydrogène et 1 atome d’oxygène."
+      }
+    }
+  ]
+}

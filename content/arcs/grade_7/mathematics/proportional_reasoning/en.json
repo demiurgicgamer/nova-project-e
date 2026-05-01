@@ -1,0 +1,197 @@
+{
+  "meta": {
+    "subject": "mathematics",
+    "topic_key": "proportional_reasoning",
+    "topic_display": "Proportional Reasoning",
+    "grade": 7,
+    "region": "canada",
+    "language_code": "en",
+    "status": "approved",
+    "review_flags": []
+  },
+  "hook_stories": [
+    {
+      "id": "hook_a",
+      "culture_hint": "universal",
+      "text": "Sarah is shopping online for a new backpack. She finds two deals: Deal A: Buy 2 backpacks for $40; Deal B: Buy 3 backpacks for $60. She wants to know which deal offers the better price per backpack. Which deal has the lower price per backpack?",
+      "closing_line": "Proportional reasoning helps us understand how things relate to each other. Whether we're comparing prices or seeing how much someone recycled, this skill helps us make smart decisions!"
+    },
+    {
+      "id": "hook_b",
+      "culture_hint": "canadian",
+      "text": "The Canadian government is planning a recycling program. In one neighborhood, 50 people recycled 200 kg of materials in one week. In another neighborhood, 30 people recycled 120 kg in a week. Which neighborhood had a higher average amount of items recycled per person?",
+      "closing_line": "Proportional reasoning helps us understand how things relate to each other. Whether we're comparing prices or seeing how much someone recycled, this skill helps us make smart decisions!"
+    }
+  ],
+  "concept": {
+    "explanation_steps": [
+      "Proportional relationships are when two quantities change together at a constant rate.",
+      "We can figure out how much one quantity is for one unit of another — this is called the unit rate or constant of proportionality.",
+      "If a recipe needs 2 cups of flour for every 1 cup of sugar, the ratio is 2:1.",
+      "For every 1 kg of apples, the price is $3.00. This is a unit rate of $3/kg.",
+      "To tell if a relationship is proportional: all ratios are the same, graphs form a straight line through the origin (0,0), and equations are in the form y = kx, where k is the constant of proportionality."
+    ],
+    "whiteboard_text": "Proportional relationships: constant rate, unit rate, y = kx",
+    "comprehension_check": "Which table shows a proportional relationship?\n| A | B |\n|---|- |\n| x | y |\n| 1 | 5 |\n| 2 | 10 |\n| 3 | 15 |\n\n| C | D |\n|---|- |\n| x | y |\n| 1 | 5 |\n| 2 | 10 |\n| 3 | 12 |\n\nA) Table A  B) Table B  C) Both A and B  D) Neither A nor B",
+    "reteach_angles": [
+      "Think of proportional relationships as consistent ratios - when one quantity doubles, the other doubles too.",
+      "A helpful way to test proportionality is to divide each y value by its corresponding x value; if all the results are the same, then it's proportional."
+    ]
+  },
+  "problems": [
+    {
+      "id": "p_guided_1",
+      "stage": "guided",
+      "difficulty": "easy",
+      "text": "A family plans to travel 300 km. They drive at a constant speed and cover 60 km in 1 hour. How far will they go in 4 hours?",
+      "answer": "240 km",
+      "answer_explanation": "They travel at 60 km/h. In 4 hours, they will go 60 km/h × 4 h = 240 km.",
+      "mc_choices": [
+        "240 km",
+        "120 km",
+        "200 km",
+        "300 km"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Confusing multiplying by 4 with adding 4 hours or adding 60 km four times instead of multiplying by 4.",
+      "intervention_hints": {
+        "level_1": "Think: How far does the family go in 1 hour?",
+        "level_2": "Then multiply by 4 hours",
+        "level_3": "They go 60 km in 1 hour, so in 4 hours, they go 60 × 4 = 240 km."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_guided_2",
+      "stage": "guided",
+      "difficulty": "medium",
+      "text": "A recipe for cookies says: 'Use 4 eggs for every 2 cups of flour.' How many eggs are needed for 6 cups of flour?",
+      "answer": "12 eggs",
+      "answer_explanation": "For 1 cup of flour, we need 4 ÷ 2 = 2 eggs. So for 6 cups, we need 2 × 6 = 12 eggs.",
+      "mc_choices": [
+        "12 eggs",
+        "8 eggs",
+        "10 eggs",
+        "6 eggs"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Mixing up the relationship, such as thinking 4 eggs for 6 cups means 4 × 6 = 24 eggs instead of finding the unit amount first.",
+      "intervention_hints": {
+        "level_1": "Try making a ratio table of eggs to flour",
+        "level_2": "How many eggs for 1 cup of flour? Then multiply by 6 cups",
+        "level_3": "If 4 eggs = 2 cups, then 1 cup = 2 eggs, so 6 cups = 6 × 2 = 12 eggs."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_1",
+      "stage": "practice",
+      "difficulty": "easy",
+      "text": "What is 25% of 80?",
+      "answer": "20",
+      "answer_explanation": "25% means 25/100, which equals 1/4. So 1/4 of 80 = 20.",
+      "mc_choices": [
+        "20",
+        "15",
+        "40",
+        "65"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Thinking 25% of 80 = 25 × 80 = 2000 instead of converting to a fraction or decimal.",
+      "intervention_hints": {
+        "level_1": "Do 25% of the whole number",
+        "level_2": "Turn 25% into a fraction or decimal (25/100 = 1/4)",
+        "level_3": "Think 25% of 80 means 1/4 of 80 = 20"
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_2",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "The price of a bicycle went from $200 to $240. What was the percent increase?",
+      "answer": "20%",
+      "answer_explanation": "The increase is $40. To find percent, divide 40 by 200 and multiply by 100. So 40 ÷ 200 = 0.2 = 20%.",
+      "mc_choices": [
+        "20%",
+        "10%",
+        "15%",
+        "25%"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Calculating percent increase using the new price or not dividing correctly by the original amount.",
+      "intervention_hints": {
+        "level_1": "Find the difference in price.",
+        "level_2": "Then divide the difference by the original price and multiply by 100",
+        "level_3": "Increase is $40. Divide 40 by original $200 to get 0.2 or 20%"
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_3",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "A basketball player scored 20 baskets in 5 games. If he continues scoring at the same rate, how many baskets will he score in 12 games?",
+      "answer": "60 baskets in 12 games",
+      "answer_explanation": "In one game, he scores 20 baskets ÷ 5 games = 4 baskets per game. So for 12 games, he’ll score 4 × 12 = 48 baskets.",
+      "mc_choices": [
+        "4 baskets per game; 48 baskets in 12 games",
+        "4 baskets per game; 60 baskets in 12 games",
+        "5 baskets per game; 60 baskets in 12 games",
+        "5 baskets per game; 48 baskets in 12 games"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Assuming that he keeps scoring at the same rate but confusing the final step of calculation.",
+      "intervention_hints": {
+        "level_1": "First, work out how many baskets he scores in one game",
+        "level_2": "Then you can use that to find how many he scores in 12 games",
+        "level_3": "He scored 20 baskets in 5 games, so 20 ÷ 5 = 4 baskets per game. Then 4 × 12 = 48 baskets"
+      },
+      "nova_guiding_question": "First, work out how many baskets he scores in one game. Then you can use that to find how many he scores in 12 games."
+    },
+    {
+      "id": "p_practice_4",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "A restaurant orders 200 kg of rice to last 5 weeks. At this same rate, how much rice will they need for 12 weeks?",
+      "answer": "480 kg",
+      "answer_explanation": "They use 200 kg ÷ 5 weeks = 40 kg per week. So for 12 weeks, they’ll need 40 × 12 = 480 kg.",
+      "mc_choices": [
+        "480 kg",
+        "240 kg",
+        "600 kg",
+        "360 kg"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Mixing up the calculation or doubling the original amount when the weeks are more than double.",
+      "intervention_hints": {
+        "level_1": "Find how much rice is used per week",
+        "level_2": "Multiply that amount by 12 weeks",
+        "level_3": "200 kg ÷ 5 = 40 kg per week. 40 × 12 = 480 kg"
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_5",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "A car travels at 60 km/h. How far will it travel in 3.5 hours?",
+      "answer": "210 km",
+      "answer_explanation": "Distance = Speed × Time. So 60 km/h × 3.5 h = 210 km.",
+      "mc_choices": [
+        "210 km",
+        "180 km",
+        "240 km",
+        "150 km"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Adding time or not correctly calculating 3.5 × 60.",
+      "intervention_hints": {
+        "level_1": "Use distance = speed × time",
+        "level_2": "Multiply 60 km/h by 3.5 h",
+        "level_3": "60 × 3.5 = 210 km"
+      },
+      "nova_guiding_question": ""
+    }
+  ]
+}

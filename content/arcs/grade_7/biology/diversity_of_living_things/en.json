@@ -1,0 +1,192 @@
+{
+  "meta": {
+    "subject": "biology",
+    "topic_key": "diversity_of_living_things",
+    "topic_display": "Diversity of Living Things",
+    "grade": 7,
+    "region": "canada",
+    "language_code": "en",
+    "status": "approved",
+    "review_flags": [
+      "Ensure all hook stories are culturally relevant and representative of Canada's diversity.",
+      "Verify scientific terminology is age-appropriate and accurate."
+    ]
+  },
+  "hook_stories": [
+    {
+      "id": "hook_a",
+      "culture_hint": "canadian",
+      "text": "Nova walks into a forest on a field trip. She sees moss, insects, mushrooms, plants, and some birds. She hears a buzzing sound, then sees a bee, followed by a small spider and a slug on the bark of a tree. \"Wow,\" she says, noticing how many things are happening here. Her teacher says, \"We don't usually see all these living things in one place. It's like nature’s big puzzle — we have to sort them out.\" Then she shows Nova a sheet of paper with a list of terms: Domain, Kingdom, Phylum, Class, Order, Family, Genus, Species. She explains each term is a way to organize life on Earth. \"This is how we classify living things. But how did scientists first think of this division? Why is it important? Let's start exploring.\"",
+      "closing_line": "This is how we classify living things. But how did scientists first think of this division? Why is it important? Let's start exploring."
+    },
+    {
+      "id": "hook_b",
+      "culture_hint": "canadian",
+      "text": "Nova is at the doctor's office; he's examining her for a cold. She notices he uses a tool that shows different types of microorganisms — some are rod-shaped, others are round. \"This is your body fighting an infection,\" he says, pointing to one organism. \"It's a bacteria – it can make you sick.\" She notices it's from the Kingdom Monera. The doctor points to another shape and says, \"This is a fungus – not good to have in your lungs, either. It's a pathogen.\" Then he explains how each type of microorganism causes different diseases depending on its classification. \"We organize all living things in a system so we can understand what we're fighting.\" Nova then realizes how important it is to know where things belong in the world of living things – and why.",
+      "closing_line": "Nova then realizes how important it is to know where things belong in the world of living things – and why."
+    }
+  ],
+  "concept": {
+    "explanation_steps": [
+      "Scientists classify living things using specific steps. These help them organize life and find patterns in nature. The hierarchy looks like this: [Domain][Kingdom][Phylum][Class][Order][Family][Genus][Species].",
+      "There are five kingdoms in biological classification. They include Monera (Bacteria), Protista (Single-celled organisms), Fungi (Decomposers like mushrooms), Plantae (Green plants that make their own food), and Animalia (Animals that eat other living things).",
+      "Each organism belongs to a unique binomial name, which consists of two Latin names – one for the genus (like *Homo*) and one for the species (*sapiens*).",
+      "Classifying living things allows scientists to understand how organisms function, interact, and to protect biodiversity and treat diseases."
+    ],
+    "whiteboard_text": "Domain → Kingdom → Phylum → Class → Order → Family → Genus → Species",
+    "comprehension_check": "What kingdom would a mushroom belong to?",
+    "reteach_angles": [
+      "Mushrooms do not make their own food, but instead absorb nutrients from dead material.",
+      "Mushrooms are not plants or animals, they are part of a separate kingdom called Fungi due to their ability to decompose organic matter."
+    ]
+  },
+  "problems": [
+    {
+      "id": "p_guided_1",
+      "stage": "guided",
+      "difficulty": "medium",
+      "text": "Let’s look at this organism – a single-celled creature that has a flagellum, lives in pond water, and can form spores. What kingdom might it be part of?",
+      "answer": "Protista",
+      "answer_explanation": "Protista is the kingdom that includes mostly single-celled life forms that are neither plants nor animals. This creature is described as single-celled and has a flagellum, which is a common way for protists to move.",
+      "mc_choices": [
+        "Protista",
+        "Animalia",
+        "Fungi",
+        "Plantae"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Students may mistakenly think the organism belongs to Animalia because it moves, but it does not consume other living things.",
+      "intervention_hints": {
+        "level_1": "What does it move with, and is it a plant or animal?",
+        "level_2": "Which kingdom includes single-celled organisms with flagella like this one?",
+        "level_3": "This creature lives in water and moves using a flagellum, which is typical of protist cells."
+      }
+    },
+    {
+      "id": "p_guided_2",
+      "stage": "guided",
+      "difficulty": "medium",
+      "text": "You're in a Canadian forest and find two new organisms. You identify them using a dichotomous key and classify them using the biological hierarchy. First, a small, round, non-moving organism with a cell wall, no nucleus, and is found on rotting logs. Second, a creature with a backbone, feathers, and builds nests. What kingdom and phylum do each belong to?",
+      "answer": "Monera; Chordata",
+      "answer_explanation": "The first organism is a prokaryotic organism (without a nucleus) that found on decomposing matter, which matches the characteristics of Monera (bacteria). The second has a backbone, feathers, and builds nests, so it belongs to the phylum Chordata and could be an avian animal.",
+      "mc_choices": [
+        "Monera",
+        "Fungi",
+        "Protista",
+        "Animalia"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Students might confuse the presence of a cell wall with plant or fungal life, or overlook prokaryotic nature.",
+      "intervention_hints": {
+        "level_1": "Does it have a nucleus? Does it make its own food or break down dead things?",
+        "level_2": "Does the first organism have a nucleus or lacks one?",
+        "level_3": "This organism has no nucleus and a cell wall—it is likely a type of bacteria."
+      }
+    },
+    {
+      "id": "p_practice_1",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "Which organism did the key lead to if it had feathers and thick ones?",
+      "answer": "Eagle",
+      "answer_explanation": "Looking at the dichotomous key, the sequence that begins with \"feathers\" and then moves to \"thick\" leads to the eagle. Birds with thick feathers are typically eagles or hawks, and eagles are mentioned in this key as being thick and feathers.",
+      "mc_choices": [
+        "Eagle",
+        "Cardinal",
+        "Squirrel",
+        "Bat"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Students might get confused between the branching paths and misinterpret which category matches.",
+      "intervention_hints": {
+        "level_1": "Which step in the key helped narrow it down to feathered ones?",
+        "level_2": "If it had thick feathers, which animal would be in that group?",
+        "level_3": "A dichotomous key works in pairs of choices. You only take the branch that matches the organism’s trait."
+      }
+    },
+    {
+      "id": "p_practice_2",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "Which organism can be both helpful and harmful in our daily lives?",
+      "answer": "Yeast used to make bread",
+      "answer_explanation": "Yeast is used in bread-making to help dough rise and is essential for baking. It can also be harmful or cause spoilage if misused, such as making food ferment unintentionally.",
+      "mc_choices": [
+        "Yeast used to make bread",
+        "Bacteria in our gut",
+        "Mushrooms in the forest",
+        "Algae in a lake"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Students often think only bacteria or fungi could be harmful and useful, but yeast falls under a different category yet is beneficial in food preparation.",
+      "intervention_hints": {
+        "level_1": "Which of these is used in food making and can also cause spoilage?",
+        "level_2": "Which one makes food in your kitchen, but also makes some foods ferment?",
+        "level_3": "Yeast helps in baking and brewing, but is also a microorganism that can cause food poisoning if misused."
+      }
+    },
+    {
+      "id": "p_practice_3",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "A study is done in Canada to see how many animal species live in the forest. What scientific purpose does this serve?",
+      "answer": "To understand how to protect biodiversity",
+      "answer_explanation": "Studying the number and types of species in a region helps scientists understand the ecosystem better, allowing for conservation efforts to protect vulnerable populations.",
+      "mc_choices": [
+        "To understand how to protect biodiversity",
+        "To know what’s not there",
+        "To count only the biggest animals",
+        "To prove that all species are equal"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Some might believe that counting species is just for curiosity or that it proves equality, without seeing its conservation value.",
+      "intervention_hints": {
+        "level_1": "What do we want to learn more about if we study many species?",
+        "level_2": "By studying diversity, how do we protect animals in nature?",
+        "level_3": "Knowing how many species are in a forest helps conservationists and ecologists make plans to protect fragile ecosystems."
+      }
+    },
+    {
+      "id": "p_capstone_1",
+      "stage": "capstone",
+      "difficulty": "hard",
+      "text": "First, a small, round, non-moving organism with a cell wall, no nucleus, and is found on rotting logs. What kingdom does it belong to?",
+      "answer": "Monera",
+      "answer_explanation": "This organism is described as lacking a nucleus, possessing a cell wall, and found on rotting logs, all of which are characteristic of Monera, also known as Bacteria.",
+      "mc_choices": [
+        "Monera",
+        "Fungi",
+        "Protista",
+        "Animalia"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Because the organism is non-moving and on decaying logs, one might think Fungi rather than bacteria.",
+      "intervention_hints": {
+        "level_1": "Does it have a nucleus? Does it make its own food or break down dead things?",
+        "level_2": "Does the organism have a cell wall and no nucleus?",
+        "level_3": "If it is a prokaryotic cell without a nucleus and lives in decaying logs, it's likely bacteria."
+      }
+    },
+    {
+      "id": "p_capstone_2",
+      "stage": "capstone",
+      "difficulty": "hard",
+      "text": "Second, a creature with a backbone, feathers, and builds nests. What phylum does it belong to?",
+      "answer": "Chordata",
+      "answer_explanation": "Animals with features like a backbone, feathers, and nesting behavior are vertebrates and belong to Phylum Chordata, which also includes mammals and reptiles.",
+      "mc_choices": [
+        "Chordata",
+        "Arthropoda",
+        "Reptilia",
+        "Mammalia"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Confusing bird traits with reptiles (e.g., feathers with Reptilia) or missing that vertebrates are Chordates.",
+      "intervention_hints": {
+        "level_1": "Does it have a backbone? What type of organism has feathers?",
+        "level_2": "Mammals and reptiles are vertebrates, but only birds fall under phylum Chordata with feathers.",
+        "level_3": "A creature with feathers and a backbone is classified under Chordata, which is also home to all vertebrates including birds."
+      }
+    }
+  ]
+}

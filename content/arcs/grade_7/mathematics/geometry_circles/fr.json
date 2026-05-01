@@ -1,0 +1,138 @@
+{
+  "meta": {
+    "subject": "mathematics",
+    "topic_key": "geometry_circles",
+    "topic_display": "Circles — Circumference and Area",
+    "grade": 7,
+    "region": "canada",
+    "language_code": "fr",
+    "status": "approved",
+    "review_flags": [
+      "Vérifier que toutes les équations pour l'aire et la circonférence sont exactes (π = 3,14 utilisé partout).",
+      "Confirmer la nature du problème composé (cercle + rectangle) est naturelle et accessible pour des élèves de 7e année.",
+      "Vérifier que les calculs et les options sont mathématiquement précises.",
+      "Vérifier que les interventions sont claires, accessibles et en français naturel."
+    ]
+  },
+  "hook_stories": [
+    {
+      "id": "hook_a",
+      "culture_hint": "universal",
+      "text": "Alors, imagine que tu traverses ta rue et tu vois sur le trottoir une voiture avec une roue qui tourne. Elle roule avec une vitesse régulière, et tu te demandes : \"Combien de cercle fait-elle en un tour complet ?\" C’est la **circonférence** de la roue.\n\nImagine de plus que cette roue fait **10 tours** sur une distance de **31,4 mètres**. Combien mesure la circonférence de cette roue ? Une roue de vélo ou de voiture — toute roue a une circonférence.\n\nTu connais déjà les dimensions des figures, alors maintenant on va faire attention aux cercles.",
+      "closing_line": "Tu es prêt à découvrir comment faire les calculs ?"
+    },
+    {
+      "id": "hook_b",
+      "culture_hint": "universal",
+      "text": "Tu es invité à un goûter chez ta grand-mère qui a préparé un **gâteau rond**. Ce gâteau est divisé en **8 parts égales**, comme s’il était un cercle coupé en morceaux. Tu vois la surface du gâteau… Cela te rappelle quelque chose ? La **surface du cercle**, c’est-à-dire son aire.\n\nMais la grand-mère t’a dit qu’elle voulait un gâteau **plus grand** cette fois, avec un rayon de **10 cm**. Combien fait l’aire de ce gâteau ? Cela dépend de son rayon.\n\nCe que tu veux savoir, c’est : comment trouver la **circonférence** et l’**aire** d’un cercle.",
+      "closing_line": "Alors, on va apprendre à trouver ces mesures !"
+    }
+  ],
+  "concept": {
+    "explanation_steps": [
+      "Le rayon est la distance du centre du cercle à n’importe quel point sur la circonférence.",
+      "Le diamètre est deux fois le rayon, et passe par le centre.",
+      "La circonférence est la ligne courbe qui délimite le cercle.",
+      "L’aire est l’espace à l’intérieur du cercle.",
+      "La constante π (pi) est un nombre spécial qui nous dit que, quelle que soit la taille du cercle, la circonférence divisée par le diamètre donne toujours environ 3,14.",
+      "La formule de la circonférence est C = π × diamètre.",
+      "La formule de l'aire est A = π × rayon²."
+    ],
+    "whiteboard_text": "Rayon = distance du centre au bord\nDiamètre = 2 × rayon\nCirconférence = π × diamètre\nAire = π × rayon²\nπ ≈ 3,14",
+    "comprehension_check": "Si un cercle a un rayon de 5 cm, quelle est l’aire ?",
+    "reteach_angles": [
+      "L'aire du cercle peut aussi être vue comme la surface qu’un cercle recouvre — comme si on l'emplissait avec des petits carrés.",
+      "Pour trouver la circonférence, il suffit de multiplier le diamètre par π, une constante qui est toujours environ 3,14."
+    ]
+  },
+  "problems": [
+    {
+      "id": "p_guided_1",
+      "stage": "guided",
+      "difficulty": "medium",
+      "text": "Une roue a un diamètre de 14 cm. Quelle est sa circonférence ? (Utilise π = 3,14)",
+      "answer": "43,96 cm",
+      "answer_explanation": "La circonférence est π × diamètre = 3,14 × 14 = 43,96 cm.",
+      "mc_choices": [
+        "43,96 cm",
+        "21,98 cm",
+        "28 cm",
+        "42 cm"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Penser que la circonférence est égale à π × rayon au lieu de π × diamètre.",
+      "intervention_hints": {
+        "level_1": "La circonférence est π × diamètre.",
+        "level_2": "C = π × d = 3,14 × 14 = ?",
+        "level_3": "14 multiplié par 3,14 = 43,96."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_1a",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "Quelle est l’aire d’un cercle avec un rayon de 7 cm ? (π = 3,14)",
+      "answer": "153,86 cm²",
+      "answer_explanation": "A = π × r² = 3,14 × 7² = 3,14 × 49 = 153,86 cm².",
+      "mc_choices": [
+        "153,86 cm²",
+        "49 cm²",
+        "219,8 cm²",
+        "98 cm²"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Calculer le carré du rayon incorrectement (par exemple 7 × 2 = 14, puis 3,14 × 14 = 43,96).",
+      "intervention_hints": {
+        "level_1": "Utilise la formule : A = π × r².",
+        "level_2": "Calcule 7² = 49, puis multiplie par 3,14.",
+        "level_3": "3,14 × 49 = 153,86 cm²."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_1b",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "Un cercle a un rayon de 3 cm. Un rectangle adjacent au cercle a une longueur de 6 cm et une largeur de 3 cm. Quelle est l’aire totale de cette figure composée ?",
+      "answer": "46,26 cm²",
+      "answer_explanation": "Aire du cercle : π × 3² = 9π ≈ 28,26 cm².\nAire du rectangle : 6 × 3 = 18 cm².\nAire totale : 28,26 + 18 = 46,26 cm².",
+      "mc_choices": [
+        "46,26 cm²",
+        "28,26 cm²",
+        "18 cm²",
+        "12,26 cm²"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Calculer l’aire du rectangle incorrectement ou oublier d’additionner les deux aires.",
+      "intervention_hints": {
+        "level_1": "Trouve l’aire du cercle, puis celle du rectangle.",
+        "level_2": "Aire cercle = π × 3² = 9π ≈ 28,26 cm²\nAire rectangle = 6 × 3 = 18 cm²",
+        "level_3": "Additionne les deux : 28,26 + 18 = 46,26 cm²."
+      },
+      "nova_guiding_question": "Quelle est l’aire du cercle ? Et celle du rectangle ? Comment les additionnes-tu ?"
+    },
+    {
+      "id": "p_practice_1c",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "Un cercle a un diamètre de 8 cm, et un rectangle adjacent a une longueur de 8 cm et une largeur de 4 cm. Quel est le périmètre total de la figure composée ?",
+      "answer": "28,26 cm",
+      "answer_explanation": "Le périmètre du cercle est π × diamètre = 3,14 × 8 = 25,12 cm.\nLe périmètre du rectangle est 2 × (8 + 4) = 24 cm.\nTotal = 25,12 + 24 = 49,12 cm.",
+      "mc_choices": [
+        "49,12 cm",
+        "25,12 cm",
+        "24 cm",
+        "28,26 cm"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Calculer le périmètre du cercle en utilisant le rayon au lieu du diamètre.",
+      "intervention_hints": {
+        "level_1": "Calcule le périmètre du cercle et du rectangle séparément.",
+        "level_2": "Périmètre cercle = π × diamètre = 3,14 × 8 = 25,12 cm.\nPérimètre rectangle = 2 × (8 + 4) = 24 cm.",
+        "level_3": "Additionne les deux : 25,12 + 24 = 49,12 cm."
+      },
+      "nova_guiding_question": ""
+    }
+  ]
+}

@@ -41,7 +41,7 @@ PROVIDER_DEFAULTS = {
     "anthropic": "claude-opus-4-5",
     "gemini":    "gemini-2.0-flash",
     "groq":      "llama-3.3-70b-versatile",
-    "ollama":    "llama3.1",
+    "ollama":    "qwen3-coder:30b",   # matches generate_arc.py default
 }
 
 # ── Paths ─────────────────────────────────────────────────────────────────────
@@ -231,17 +231,24 @@ def _export_anthropic(item: dict, model: str) -> tuple[dict, dict]:
 
 
 def _export_gemini(item: dict, model: str) -> tuple[dict, dict]:
-    import google.generativeai as genai
+    # Uses google-genai (new SDK) — same as nova_agent.py and generate_arc.py
+    # pip install google-genai   (NOT google-generativeai)
+    from google import genai
+    from google.genai import types as genai_types
     api_key = os.environ.get("GEMINI_API_KEY")
     if not api_key:
         print("\n  ERROR: GEMINI_API_KEY not set in .env", file=sys.stderr)
         sys.exit(1)
-    genai.configure(api_key=api_key)
-    gemini  = genai.GenerativeModel(model_name=model, system_instruction=SYSTEM_PROMPT)
+    client  = genai.Client(api_key=api_key)
     md_text = item["md_path"].read_text(encoding="utf-8")
-    resp    = gemini.generate_content(
-        f"Convert this arc to JSON:\n\n{md_text}",
-        generation_config=genai.types.GenerationConfig(max_output_tokens=8192),
+    resp    = client.models.generate_content(
+        model=model,
+        contents=f"Convert this arc to JSON:\n\n{md_text}",
+        config=genai_types.GenerateContentConfig(
+            system_instruction=SYSTEM_PROMPT,
+            max_output_tokens=8192,
+            temperature=0.2,   # low temp — we want deterministic JSON extraction
+        ),
     )
     json_data = _parse_json_response(resp.text)
     _stamp_meta(json_data, item)
@@ -286,9 +293,30 @@ def _export_groq(item: dict, model: str) -> tuple[dict, dict]:
 
 
 def _export_ollama(item: dict, model: str) -> tuple[dict, dict]:
-    return _export_openai_compat(item, model,
-                                  base_url="http://localhost:11434/v1",
-                                  api_key="ollama")
+    # Use higher timeout + max_tokens for Ollama — qwen3 think blocks are long
+    from openai import OpenAI
+    client  = OpenAI(
+        base_url="http://localhost:11434/v1",
+        api_key="ollama",
+        timeout=900.0,   # 15 minutes — 30B models are slow
+    )
+    md_text = item["md_path"].read_text(encoding="utf-8")
+    resp    = client.chat.completions.create(
+        model=model, max_tokens=16384,
+        messages=[
+            {"role": "system", "content": SYSTEM_PROMPT},
+            {"role": "user",   "content": f"Convert this arc to JSON:\n\n{md_text}"},
+        ],
+        extra_body={"options": {"num_ctx": 32768}},  # override Ollama's default 4096 ctx
+    )
+    json_data = _parse_json_response(resp.choices[0].message.content)
+    _stamp_meta(json_data, item)
+    usage = {
+        "input_tokens":  resp.usage.prompt_tokens     if resp.usage else 0,
+        "output_tokens": resp.usage.completion_tokens if resp.usage else 0,
+        "cost_usd":      0.0,
+    }
+    return json_data, usage
 
 
 EXPORTERS = {
@@ -345,7 +373,9 @@ def main():
     if args.dry_run:
         print("  DRY RUN\n")
 
-    total_cost = 0.0
+    total_cost  = 0.0
+    saved_count = 0
+    error_count = 0
 
     for i, item in enumerate(approved, 1):
         label = f"{item['subject']}/{item['topic_key']}/{item['language']}"
@@ -361,15 +391,20 @@ def main():
             json_data, usage = export_to_json(item, model, args.provider)
         except json.JSONDecodeError as e:
             print(f"\n         ERROR: Invalid JSON from {args.provider}: {e}")
+            print(f"         *** SKIPPED — fix the error above and re-run ***")
+            error_count += 1
             continue
         except Exception as e:
-            print(f"\n         ERROR: {e}")
+            print(f"\n         ERROR: {type(e).__name__}: {e}")
+            print(f"         *** SKIPPED — fix the error above and re-run ***")
+            error_count += 1
             continue
 
         item["json_path"].write_text(
             json.dumps(json_data, indent=2, ensure_ascii=False),
             encoding="utf-8"
         )
+        saved_count += 1
 
         total_cost += usage["cost_usd"]
         flags = json_data.get("meta", {}).get("review_flags", [])
@@ -383,10 +418,13 @@ def main():
 
     if not args.dry_run:
         print(f"\n  {'=' * 56}")
-        print(f"  Done. {len(approved)} JSON file(s) exported.")
+        print(f"  Done. {saved_count}/{len(approved)} JSON file(s) exported.  Errors: {error_count}")
         total_str = f"~${total_cost:.4f} USD" if total_cost > 0 else "free"
         print(f"  Total cost: {total_str}")
-        print(f"\n  NEXT STEP: python insert_arc.py --grade {args.grade}")
+        if error_count == 0:
+            print(f"\n  NEXT STEP: python insert_arc.py --grade {args.grade}")
+        else:
+            print(f"\n  Fix errors above, then re-run. Already-exported .json files will be skipped.")
         print(f"  {'=' * 56}\n")
 
 

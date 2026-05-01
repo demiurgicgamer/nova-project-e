@@ -1,0 +1,198 @@
+{
+  "meta": {
+    "subject": "mathematics",
+    "topic_key": "two_step_equations",
+    "topic_display": "Two-Step Equations and Inequalities",
+    "grade": 7,
+    "region": "canada",
+    "language_code": "en",
+    "status": "approved",
+    "review_flags": []
+  },
+  "hook_stories": [
+    {
+      "id": "hook_a",
+      "culture_hint": "canadian",
+      "text": "In the spring, Canada’s Maple Leaf Airlines is offering a promotion. They’re saying that if you pay for a round-trip ticket that costs $200, plus $100 for a seat upgrade, you'll get a $50 discount on your total. You are planning a weekend trip. You want to know how much the seat upgrade would cost if you want the total trip to be $250. The math is: 200 + x + 100 = 250, where x is the cost of the upgrade.",
+      "closing_line": "But there's more. You decide you're going to buy a travel insurance policy that costs $45. You find out that if you include the insurance, the total comes to $295. So, the math is: 200 + x + 100 + 45 = 295, where x is still the cost of the upgrade. How much did each upgrade cost in both cases?"
+    },
+    {
+      "id": "hook_b",
+      "culture_hint": "canadian",
+      "text": "In a small town in Ontario, a group of 7th graders decide to raise money for their field trip by selling cookies. They’ve already sold 12 boxes at $3 each and still need to collect $48 more. What should they charge for each additional box? Let x = the price of each additional box. The math is: 12 × 3 + x = 48. How much should they charge per box?",
+      "closing_line": ""
+    }
+  ],
+  "concept": {
+    "explanation_steps": [
+      "To solve a two-step equation, you must follow the Reverse Order of Operations (PEMDAS backwards). You isolate the variable by working backwards from the final number.",
+      "Example: 3x + 7 = 16. Step 1: Subtract 7 from both sides to undo the addition. Step 2: Divide by 3 to undo the multiplication.",
+      "Inequalities use the same process but with inequality signs (like <, >, ≤, ≥). You solve them just like equations, except if you multiply or divide by a negative number, you must flip the inequality sign.",
+      "Example: 2x + 5 < 15. Step 1: Subtract 5 from both sides. Step 2: Divide by 2 (no flipped sign needed).",
+      "To graph inequalities: use an open circle for > or <; use a closed circle for ≤ or ≥; shade the appropriate side of the number line.",
+      "You also need to 'check solutions' by substituting them back into the original equation or inequality to see if it is true."
+    ],
+    "whiteboard_text": "3x + 7 = 16 → Sub 7 then divide by 3",
+    "comprehension_check": "What is the reverse order of operations?",
+    "reteach_angles": [
+      "A two-step equation uses two inverse operations to isolate a variable. Think of it like undoing steps.",
+      "When solving inequalities, if you multiply or divide by a negative number, you must flip the sign. It’s like a mirror effect."
+    ]
+  },
+  "problems": [
+    {
+      "id": "p_guided_1",
+      "stage": "guided",
+      "difficulty": "medium",
+      "text": "A car rental company charges a fixed fee of $10 plus $0.25 per kilometer driven. You paid $18.75 to rent the car. How many kilometers did you drive? Let x = number of kilometers driven. Equation: 10 + 0.25x = 18.75.",
+      "answer": "35 km",
+      "answer_explanation": "10 + 0.25x = 18.75 → 0.25x = 8.75 → x = 35",
+      "mc_choices": [
+        "35 km",
+        "25 km",
+        "45 km",
+        "55 km"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Students may subtract 0.25x from 10 instead of subtracting 10.",
+      "intervention_hints": {
+        "level_1": "What needs to be removed first?",
+        "level_2": "What operation undoes addition?",
+        "level_3": "When dividing, how can you avoid decimals?"
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_1a",
+      "stage": "practice",
+      "difficulty": "easy",
+      "text": "A class is ordering pizza. They’ve already spent $30 on sauce and toppings. Each pizza costs $12, and they need to buy 5 more pizzas to have enough. How much did the class spend in total? Equation: 30 + 5 × 12 = x. What is x?",
+      "answer": "90",
+      "answer_explanation": "5 × 12 = 60, then 30 + 60 = 90",
+      "mc_choices": [
+        "90",
+        "60",
+        "120",
+        "150"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Confusing order of operations by doing addition first.",
+      "intervention_hints": {
+        "level_1": "What is 5 × 12?",
+        "level_2": "What do you add to 60 to get the total?",
+        "level_3": "What's the total cost?"
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_1b",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "Sarah is saving money for a new bike. She already has $40 and saves $5 a week. She wants to save for 20 weeks. How much money will she have in total? Equation: 40 + 5(20) = x. What is x?",
+      "answer": "140",
+      "answer_explanation": "5 × 20 = 100, then 100 + 40 = 140",
+      "mc_choices": [
+        "140",
+        "90",
+        "100",
+        "200"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Confusing multiplication with addition in order of operations.",
+      "intervention_hints": {
+        "level_1": "What is 5 multiplied by 20?",
+        "level_2": "What do you add to 100 to get the total?",
+        "level_3": "What's the total after adding $40?"
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_1c",
+      "stage": "practice",
+      "difficulty": "hard",
+      "text": "She later realizes she can also rent a backpack for the trip, but it costs $35. If this brings her total spending to $185, how much is her backpack costing? Let y = cost of backpack. Equation: 70 + 30 + y = 185. Solve for y.",
+      "answer": "85",
+      "answer_explanation": "70 + 30 = 100, then 185 - 100 = 85",
+      "mc_choices": [
+        "85",
+        "70",
+        "80",
+        "90"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Incorrectly solving for y by skipping the first addition.",
+      "intervention_hints": {
+        "level_1": "What is 70 + 30?",
+        "level_2": "What number, when added to 100, gives 185?",
+        "level_3": "How much does the backpack cost?"
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_capstone_1",
+      "stage": "capstone",
+      "difficulty": "hard",
+      "text": "Let x = money spend on snacks. Equation: 70 + x + 30 = 150. What is the value of x?",
+      "answer": "50",
+      "answer_explanation": "70 + 30 = 100, 150 - 100 = 50",
+      "mc_choices": [
+        "50",
+        "40",
+        "60",
+        "70"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Subtracting 180 from 150 instead of adding up the terms.",
+      "intervention_hints": {
+        "level_1": "What is 70 + 30?",
+        "level_2": "How much is left after subtracting from 150?",
+        "level_3": "What is x?"
+      },
+      "nova_guiding_question": "What is the total initial amount Tania spends, and what is the extra amount she spends later?"
+    },
+    {
+      "id": "p_capstone_2",
+      "stage": "capstone",
+      "difficulty": "hard",
+      "text": "Let y = cost of backpack. Equation: 70 + 30 + y = 185. What is the value of y?",
+      "answer": "85",
+      "answer_explanation": "70 + 30 = 100, 185 - 100 = 85",
+      "mc_choices": [
+        "85",
+        "70",
+        "80",
+        "90"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Not subtracting correctly from 185 or skipping a step.",
+      "intervention_hints": {
+        "level_1": "What is 70 plus 30?",
+        "level_2": "How much does y have to equal in order to reach 185?",
+        "level_3": "What does the backpack cost?"
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_retry_1",
+      "stage": "capstone",
+      "difficulty": "medium",
+      "text": "A car is traveling at 60 km/h for a certain amount of time. The total distance covered is 180 km. How long did it take to travel? Equation: 60 × t = 180. Solve for t.",
+      "answer": "3 hours",
+      "answer_explanation": "180 ÷ 60 = 3",
+      "mc_choices": [
+        "3 hours",
+        "2 hours",
+        "4 hours",
+        "5 hours"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Misreading the problem; dividing 60 by 180 instead.",
+      "intervention_hints": {
+        "level_1": "How many times does 60 go into 180?",
+        "level_2": "To find time, divide distance by speed.",
+        "level_3": "How long did the car travel?"
+      },
+      "nova_guiding_question": ""
+    }
+  ]
+}

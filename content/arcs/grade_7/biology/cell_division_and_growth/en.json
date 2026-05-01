@@ -1,0 +1,152 @@
+{
+  "meta": {
+    "subject": "biology",
+    "topic_key": "cell_division_and_growth",
+    "topic_display": "Cell Division and Growth",
+    "grade": 7,
+    "region": "canada",
+    "language_code": "en",
+    "status": "approved",
+    "review_flags": [
+      "Contains reference to cancer as uncontrolled cell division, which must be presented in a factual, non-scary, age-appropriate way.",
+      "No explicit mention of how the body controls cell division or what ensures correct cell types are made."
+    ]
+  },
+  "hook_stories": [
+    {
+      "id": "hook_a",
+      "culture_hint": "universal",
+      "text": "Imagine Emma, a 12-year-old, has just grown 2 inches taller this year. How is it possible? Is Emma’s body getting bigger because her body parts are just growing larger? Actually, no — her body gets bigger by making **more** cells. Every time her bones grow longer, or her muscles get stronger, or her organs work harder, her body is making **new cells** to do the job. But how do these brand-new cells get made?\n\nIn one of her science class experiments, Emma found out that her body is constantly making new cells to grow. She looked at a sample of skin under a microscope and saw that the cells were **changing shape** and **splitting apart** to make copies. That process is called **cell division**. Emma wonders — why does the body need to grow cells all the time, and how does it know how to build the new cells?",
+      "closing_line": "How does the body know what to build in each new cell? What does DNA do in all those new cells? When cells divide, is there a special plan or instruction manual?"
+    },
+    {
+      "id": "hook_b",
+      "culture_hint": "universal",
+      "text": "One morning, Liam was playing soccer in the schoolyard. He fell and cut his knee. Right away, his body began to heal himself. The skin and tissue around the cut grew back to cover it up. How did this happen? His body made new cells to grow back the damaged skin — but how did it know to **make exactly the right skin cells** to fix his knee?\n\nLiam’s science project showed him how his body was able to **make new body parts**. He learned that this **cell regeneration** isn't just about growing more cells, but choosing the right type to do the job — like the skin cells to fix a cut, the muscle cells to heal a muscle, or nerve cells to restore sensation.\n\nHis teacher told him that all new cells start with the **same basic instruction manual** inside them — this is **DNA**. DNA is copied every time a cell divides, so each new cell knows exactly what role it has to play.\n\nLiam was amazed — his body is **like a factory**, with instructions for making different cells to build bones, skin, muscle, and more. And when a cell divides, it’s not random — it follows a special **plan**.",
+      "closing_line": "How does the body know what to build in each new cell? What does DNA do in all those new cells? When cells divide, is there a special plan or instruction manual?"
+    }
+  ],
+  "concept": {
+    "explanation_steps": [
+      "Cells divide to allow the body to grow.",
+      "Cells also divide to repair damages like wounds.",
+      "Cells divide to replace old or damaged cells.",
+      "Mitosis is the process where one cell splits into two identical cells.",
+      "DNA is the instruction manual inside cells that tells the cells what to become and how to work.",
+      "During mitosis, DNA is copied, and then the cell splits into two."
+    ],
+    "whiteboard_text": "[Body]\n├── → [Cells]\n│   └── → [DNA copied]\n│       └── → [Mitosis: Cell splitting into two new cells]\n│           └── → [New cells have same DNA → grow into special cells]\n└── → [Different types of cells needed: skin, muscle, etc.]",
+    "comprehension_check": "How does growth happen in your body?",
+    "reteach_angles": [
+      "Think of growth like building a LEGO house — the body needs to make more LEGO blocks (cells) to get bigger.",
+      "Imagine a garden: plants grow taller and wider by making more cells (leaves and roots), just like your body."
+    ]
+  },
+  "problems": [
+    {
+      "id": "p_comprehension_check",
+      "stage": "guided",
+      "difficulty": "easy",
+      "text": "How does growth happen in your body?",
+      "answer": "B",
+      "answer_explanation": "Growth happens in the body by making more cells. The body gets bigger by creating new cells rather than making existing cells larger.",
+      "mc_choices": [
+        "B) Your body makes more cells",
+        "A) Your body parts just get larger",
+        "C) Your body gets taller and wider, but not more cells",
+        "D) Your body stops making cells"
+      ],
+      "correct_index": 0,
+      "common_misconception": "A) Suggests external influence instead of internal instruction",
+      "intervention_hints": {
+        "level_1": "What would happen if a skin cell didn’t know what it was supposed to be? Where would it get that information?",
+        "level_2": "How does DNA act like a recipe? It tells each cell what to build — for example, muscle or brain cells.",
+        "level_3": "What happens in a cell when it divides? Does it copy itself or just change its shape?"
+      }
+    },
+    {
+      "id": "p_practice_1",
+      "stage": "practice",
+      "difficulty": "easy",
+      "text": "Which of the following best describes what happens during mitosis?",
+      "answer": "B",
+      "answer_explanation": "During mitosis, DNA copies and then the cell splits into two identical cells.",
+      "mc_choices": [
+        "B) DNA copies, and then cell splits into two",
+        "A) Cell splits but DNA does not copy",
+        "C) Cell merges with another cell",
+        "D) DNA and cell both die in the process"
+      ],
+      "correct_index": 0,
+      "common_misconception": "A) Incorrectly says DNA doesn't copy",
+      "intervention_hints": {
+        "level_1": "When a cell divides, what happens to the DNA inside it? Does it copy first or does it leave?",
+        "level_2": "Imagine splitting a sandwich in half — the same idea is happening in a cell!",
+        "level_3": "After DNA copies itself, what does the cell do next to form two new cells?"
+      }
+    },
+    {
+      "id": "p_practice_2",
+      "stage": "practice",
+      "difficulty": "easy",
+      "text": "Which of the following is NOT a reason why cells divide?",
+      "answer": "C",
+      "answer_explanation": "Cells divide to grow, repair, and replace cells, but not to reproduce sex cells. That process is meiosis.",
+      "mc_choices": [
+        "C) To reproduce sex cells",
+        "A) To repair damage",
+        "B) To grow the body",
+        "D) To replace old cells"
+      ],
+      "correct_index": 0,
+      "common_misconception": "A) Incorrectly includes reproduction instead of growth and repair",
+      "intervention_hints": {
+        "level_1": "What are two main jobs of cell division — growing up or fixing cuts?",
+        "level_2": "How does the body make new skin? Does it grow by splitting cells or does it need a special process for making babies?",
+        "level_3": "Think of what happens inside a wound — it's all about cell repair and growth, not reproduction."
+      }
+    },
+    {
+      "id": "p_practice_3",
+      "stage": "practice",
+      "difficulty": "easy",
+      "text": "Which of the following best describes what happens during mitosis?",
+      "answer": "B",
+      "answer_explanation": "During mitosis, DNA copies, and then the cell splits into two identical cells.",
+      "mc_choices": [
+        "B) DNA copies, and then cell splits into two",
+        "A) Cell splits but DNA does not copy",
+        "C) Cell merges with another cell",
+        "D) DNA and cell both die in the process"
+      ],
+      "correct_index": 0,
+      "common_misconception": "A) Incorrectly says DNA doesn’t copy",
+      "intervention_hints": {
+        "level_1": "When a cell divides, what happens to the DNA inside it? Does it copy first or does it leave?",
+        "level_2": "Imagine splitting a sandwich in half — the same idea is happening in a cell!",
+        "level_3": "After DNA copies itself, what does the cell do next to form two new cells?"
+      }
+    },
+    {
+      "id": "p_capstone",
+      "stage": "capstone",
+      "difficulty": "medium",
+      "text": "A child has a cut on their arm. Which of the following processes helps the body repair the cut?",
+      "answer": "B",
+      "answer_explanation": "The body repairs a cut by dividing cells to create skin cells.",
+      "mc_choices": [
+        "B) The body divides cells to create skin cells",
+        "A) The body stops cell division",
+        "C) The body uses more fat cells to replace the cut",
+        "D) The body replaces the skin by splitting the cut into two"
+      ],
+      "correct_index": 0,
+      "common_misconception": "A) Incorrectly says cells stop dividing",
+      "intervention_hints": {
+        "level_1": "If you have a cut, what needs to grow back to cover it? What kind of cell do you need?",
+        "level_2": "Skin cells are made by splitting other skin cells — what role does cell division play in healing?",
+        "level_3": "When a cell splits, does it make a copy of itself or change its shape?"
+      }
+    }
+  ]
+}

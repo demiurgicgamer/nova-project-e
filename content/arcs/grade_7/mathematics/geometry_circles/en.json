@@ -1,0 +1,126 @@
+{
+  "meta": {
+    "subject": "mathematics",
+    "topic_key": "geometry_circles",
+    "topic_display": "Circles — Circumference and Area",
+    "grade": 7,
+    "region": "canada",
+    "language_code": "en",
+    "status": "approved",
+    "review_flags": []
+  },
+  "hook_stories": [
+    {
+      "id": "hook_a",
+      "culture_hint": "universal",
+      "text": "You're going to build a new playground on your school's land – and part of it is going to need a circular sandbox with a diameter of 12 feet. Your supervisor wants to make sure it's the right size, so she asks you: \"How far would you walk around the edge of that sandbox?\" This measurement is the **circumference** of the circle. Then she asks: \"How much sand would fit in it?\" That would be the **area** of the circle. But here’s the kicker – your supervisor is also wondering how many times a wheel from a school bus (with a diameter of 2.5 feet) would need to rotate to cover the full length of that 12-foot diameter sandbox’s edge. This is a real-world problem in motion, and to solve it, we need to know the circumference and be able to use the constant π.",
+      "closing_line": "Wouldn't it be great to learn how to calculate these? This is the power of understanding circles!"
+    },
+    {
+      "id": "hook_b",
+      "culture_hint": "canadian",
+      "text": "Using the same concept (wheel rotation) as in the French \"pièce de resistance\" of the Canadian road system where wheel size and measurements are important for traffic control and vehicle safety.",
+      "closing_line": "Wouldn't it be great to learn how to calculate these? This is the power of understanding circles!"
+    }
+  ],
+  "concept": {
+    "explanation_steps": [
+      "Let’s talk about circles and how they work. A circle has a **center**, and from that center, all points on the edge are the same distance. That distance is the circle’s **radius (r)**. The **diameter (d)** is twice the radius, so d = 2r.",
+      "When we go around the edge of a circle, that distance is called the **circumference** (C). If you could stretch that edge out straight, the circumference would be longer than the diameter.",
+      "There’s this special number, **π (pi)**, that helps us find the circumference. No matter what size the circle is, the ratio of its circumference to its diameter is always the same. That number is about 3.14159 and is written as π.",
+      "The **formula** for **circumference** is: **C = πd** or **C = 2πr**. The **area** of a circle is found using: **A = πr²**. In real life, circles are found everywhere – car wheels, pizza, clocks, garden hoses, and even the rings of Saturn."
+    ],
+    "whiteboard_text": "C = πd or C = 2πr; A = πr²",
+    "comprehension_check": "The diameter of a circle is 6 meters. What is the radius?",
+    "reteach_angles": [
+      "Think of a circle’s diameter and radius like a line from center to edge – how does that compare to a line all the way across?",
+      "Which is twice as big: the radius or the diameter? The diameter is twice the radius."
+    ]
+  },
+  "problems": [
+    {
+      "id": "p_guided_1",
+      "stage": "guided",
+      "difficulty": "medium",
+      "text": "A circular swimming pool has a radius of 7 feet. What is the area of the pool, using π ≈ 3.14?",
+      "answer": "153.86 sq ft",
+      "answer_explanation": "Using the formula A = πr², we get A = 3.14 × 7² = 3.14 × 49 = 153.86 sq ft.",
+      "mc_choices": [
+        "153.86 sq ft",
+        "43.96 sq ft",
+        "219.8 sq ft",
+        "112.96 sq ft"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Confusing the formula for area with perimeter or diameter calculation.",
+      "intervention_hints": {
+        "level_1": "You know π and r. What’s the first step to calculate area?",
+        "level_2": "Which formula do you use for area of a circle?",
+        "level_3": "Multiply 3.14 by 7, then multiply that result by 7 again."
+      }
+    },
+    {
+      "id": "p_practice_1",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "A circular fountain has a radius of 5 feet. What is the circumference of the fountain? (Use π ≈ 3.14)",
+      "answer": "31.4 feet",
+      "answer_explanation": "Using the formula C = 2πr, we get C = 2 × 3.14 × 5 = 31.4 feet.",
+      "mc_choices": [
+        "31.4 feet",
+        "15.7 feet",
+        "31.4 feet²",
+        "78.5 feet²"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Confusing circumference with area or using the wrong formula.",
+      "intervention_hints": {
+        "level_1": "Which formula do you use for circumference?",
+        "level_2": "Do you use diameter or radius in the circumference formula?",
+        "level_3": "This is a distance – should it have square units (²)?"
+      }
+    },
+    {
+      "id": "p_practice_2",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "A bicycle wheel has a radius of 14 inches. What is the distance the wheel would travel in 5 complete rotations? (Use π ≈ 3.14)",
+      "answer": "439.6 inches",
+      "answer_explanation": "First, calculate the circumference: C = 2πr = 2 × 3.14 × 14 = 87.92 inches. Then multiply by 5: 87.92 × 5 = 439.6 inches.",
+      "mc_choices": [
+        "439.6 inches",
+        "87.92 inches",
+        "879.2 inches",
+        "100.48 inches"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Confusing the number of rotations with the circumference or forgetting to multiply by the number of rotations.",
+      "intervention_hints": {
+        "level_1": "How do you find the distance for one full rotation?",
+        "level_2": "Remember to multiply the circumference by 5 to account for all rotations.",
+        "level_3": "Check that you are multiplying by the right numbers to get the final distance."
+      }
+    },
+    {
+      "id": "p_capstone_1",
+      "stage": "capstone",
+      "difficulty": "hard",
+      "text": "A circular garden with diameter 20 meters is surrounded by a path 3 meters wide. What is the area of the path? (Hint: The path forms a larger circle around the garden.)",
+      "answer": "215.92 sq m",
+      "answer_explanation": "Garden radius = 10 m, Outer radius = 13 m. Area of outer circle = π(13)² = 3.14 × 169 = 530.66 sq m. Area of garden = π(10)² = 3.14 × 100 = 314 sq m. Area of path = 530.66 − 314 = 216.66 sq m ≈ 215.92 sq m.",
+      "mc_choices": [
+        "215.92 sq m",
+        "113.04 sq m",
+        "138.16 sq m",
+        "226.08 sq m"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Misunderstanding how to calculate the area of the path, often by subtracting the garden area from the total area instead of subtracting the inner from the outer circle.",
+      "intervention_hints": {
+        "level_1": "Identify the radii of the inner and outer circles.",
+        "level_2": "Calculate the area of both circles first.",
+        "level_3": "Remember to find the difference in the areas to get the area of the path."
+      }
+    }
+  ]
+}

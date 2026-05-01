@@ -1,0 +1,142 @@
+{
+  "meta": {
+    "subject": "biology",
+    "topic_key": "heredity_and_traits",
+    "topic_display": "Heredity and Traits",
+    "grade": 7,
+    "region": "canada",
+    "language_code": "en",
+    "status": "approved",
+    "review_flags": [
+      "Ensure that Punnett square examples only include simple dominant-recessive combinations and that sex-linked or complex traits are not introduced.",
+      "Confirm that the language around genetic diseases is accurate, factual, and not alarmistic.",
+      "Check that example genotypes and phenotypes used in the arc (e.g., eye color, tongue rolling) are culturally and scientifically appropriate.",
+      "Confirm that vocabulary such as 'dominant' and 'recessive' is clearly explained and understood before introducing Punnett squares.",
+      "Ensure the language used remains clear and avoids technical jargon for Grade 7 learners."
+    ]
+  },
+  "hook_stories": [
+    {
+      "id": "hook_a",
+      "culture_hint": "canadian",
+      "text": "In a small town in Ontario, a group of kids are trying to figure out who is \"the most like their parents\" in terms of eye color. One student, Alex, has green eyes, which he got from his mother who also has green eyes. His father, however, has brown eyes. Alex’s little sister has green eyes and is curious to know if there is a science behind eye color. She is excited to learn that her eye color comes from her parents’ genes.",
+      "closing_line": "Both stories tie into real-world experiences students can relate to and spark curiosity about heredity."
+    },
+    {
+      "id": "hook_b",
+      "culture_hint": "canadian",
+      "text": "In another classroom in Quebec, students are discovering how their genes affect everyday actions. A boy named Marc is showing off how he can roll his tongue like his grandfather, even though his younger sister can’t. The class is trying to understand why some people can roll their tongues and others can’t — and why sometimes these traits are passed down to children.",
+      "closing_line": "Both stories tie into real-world experiences students can relate to and spark curiosity about heredity."
+    }
+  ],
+  "concept": {
+    "explanation_steps": [
+      "Genes are segments of DNA that influence traits.",
+      "Alleles are different versions of a gene.",
+      "A dominant allele is a trait that appears even if only one copy is present.",
+      "A recessive allele is a trait that only appears if two copies are present.",
+      "Genotype is the genetic makeup (letters like \"Bb\").",
+      "Phenotype is the physical trait (eye color, rolling tongue).",
+      "Homozygous means having two identical alleles (like \"BB\" or \"bb\").",
+      "Heterozygous means having two different alleles (like \"Bb\").",
+      "A Punnett square is a visual tool to predict genetic outcomes.",
+      "Inherited traits come from parents, while environmental traits are influenced by the environment (e.g., a tan from sun exposure)."
+    ],
+    "whiteboard_text": "Genes → Alleles (Dominant & Recessive) → Genotype & Phenotype → Punnett Squares",
+    "comprehension_check": "A child has a trait that only appears when two copies of the gene are present. What is this trait called?",
+    "reteach_angles": [
+      "Think of a dominant trait like a loud voice in a quiet room—it stands out even when mixed with others.",
+      "A recessive trait is like a whisper—it only shows up when no one else is making noise."
+    ]
+  },
+  "problems": [
+    {
+      "id": "p_guided_1",
+      "stage": "guided",
+      "difficulty": "medium",
+      "text": "In this simple plant, tall stems (T) are dominant over short stems (t). A plant with a genotype of Tt is crossed with another plant with a genotype of Tt. What is the probability that their offspring will have a tall stem?",
+      "answer": "75%",
+      "answer_explanation": "Using a Punnett square, with both parents having genotype Tt, the offspring can be TT, Tt, Tt, or tt. Since tall stems (T_) are dominant, three out of four results show a tall stem (TT or Tt). Therefore, the probability is 75%.",
+      "mc_choices": [
+        "75%",
+        "25%",
+        "50%",
+        "100%"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Confusing the concept of dominant and recessive traits and incorrectly calculating the outcomes based on just one dominant gene copy.",
+      "intervention_hints": {
+        "level_1": "Start with the parents. One plant has genotype Tt, the other also Tt. What are the alleles they can pass on?",
+        "level_2": "If both parents are Tt, what are the possible combinations of alleles for the offspring?",
+        "level_3": "Draw a Punnett square with T and t from one parent, and T and t from the other. Then count how many of the four squares have a tall stem (T_)."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_1",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "A mother has a genotype of Rr (round seeds) and a father has a genotype of rr (wrinkled seeds). What is the chance that their child will have wrinkled seeds?",
+      "answer": "50%",
+      "answer_explanation": "The father can only contribute an r allele, while the mother can contribute either an R or r. So the combinations are Rr and rr. Since wrinkled seeds (rr) are recessive, only one of the two possible offspring will have wrinkled seeds. Therefore, the chance is 50%.",
+      "mc_choices": [
+        "50%",
+        "0%",
+        "25%",
+        "100%"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Assuming the mother contributes only R alleles or incorrectly thinking the father can contribute more than one allele.",
+      "intervention_hints": {
+        "level_1": "The father can only give 'r' alleles. The mother can give 'R' or 'r'. What are the possible results?",
+        "level_2": "The father has genotype rr, so he can only give r. The mother is Rr, so she can give R or r. What are the outcomes?",
+        "level_3": "Punnett square: Mother Rr and father rr. How many outcomes show wrinkled seeds (rr)?"
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_2",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "A dog breeder wants to breed two dogs. One has a genotype of Bb (black fur dominant to brown fur), and the other too. What is the probability that their offspring will have black fur?",
+      "answer": "75%",
+      "answer_explanation": "Both parents are Bb. Each can pass on either a B or b. The Punnett square gives four outcomes: BB, Bb, Bb, and bb. Black fur (B_) is dominant, so three of the four results exhibit black fur. Thus, the probability is 75%.",
+      "mc_choices": [
+        "75%",
+        "25%",
+        "50%",
+        "100%"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Misunderstanding dominant traits and incorrectly concluding black fur appears in 50% or 100% of offspring.",
+      "intervention_hints": {
+        "level_1": "Think about what the two parents can pass on. The Punnett square gives you the answer.",
+        "level_2": "Each parent can pass on either the B or b allele. Consider all combinations.",
+        "level_3": "Construct a Punnett square showing each parent's possible gametes and list all possible offspring genotypes."
+      },
+      "nova_guiding_question": "Think about what the two parents can pass on. The Punnett square gives you the answer."
+    },
+    {
+      "id": "p_practice_3",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "A child is born with blue eyes, while both parents have brown eyes. The child's genotype is bb (blue eyes are recessive), but both parents are Bb (brown eyes). What does this tell us?",
+      "answer": "The child got two recessive genes",
+      "answer_explanation": "Since both parents are Bb and have brown eyes, they each carry one dominant B allele and one recessive b allele. For a child to have blue eyes (bb), they must receive two recessive alleles—one from each parent. This means one of the recessive genes was passed from each parent.",
+      "mc_choices": [
+        "The child got two recessive genes",
+        "One of the parents has a different genotype",
+        "The parents can't have a blue-eyed child",
+        "The child's genotype was changed"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Believing that recessive traits can never be expressed if dominant genes are present, or attributing it to external factors like mutations.",
+      "intervention_hints": {
+        "level_1": "If both parents are Bb and have brown eyes, where did the child get two b genes?",
+        "level_2": "The child has blue eyes. What does that mean about the genes?",
+        "level_3": "Both parents could give the child a b. So b + b = bb. What does this show?"
+      },
+      "nova_guiding_question": ""
+    }
+  ]
+}

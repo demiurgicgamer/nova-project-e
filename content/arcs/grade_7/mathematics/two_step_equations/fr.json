@@ -1,0 +1,177 @@
+{
+  "meta": {
+    "subject": "mathematics",
+    "topic_key": "two_step_equations",
+    "topic_display": "Two-Step Equations and Inequalities",
+    "grade": 7,
+    "region": "canada",
+    "language_code": "fr",
+    "status": "approved",
+    "review_flags": [
+      "Vérifiez que tous les problèmes mathématiquement exacts, notamment : Solutions des équations : 3x + 6 = 24 → x = 6 → 18 cuillères (partie 2) ; Équation Distance = Vitesse × Temps : 60 × 4 = 240",
+      "Assurez-vous que le langage en français est naturel et approprié pour un enfant de 12 à 13 ans.",
+      "L'ordre et la clarté de l'explication pour résoudre les équations à deux étapes est cohérent."
+    ]
+  },
+  "hook_stories": [
+    {
+      "id": "hook_a",
+      "culture_hint": "universal",
+      "text": "Pierre est allé au cinéma avec ses amis. Il a dépensé **18$** en tout. Il a acheté **2 billets** de cinéma et **1 sodas** qui coûtait **3$**. Combien coûtait un billet de cinéma ?",
+      "closing_line": "La réponse: 7,50 $."
+    },
+    {
+      "id": "hook_b",
+      "culture_hint": "universal",
+      "text": "Lucie travaille au magasin de produits de nettoyage. Elle gagne **25$ par heure** plus **5$** de prime. Elle a gagné **75$** cette semaine. Combien d'heures a-t-elle travaillé ?",
+      "closing_line": "La réponse: 3 heures."
+    }
+  ],
+  "concept": {
+    "explanation_steps": [
+      "On va apprendre à résoudre des équations comme celle-ci : `2x + 5 = 15`. Tu veux trouver **ce que vaut x**.",
+      "Il y a deux étapes. D'abord, on enlève ce que tu **n'aimes pas** de l'autre côté de l'égalité. Puis, on divise par le nombre devant **x**.",
+      "Tu peux toujours vérifier ton résultat : si tu remplaces **x** par ton nombre dans l’équation, tu dois retrouver le même nombre que de l'autre côté."
+    ],
+    "whiteboard_text": "2x + 5 = 15 → 2x = 10 → x = 5",
+    "comprehension_check": "Quelle est la première chose qu'il faut faire pour résoudre `2x + 6 = 14` ?",
+    "reteach_angles": [
+      "Pour résoudre l’équation `2x + 6 = 14`, commence par soustraire 6 de chaque côté pour isoler le terme avec x.",
+      "Tu dois toujours faire la même opération de chaque côté de l’égalité."
+    ]
+  },
+  "problems": [
+    {
+      "id": "p_guided_1",
+      "stage": "guided",
+      "difficulty": "medium",
+      "text": "Trouve la valeur de x : `3x + 7 = 22`. Quelle est la première chose à faire ?",
+      "answer": "B) Soustraire 7",
+      "answer_explanation": "Pour résoudre cette équation, on commence par retirer le nombre sans x, ici -7, de chaque côté afin d'isoler le terme avec x.",
+      "mc_choices": [
+        "B) Soustraire 7",
+        "A) Multiplier par 3",
+        "C) Diviser par 3",
+        "D) Ajouter 7"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Souvent, les élèves pensent qu’il faut diviser d’abord par le coefficient de x, mais il faut d’abord isoler x en soustrayant ou ajoutant le nombre sans x.",
+      "intervention_hints": {
+        "level_1": "Tu veux que x soit tout seul. Essaie de retirer un nombre.",
+        "level_2": "Quel nombre est loin de x ? On veut garder x seul.",
+        "level_3": "Tu retires 7 de chaque côté : `3x = 15`."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_1",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "Trouve x : `4x - 3 = 13`. Quelle est la première chose à faire ?",
+      "answer": "B) Ajouter 3",
+      "answer_explanation": "Pour isoler l’expression avec x, on commence par retirer le terme constant -3 de l'équation. On fait cela en ajoutant 3 à chaque côté.",
+      "mc_choices": [
+        "B) Ajouter 3",
+        "A) Multiplier par 4",
+        "C) Diviser par 4",
+        "D) Soustraire 4"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Certains élèves essayent de multiplier ou diviser avant de simplifier l’équation.",
+      "intervention_hints": {
+        "level_1": "Tu as un nombre qui ne veut pas que x soit seul, tu veux le retirer.",
+        "level_2": "Retire ce qui est \"en trop\" avant de diviser.",
+        "level_3": "Tu retires 3 de chaque côté : `4x = 16`."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_2",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "Résous : `5x - 10 = 35`",
+      "answer": "D) 7",
+      "answer_explanation": "Premièrement, on ajoute 10 à chaque côté pour isoler le terme avec x. Ensuite, on divise par 5 pour trouver x.",
+      "mc_choices": [
+        "D) 7",
+        "A) 5",
+        "B) 9",
+        "C) 8"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Les élèves peuvent oublier de diviser complètement ou confondre les opérations.",
+      "intervention_hints": {
+        "level_1": "Retire le nombre sans x, puis divise.",
+        "level_2": "Retire le -10 de partout.",
+        "level_3": "`5x = 45` → `x = 9`."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_3",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "Quel est le bon résultat pour `2x + 6 = 18` ?",
+      "answer": "C) x = 6",
+      "answer_explanation": "On soustrait 6 de chaque côté pour obtenir `2x = 12`, puis on divise par 2 pour trouver `x = 6`.",
+      "mc_choices": [
+        "C) x = 6",
+        "A) x = 5",
+        "B) x = 4",
+        "D) x = 7"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Certains élèves pensent que 18 divisé par 2 donne 8 ou quelque chose d'autre.",
+      "intervention_hints": {
+        "level_1": "Soustrayez les constantes avant de diviser pour trouver x.",
+        "level_2": "Soustrayez 6 : `2x = 12`.",
+        "level_3": "Divisez 12 par 2 : x = 6."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_capstone_1",
+      "stage": "capstone",
+      "difficulty": "hard",
+      "text": "Une recette d'un gateau demande `3x + 6 = 24` cuillères de sucre. Combien de cuillères de sucre sont utilisées pour x unités de sucre ? Partie 1 : Trouve x. Partie 2 : Combien de cuillères de sucre sont utilisées pour les x dans cette recette ?",
+      "answer": "C) 18 cuillères",
+      "answer_explanation": "On résout `3x + 6 = 24` : soustrayez 6 pour obtenir `3x = 18`, puis divisez par 3 pour `x = 6`. Remplacez x dans l'équation initiale : 3(6) = 18.",
+      "mc_choices": [
+        "C) 18",
+        "A) 15",
+        "B) 20",
+        "D) 12"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Les élèves peuvent se tromper dans la soustraction ou dans la division de l’équation finale.",
+      "intervention_hints": {
+        "level_1": "Trouve d'abord x en résolvant `3x + 6 = 24`.",
+        "level_2": "Soustrais 6, donc 3x = 18.",
+        "level_3": "Divise 18 par 3, donc x = 6, et 3×6 = 18."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_capstone_2",
+      "stage": "capstone",
+      "difficulty": "hard",
+      "text": "Un train part à 7h00 et voyage à 60 km/h. Il arrive à destination à 11h00. Quelle est la distance ?",
+      "answer": "B) 240 km",
+      "answer_explanation": "La durée est de 4 heures. Utilise la formule distance = vitesse × temps : D = 60 × 4 = 240 km.",
+      "mc_choices": [
+        "B) 240 km",
+        "A) 200 km",
+        "C) 280 km",
+        "D) 320 km"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Certains élèves peuvent confondre la vitesse avec la distance ou oublier de convertir le temps correctement.",
+      "intervention_hints": {
+        "level_1": "Penses à la formule distance = vitesse × temps.",
+        "level_2": "Tu as le temps de 4 heures et la vitesse de 60 km/h.",
+        "level_3": "Trouve la distance : `60 × 4 = 240`."
+      },
+      "nova_guiding_question": ""
+    }
+  ]
+}

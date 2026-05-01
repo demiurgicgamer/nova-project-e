@@ -1,0 +1,161 @@
+{
+  "meta": {
+    "subject": "chemistry",
+    "topic_key": "acids_and_bases",
+    "topic_display": "Acids and Bases",
+    "grade": 7,
+    "region": "canada",
+    "language_code": "en",
+    "status": "approved",
+    "review_flags": [
+      "Verify all pH values and real-life substance examples against current Canadian science curriculum expectations for Grade 7.",
+      "Confirm all indicators (litmus, pH paper, red cabbage juice) and their color changes for accurate scientific communication.",
+      "Double-check that all real-world applications, such as acid rain and pool maintenance, are appropriate for Canadian contexts and grade level.",
+      "Review whether \"neutralization\" is clearly defined as a reaction between acid and base, and whether the example of the person drinking vinegar is appropriate for Grade 7 students.",
+      "Ensure all MCQs reflect common misconceptions accurately without being misleading."
+    ]
+  },
+  "hook_stories": [
+    {
+      "id": "hook_a",
+      "culture_hint": "universal",
+      "text": "Imagine you're doing a science project on household items. You take a lemon and squeeze some juice onto a small piece of paper. Then, you take a bar of soap and rub it on the same piece of paper.\n\nYou notice the lemon juice makes your fingers feel sour, like you just bit into a lemon. The soap, on the other hand, feels slippery against your skin.\n\nThis is because the lemon juice is acidic and the soap is basic. These are special types of substances we call acids and bases.",
+      "closing_line": "In science, we can measure how acidic or basic a substance is using a thing called the pH scale. The pH scale is marked from 0 to 14, and it tells us how \"acidic\" or \"basic\" something is."
+    },
+    {
+      "id": "hook_b",
+      "culture_hint": "canadian",
+      "text": "In Canada, especially in areas like Ontario and Quebec, we sometimes hear about acid rain. Acid rain is rain that is more acidic than normal.\n\nImagine you are outside during a heavy rainstorm. The water from the sky feels a bit strange — it doesn't have the usual clean taste or feel of fresh water. This is because there are chemicals in the air that mix with the rainwater, making it acidic.\n\nThis kind of rain can hurt plants, animals, and even buildings!",
+      "closing_line": "Let's look at the pH scale to understand how we measure acidity, and how acids and bases work in our daily lives."
+    }
+  ],
+  "concept": {
+    "explanation_steps": [
+      "The pH Scale is used to measure how acidic or basic a solution is.",
+      "A pH of 0–6 = Acid – It is sour, and can be corrosive.",
+      "A pH of 7 = Neutral – It is neither acidic nor basic.",
+      "A pH of 8–14 = Base – It is bitter or slippery.",
+      "Indicators are substances that change color in response to pH. Some common indicators: Litmus paper – It turns red in acids and blue in bases; pH paper – It changes to many colors depending on the pH; Red cabbage juice – It turns pink in acids, green in bases, and purple in neutral substances.",
+      "Neutralization is a reaction that happens when an acid and a base mix together and cancel each other out.",
+      "Real-world examples of acids and bases: Stomach acid (Acid, pH 1.5–2), Baking soda (Base, pH 8–9), Vinegar (Acid, pH 3), Pool water (Base, pH 7.2–7.8), Rainwater (Acid, pH 5.6), Soap (Base, pH 9–10)."
+    ],
+    "whiteboard_text": "pH Scale (0–14): Acids (0–6), Neutral (7), Bases (8–14)\nIndicators: Litmus paper, pH paper, red cabbage juice\nNeutralization: Acid + Base = Neutral",
+    "comprehension_check": "Which of the following is NOT an example of an acid?",
+    "reteach_angles": [
+      "Think of the properties of acids — they are often sour and can be corrosive.",
+      "We can also look at the pH values — which one is below 7 (acidic) versus above 7 (basic)."
+    ]
+  },
+  "problems": [
+    {
+      "id": "p_guided_1",
+      "stage": "guided",
+      "difficulty": "easy",
+      "text": "Sarah is doing a science experiment. She has four test tubes with different solutions.\n\n- Solution A: Turns red litmus paper red.\n- Solution B: Turns blue litmus paper blue.\n- Solution C: Turns red cabbage juice green.\n- Solution D: Turns red cabbage juice pink.\n\nWhich solution is most likely to be a base?",
+      "answer": "B. Solution B",
+      "answer_explanation": "Blue litmus paper turns red when it's in an acid, but it stays blue when it's in a base. So if Solution B keeps blue litmus blue, it is a base.",
+      "mc_choices": [
+        "B. Solution B",
+        "A. Solution A",
+        "C. Solution C",
+        "D. Solution D"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Mixing up which litmus paper goes with what type of substance.",
+      "intervention_hints": {
+        "level_1": "Let’s think, which indicator tells us if something is a base?",
+        "level_2": "Red litmus paper turns blue when it's in a base. Blue litmus paper turns red in acids.",
+        "level_3": "We know that litmus paper helps us test acids and bases, and solution B makes blue litmus stay blue — that means it's a base!"
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_1",
+      "stage": "practice",
+      "difficulty": "easy",
+      "text": "What happens when an acid and a base are mixed together?",
+      "answer": "C. The mixture becomes neutral",
+      "answer_explanation": "When an acid and a base react, they form water and a salt, and the resulting mixture is often neutral with a pH close to 7.",
+      "mc_choices": [
+        "C. The mixture becomes neutral",
+        "A. The mixture becomes more acidic",
+        "B. The mixture becomes more basic",
+        "D. It forms a gas"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Thinking that mixing acids and bases will keep them acidic or basic.",
+      "intervention_hints": {
+        "level_1": "What is the result of a reaction between an acid and a base?",
+        "level_2": "This reaction is called neutralization, and the products are usually salt and water.",
+        "level_3": "The pH of the product is usually around 7, which means it's neutral."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_2",
+      "stage": "practice",
+      "difficulty": "easy",
+      "text": "What effect does it have when someone drinks vinegar for health benefits?",
+      "answer": "A. Makes the body more acidic",
+      "answer_explanation": "Vinegar is an acidic substance (pH around 2.4–3.4). When consumed, it lowers the pH of the stomach acid, but overall it makes the internal environment more acidic.",
+      "mc_choices": [
+        "A. Makes the body more acidic",
+        "B. Makes the body more basic",
+        "C. Does not change the body's pH",
+        "D. Makes the body neutral"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Thinking that vinegar has a beneficial alkaline effect on the body.",
+      "intervention_hints": {
+        "level_1": "Think about what vinegar is chemically — is it acidic or basic?",
+        "level_2": "If you add something acidic to your system, it's going to affect the pH levels.",
+        "level_3": "Vinegar is a strong acid and drinking it raises the acidity in your body (especially in the stomach)."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_practice_3",
+      "stage": "practice",
+      "difficulty": "medium",
+      "text": "What color does red cabbage juice turn in a base?",
+      "answer": "B. Green",
+      "answer_explanation": "Red cabbage juice turns green in a base (pH above 7) and pink in an acid (pH below 7). It turns purple when the pH is neutral (7).",
+      "mc_choices": [
+        "B. Green",
+        "A. Pink",
+        "C. Purple",
+        "D. Yellow"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Confusing which color corresponds to which environment.",
+      "intervention_hints": {
+        "level_1": "Red cabbage juice gives different colors based on pH. What happens in a base?",
+        "level_2": "We told you that in a base, red cabbage juice turns green, because that’s how it reacts.",
+        "level_3": "If it's an acid, it goes pink. If it's basic, it goes green. If it's neutral, it's purple."
+      },
+      "nova_guiding_question": ""
+    },
+    {
+      "id": "p_capstone_1",
+      "stage": "capstone",
+      "difficulty": "hard",
+      "text": "A science student is testing several common household substances to find their pH.\n\n1. Stomach acid – What type of substance is it?\n2. Household cleaning product – It feels slippery and is used to clean toilets. What type is it?\n3. A person drinks vinegar for health benefits – What effect does it have?",
+      "answer": "1. A. Acid, 2. B. Base, 3. A. Makes the body more acidic",
+      "answer_explanation": "Stomach acid is an acid (pH below 7). Cleaning products are bases (pH above 7) due to their slippery feel. Vinegar is acidic, making the body more acidic when consumed.",
+      "mc_choices": [
+        "A. Acid",
+        "B. Base",
+        "C. Neutral",
+        "D. Salt"
+      ],
+      "correct_index": 0,
+      "common_misconception": "Misconceiving that cleaning products are acidic or that vinegar has an alkaline effect in the body.",
+      "intervention_hints": {
+        "level_1": "What does a pH of below 7 mean? And what does a pH of above 7 mean? Which of these items matches each?",
+        "level_2": "Think about how the products feel and how you would use them — acidic substances often taste sour or corrosive while basic ones feel slippery or soapy.",
+        "level_3": "Revisit the basic concept of pH and what acids and bases do to our environment."
+      },
+      "nova_guiding_question": "What does a pH of below 7 mean? And what does a pH of above 7 mean? Which of these items matches each?"
+    }
+  ]
+}

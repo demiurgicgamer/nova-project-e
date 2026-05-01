@@ -1,24 +1,24 @@
-# Nova Curriculum Master File — Grade 7
+﻿# Nova Curriculum Master File â€” Grade 7
 # =======================================
 # MVP Scope : Mathematics + Science (Physics, Chemistry, Biology)
-# Markets   : North America — Canada (EN), Quebec (FR-CA), United States (EN)
-# Deferred  : History, Geography, Arts, Language Arts — see roadmap TBD-C
+# Markets   : North America â€” Canada (EN), Quebec (FR-CA), United States (EN)
+# Deferred  : History, Geography, Arts, Language Arts â€” see roadmap TBD-C
 #
 # Curriculum alignment:
-#   Canada  — Provincial K-12 (Ontario Grade 7 · BC Grade 7 · Alberta Grade 7)
-#   Quebec  — Programme de formation de l'école québécoise (PFEQ) — Secondary 1
-#   US      — Common Core State Standards (CCSS) Grade 7
+#   Canada  â€” Provincial K-12 (Ontario Grade 7 Â· BC Grade 7 Â· Alberta Grade 7)
+#   Quebec  â€” Programme de formation de l'Ã©cole quÃ©bÃ©coise (PFEQ) â€” Secondary 1
+#   US      â€” Common Core State Standards (CCSS) Grade 7
 #             (7.RP, 7.NS, 7.EE, 7.G, 7.SP)
-#             Next Generation Science Standards (NGSS) — Middle School
+#             Next Generation Science Standards (NGSS) â€” Middle School
 #             (MS-PS, MS-ESS, MS-LS)
 #
 # Grade 7 notes:
-#   • Math deepens from Grade 6: ratios → proportional reasoning,
-#     integers → full rational numbers, one-step → two-step equations,
-#     area/perimeter → circles + 3D figures, basic prob → compound prob
-#   • Science introduces atoms, heredity, solar system — bigger conceptual
+#   â€¢ Math deepens from Grade 6: ratios â†’ proportional reasoning,
+#     integers â†’ full rational numbers, one-step â†’ two-step equations,
+#     area/perimeter â†’ circles + 3D figures, basic prob â†’ compound prob
+#   â€¢ Science introduces atoms, heredity, solar system â€” bigger conceptual
 #     jumps than Grade 6. Hook stories must ground abstract ideas concretely.
-#   • Quebec (PFEQ Secondary 1) aligns very closely to Ontario Grade 7.
+#   â€¢ Quebec (PFEQ Secondary 1) aligns very closely to Ontario Grade 7.
 #     Minor regional differences handled via --region flag in generate_arc.py.
 #
 # insert_arc.py note:
@@ -26,10 +26,10 @@
 #   Keys added here with suggested order_index values (0-based per subject).
 #
 # Status lifecycle:
-#   approved      → topic defined, not yet sent to arc generator
-#   draft        → .md generated, awaiting human review
-#   approved     → .md reviewed, ready for JSON export
-#   db_inserted  → .json exported and inserted into database
+#   approved      â†’ topic defined, not yet sent to arc generator
+#   draft        â†’ .md generated, awaiting human review
+#   approved     â†’ .md reviewed, ready for JSON export
+#   db_inserted  â†’ .json exported and inserted into database
 #
 # Languages:
 #   en = English (Canadian context; US variant via --region us)
@@ -51,22 +51,22 @@ markets: [canada, quebec, us]
 region: canada
 languages: [en, fr]
 
-# ─────────────────────────────────────────────────────────────────────────────
+# â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 subjects:
 
-  # ── MATHEMATICS ─────────────────────────────────────────────────────────────
-  # Aligned to: Ontario Grade 7 · BC Grade 7 · Alberta Grade 7
+  # â”€â”€ MATHEMATICS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  # Aligned to: Ontario Grade 7 Â· BC Grade 7 Â· Alberta Grade 7
   #             CCSS Grade 7 (7.RP, 7.NS, 7.EE, 7.G, 7.SP)
   #
   # Grade 7 math progression vs Grade 6:
-  #   ratios           → proportional_reasoning (constant of proportionality,
+  #   ratios           â†’ proportional_reasoning (constant of proportionality,
   #                       percent change, tax/tip/discount)
-  #   integers         → rational_numbers (all ops with pos/neg fractions+decimals)
-  #   linear_equations → two_step_equations (also inequalities)
-  #   geometry_area    → geometry_circles (π, circumference, area of circles)
-  #   (new)            → surface_area_and_volume (3D figures: prisms, cylinders)
-  #   data_and_graphs  → statistics_and_sampling (variability, sampling inference)
-  #   probability      → probability_compound (compound events, tree diagrams)
+  #   integers         â†’ rational_numbers (all ops with pos/neg fractions+decimals)
+  #   linear_equations â†’ two_step_equations (also inequalities)
+  #   geometry_area    â†’ geometry_circles (Ï€, circumference, area of circles)
+  #   (new)            â†’ surface_area_and_volume (3D figures: prisms, cylinders)
+  #   data_and_graphs  â†’ statistics_and_sampling (variability, sampling inference)
+  #   probability      â†’ probability_compound (compound events, tree diagrams)
   - subject: mathematics
     display: Mathematics
     topics:
@@ -83,9 +83,9 @@ subjects:
         prerequisites: [ratios, percentages]   # Grade 6 keys
         estimated_sessions: 3
         curriculum_refs:
-          canada: Ontario Grade 7 — Number Sense · Proportional Relationships
-          quebec: PFEQ Secondary 1 — Arithmetic · Proportionality
-          us: CCSS 7.RP — Ratios and Proportional Relationships
+          canada: Ontario Grade 7 â€” Number Sense Â· Proportional Relationships
+          quebec: PFEQ Secondary 1 â€” Arithmetic Â· Proportionality
+          us: CCSS 7.RP â€” Ratios and Proportional Relationships
         arc_notes: >
           Hook: percent discount at a store or recipe scaling for a large party.
           Concept: constant of proportionality (k = y/x) and y = kx.
@@ -94,8 +94,8 @@ subjects:
           Capstone: multi-step percent word problem (e.g. original price after
           successive discount and tax).
         status:
-          en: pending
-          fr: pending
+          en: approved
+          fr: approved
 
       - key: rational_numbers
         display: Rational Numbers
@@ -108,9 +108,9 @@ subjects:
         prerequisites: [integers, fractions]   # Grade 6 keys
         estimated_sessions: 3
         curriculum_refs:
-          canada: Ontario Grade 7 — Number Sense · Operations with Fractions
-          quebec: PFEQ Secondary 1 — Arithmetic · Operations on rational numbers
-          us: CCSS 7.NS — The Number System
+          canada: Ontario Grade 7 â€” Number Sense Â· Operations with Fractions
+          quebec: PFEQ Secondary 1 â€” Arithmetic Â· Operations on rational numbers
+          us: CCSS 7.NS â€” The Number System
         arc_notes: >
           Hook: bank balance going negative, or temperature falling below zero
           by a fractional amount.
@@ -121,23 +121,23 @@ subjects:
           Capstone: multi-operation expression with mixed positive and negative
           rational numbers (order of operations).
         status:
-          en: pending
-          fr: pending
+          en: approved
+          fr: approved
 
       - key: two_step_equations
         display: Two-Step Equations and Inequalities
         order_index: 2
         description: >
           Solving two-step linear equations (ax + b = c). Writing equations from
-          word problems. Checking solutions. Introduction to inequalities — solving
+          word problems. Checking solutions. Introduction to inequalities â€” solving
           and graphing on a number line. Real-world contexts (age problems, price
           problems, distance/rate/time).
         prerequisites: [linear_equations]   # Grade 6 key
         estimated_sessions: 2
         curriculum_refs:
-          canada: Ontario Grade 7 — Patterning and Algebra
-          quebec: PFEQ Secondary 1 — Algebra · Equations and inequalities
-          us: CCSS 7.EE — Expressions and Equations
+          canada: Ontario Grade 7 â€” Patterning and Algebra
+          quebec: PFEQ Secondary 1 â€” Algebra Â· Equations and inequalities
+          us: CCSS 7.EE â€” Expressions and Equations
         arc_notes: >
           Hook: "I'm thinking of a number..." riddle that requires two-step
           solving; or a cell-phone plan cost equation.
@@ -148,35 +148,35 @@ subjects:
           inequality problems with direction of inequality flip for negatives.
           Capstone: age-gap or distance word problem requiring inequality + check.
         status:
-          en: pending
-          fr: pending
+          en: approved
+          fr: approved
 
       - key: geometry_circles
-        display: Circles — Circumference and Area
+        display: Circles â€” Circumference and Area
         order_index: 3
         description: >
-          Parts of a circle (radius, diameter, chord, arc). The number π and where
-          it comes from. Circumference formula (C = πd = 2πr). Area of a circle
-          (A = πr²). Composite figures involving circles and rectangles/triangles.
+          Parts of a circle (radius, diameter, chord, arc). The number Ï€ and where
+          it comes from. Circumference formula (C = Ï€d = 2Ï€r). Area of a circle
+          (A = Ï€rÂ²). Composite figures involving circles and rectangles/triangles.
           Real-world contexts (wheels, pipes, pizza, tracks, clocks).
         prerequisites: [geometry_area_perimeter]   # Grade 6 key
         estimated_sessions: 2
         curriculum_refs:
-          canada: Ontario Grade 7 — Measurement · Circles
-          quebec: PFEQ Secondary 1 — Geometry · Circles
-          us: CCSS 7.G.4-6 — Area and circumference of circles
+          canada: Ontario Grade 7 â€” Measurement Â· Circles
+          quebec: PFEQ Secondary 1 â€” Geometry Â· Circles
+          us: CCSS 7.G.4-6 â€” Area and circumference of circles
         arc_notes: >
           Hook: comparing circular pizza sizes (is a 14-inch much bigger than 12-inch?).
-          Concept: π as the ratio of circumference to diameter — always ≈3.14159;
-          derive C = πd from this.
+          Concept: Ï€ as the ratio of circumference to diameter â€” always â‰ˆ3.14159;
+          derive C = Ï€d from this.
           Guided: find circumference given diameter; find area given radius.
           Practice: find radius given circumference; composite shapes (semi-circle +
           rectangle).
           Capstone: running track problem (rectangle + two semi-circles); compare
           areas of two differently-sized circles.
         status:
-          en: pending
-          fr: pending
+          en: approved
+          fr: approved
 
       - key: surface_area_and_volume
         display: Surface Area and Volume
@@ -189,22 +189,22 @@ subjects:
         prerequisites: [geometry_area_perimeter, geometry_circles]
         estimated_sessions: 3
         curriculum_refs:
-          canada: Ontario Grade 7 — Measurement · 3D Figures
-          quebec: PFEQ Secondary 1 — Geometry · Solids
-          us: CCSS 7.G.6 — Surface area and volume of 3D figures
+          canada: Ontario Grade 7 â€” Measurement Â· 3D Figures
+          quebec: PFEQ Secondary 1 â€” Geometry Â· Solids
+          us: CCSS 7.G.6 â€” Surface area and volume of 3D figures
         arc_notes: >
-          Hook: designing a box to ship a gift — how much cardboard is needed
+          Hook: designing a box to ship a gift â€” how much cardboard is needed
           (surface area) and will the item fit (volume)?
-          Concept: net of a rectangular prism → 6 rectangle faces; surface area
+          Concept: net of a rectangular prism â†’ 6 rectangle faces; surface area
           = sum of all face areas.
           Guided: surface area of a rectangular prism; volume of a rectangular
-          prism (V = l × w × h).
+          prism (V = l Ã— w Ã— h).
           Practice: surface area of a triangular prism; volume of a cylinder.
-          Capstone: compare two container designs — which uses less material
+          Capstone: compare two container designs â€” which uses less material
           (surface area) for the same volume?
         status:
-          en: pending
-          fr: pending
+          en: approved
+          fr: approved
 
       - key: statistics_and_sampling
         display: Statistics and Sampling
@@ -217,11 +217,11 @@ subjects:
         prerequisites: [data_and_graphs]   # Grade 6 key
         estimated_sessions: 2
         curriculum_refs:
-          canada: Ontario Grade 7 — Data Management
-          quebec: PFEQ Secondary 1 — Statistics · Measures of dispersion
-          us: CCSS 7.SP.1-4 — Statistics and Probability
+          canada: Ontario Grade 7 â€” Data Management
+          quebec: PFEQ Secondary 1 â€” Statistics Â· Measures of dispersion
+          us: CCSS 7.SP.1-4 â€” Statistics and Probability
         arc_notes: >
-          Hook: two hockey teams — who is more consistent? (compare distributions,
+          Hook: two hockey teams â€” who is more consistent? (compare distributions,
           not just averages).
           Concept: random sample vs biased sample; IQR as measure of spread.
           Guided: calculate mean and MAD for a small data set; identify outlier.
@@ -230,14 +230,14 @@ subjects:
           Capstone: given a biased survey description, explain why inference would
           be unreliable and suggest how to fix the sampling method.
         status:
-          en: pending
-          fr: pending
+          en: approved
+          fr: approved
 
       - key: probability_compound
         display: Compound Probability
         order_index: 6
         description: >
-          Review: simple probability as a fraction 0–1. Compound events —
+          Review: simple probability as a fraction 0â€“1. Compound events â€”
           independent and dependent. Counting outcomes: tree diagrams, organized
           lists, and the Fundamental Counting Principle. Theoretical vs
           experimental probability. Real-world contexts (board games, card games,
@@ -246,31 +246,31 @@ subjects:
         estimated_sessions: 2
         review_note: >
           US CCSS 7.SP.5-8 covers compound probability at Grade 7. Canadian
-          provincial curricula vary — Ontario places compound probability in
+          provincial curricula vary â€” Ontario places compound probability in
           Grade 7 Data Management unit. Include for all markets.
         curriculum_refs:
-          canada: Ontario Grade 7 — Data Management and Probability
-          quebec: PFEQ Secondary 1 — Statistics and Probability
-          us: CCSS 7.SP.5-8 — Probability
+          canada: Ontario Grade 7 â€” Data Management and Probability
+          quebec: PFEQ Secondary 1 â€” Statistics and Probability
+          us: CCSS 7.SP.5-8 â€” Probability
         arc_notes: >
-          Hook: card game where you draw two cards — what are the chances of
+          Hook: card game where you draw two cards â€” what are the chances of
           getting two aces?
           Concept: compound event = two or more simple events; independent events
-          → P(A and B) = P(A) × P(B).
+          â†’ P(A and B) = P(A) Ã— P(B).
           Guided: tree diagram for flipping a coin twice; count outcomes.
           Practice: draw without replacement (dependent); organized list for
           rolling two dice.
           Capstone: design a "fair game" using compound probability, justify why
           it is or isn't fair using calculations.
         status:
-          en: pending
-          fr: pending
+          en: approved
+          fr: approved
 
-  # ── SCIENCE — PHYSICS ────────────────────────────────────────────────────────
-  # Aligned to: Ontario Science Grade 7 · NGSS MS-PS (Middle School Physical Science)
+  # â”€â”€ SCIENCE â€” PHYSICS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  # Aligned to: Ontario Science Grade 7 Â· NGSS MS-PS (Middle School Physical Science)
   #             NGSS MS-ESS (Earth and Space Science)
   - subject: physics
-    display: Science — Physics
+    display: Science â€” Physics
     subject_group: science
     topics:
 
@@ -286,9 +286,9 @@ subjects:
         prerequisites: []
         estimated_sessions: 2
         curriculum_refs:
-          canada: Ontario Science Grade 7 — Heat in the Environment
-          quebec: PFEQ Secondary 1 — Earth and Space · Thermal energy
-          us: NGSS MS-PS3-3/4 — Energy · Thermal energy transfer
+          canada: Ontario Science Grade 7 â€” Heat in the Environment
+          quebec: PFEQ Secondary 1 â€” Earth and Space Â· Thermal energy
+          us: NGSS MS-PS3-3/4 â€” Energy Â· Thermal energy transfer
         arc_notes: >
           Hook: why does a metal spoon in hot soup get burning-hot while a
           wooden spoon handle stays cool? (conduction + insulators).
@@ -297,41 +297,41 @@ subjects:
           Guided: identify conduction/convection/radiation in given scenarios.
           Practice: rank insulators by effectiveness; explain why a thermos
           works.
-          Capstone: design challenge — choose materials to build the best
+          Capstone: design challenge â€” choose materials to build the best
           insulated container; justify using all three transfer concepts.
         status:
-          en: pending
-          fr: pending
+          en: approved
+          fr: approved
 
       - key: the_solar_system
         display: The Solar System
         order_index: 1
         description: >
-          The Sun and eight planets — order, relative size, and distance.
+          The Sun and eight planets â€” order, relative size, and distance.
           Why planets orbit the Sun (gravity). Moon phases and why they occur.
-          Tides — gravitational pull of Moon on Earth's oceans. Solar and lunar
+          Tides â€” gravitational pull of Moon on Earth's oceans. Solar and lunar
           eclipses. Real-world contexts (seasons, navigation, space exploration,
           the night sky in Canada).
         prerequisites: []
         estimated_sessions: 2
         curriculum_refs:
-          canada: Ontario Science Grade 7 — Earth and Space Systems
-          quebec: PFEQ Secondary 1 — Earth and Space · Solar System
-          us: NGSS MS-ESS1-1/2/3 — Earth's Place in the Universe
+          canada: Ontario Science Grade 7 â€” Earth and Space Systems
+          quebec: PFEQ Secondary 1 â€” Earth and Space Â· Solar System
+          us: NGSS MS-ESS1-1/2/3 â€” Earth's Place in the Universe
         arc_notes: >
           Hook: why did it get dark in the middle of the day? (solar eclipse)
-          — a news story from a city in the eclipse path.
+          â€” a news story from a city in the eclipse path.
           Concept: planets in order, Moon orbit causes phases, eclipse geometry
           (Earth/Moon/Sun alignment).
-          Guided: moon phase sequence (new → crescent → quarter → gibbous →
-          full → back); identify solar vs lunar eclipse from diagram.
+          Guided: moon phase sequence (new â†’ crescent â†’ quarter â†’ gibbous â†’
+          full â†’ back); identify solar vs lunar eclipse from diagram.
           Practice: explain why we always see the same side of the Moon;
           explain why tides are highest during full/new moon.
           Capstone: given a diagram of Earth-Moon-Sun positions, predict:
           (a) what phase is the moon? (b) could an eclipse happen? Justify.
         status:
-          en: pending
-          fr: pending
+          en: approved
+          fr: approved
 
       - key: energy_and_work
         display: Energy and Work
@@ -339,35 +339,35 @@ subjects:
         description: >
           Kinetic energy (energy of motion) and potential energy (stored energy).
           Gravitational potential energy. Energy transformations between KE and PE.
-          Work as force applied through a distance (W = F × d). Conservation of
+          Work as force applied through a distance (W = F Ã— d). Conservation of
           energy (energy cannot be created or destroyed). Real-world contexts
           (roller coasters, pendulums, hydroelectric dams, sports).
         prerequisites: [forces_and_motion]   # Grade 6 key
         estimated_sessions: 2
         curriculum_refs:
-          canada: Ontario Science Grade 7 — Structures and Mechanisms
-          quebec: PFEQ Secondary 1 — Physical world · Forms of energy
-          us: NGSS MS-PS3-1/2/5 — Energy
+          canada: Ontario Science Grade 7 â€” Structures and Mechanisms
+          quebec: PFEQ Secondary 1 â€” Physical world Â· Forms of energy
+          us: NGSS MS-PS3-1/2/5 â€” Energy
         arc_notes: >
-          Hook: roller coaster — at the top of the first hill, nearly stopped;
+          Hook: roller coaster â€” at the top of the first hill, nearly stopped;
           at the bottom, moving fastest. Where did the energy come from?
-          Concept: PE = mgh (conceptual, not formula-heavy); KE = ½mv² (describe
-          relationship); at top → max PE, at bottom → max KE.
+          Concept: PE = mgh (conceptual, not formula-heavy); KE = Â½mvÂ² (describe
+          relationship); at top â†’ max PE, at bottom â†’ max KE.
           Guided: identify energy type at each point of a pendulum swing;
-          calculate simple work (W = F × d).
+          calculate simple work (W = F Ã— d).
           Practice: compare two roller coasters; predict speed at bottom given
           height.
-          Capstone: hydroelectric dam — trace energy transformation from water
-          height (PE) → falling water (KE) → generator → electricity; explain
+          Capstone: hydroelectric dam â€” trace energy transformation from water
+          height (PE) â†’ falling water (KE) â†’ generator â†’ electricity; explain
           why no energy is "lost" but some is "converted" to heat.
         status:
-          en: pending
-          fr: pending
+          en: approved
+          fr: approved
 
-  # ── SCIENCE — CHEMISTRY ──────────────────────────────────────────────────────
-  # Aligned to: Ontario Science Grade 7 · NGSS MS-PS1 (Matter and Its Interactions)
+  # â”€â”€ SCIENCE â€” CHEMISTRY â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  # Aligned to: Ontario Science Grade 7 Â· NGSS MS-PS1 (Matter and Its Interactions)
   - subject: chemistry
-    display: Science — Chemistry
+    display: Science â€” Chemistry
     subject_group: science
     topics:
 
@@ -376,17 +376,17 @@ subjects:
         order_index: 0
         description: >
           The atom as the smallest unit of an element. Protons, neutrons, and
-          electrons — their charge and location. Elements vs compounds vs mixtures.
-          The periodic table — how it's organized, what periods and groups mean.
-          Introduction to chemical symbols and simple formulas (H₂O, CO₂, NaCl).
+          electrons â€” their charge and location. Elements vs compounds vs mixtures.
+          The periodic table â€” how it's organized, what periods and groups mean.
+          Introduction to chemical symbols and simple formulas (Hâ‚‚O, COâ‚‚, NaCl).
           Real-world contexts (the materials everything is made of, why gold is
           gold, why water is special).
         prerequisites: [matter_and_materials, physical_vs_chemical_changes]   # Grade 6
         estimated_sessions: 2
         curriculum_refs:
-          canada: Ontario Science Grade 7 — Pure Substances and Mixtures
-          quebec: PFEQ Secondary 1 — Material world · Atom model
-          us: NGSS MS-PS1-1 — Properties and structure of matter
+          canada: Ontario Science Grade 7 â€” Pure Substances and Mixtures
+          quebec: PFEQ Secondary 1 â€” Material world Â· Atom model
+          us: NGSS MS-PS1-1 â€” Properties and structure of matter
         arc_notes: >
           Hook: why does a copper penny turn green outdoors but gold jewellery
           never changes? (different elements behave differently).
@@ -399,44 +399,44 @@ subjects:
           Capstone: given description of a substance, classify it as element,
           compound, or mixture AND justify using particle-level reasoning.
         status:
-          en: pending
-          fr: pending
+          en: approved
+          fr: approved
 
       - key: acids_and_bases
         display: Acids and Bases
         order_index: 1
         description: >
-          The pH scale (0–14). Properties of acids (sour taste, corrosive,
+          The pH scale (0â€“14). Properties of acids (sour taste, corrosive,
           pH < 7) and bases (bitter/slippery, pH > 7). Neutral substances (pH = 7).
-          Indicators — litmus, pH paper, red cabbage juice. Neutralization reaction.
+          Indicators â€” litmus, pH paper, red cabbage juice. Neutralization reaction.
           Real-world examples (stomach acid, baking soda, cleaning products,
           rainwater, vinegar, pool water maintenance).
         prerequisites: [atoms_and_elements, physical_vs_chemical_changes]
         estimated_sessions: 2
         curriculum_refs:
-          canada: Ontario Science Grade 7 — Pure Substances and Mixtures
-          quebec: PFEQ Secondary 1 — Material world · Acid-base reactions
-          us: NGSS MS-PS1-2 — Chemical reactions (acid-base as example)
+          canada: Ontario Science Grade 7 â€” Pure Substances and Mixtures
+          quebec: PFEQ Secondary 1 â€” Material world Â· Acid-base reactions
+          us: NGSS MS-PS1-2 â€” Chemical reactions (acid-base as example)
         arc_notes: >
           Hook: why does vinegar and baking soda make bubbles when mixed? Is
           that a chemical change?
-          Concept: pH scale — below 7 = acid, above 7 = base, 7 = neutral;
+          Concept: pH scale â€” below 7 = acid, above 7 = base, 7 = neutral;
           neutralization produces water and a salt.
           Guided: classify common substances (lemon juice, bleach, pure water,
           milk) by pH range; identify indicator colour change.
-          Practice: neutralization word problem — how much base to neutralize
+          Practice: neutralization word problem â€” how much base to neutralize
           an acid?; real-world pH safety scenario.
-          Capstone: pool maintenance problem — pH is too low, which common
+          Capstone: pool maintenance problem â€” pH is too low, which common
           household substance could raise it, and what would happen at particle
           level?
         status:
-          en: pending
-          fr: pending
+          en: approved
+          fr: approved
 
-  # ── SCIENCE — BIOLOGY ────────────────────────────────────────────────────────
-  # Aligned to: Ontario Science Grade 7 · NGSS MS-LS (Middle School Life Science)
+  # â”€â”€ SCIENCE â€” BIOLOGY â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  # Aligned to: Ontario Science Grade 7 Â· NGSS MS-LS (Middle School Life Science)
   - subject: biology
-    display: Science — Biology
+    display: Science â€” Biology
     subject_group: science
     topics:
 
@@ -444,19 +444,19 @@ subjects:
         display: Diversity of Living Things
         order_index: 0
         description: >
-          Classification system (Domain → Kingdom → Phylum → Class → Order →
-          Family → Genus → Species). Characteristics of the five kingdoms
+          Classification system (Domain â†’ Kingdom â†’ Phylum â†’ Class â†’ Order â†’
+          Family â†’ Genus â†’ Species). Characteristics of the five kingdoms
           (Monera/bacteria, Protista, Fungi, Plantae, Animalia). Binomial
           nomenclature. Dichotomous keys. Real-world contexts (identifying local
           wildlife, understanding disease-causing organisms, biodiversity).
         prerequisites: [cells_and_life]   # Grade 6 key
         estimated_sessions: 2
         curriculum_refs:
-          canada: Ontario Science Grade 7 — Diversity of Living Things
-          quebec: PFEQ Secondary 1 — Living world · Classification
-          us: NGSS MS-LS4-2 — Biological evolution and diversity
+          canada: Ontario Science Grade 7 â€” Diversity of Living Things
+          quebec: PFEQ Secondary 1 â€” Living world Â· Classification
+          us: NGSS MS-LS4-2 â€” Biological evolution and diversity
         arc_notes: >
-          Hook: you find a strange organism in a pond — how would a scientist
+          Hook: you find a strange organism in a pond â€” how would a scientist
           decide what it is? (dichotomous key exercise).
           Concept: classification hierarchy with a memorable mnemonic; key
           differences between kingdoms (unicellular/multicellular, cell wall,
@@ -468,31 +468,31 @@ subjects:
           use classification criteria to place each in the correct kingdom and
           justify your reasoning.
         status:
-          en: pending
-          fr: pending
+          en: approved
+          fr: approved
 
       - key: cell_division_and_growth
         display: Cell Division and Growth
         order_index: 1
         description: >
-          Why cells divide (growth, repair, reproduction). Mitosis overview —
+          Why cells divide (growth, repair, reproduction). Mitosis overview â€”
           four stages (prophase, metaphase, anaphase, telophase) in accessible
           terms. DNA as the instruction manual copied into each new cell.
-          Cell differentiation — how one fertilized egg becomes a whole body.
+          Cell differentiation â€” how one fertilized egg becomes a whole body.
           Real-world contexts (wound healing, cancer as uncontrolled division,
           how babies grow).
         prerequisites: [cells_and_life]   # Grade 6 key
         estimated_sessions: 2
         review_note: >
           Keep mitosis at a conceptual level (stage names + what happens).
-          Do NOT include meiosis or reproduction — outside Nova MVP scope for
+          Do NOT include meiosis or reproduction â€” outside Nova MVP scope for
           this age group. Cancer reference should be factual and non-scary.
         curriculum_refs:
-          canada: Ontario Science Grade 7 — Cells
-          quebec: PFEQ Secondary 1 — Living world · Cell division
-          us: NGSS MS-LS1-2 — Cell division and growth
+          canada: Ontario Science Grade 7 â€” Cells
+          quebec: PFEQ Secondary 1 â€” Living world Â· Cell division
+          us: NGSS MS-LS1-2 â€” Cell division and growth
         arc_notes: >
-          Hook: you cut your finger — how does skin repair itself? The answer
+          Hook: you cut your finger â€” how does skin repair itself? The answer
           is in cell division.
           Concept: 4 stages of mitosis as a story (chromosomes line up, pull
           apart, cell splits into two identical daughter cells).
@@ -504,8 +504,8 @@ subjects:
           repair (replacing damaged cells); explain why cancer is a cell
           division problem, not a disease you "catch."
         status:
-          en: pending
-          fr: pending
+          en: approved
+          fr: approved
 
       - key: heredity_and_traits
         display: Heredity and Traits
@@ -522,35 +522,35 @@ subjects:
           Punnett squares are the primary skill for this arc. Keep genetic
           disease examples factual and non-alarmist (e.g. colour blindness
           is a safe example). Do NOT include sex-linked traits or complex
-          inheritance — Grade 9+ content.
+          inheritance â€” Grade 9+ content.
         curriculum_refs:
-          canada: Ontario Science Grade 7 — Reproduction
-          quebec: PFEQ Secondary 1 — Living world · Heredity
-          us: NGSS MS-LS3-2 — Heredity — Inheritance and Variation
+          canada: Ontario Science Grade 7 â€” Reproduction
+          quebec: PFEQ Secondary 1 â€” Living world Â· Heredity
+          us: NGSS MS-LS3-2 â€” Heredity â€” Inheritance and Variation
         arc_notes: >
-          Hook: both parents have brown eyes but their child has blue eyes —
+          Hook: both parents have brown eyes but their child has blue eyes â€”
           how is that possible?
           Concept: dominant (B) masks recessive (b); Bb = brown phenotype
-          but carries recessive; two Bb parents → 25% chance of bb (blue).
-          Guided: complete a Punnett square for Bb × Bb; count genotype ratios
+          but carries recessive; two Bb parents â†’ 25% chance of bb (blue).
+          Guided: complete a Punnett square for Bb Ã— Bb; count genotype ratios
           (BB, Bb, bb = 1:2:1) and phenotype ratios (3 brown : 1 blue).
-          Practice: Bb × bb cross (test cross); predict probability of a
+          Practice: Bb Ã— bb cross (test cross); predict probability of a
           specific trait.
           Capstone: a farmer wants all blue-flower plants (recessive). The
           parent plants are BB and bb. Describe two generations of crosses
           needed to guarantee blue-flower offspring and explain using Punnett
           squares.
         status:
-          en: pending
-          fr: pending
+          en: approved
+          fr: approved
 
-# ─────────────────────────────────────────────────────────────────────────────
+# â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 # TOPIC_ORDER values for insert_arc.py
-# ─────────────────────────────────────────────────────────────────────────────
+# â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 # Add these entries to the TOPIC_ORDER dict in content/insert_arc.py before
 # running insert_arc.py --grade 7:
 #
-#   Mathematics (Grade 7 — keys don't conflict with Grade 6 keys):
+#   Mathematics (Grade 7 â€” keys don't conflict with Grade 6 keys):
 #   "proportional_reasoning":   0,
 #   "rational_numbers":         1,
 #   "two_step_equations":       2,
@@ -573,21 +573,21 @@ subjects:
 #   "cell_division_and_growth":   1,
 #   "heredity_and_traits":        2,
 #
-# ─────────────────────────────────────────────────────────────────────────────
-# DEFERRED — Not in MVP scope for Grade 7
-# ─────────────────────────────────────────────────────────────────────────────
+# â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+# DEFERRED â€” Not in MVP scope for Grade 7
+# â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 # mathematics:
-#   pythagorean_theorem  — CCSS 8.G; Ontario Grade 8; Grade 8 content.
-#   slope_and_graphing   — CCSS 8.EE/F; Grade 8 content.
-#   transformations      — reflections/rotations/translations/dilations (7.G.1-3);
-#                          deferred — complex to scaffold in voice-first format.
+#   pythagorean_theorem  â€” CCSS 8.G; Ontario Grade 8; Grade 8 content.
+#   slope_and_graphing   â€” CCSS 8.EE/F; Grade 8 content.
+#   transformations      â€” reflections/rotations/translations/dilations (7.G.1-3);
+#                          deferred â€” complex to scaffold in voice-first format.
 #
 # science:
-#   reproduction         — Outside Nova MVP scope (parental sensitivity).
-#   plate_tectonics      — NGSS MS-ESS2; strong Grade 8 fit; defer.
-#   weather_and_climate  — NGSS MS-ESS2; rich topic but needs Grade 8 depth.
-#   electromagnetic_spec — MS-PS4; better placed after energy_and_work in G8.
-#   natural_selection    — MS-LS4; needs heredity_and_traits as prereq → Grade 8.
+#   reproduction         â€” Outside Nova MVP scope (parental sensitivity).
+#   plate_tectonics      â€” NGSS MS-ESS2; strong Grade 8 fit; defer.
+#   weather_and_climate  â€” NGSS MS-ESS2; rich topic but needs Grade 8 depth.
+#   electromagnetic_spec â€” MS-PS4; better placed after energy_and_work in G8.
+#   natural_selection    â€” MS-LS4; needs heredity_and_traits as prereq â†’ Grade 8.
 #
 # history / geography / arts / language_arts:
-#   See roadmap TBD-C — not suitable for voice-first Socratic arc in MVP.
+#   See roadmap TBD-C â€” not suitable for voice-first Socratic arc in MVP.
